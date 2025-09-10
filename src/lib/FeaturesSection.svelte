@@ -1,7 +1,7 @@
 <script>
 import { trackEvent } from "$lib/analytics"
 
-const _features = [
+const features = [
   {
     icon: "🏠",
     title: "Modern Home Designs",

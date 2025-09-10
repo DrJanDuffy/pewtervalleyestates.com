@@ -1,7 +1,7 @@
 <script>
 import { trackEvent } from "$lib/analytics"
 
-const _homeDesigns = [
+const homeDesigns = [
   {
     id: "the-avalon",
     name: "The Avalon",

@@ -6,7 +6,7 @@ export const delay = 0
 export const duration = 0.6
 export const direction = "up"
 
-let _isVisible = false
+let isVisible = false
 let element
 
 onMount(() => {
@@ -14,7 +14,7 @@ onMount(() => {
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          _isVisible = true
+          isVisible = true
         }
       })
     },
@@ -32,7 +32,7 @@ onMount(() => {
   }
 })
 
-const _getInitialStyle = () => {
+const getInitialStyle = () => {
   const baseStyle = {
     opacity: 0,
     transition: `all ${duration}s ease-out ${delay}s`,
@@ -52,7 +52,7 @@ const _getInitialStyle = () => {
   }
 }
 
-const _getAnimateStyle = () => {
+const getAnimateStyle = () => {
   return {
     opacity: 1,
     transform: "translate(0, 0)",
