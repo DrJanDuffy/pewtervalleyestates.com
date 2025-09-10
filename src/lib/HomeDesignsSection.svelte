@@ -37,7 +37,7 @@ const homeDesigns = [
   },
 ]
 
-function _handleDesignClick(design) {
+function handleDesignClick(design) {
   trackEvent("home_design_click", {
     design_name: design.name,
     design_id: design.id,
@@ -45,7 +45,7 @@ function _handleDesignClick(design) {
   })
 }
 
-function _handleScheduleTour(design) {
+function handleScheduleTour(design) {
   trackEvent("schedule_tour_click", {
     design_name: design.name,
     design_id: design.id,

@@ -45,7 +45,7 @@ const features = [
   },
 ]
 
-function _handleFeatureClick(feature) {
+function handleFeatureClick(feature) {
   trackEvent("feature_click", {
     feature: feature.title,
     section: "features",

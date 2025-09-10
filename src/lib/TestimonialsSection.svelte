@@ -49,10 +49,26 @@ function _prevTestimonial() {
   })
 }
 
-function _goToTestimonial(index) {
+function goToTestimonial(index) {
   currentTestimonial = index
   trackEvent("testimonial_navigation", {
     action: "direct",
+    current_index: currentTestimonial,
+  })
+}
+
+function prevTestimonial() {
+  currentTestimonial = currentTestimonial === 0 ? testimonials.length - 1 : currentTestimonial - 1
+  trackEvent("testimonial_navigation", {
+    action: "previous",
+    current_index: currentTestimonial,
+  })
+}
+
+function nextTestimonial() {
+  currentTestimonial = (currentTestimonial + 1) % testimonials.length
+  trackEvent("testimonial_navigation", {
+    action: "next",
     current_index: currentTestimonial,
   })
 }

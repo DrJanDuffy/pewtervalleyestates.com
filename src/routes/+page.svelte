@@ -137,7 +137,9 @@ onMount(() => {
   <CTASection />
   
   <!-- Animated Section -->
-  <SimpleAnimatedSection />
+  <SimpleAnimatedSection>
+    <p>This is an animated section with content.</p>
+  </SimpleAnimatedSection>
 </main>
 
 <!-- Analytics -->

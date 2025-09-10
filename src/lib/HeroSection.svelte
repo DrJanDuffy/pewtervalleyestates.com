@@ -1,7 +1,7 @@
 <script>
 import { trackEvent } from "$lib/analytics"
 
-function _handleCtaClick(action) {
+function handleCtaClick(action) {
   trackEvent("hero_cta_click", {
     action: action,
     section: "hero",
