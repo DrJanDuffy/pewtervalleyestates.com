@@ -19,7 +19,7 @@ $: if (browser && $page) {
   trackPageView($page.url.href, document.title)
 }
 
-$: if (browser && analyticsId) {
+$: if (browser && analyticsId && $page) {
   webVitals({
     path: $page.url.pathname,
     params: $page.params,
