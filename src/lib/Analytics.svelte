@@ -1,9 +1,9 @@
 <script>
   import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
-  import { inject } from '@vercel/analytics/sveltekit';
+  import { injectAnalytics } from '@vercel/analytics/sveltekit';
   
   // Initialize Vercel Analytics
-  inject();
+  injectAnalytics();
   
   // Initialize Speed Insights
   injectSpeedInsights();
