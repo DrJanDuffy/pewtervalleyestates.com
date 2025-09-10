@@ -4,7 +4,7 @@
 	import HomeDesignsSection from '$lib/HomeDesignsSection.svelte';
 	import TestimonialsSection from '$lib/TestimonialsSection.svelte';
 	import CTASection from '$lib/CTASection.svelte';
-	import AnimatedSection from '$lib/AnimatedSection.svelte';
+	import SimpleAnimatedSection from '$lib/SimpleAnimatedSection.svelte';
 	import Analytics from '$lib/Analytics.svelte';
 	import RichmondAmericanAssets from '$lib/RichmondAmericanAssets.svelte';
 	import { trackEvent } from '$lib/analytics';
@@ -35,18 +35,18 @@
 
 <main>
 	<HeroSection />
-	<AnimatedSection delay={0.2}>
+	<SimpleAnimatedSection delay={0.2}>
 		<FeaturesSection />
-	</AnimatedSection>
-	<AnimatedSection delay={0.4} direction="up">
+	</SimpleAnimatedSection>
+	<SimpleAnimatedSection delay={0.4} direction="up">
 		<HomeDesignsSection />
-	</AnimatedSection>
-	<AnimatedSection delay={0.6}>
+	</SimpleAnimatedSection>
+	<SimpleAnimatedSection delay={0.6}>
 		<TestimonialsSection />
-	</AnimatedSection>
-	<AnimatedSection delay={0.8} direction="up">
+	</SimpleAnimatedSection>
+	<SimpleAnimatedSection delay={0.8} direction="up">
 		<CTASection />
-	</AnimatedSection>
+	</SimpleAnimatedSection>
 </main>
 
 <style>

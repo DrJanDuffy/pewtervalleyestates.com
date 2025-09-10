@@ -134,13 +134,13 @@
     role="dialog"
     aria-modal="true"
     aria-label="Photo lightbox"
+    tabindex="-1"
     on:click={closeLightbox}
     on:keydown={(e) => e.key === 'Escape' && closeLightbox()}
   >
     <div 
       class="lightbox-content" 
       role="document"
-      on:click|stopPropagation
     >
       <button class="lightbox-close" on:click={closeLightbox} aria-label="Close lightbox">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
