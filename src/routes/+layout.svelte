@@ -1,8 +1,10 @@
 <script>
 import { onMount } from "svelte"
+import { page } from "$app/stores"
 import { browser } from "$app/environment"
 import { initGA, trackPageView } from "$lib/analytics"
 import { webVitals } from "$lib/vitals"
+import Header from "$lib/header/Header.svelte"
 import "../app.css"
 
 const analyticsId = import.meta.env.VERCEL_ANALYTICS_ID

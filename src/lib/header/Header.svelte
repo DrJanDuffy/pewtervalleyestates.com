@@ -1,11 +1,11 @@
 <script>
-
+import { page } from '$app/stores';
 </script>
 
 <header>
 	<div class="corner">
 		<a href="https://kit.svelte.dev">
-			<img src={logo} alt="SvelteKit" />
+			<img src="/favicon.ico" alt="SvelteKit" />
 		</a>
 	</div>
 

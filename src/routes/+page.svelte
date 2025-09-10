@@ -1,9 +1,19 @@
 <script>
 import { onMount } from "svelte"
 import { trackEvent } from "$lib/analytics"
+import SEOHead from "$lib/SEOHead.svelte"
+import Breadcrumbs from "$lib/Breadcrumbs.svelte"
+import RichmondAmericanAssets from "$lib/RichmondAmericanAssets.svelte"
+import HeroSection from "$lib/HeroSection.svelte"
+import FeaturesSection from "$lib/FeaturesSection.svelte"
+import HomeDesignsSection from "$lib/HomeDesignsSection.svelte"
+import TestimonialsSection from "$lib/TestimonialsSection.svelte"
+import CTASection from "$lib/CTASection.svelte"
+import SimpleAnimatedSection from "$lib/SimpleAnimatedSection.svelte"
+import Analytics from "$lib/Analytics.svelte"
 
 // SEO data for homepage
-const _pageData = {
+const pageData = {
   title: "Pewter Valley Estates Las Vegas - New Construction Homes",
   description:
     "Discover your dream home at Pewter Valley Estates in Las Vegas, Nevada. Modern new construction homes with 3-5 bedrooms, resort-style amenities, and prime Las Vegas locations.",
@@ -12,8 +22,13 @@ const _pageData = {
   canonical: "https://www.pewtervalleyestates.com",
 }
 
+// Breadcrumb data
+const breadcrumbs = [
+  { name: "Home", href: "/" }
+]
+
 // FAQ data for structured data
-const _faqData = [
+const faqData = [
   {
     question: "What types of homes are available at Pewter Valley Estates?",
     answer:

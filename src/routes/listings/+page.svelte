@@ -259,13 +259,6 @@ function renderWidget() {
     box-shadow: 0 4px 12px rgba(30, 58, 138, 0.4);
   }
 
-  /* RealScout widget styling */
-  realscout-office-listings {
-    --rs-listing-divider-color: rgb(101, 141, 172);
-    width: 100%;
-    min-height: 400px;
-    display: block;
-  }
 
   @media (max-width: 768px) {
     .listings-page {

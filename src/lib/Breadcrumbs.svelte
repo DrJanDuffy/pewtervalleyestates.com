@@ -41,9 +41,7 @@ $: breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs)
 </nav>
 
 <!-- JSON-LD Structured Data -->
-<script type="application/ld+json">
-  {JSON.stringify(breadcrumbSchema)}
-</script>
+{@html `<script type="application/ld+json">${JSON.stringify(breadcrumbSchema)}</script>`}
 
 <style>
   .breadcrumbs {
