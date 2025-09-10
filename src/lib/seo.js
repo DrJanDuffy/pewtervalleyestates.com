@@ -374,6 +374,12 @@ export function generateSitemapData() {
       priority: "0.9",
     },
     {
+      url: `${baseUrl}/neighborhood`,
+      lastmod: currentDate,
+      changefreq: "monthly",
+      priority: "0.85",
+    },
+    {
       url: `${baseUrl}/contact`,
       lastmod: currentDate,
       changefreq: "monthly",

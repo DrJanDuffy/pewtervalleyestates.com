@@ -18,8 +18,17 @@ import { page } from '$app/stores';
       <li class:active={$page.url.pathname === '/about'}>
         <a data-sveltekit-preload-data="hover" href="/about">About</a>
       </li>
-      <li class:active={$page.url.pathname === '/todos'}>
-        <a data-sveltekit-preload-data="hover" href="/todos">Todos</a>
+      <li class:active={$page.url.pathname === '/neighborhood'}>
+        <a data-sveltekit-preload-data="hover" href="/neighborhood">Neighborhood</a>
+      </li>
+      <li class:active={$page.url.pathname === '/listings'}>
+        <a data-sveltekit-preload-data="hover" href="/listings">Listings</a>
+      </li>
+      <li class:active={$page.url.pathname === '/photos'}>
+        <a data-sveltekit-preload-data="hover" href="/photos">Photos</a>
+      </li>
+      <li class:active={$page.url.pathname === '/contact'}>
+        <a data-sveltekit-preload-data="hover" href="/contact">Contact</a>
       </li>
 		</ul>
 		<svg viewBox="0 0 2 3" aria-hidden="true">
