@@ -4,6 +4,8 @@
 	import HomeDesignsSection from '$lib/HomeDesignsSection.svelte';
 	import TestimonialsSection from '$lib/TestimonialsSection.svelte';
 	import CTASection from '$lib/CTASection.svelte';
+	import AnimatedSection from '$lib/AnimatedSection.svelte';
+	import Analytics from '$lib/Analytics.svelte';
 	import RichmondAmericanAssets from '$lib/RichmondAmericanAssets.svelte';
 	import { trackEvent } from '$lib/analytics';
 	import { onMount } from 'svelte';
@@ -29,12 +31,22 @@
 	<meta property="og:url" content="https://www.pewtervalleyestates.com/" />
 </svelte:head>
 
+<Analytics />
+
 <main>
 	<HeroSection />
-	<FeaturesSection />
-	<HomeDesignsSection />
-	<TestimonialsSection />
-	<CTASection />
+	<AnimatedSection delay={0.2}>
+		<FeaturesSection />
+	</AnimatedSection>
+	<AnimatedSection delay={0.4} direction="up">
+		<HomeDesignsSection />
+	</AnimatedSection>
+	<AnimatedSection delay={0.6}>
+		<TestimonialsSection />
+	</AnimatedSection>
+	<AnimatedSection delay={0.8} direction="up">
+		<CTASection />
+	</AnimatedSection>
 </main>
 
 <style>
