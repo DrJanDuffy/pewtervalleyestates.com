@@ -1,82 +1,80 @@
 <script>
-  import PhotoGallery from '$lib/PhotoGallery.svelte';
-  import RichmondAmericanAssets from '$lib/RichmondAmericanAssets.svelte';
-  import { trackEvent } from '$lib/analytics';
-  import { onMount } from 'svelte';
+import { onMount } from "svelte"
+import { trackEvent } from "$lib/analytics"
 
-  // Sample photos using Unsplash images
-  const photos = [
-    {
-      src: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop',
-      thumbnail: 'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&h=300&fit=crop',
-      title: 'Beautiful Home Exterior',
-      description: 'Stunning front view of our modern homes',
-      alt: 'Pewter Valley Estates home exterior'
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop',
-      thumbnail: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop',
-      title: 'Spacious Living Room',
-      description: 'Open concept living space with natural light',
-      alt: 'Modern living room interior'
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop',
-      thumbnail: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop',
-      title: 'Gourmet Kitchen',
-      description: 'State-of-the-art kitchen with premium appliances',
-      alt: 'Modern kitchen with island'
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop',
-      thumbnail: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop',
-      title: 'Master Suite',
-      description: 'Luxurious master bedroom with walk-in closet',
-      alt: 'Master bedroom interior'
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&h=600&fit=crop',
-      thumbnail: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400&h=300&fit=crop',
-      title: 'Community Amenities',
-      description: 'Resort-style pool and recreation area',
-      alt: 'Community pool and amenities'
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&h=600&fit=crop',
-      thumbnail: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=400&h=300&fit=crop',
-      title: 'Prime Location',
-      description: 'Convenient access to shopping and entertainment',
-      alt: 'Neighborhood view and location'
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop',
-      thumbnail: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400&h=300&fit=crop',
-      title: 'Modern Architecture',
-      description: 'Contemporary design with clean lines',
-      alt: 'Modern home architecture'
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800&h=600&fit=crop',
-      thumbnail: 'https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=400&h=300&fit=crop',
-      title: 'Outdoor Living',
-      description: 'Beautiful outdoor spaces for relaxation',
-      alt: 'Outdoor living space'
-    },
-    {
-      src: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop',
-      thumbnail: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=400&h=300&fit=crop',
-      title: 'Family Room',
-      description: 'Perfect space for family gatherings',
-      alt: 'Family room interior'
-    }
-  ];
+// Sample photos using Unsplash images
+const _photos = [
+  {
+    src: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop",
+    thumbnail: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&h=300&fit=crop",
+    title: "Beautiful Home Exterior",
+    description: "Stunning front view of our modern homes",
+    alt: "Pewter Valley Estates home exterior",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop",
+    thumbnail: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop",
+    title: "Spacious Living Room",
+    description: "Open concept living space with natural light",
+    alt: "Modern living room interior",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=600&fit=crop",
+    thumbnail: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop",
+    title: "Gourmet Kitchen",
+    description: "State-of-the-art kitchen with premium appliances",
+    alt: "Modern kitchen with island",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=600&fit=crop",
+    thumbnail: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop",
+    title: "Master Suite",
+    description: "Luxurious master bedroom with walk-in closet",
+    alt: "Master bedroom interior",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&h=600&fit=crop",
+    thumbnail: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400&h=300&fit=crop",
+    title: "Community Amenities",
+    description: "Resort-style pool and recreation area",
+    alt: "Community pool and amenities",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&h=600&fit=crop",
+    thumbnail: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=400&h=300&fit=crop",
+    title: "Prime Location",
+    description: "Convenient access to shopping and entertainment",
+    alt: "Neighborhood view and location",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop",
+    thumbnail: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400&h=300&fit=crop",
+    title: "Modern Architecture",
+    description: "Contemporary design with clean lines",
+    alt: "Modern home architecture",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=800&h=600&fit=crop",
+    thumbnail: "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=400&h=300&fit=crop",
+    title: "Outdoor Living",
+    description: "Beautiful outdoor spaces for relaxation",
+    alt: "Outdoor living space",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop",
+    thumbnail: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=400&h=300&fit=crop",
+    title: "Family Room",
+    description: "Perfect space for family gatherings",
+    alt: "Family room interior",
+  },
+]
 
-  onMount(() => {
-    trackEvent('page_view', {
-      page_title: 'Photo Gallery',
-      page_location: window.location.href
-    });
-  });
+onMount(() => {
+  trackEvent("page_view", {
+    page_title: "Photo Gallery",
+    page_location: window.location.href,
+  })
+})
 </script>
 
 <svelte:head>

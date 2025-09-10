@@ -1,45 +1,45 @@
 <script>
-  import { onMount } from 'svelte';
-  import { trackEvent } from '$lib/analytics';
+import { onMount } from "svelte"
+import { trackEvent } from "$lib/analytics"
 
-  // RealScout configuration
-  const agentEncodedId = 'QWdlbnQtMjI1MDUw';
-  const sortOrder = 'STATUS_AND_SIGNIFICANT_CHANGE';
-  const listingStatus = 'For Sale';
-  const propertyTypes = 'SFR,MF,TC';
+// RealScout configuration
+const agentEncodedId = "QWdlbnQtMjI1MDUw"
+const _sortOrder = "STATUS_AND_SIGNIFICANT_CHANGE"
+const listingStatus = "For Sale"
+const propertyTypes = "SFR,MF,TC"
 
-  onMount(() => {
-    // Track when RealScout widget loads
-    trackEvent('realscout_widget_loaded', {
+onMount(() => {
+  // Track when RealScout widget loads
+  trackEvent("realscout_widget_loaded", {
+    agent_id: agentEncodedId,
+    listing_status: listingStatus,
+    property_types: propertyTypes,
+  })
+
+  // Add event listeners for RealScout widget interactions
+  const handleListingClick = (event) => {
+    trackEvent("realscout_listing_click", {
+      listing_id: event.detail?.listingId || "unknown",
       agent_id: agentEncodedId,
-      listing_status: listingStatus,
-      property_types: propertyTypes
-    });
+    })
+  }
 
-    // Add event listeners for RealScout widget interactions
-    const handleListingClick = (event) => {
-      trackEvent('realscout_listing_click', {
-        listing_id: event.detail?.listingId || 'unknown',
-        agent_id: agentEncodedId
-      });
-    };
+  const handleListingView = (event) => {
+    trackEvent("realscout_listing_view", {
+      listing_id: event.detail?.listingId || "unknown",
+      agent_id: agentEncodedId,
+    })
+  }
 
-    const handleListingView = (event) => {
-      trackEvent('realscout_listing_view', {
-        listing_id: event.detail?.listingId || 'unknown',
-        agent_id: agentEncodedId
-      });
-    };
+  // Listen for RealScout widget events
+  document.addEventListener("realscout-listing-click", handleListingClick)
+  document.addEventListener("realscout-listing-view", handleListingView)
 
-    // Listen for RealScout widget events
-    document.addEventListener('realscout-listing-click', handleListingClick);
-    document.addEventListener('realscout-listing-view', handleListingView);
-
-    return () => {
-      document.removeEventListener('realscout-listing-click', handleListingClick);
-      document.removeEventListener('realscout-listing-view', handleListingView);
-    };
-  });
+  return () => {
+    document.removeEventListener("realscout-listing-click", handleListingClick)
+    document.removeEventListener("realscout-listing-view", handleListingView)
+  }
+})
 </script>
 
 <section class="realscout-section">

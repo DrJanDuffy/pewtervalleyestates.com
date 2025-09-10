@@ -1,51 +1,56 @@
 <script>
-  import { trackEvent } from '$lib/analytics';
-  
-  const features = [
-    {
-      icon: '🏠',
-      title: 'Modern Home Designs',
-      description: 'Contemporary floor plans with open concepts, high ceilings, and premium finishes throughout.',
-      highlight: '50+ Floor Plans'
-    },
-    {
-      icon: '🏊‍♀️',
-      title: 'Resort-Style Amenities',
-      description: 'Community pool, fitness center, clubhouse, and walking trails for an active lifestyle.',
-      highlight: '5-Star Amenities'
-    },
-    {
-      icon: '📍',
-      title: 'Prime Las Vegas Location',
-      description: 'Convenient access to shopping, dining, entertainment, and major employment centers.',
-      highlight: '15 Min to Strip'
-    },
-    {
-      icon: '🌱',
-      title: 'Energy Efficient',
-      description: 'Built with the latest green technology to reduce utility costs and environmental impact.',
-      highlight: 'LEED Certified'
-    },
-    {
-      icon: '🛡️',
-      title: '10-Year Warranty',
-      description: 'Comprehensive warranty coverage on all major systems and structural components.',
-      highlight: 'Peace of Mind'
-    },
-    {
-      icon: '💰',
-      title: 'Competitive Pricing',
-      description: 'Exceptional value with flexible financing options and special incentives available.',
-      highlight: 'From $350K'
-    }
-  ];
-  
-  function handleFeatureClick(feature) {
-    trackEvent('feature_click', {
-      feature: feature.title,
-      section: 'features'
-    });
-  }
+import { trackEvent } from "$lib/analytics"
+
+const _features = [
+  {
+    icon: "🏠",
+    title: "Modern Home Designs",
+    description:
+      "Contemporary floor plans with open concepts, high ceilings, and premium finishes throughout.",
+    highlight: "50+ Floor Plans",
+  },
+  {
+    icon: "🏊‍♀️",
+    title: "Resort-Style Amenities",
+    description:
+      "Community pool, fitness center, clubhouse, and walking trails for an active lifestyle.",
+    highlight: "5-Star Amenities",
+  },
+  {
+    icon: "📍",
+    title: "Prime Las Vegas Location",
+    description:
+      "Convenient access to shopping, dining, entertainment, and major employment centers.",
+    highlight: "15 Min to Strip",
+  },
+  {
+    icon: "🌱",
+    title: "Energy Efficient",
+    description:
+      "Built with the latest green technology to reduce utility costs and environmental impact.",
+    highlight: "LEED Certified",
+  },
+  {
+    icon: "🛡️",
+    title: "10-Year Warranty",
+    description: "Comprehensive warranty coverage on all major systems and structural components.",
+    highlight: "Peace of Mind",
+  },
+  {
+    icon: "💰",
+    title: "Competitive Pricing",
+    description:
+      "Exceptional value with flexible financing options and special incentives available.",
+    highlight: "From $350K",
+  },
+]
+
+function _handleFeatureClick(feature) {
+  trackEvent("feature_click", {
+    feature: feature.title,
+    section: "features",
+  })
+}
 </script>
 
 <section class="features">

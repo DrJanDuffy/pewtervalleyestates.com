@@ -1,58 +1,61 @@
 <script>
-  import { trackEvent } from '$lib/analytics';
-  
-  const testimonials = [
-    {
-      id: 1,
-      name: 'Sarah & Michael Johnson',
-      location: 'The Avalon Homeowner',
-      rating: 5,
-      text: 'We absolutely love our new home at Pewter Valley Estates! The quality is outstanding and the community amenities are fantastic. Our kids love the pool and we enjoy the walking trails.',
-      image: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face'
-    },
-    {
-      id: 2,
-      name: 'David Chen',
-      location: 'The Cambridge Homeowner',
-      rating: 5,
-      text: 'The location is perfect - close to everything but still quiet and peaceful. The Richmond American team made the entire process smooth and stress-free. Highly recommend!',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face'
-    },
-    {
-      id: 3,
-      name: 'Lisa Rodriguez',
-      location: 'The Berkeley Homeowner',
-      rating: 5,
-      text: 'The energy efficiency features have saved us so much on utilities. The open floor plan is perfect for entertaining, and our neighbors are wonderful. This truly feels like home.',
-      image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face'
-    }
-  ];
-  
-  let currentTestimonial = 0;
-  
-  function nextTestimonial() {
-    currentTestimonial = (currentTestimonial + 1) % testimonials.length;
-    trackEvent('testimonial_navigation', {
-      action: 'next',
-      current_index: currentTestimonial
-    });
-  }
-  
-  function prevTestimonial() {
-    currentTestimonial = currentTestimonial === 0 ? testimonials.length - 1 : currentTestimonial - 1;
-    trackEvent('testimonial_navigation', {
-      action: 'previous',
-      current_index: currentTestimonial
-    });
-  }
-  
-  function goToTestimonial(index) {
-    currentTestimonial = index;
-    trackEvent('testimonial_navigation', {
-      action: 'direct',
-      current_index: currentTestimonial
-    });
-  }
+import { trackEvent } from "$lib/analytics"
+
+const testimonials = [
+  {
+    id: 1,
+    name: "Sarah & Michael Johnson",
+    location: "The Avalon Homeowner",
+    rating: 5,
+    text: "We absolutely love our new home at Pewter Valley Estates! The quality is outstanding and the community amenities are fantastic. Our kids love the pool and we enjoy the walking trails.",
+    image:
+      "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face",
+  },
+  {
+    id: 2,
+    name: "David Chen",
+    location: "The Cambridge Homeowner",
+    rating: 5,
+    text: "The location is perfect - close to everything but still quiet and peaceful. The Richmond American team made the entire process smooth and stress-free. Highly recommend!",
+    image:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
+  },
+  {
+    id: 3,
+    name: "Lisa Rodriguez",
+    location: "The Berkeley Homeowner",
+    rating: 5,
+    text: "The energy efficiency features have saved us so much on utilities. The open floor plan is perfect for entertaining, and our neighbors are wonderful. This truly feels like home.",
+    image:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face",
+  },
+]
+
+let currentTestimonial = 0
+
+function _nextTestimonial() {
+  currentTestimonial = (currentTestimonial + 1) % testimonials.length
+  trackEvent("testimonial_navigation", {
+    action: "next",
+    current_index: currentTestimonial,
+  })
+}
+
+function _prevTestimonial() {
+  currentTestimonial = currentTestimonial === 0 ? testimonials.length - 1 : currentTestimonial - 1
+  trackEvent("testimonial_navigation", {
+    action: "previous",
+    current_index: currentTestimonial,
+  })
+}
+
+function _goToTestimonial(index) {
+  currentTestimonial = index
+  trackEvent("testimonial_navigation", {
+    action: "direct",
+    current_index: currentTestimonial,
+  })
+}
 </script>
 
 <section class="testimonials">

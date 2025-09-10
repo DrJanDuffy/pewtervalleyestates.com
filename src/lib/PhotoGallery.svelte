@@ -1,84 +1,84 @@
 <script>
-  import { onMount } from 'svelte';
-  import { browser } from '$app/environment';
-  import { trackEvent } from '$lib/analytics';
+import { onMount } from "svelte"
+import { browser } from "$app/environment"
+import { trackEvent } from "$lib/analytics"
 
-  // Props
-  export let photos = [];
-  export let title = 'Photo Gallery';
-  export let showTitle = true;
-  export let columns = 3;
-  export let enableLightbox = true;
-  export let enableLazyLoading = true;
+// Props
+export const photos = []
+export const title = "Photo Gallery"
+export const showTitle = true
+export const columns = 3
+export const enableLightbox = true
+export const enableLazyLoading = true
 
-  let selectedPhoto = null;
-  let lightboxOpen = false;
-  let galleryRef;
+let selectedPhoto = null
+let lightboxOpen = false
+let _galleryRef
 
-  // Responsive columns
-  $: responsiveColumns = browser ? getResponsiveColumns() : columns;
+// Responsive columns
+$: responsiveColumns = browser ? getResponsiveColumns() : columns
 
-  function getResponsiveColumns() {
-    if (window.innerWidth < 640) return 1;
-    if (window.innerWidth < 1024) return 2;
-    return columns;
+function getResponsiveColumns() {
+  if (window.innerWidth < 640) return 1
+  if (window.innerWidth < 1024) return 2
+  return columns
+}
+
+onMount(() => {
+  if (browser) {
+    window.addEventListener("resize", () => {
+      responsiveColumns = getResponsiveColumns()
+    })
+
+    // Track gallery view
+    trackEvent("gallery_view", {
+      gallery_title: title,
+      photo_count: photos.length,
+    })
   }
+})
 
-  onMount(() => {
-    if (browser) {
-      window.addEventListener('resize', () => {
-        responsiveColumns = getResponsiveColumns();
-      });
+function _openLightbox(photo, index) {
+  if (enableLightbox) {
+    selectedPhoto = { ...photo, index }
+    lightboxOpen = true
+    document.body.style.overflow = "hidden"
 
-      // Track gallery view
-      trackEvent('gallery_view', {
-        gallery_title: title,
-        photo_count: photos.length
-      });
-    }
-  });
-
-  function openLightbox(photo, index) {
-    if (enableLightbox) {
-      selectedPhoto = { ...photo, index };
-      lightboxOpen = true;
-      document.body.style.overflow = 'hidden';
-      
-      trackEvent('photo_click', {
-        photo_index: index,
-        photo_title: photo.title || 'Untitled',
-        gallery_title: title
-      });
-    }
+    trackEvent("photo_click", {
+      photo_index: index,
+      photo_title: photo.title || "Untitled",
+      gallery_title: title,
+    })
   }
+}
 
-  function closeLightbox() {
-    lightboxOpen = false;
-    selectedPhoto = null;
-    document.body.style.overflow = 'auto';
-  }
+function closeLightbox() {
+  lightboxOpen = false
+  selectedPhoto = null
+  document.body.style.overflow = "auto"
+}
 
-  function nextPhoto() {
-    if (selectedPhoto) {
-      const nextIndex = (selectedPhoto.index + 1) % photos.length;
-      selectedPhoto = { ...photos[nextIndex], index: nextIndex };
-    }
+function nextPhoto() {
+  if (selectedPhoto) {
+    const nextIndex = (selectedPhoto.index + 1) % photos.length
+    selectedPhoto = { ...photos[nextIndex], index: nextIndex }
   }
+}
 
-  function prevPhoto() {
-    if (selectedPhoto) {
-      const prevIndex = selectedPhoto.index === 0 ? photos.length - 1 : selectedPhoto.index - 1;
-      selectedPhoto = { ...photos[prevIndex], index: prevIndex };
-    }
+function prevPhoto() {
+  if (selectedPhoto) {
+    const prevIndex = selectedPhoto.index === 0 ? photos.length - 1 : selectedPhoto.index - 1
+    selectedPhoto = { ...photos[prevIndex], index: prevIndex }
   }
+}
 
-  function handleKeydown(event) {
-    if (lightboxOpen) {
-      if (event.key === 'Escape') closeLightbox();
-      if (event.key === 'ArrowRight') nextPhoto();
-      if (event.key === 'ArrowLeft') prevPhoto();
-    }
+function _handleKeydown(event) {
+  if (lightboxOpen) {
+    if (event.key === "Escape") closeLightbox()
+    if (event.key === "ArrowRight") nextPhoto()
+    if (event.key === "ArrowLeft") prevPhoto()
   }
+}
 </script>
 
 <svelte:window on:keydown={handleKeydown} />

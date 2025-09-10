@@ -1,44 +1,44 @@
 <script>
-  import { createForm } from 'svelte-forms-lib';
-  import { trackEvent } from '$lib/analytics';
-  
-  const { form, handleChange, handleSubmit, errors, isSubmitting } = createForm({
-    initialValues: {
-      firstName: '',
-      lastName: '',
-      email: '',
-      phone: '',
-      homeSize: ''
+import { createForm } from "svelte-forms-lib"
+import { trackEvent } from "$lib/analytics"
+
+const { form, handleChange, handleSubmit, errors, isSubmitting } = createForm({
+  initialValues: {
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    homeSize: "",
+  },
+  validationSchema: {
+    firstName: (value) => (value ? null : "First name is required"),
+    lastName: (value) => (value ? null : "Last name is required"),
+    email: (value) => {
+      if (!value) return "Email is required"
+      if (!value.includes("@")) return "Please enter a valid email"
+      return null
     },
-    validationSchema: {
-      firstName: (value) => value ? null : 'First name is required',
-      lastName: (value) => value ? null : 'Last name is required',
-      email: (value) => {
-        if (!value) return 'Email is required';
-        if (!value.includes('@')) return 'Please enter a valid email';
-        return null;
-      },
-      phone: (value) => {
-        if (!value) return 'Phone number is required';
-        if (value.length < 10) return 'Please enter a valid phone number';
-        return null;
-      },
-      homeSize: (value) => value ? null : 'Please select a home size'
-    }
-  });
-  
-  function onSubmit(values) {
-    trackEvent('cta_form_submit', {
-      form_type: 'lead_capture',
-      home_size: values.homeSize
-    });
-    
-    // Here you would typically send the data to your backend
-    console.log('Form submitted:', values);
-    
-    // Show success message
-    alert('Thank you! We\'ll send you the information packet shortly.');
-  }
+    phone: (value) => {
+      if (!value) return "Phone number is required"
+      if (value.length < 10) return "Please enter a valid phone number"
+      return null
+    },
+    homeSize: (value) => (value ? null : "Please select a home size"),
+  },
+})
+
+function _onSubmit(values) {
+  trackEvent("cta_form_submit", {
+    form_type: "lead_capture",
+    home_size: values.homeSize,
+  })
+
+  // Here you would typically send the data to your backend
+  console.log("Form submitted:", values)
+
+  // Show success message
+  alert("Thank you! We'll send you the information packet shortly.")
+}
 </script>
 
 <div class="cta-form">

@@ -1,63 +1,62 @@
 <script>
-  import { createForm } from 'svelte-forms-lib';
-  import { trackEvent } from '$lib/analytics';
-  import { onMount } from 'svelte';
-  import RichmondAmericanAssets from '$lib/RichmondAmericanAssets.svelte';
+import { onMount } from "svelte"
+import { createForm } from "svelte-forms-lib"
+import { trackEvent } from "$lib/analytics"
 
-  const { form, handleChange, handleSubmit, errors, isSubmitting } = createForm({
-    initialValues: {
-      name: '',
-      email: '',
-      phone: '',
-      message: '',
-      propertyInterest: '',
-      preferredContact: 'phone'
+const { form, handleChange, handleSubmit, errors, isSubmitting } = createForm({
+  initialValues: {
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+    propertyInterest: "",
+    preferredContact: "phone",
+  },
+  validationSchema: {
+    name: (value) => (value ? null : "Name is required"),
+    email: (value) => {
+      if (!value) return "Email is required"
+      if (!value.includes("@")) return "Please enter a valid email"
+      return null
     },
-    validationSchema: {
-      name: (value) => value ? null : 'Name is required',
-      email: (value) => {
-        if (!value) return 'Email is required';
-        if (!value.includes('@')) return 'Please enter a valid email';
-        return null;
-      },
-      phone: (value) => {
-        if (!value) return 'Phone number is required';
-        if (value.length < 10) return 'Please enter a valid phone number';
-        return null;
-      },
-      message: (value) => value ? null : 'Please tell us how we can help you',
-      propertyInterest: (value) => value ? null : 'Please select a property interest',
-      preferredContact: (value) => value ? null : 'Please select preferred contact method'
-    }
-  });
+    phone: (value) => {
+      if (!value) return "Phone number is required"
+      if (value.length < 10) return "Please enter a valid phone number"
+      return null
+    },
+    message: (value) => (value ? null : "Please tell us how we can help you"),
+    propertyInterest: (value) => (value ? null : "Please select a property interest"),
+    preferredContact: (value) => (value ? null : "Please select preferred contact method"),
+  },
+})
 
-  onMount(() => {
-    trackEvent('page_view', {
-      page_title: 'Contact',
-      page_location: window.location.href
-    });
-  });
+onMount(() => {
+  trackEvent("page_view", {
+    page_title: "Contact",
+    page_location: window.location.href,
+  })
+})
 
-  function onSubmit(values) {
-    trackEvent('contact_form_submit', {
-      form_type: 'contact',
-      property_interest: values.propertyInterest,
-      preferred_contact: values.preferredContact
-    });
-    
-    // Here you would typically send the data to your backend
-    console.log('Contact form submitted:', values);
-    
-    // Show success message
-    alert('Thank you for your message! Dr. Jan Duffy will contact you within 24 hours.');
-  }
+function _onSubmit(values) {
+  trackEvent("contact_form_submit", {
+    form_type: "contact",
+    property_interest: values.propertyInterest,
+    preferred_contact: values.preferredContact,
+  })
 
-  function handlePhoneClick() {
-    trackEvent('phone_click', {
-      phone_number: '702-222-1964',
-      section: 'contact'
-    });
-  }
+  // Here you would typically send the data to your backend
+  console.log("Contact form submitted:", values)
+
+  // Show success message
+  alert("Thank you for your message! Dr. Jan Duffy will contact you within 24 hours.")
+}
+
+function _handlePhoneClick() {
+  trackEvent("phone_click", {
+    phone_number: "702-222-1964",
+    section: "contact",
+  })
+}
 </script>
 
 <svelte:head>

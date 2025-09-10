@@ -1,26 +1,26 @@
 <script>
-  import { onMount } from 'svelte';
+import { onMount } from "svelte"
 
-  let widgetLoaded = false;
-  let errorMessage = '';
+let _widgetLoaded = false
+let _errorMessage = ""
 
-  onMount(() => {
-    // Check if RealScout is available
-    console.log('RealScout Test Component mounted');
-    console.log('window.realscout:', window.realscout);
-    console.log('Custom elements registry:', customElements);
-    
-    // Wait a bit for the script to load
-    setTimeout(() => {
-      if (customElements.get('realscout-office-listings')) {
-        console.log('RealScout custom element is defined');
-        widgetLoaded = true;
-      } else {
-        console.log('RealScout custom element not found');
-        errorMessage = 'RealScout custom element not found. Check if script loaded correctly.';
-      }
-    }, 2000);
-  });
+onMount(() => {
+  // Check if RealScout is available
+  console.log("RealScout Test Component mounted")
+  console.log("window.realscout:", window.realscout)
+  console.log("Custom elements registry:", customElements)
+
+  // Wait a bit for the script to load
+  setTimeout(() => {
+    if (customElements.get("realscout-office-listings")) {
+      console.log("RealScout custom element is defined")
+      _widgetLoaded = true
+    } else {
+      console.log("RealScout custom element not found")
+      _errorMessage = "RealScout custom element not found. Check if script loaded correctly."
+    }
+  }, 2000)
+})
 </script>
 
 <section class="realscout-test">

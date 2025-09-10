@@ -1,81 +1,73 @@
 <script>
-	import HeroSection from '$lib/HeroSection.svelte';
-	import FeaturesSection from '$lib/FeaturesSection.svelte';
-	import HomeDesignsSection from '$lib/HomeDesignsSection.svelte';
-	import TestimonialsSection from '$lib/TestimonialsSection.svelte';
-	import CTASection from '$lib/CTASection.svelte';
-	import SimpleAnimatedSection from '$lib/SimpleAnimatedSection.svelte';
-	import Analytics from '$lib/Analytics.svelte';
-	import RichmondAmericanAssets from '$lib/RichmondAmericanAssets.svelte';
-	import { trackEvent } from '$lib/analytics';
-	import { onMount } from 'svelte';
+import { onMount } from "svelte"
+import { trackEvent } from "$lib/analytics"
 
-	// Track page engagement
-	onMount(() => {
-		// Track when the page loads
-		trackEvent('page_view', {
-			page_title: 'Home',
-			page_location: window.location.href
-		});
+// Track page engagement
+onMount(() => {
+  // Track when the page loads
+  trackEvent("page_view", {
+    page_title: "Home",
+    page_location: window.location.href,
+  })
 
-		// Load RealScout widget after page loads
-		setTimeout(() => {
-			loadRealScoutWidget();
-		}, 1000);
-	});
+  // Load RealScout widget after page loads
+  setTimeout(() => {
+    loadRealScoutWidget()
+  }, 1000)
+})
 
-	function loadRealScoutWidget() {
-		console.log('Loading RealScout widget...');
-		
-		// Check if RealScout script is already loaded
-		if (document.querySelector('script[src*="realscout"]')) {
-			console.log('RealScout script already loaded');
-			initializeWidget();
-			return;
-		}
+function loadRealScoutWidget() {
+  console.log("Loading RealScout widget...")
 
-		// Load the script
-		const script = document.createElement('script');
-		script.src = 'https://em.realscout.com/widgets/realscout-web-components.umd.js';
-		script.type = 'module';
-		script.crossOrigin = 'anonymous';
-		script.onload = () => {
-			console.log('RealScout script loaded');
-			initializeWidget();
-		};
-		script.onerror = () => {
-			console.error('Failed to load RealScout script');
-		};
-		document.head.appendChild(script);
-	}
+  // Check if RealScout script is already loaded
+  if (document.querySelector('script[src*="realscout"]')) {
+    console.log("RealScout script already loaded")
+    initializeWidget()
+    return
+  }
 
-	function initializeWidget() {
-		// Wait for custom element to be defined
-		const checkElement = () => {
-			if (customElements.get('realscout-office-listings')) {
-				console.log('RealScout custom element is available');
-				renderWidget();
-			} else {
-				console.log('Waiting for RealScout custom element...');
-				setTimeout(checkElement, 500);
-			}
-		};
-		checkElement();
-	}
+  // Load the script
+  const script = document.createElement("script")
+  script.src = "https://em.realscout.com/widgets/realscout-web-components.umd.js"
+  script.type = "module"
+  script.crossOrigin = "anonymous"
+  script.onload = () => {
+    console.log("RealScout script loaded")
+    initializeWidget()
+  }
+  script.onerror = () => {
+    console.error("Failed to load RealScout script")
+  }
+  document.head.appendChild(script)
+}
 
-	function renderWidget() {
-		const container = document.getElementById('realscout-container');
-		if (container) {
-			container.innerHTML = `
+function initializeWidget() {
+  // Wait for custom element to be defined
+  const checkElement = () => {
+    if (customElements.get("realscout-office-listings")) {
+      console.log("RealScout custom element is available")
+      renderWidget()
+    } else {
+      console.log("Waiting for RealScout custom element...")
+      setTimeout(checkElement, 500)
+    }
+  }
+  checkElement()
+}
+
+function renderWidget() {
+  const container = document.getElementById("realscout-container")
+  if (container) {
+    container.innerHTML = `
 				<realscout-office-listings 
 					agent-encoded-id="QWdlbnQtMjI1MDUw"
 					sort-order="STATUS_AND_SIGNIFICANT_CHANGE"
 					listing-status="For Sale"
 					property-types="SFR,MF,TC">
 				</realscout-office-listings>
-			`;
-		}
-	}
+			`
+  }
+}
 </script>
 
 <RichmondAmericanAssets />

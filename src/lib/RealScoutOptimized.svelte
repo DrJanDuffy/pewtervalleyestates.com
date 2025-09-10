@@ -1,99 +1,99 @@
 <script>
-  import { onMount, onDestroy } from 'svelte';
-  import { browser } from '$app/env';
-  import { trackEvent } from '$lib/analytics';
+import { onDestroy, onMount } from "svelte"
+import { browser } from "$app/env"
+import { trackEvent } from "$lib/analytics"
 
-  let widgetLoaded = false;
-  let widgetError = false;
-  let widgetElement;
-  let observer;
-  let isVisible = false;
+let widgetLoaded = false
+let widgetError = false
+let widgetElement
+let observer
+let _isVisible = false
 
-  // Configuration
-  export let agentEncodedId = "QWdlbnQtMjI1MDUw";
-  export let sortOrder = "STATUS_AND_SIGNIFICANT_CHANGE";
-  export let listingStatus = "For Sale";
-  export let propertyTypes = "SFR,MF,TC";
-  export let lazyLoad = true;
-  export let showLoadingState = true;
+// Configuration
+export const agentEncodedId = "QWdlbnQtMjI1MDUw"
+export const sortOrder = "STATUS_AND_SIGNIFICANT_CHANGE"
+export const listingStatus = "For Sale"
+export const propertyTypes = "SFR,MF,TC"
+export const lazyLoad = true
+export const showLoadingState = true
 
-  onMount(() => {
-    if (browser) {
-      if (lazyLoad) {
-        setupIntersectionObserver();
-      } else {
-        loadWidget();
-      }
-    }
-  });
-
-  onDestroy(() => {
-    if (observer) {
-      observer.disconnect();
-    }
-  });
-
-  function setupIntersectionObserver() {
-    observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting && !widgetLoaded && !widgetError) {
-            isVisible = true;
-            loadWidget();
-            observer.disconnect();
-          }
-        });
-      },
-      { 
-        rootMargin: '50px',
-        threshold: 0.1 
-      }
-    );
-    
-    if (widgetElement) {
-      observer.observe(widgetElement);
+onMount(() => {
+  if (browser) {
+    if (lazyLoad) {
+      setupIntersectionObserver()
+    } else {
+      loadWidget()
     }
   }
+})
 
-  function loadWidget() {
-    // Check if script is already loaded
-    if (document.querySelector('script[src*="realscout-web-components"]')) {
-      widgetLoaded = true;
-      return;
+onDestroy(() => {
+  if (observer) {
+    observer.disconnect()
+  }
+})
+
+function setupIntersectionObserver() {
+  observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !widgetLoaded && !widgetError) {
+          _isVisible = true
+          loadWidget()
+          observer.disconnect()
+        }
+      })
+    },
+    {
+      rootMargin: "50px",
+      threshold: 0.1,
     }
+  )
 
-    const script = document.createElement('script');
-    script.src = 'https://em.realscout.com/widgets/realscout-web-components.umd.js';
-    script.type = 'module';
-    script.async = true;
-    script.defer = true;
-    
-    script.onload = () => {
-      widgetLoaded = true;
-      trackEvent('widget_loaded', {
-        widget_type: 'realscout',
-        agent_id: agentEncodedId
-      });
-    };
-    
-    script.onerror = () => {
-      widgetError = true;
-      console.error('Failed to load RealScout widget');
-      trackEvent('widget_error', {
-        widget_type: 'realscout',
-        error: 'script_load_failed'
-      });
-    };
-    
-    document.head.appendChild(script);
+  if (widgetElement) {
+    observer.observe(widgetElement)
+  }
+}
+
+function loadWidget() {
+  // Check if script is already loaded
+  if (document.querySelector('script[src*="realscout-web-components"]')) {
+    widgetLoaded = true
+    return
   }
 
-  function handleWidgetClick() {
-    trackEvent('widget_interaction', {
-      widget_type: 'realscout',
-      action: 'listing_click'
-    });
+  const script = document.createElement("script")
+  script.src = "https://em.realscout.com/widgets/realscout-web-components.umd.js"
+  script.type = "module"
+  script.async = true
+  script.defer = true
+
+  script.onload = () => {
+    widgetLoaded = true
+    trackEvent("widget_loaded", {
+      widget_type: "realscout",
+      agent_id: agentEncodedId,
+    })
   }
+
+  script.onerror = () => {
+    widgetError = true
+    console.error("Failed to load RealScout widget")
+    trackEvent("widget_error", {
+      widget_type: "realscout",
+      error: "script_load_failed",
+    })
+  }
+
+  document.head.appendChild(script)
+}
+
+function _handleWidgetClick() {
+  trackEvent("widget_interaction", {
+    widget_type: "realscout",
+    action: "listing_click",
+  })
+}
 </script>
 
 <div bind:this={widgetElement} class="realscout-container">

@@ -1,5 +1,5 @@
-import { error } from '@sveltejs/kit';
-import { api } from './api';
+import { error } from "@sveltejs/kit"
+import { api } from "./api"
 
 /**
  * @typedef {{
@@ -14,49 +14,49 @@ import { api } from './api';
 /** @type {import('./$types').PageServerLoad} */
 export const load = async ({ locals }) => {
   // locals.userid comes from src/hooks.js
-  const response = await api('GET', `todos/${locals.userid}`);
+  const response = await api("GET", `todos/${locals.userid}`)
 
   if (response.status === 404) {
     // user hasn't created a todo list.
     // start with an empty array
     return {
       /** @type {Todo[]} */
-      todos: []
-    };
+      todos: [],
+    }
   }
 
   if (response.status === 200) {
     return {
       /** @type {Todo[]} */
-      todos: await response.json()
-    };
+      todos: await response.json(),
+    }
   }
 
-  throw error(response.status);
-};
+  throw error(response.status)
+}
 
 /** @type {import('./$types').Actions} */
 export const actions = {
   create: async ({ request, locals }) => {
-    const form = await request.formData();
+    const form = await request.formData()
 
-    await api('POST', `todos/${locals.userid}`, {
-      text: form.get('text')
-    });
+    await api("POST", `todos/${locals.userid}`, {
+      text: form.get("text"),
+    })
   },
 
   update: async ({ request, locals }) => {
-    const form = await request.formData();
+    const form = await request.formData()
 
-    await api('PATCH', `todos/${locals.userid}/${form.get('uid')}`, {
-      text: form.has('text') ? form.get('text') : undefined,
-      done: form.has('done') ? !!form.get('done') : undefined
-    });
+    await api("PATCH", `todos/${locals.userid}/${form.get("uid")}`, {
+      text: form.has("text") ? form.get("text") : undefined,
+      done: form.has("done") ? !!form.get("done") : undefined,
+    })
   },
 
   delete: async ({ request, locals }) => {
-    const form = await request.formData();
+    const form = await request.formData()
 
-    await api('DELETE', `todos/${locals.userid}/${form.get('uid')}`);
-  }
-};
+    await api("DELETE", `todos/${locals.userid}/${form.get("uid")}`)
+  },
+}

@@ -1,69 +1,69 @@
 <script>
-  import { onMount } from 'svelte';
-  import { trackEvent } from '$lib/analytics';
+import { onMount } from "svelte"
+import { trackEvent } from "$lib/analytics"
 
-  onMount(() => {
-    trackEvent('page_view', {
-      page_title: 'Property Listings',
-      page_location: window.location.href
-    });
+onMount(() => {
+  trackEvent("page_view", {
+    page_title: "Property Listings",
+    page_location: window.location.href,
+  })
 
-    // Load RealScout widget
-    loadRealScoutWidget();
-  });
+  // Load RealScout widget
+  loadRealScoutWidget()
+})
 
-  function loadRealScoutWidget() {
-    console.log('Loading RealScout widget on listings page...');
-    
-    // Check if RealScout script is already loaded
-    if (document.querySelector('script[src*="realscout"]')) {
-      console.log('RealScout script already loaded');
-      initializeWidget();
-      return;
+function loadRealScoutWidget() {
+  console.log("Loading RealScout widget on listings page...")
+
+  // Check if RealScout script is already loaded
+  if (document.querySelector('script[src*="realscout"]')) {
+    console.log("RealScout script already loaded")
+    initializeWidget()
+    return
+  }
+
+  // Load the script
+  const script = document.createElement("script")
+  script.src = "https://em.realscout.com/widgets/realscout-web-components.umd.js"
+  script.type = "module"
+  script.crossOrigin = "anonymous"
+  script.onload = () => {
+    console.log("RealScout script loaded")
+    initializeWidget()
+  }
+  script.onerror = () => {
+    console.error("Failed to load RealScout script")
+  }
+  document.head.appendChild(script)
+}
+
+function initializeWidget() {
+  // Wait for custom element to be defined
+  const checkElement = () => {
+    if (customElements.get("realscout-office-listings")) {
+      console.log("RealScout custom element is available")
+      renderWidget()
+    } else {
+      console.log("Waiting for RealScout custom element...")
+      setTimeout(checkElement, 500)
     }
-
-    // Load the script
-    const script = document.createElement('script');
-    script.src = 'https://em.realscout.com/widgets/realscout-web-components.umd.js';
-    script.type = 'module';
-    script.crossOrigin = 'anonymous';
-    script.onload = () => {
-      console.log('RealScout script loaded');
-      initializeWidget();
-    };
-    script.onerror = () => {
-      console.error('Failed to load RealScout script');
-    };
-    document.head.appendChild(script);
   }
+  checkElement()
+}
 
-  function initializeWidget() {
-    // Wait for custom element to be defined
-    const checkElement = () => {
-      if (customElements.get('realscout-office-listings')) {
-        console.log('RealScout custom element is available');
-        renderWidget();
-      } else {
-        console.log('Waiting for RealScout custom element...');
-        setTimeout(checkElement, 500);
-      }
-    };
-    checkElement();
-  }
-
-  function renderWidget() {
-    const container = document.getElementById('realscout-container');
-    if (container) {
-      container.innerHTML = `
+function renderWidget() {
+  const container = document.getElementById("realscout-container")
+  if (container) {
+    container.innerHTML = `
         <realscout-office-listings 
           agent-encoded-id="QWdlbnQtMjI1MDUw"
           sort-order="STATUS_AND_SIGNIFICANT_CHANGE"
           listing-status="For Sale"
           property-types="SFR,MF,TC">
         </realscout-office-listings>
-      `;
-    }
+      `
   }
+}
 </script>
 
 <svelte:head>

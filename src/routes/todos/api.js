@@ -7,7 +7,7 @@
 	guarantees are made. Don't use it to organise your life.)
 */
 
-const base = 'https://api.svelte.dev';
+const base = "https://api.svelte.dev"
 
 /**
  * @param {string} method
@@ -18,8 +18,8 @@ export function api(method, resource, data) {
   return fetch(`${base}/${resource}`, {
     method,
     headers: {
-      'content-type': 'application/json'
+      "content-type": "application/json",
     },
-    body: data && JSON.stringify(data)
-  });
+    body: data && JSON.stringify(data),
+  })
 }

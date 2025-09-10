@@ -1,25 +1,23 @@
 <script>
-  import RichmondAmericanBackground from '$lib/RichmondAmericanBackground.svelte';
-  import RichmondAmericanAssets from '$lib/RichmondAmericanAssets.svelte';
-  import { trackEvent } from '$lib/analytics';
-  import { onMount } from 'svelte';
+import { onMount } from "svelte"
+import { trackEvent } from "$lib/analytics"
 
-  let isLoaded = false;
+let _isLoaded = false
 
-  onMount(() => {
-    isLoaded = true;
-    trackEvent('page_view', {
-      page_title: 'Richmond American Demo',
-      page_location: window.location.href
-    });
-  });
+onMount(() => {
+  _isLoaded = true
+  trackEvent("page_view", {
+    page_title: "Richmond American Demo",
+    page_location: window.location.href,
+  })
+})
 
-  function handleButtonClick(buttonType) {
-    trackEvent('button_click', {
-      button_name: buttonType,
-      page: 'richmond_demo'
-    });
-  }
+function _handleButtonClick(buttonType) {
+  trackEvent("button_click", {
+    button_name: buttonType,
+    page: "richmond_demo",
+  })
+}
 </script>
 
 <svelte:head>

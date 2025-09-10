@@ -1,52 +1,52 @@
 <script>
-  import { onMount } from 'svelte';
+import { onMount } from "svelte"
 
-  let scriptLoaded = false;
-  let customElementDefined = false;
-  let debugInfo = [];
-  let widgetVisible = false;
+let _scriptLoaded = false
+let _customElementDefined = false
+const debugInfo = []
+const _widgetVisible = false
 
-  onMount(() => {
-    debugInfo.push('Component mounted');
-    
-    // Check if script is loaded
-    const checkScript = () => {
-      if (document.querySelector('script[src*="realscout"]')) {
-        scriptLoaded = true;
-        debugInfo.push('RealScout script found in DOM');
-      } else {
-        debugInfo.push('RealScout script NOT found in DOM');
-      }
-    };
+onMount(() => {
+  debugInfo.push("Component mounted")
 
-    // Check if custom element is defined
-    const checkCustomElement = () => {
-      if (customElements.get('realscout-office-listings')) {
-        customElementDefined = true;
-        debugInfo.push('realscout-office-listings custom element is defined');
-      } else {
-        debugInfo.push('realscout-office-listings custom element NOT defined');
-      }
-    };
+  // Check if script is loaded
+  const checkScript = () => {
+    if (document.querySelector('script[src*="realscout"]')) {
+      _scriptLoaded = true
+      debugInfo.push("RealScout script found in DOM")
+    } else {
+      debugInfo.push("RealScout script NOT found in DOM")
+    }
+  }
 
-    // Initial checks
-    checkScript();
-    checkCustomElement();
+  // Check if custom element is defined
+  const checkCustomElement = () => {
+    if (customElements.get("realscout-office-listings")) {
+      _customElementDefined = true
+      debugInfo.push("realscout-office-listings custom element is defined")
+    } else {
+      debugInfo.push("realscout-office-listings custom element NOT defined")
+    }
+  }
 
-    // Check again after a delay
-    setTimeout(() => {
-      checkScript();
-      checkCustomElement();
-      debugInfo.push('Delayed check completed');
-    }, 2000);
+  // Initial checks
+  checkScript()
+  checkCustomElement()
 
-    // Check one more time after longer delay
-    setTimeout(() => {
-      checkScript();
-      checkCustomElement();
-      debugInfo.push('Final check completed');
-    }, 5000);
-  });
+  // Check again after a delay
+  setTimeout(() => {
+    checkScript()
+    checkCustomElement()
+    debugInfo.push("Delayed check completed")
+  }, 2000)
+
+  // Check one more time after longer delay
+  setTimeout(() => {
+    checkScript()
+    checkCustomElement()
+    debugInfo.push("Final check completed")
+  }, 5000)
+})
 </script>
 
 <section class="realscout-debug">

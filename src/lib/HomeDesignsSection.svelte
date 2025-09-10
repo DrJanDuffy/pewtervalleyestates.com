@@ -1,57 +1,57 @@
 <script>
-  import { trackEvent } from '$lib/analytics';
-  
-  const homeDesigns = [
-    {
-      id: 'the-avalon',
-      name: 'The Avalon',
-      bedrooms: 4,
-      bathrooms: 3,
-      sqft: '2,847',
-      price: 'From $485,000',
-      image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=400&fit=crop',
-      features: ['Open Concept Living', 'Gourmet Kitchen', 'Master Suite', '2-Car Garage'],
-      popular: true
-    },
-    {
-      id: 'the-berkeley',
-      name: 'The Berkeley',
-      bedrooms: 3,
-      bathrooms: 2.5,
-      sqft: '2,156',
-      price: 'From $425,000',
-      image: 'https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=600&h=400&fit=crop',
-      features: ['Great Room', 'Island Kitchen', 'Loft Space', 'Covered Patio'],
-      popular: false
-    },
-    {
-      id: 'the-cambridge',
-      name: 'The Cambridge',
-      bedrooms: 5,
-      bathrooms: 4,
-      sqft: '3,245',
-      price: 'From $565,000',
-      image: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=600&h=400&fit=crop',
-      features: ['Formal Dining', 'Bonus Room', 'Walk-in Closets', '3-Car Garage'],
-      popular: true
-    }
-  ];
-  
-  function handleDesignClick(design) {
-    trackEvent('home_design_click', {
-      design_name: design.name,
-      design_id: design.id,
-      section: 'home_designs'
-    });
-  }
-  
-  function handleScheduleTour(design) {
-    trackEvent('schedule_tour_click', {
-      design_name: design.name,
-      design_id: design.id,
-      section: 'home_designs'
-    });
-  }
+import { trackEvent } from "$lib/analytics"
+
+const _homeDesigns = [
+  {
+    id: "the-avalon",
+    name: "The Avalon",
+    bedrooms: 4,
+    bathrooms: 3,
+    sqft: "2,847",
+    price: "From $485,000",
+    image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=400&fit=crop",
+    features: ["Open Concept Living", "Gourmet Kitchen", "Master Suite", "2-Car Garage"],
+    popular: true,
+  },
+  {
+    id: "the-berkeley",
+    name: "The Berkeley",
+    bedrooms: 3,
+    bathrooms: 2.5,
+    sqft: "2,156",
+    price: "From $425,000",
+    image: "https://images.unsplash.com/photo-1600607687644-c7171b42498b?w=600&h=400&fit=crop",
+    features: ["Great Room", "Island Kitchen", "Loft Space", "Covered Patio"],
+    popular: false,
+  },
+  {
+    id: "the-cambridge",
+    name: "The Cambridge",
+    bedrooms: 5,
+    bathrooms: 4,
+    sqft: "3,245",
+    price: "From $565,000",
+    image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=600&h=400&fit=crop",
+    features: ["Formal Dining", "Bonus Room", "Walk-in Closets", "3-Car Garage"],
+    popular: true,
+  },
+]
+
+function _handleDesignClick(design) {
+  trackEvent("home_design_click", {
+    design_name: design.name,
+    design_id: design.id,
+    section: "home_designs",
+  })
+}
+
+function _handleScheduleTour(design) {
+  trackEvent("schedule_tour_click", {
+    design_name: design.name,
+    design_id: design.id,
+    section: "home_designs",
+  })
+}
 </script>
 
 <section class="home-designs">

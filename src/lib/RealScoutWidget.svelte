@@ -1,66 +1,66 @@
 <script>
-  import { onMount } from 'svelte';
+import { onMount } from "svelte"
 
-  let scriptLoaded = false;
-  let widgetReady = false;
+let _scriptLoaded = false
+let widgetReady = false
 
-  onMount(() => {
-    console.log('RealScout Widget component mounted');
-    
-    // Load RealScout script dynamically if not already loaded
-    const loadRealScoutScript = () => {
-      if (document.querySelector('script[src*="realscout"]')) {
-        console.log('RealScout script already loaded');
-        scriptLoaded = true;
-        return;
-      }
+onMount(() => {
+  console.log("RealScout Widget component mounted")
 
-      console.log('Loading RealScout script...');
-      const script = document.createElement('script');
-      script.src = 'https://em.realscout.com/widgets/realscout-web-components.umd.js';
-      script.type = 'module';
-      script.crossOrigin = 'anonymous';
-      script.onload = () => {
-        console.log('RealScout script loaded successfully');
-        scriptLoaded = true;
-        checkWidget();
-      };
-      script.onerror = () => {
-        console.error('Failed to load RealScout script');
-      };
-      document.head.appendChild(script);
-    };
+  // Load RealScout script dynamically if not already loaded
+  const loadRealScoutScript = () => {
+    if (document.querySelector('script[src*="realscout"]')) {
+      console.log("RealScout script already loaded")
+      _scriptLoaded = true
+      return
+    }
 
-    // Check if widget is ready
-    const checkWidget = () => {
-      if (customElements.get('realscout-office-listings')) {
-        console.log('RealScout custom element is available');
-        widgetReady = true;
-        return true;
-      } else {
-        console.log('RealScout custom element not available yet');
-        return false;
-      }
-    };
+    console.log("Loading RealScout script...")
+    const script = document.createElement("script")
+    script.src = "https://em.realscout.com/widgets/realscout-web-components.umd.js"
+    script.type = "module"
+    script.crossOrigin = "anonymous"
+    script.onload = () => {
+      console.log("RealScout script loaded successfully")
+      _scriptLoaded = true
+      checkWidget()
+    }
+    script.onerror = () => {
+      console.error("Failed to load RealScout script")
+    }
+    document.head.appendChild(script)
+  }
 
-    // Start the process
-    loadRealScoutScript();
+  // Check if widget is ready
+  const checkWidget = () => {
+    if (customElements.get("realscout-office-listings")) {
+      console.log("RealScout custom element is available")
+      widgetReady = true
+      return true
+    } else {
+      console.log("RealScout custom element not available yet")
+      return false
+    }
+  }
 
-    // Check periodically for widget readiness
-    const checkInterval = setInterval(() => {
-      if (checkWidget()) {
-        clearInterval(checkInterval);
-      }
-    }, 500);
+  // Start the process
+  loadRealScoutScript()
 
-    // Stop checking after 10 seconds
-    setTimeout(() => {
-      clearInterval(checkInterval);
-      if (!widgetReady) {
-        console.log('RealScout widget failed to load after 10 seconds');
-      }
-    }, 10000);
-  });
+  // Check periodically for widget readiness
+  const checkInterval = setInterval(() => {
+    if (checkWidget()) {
+      clearInterval(checkInterval)
+    }
+  }, 500)
+
+  // Stop checking after 10 seconds
+  setTimeout(() => {
+    clearInterval(checkInterval)
+    if (!widgetReady) {
+      console.log("RealScout widget failed to load after 10 seconds")
+    }
+  }, 10000)
+})
 </script>
 
 <section class="realscout-widget-section">

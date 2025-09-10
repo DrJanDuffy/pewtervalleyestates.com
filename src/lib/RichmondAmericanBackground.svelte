@@ -1,61 +1,61 @@
 <script>
-  import { onMount, onDestroy } from 'svelte';
-  import { browser } from '$app/environment';
-  import { trackEvent } from '$lib/analytics';
+import { onDestroy, onMount } from "svelte"
+import { browser } from "$app/environment"
+import { trackEvent } from "$lib/analytics"
 
-  let containerRef;
-  let isActive = false;
-  let mousePosition = { x: 0, y: 0 };
+let containerRef
+let _isActive = false
+const mousePosition = { x: 0, y: 0 }
 
-  // Configuration
-  export let enableMouseEffects = true;
-  export let enableGlassEffect = true;
-  export let enableGooeyEffect = false;
+// Configuration
+export const enableMouseEffects = true
+export const enableGlassEffect = true
+export const enableGooeyEffect = false
 
-  onMount(() => {
-    if (browser && enableMouseEffects) {
-      setupMouseEffects();
-    }
-  });
+onMount(() => {
+  if (browser && enableMouseEffects) {
+    setupMouseEffects()
+  }
+})
 
-  onDestroy(() => {
-    if (browser) {
-      cleanupMouseEffects();
-    }
-  });
+onDestroy(() => {
+  if (browser) {
+    cleanupMouseEffects()
+  }
+})
 
-  function setupMouseEffects() {
-    const handleMouseMove = (e) => {
-      mousePosition.x = e.clientX;
-      mousePosition.y = e.clientY;
-    };
-
-    const handleMouseEnter = () => {
-      isActive = true;
-      trackEvent('background_interaction', {
-        interaction_type: 'mouse_enter',
-        component: 'richmond_american_background'
-      });
-    };
-
-    const handleMouseLeave = () => {
-      isActive = false;
-      trackEvent('background_interaction', {
-        interaction_type: 'mouse_leave',
-        component: 'richmond_american_background'
-      });
-    };
-
-    document.addEventListener('mousemove', handleMouseMove);
-    if (containerRef) {
-      containerRef.addEventListener('mouseenter', handleMouseEnter);
-      containerRef.addEventListener('mouseleave', handleMouseLeave);
-    }
+function setupMouseEffects() {
+  const handleMouseMove = (e) => {
+    mousePosition.x = e.clientX
+    mousePosition.y = e.clientY
   }
 
-  function cleanupMouseEffects() {
-    // Cleanup will be handled by Svelte's automatic cleanup
+  const handleMouseEnter = () => {
+    _isActive = true
+    trackEvent("background_interaction", {
+      interaction_type: "mouse_enter",
+      component: "richmond_american_background",
+    })
   }
+
+  const handleMouseLeave = () => {
+    _isActive = false
+    trackEvent("background_interaction", {
+      interaction_type: "mouse_leave",
+      component: "richmond_american_background",
+    })
+  }
+
+  document.addEventListener("mousemove", handleMouseMove)
+  if (containerRef) {
+    containerRef.addEventListener("mouseenter", handleMouseEnter)
+    containerRef.addEventListener("mouseleave", handleMouseLeave)
+  }
+}
+
+function cleanupMouseEffects() {
+  // Cleanup will be handled by Svelte's automatic cleanup
+}
 </script>
 
 <div 

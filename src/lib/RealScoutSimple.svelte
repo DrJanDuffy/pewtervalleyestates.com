@@ -1,14 +1,14 @@
 <script>
-  import { onMount } from 'svelte';
-  import { trackEvent } from '$lib/analytics';
+import { onMount } from "svelte"
+import { trackEvent } from "$lib/analytics"
 
-  onMount(() => {
-    trackEvent('realscout_widget_loaded', {
-      agent_id: 'QWdlbnQtMjI1MDUw',
-      listing_status: 'For Sale',
-      property_types: 'SFR,MF,TC'
-    });
-  });
+onMount(() => {
+  trackEvent("realscout_widget_loaded", {
+    agent_id: "QWdlbnQtMjI1MDUw",
+    listing_status: "For Sale",
+    property_types: "SFR,MF,TC",
+  })
+})
 </script>
 
 <section class="realscout-simple">

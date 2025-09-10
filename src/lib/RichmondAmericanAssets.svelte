@@ -1,42 +1,43 @@
 <script>
-  import { onMount } from 'svelte';
-  import { browser } from '$app/environment';
+import { onMount } from "svelte"
+import { browser } from "$app/environment"
 
-  // Asset configuration
-  export let enableFonts = true;
-  export let enableFavicons = true;
-  export let enableStyles = true;
+// Asset configuration
+export const enableFonts = true
+export const enableFavicons = true
+export const enableStyles = true
 
-  onMount(() => {
-    if (browser && enableFonts) {
-      loadFonts();
-    }
-  });
-
-  function loadFonts() {
-    // Preload Google Fonts
-    const fontLink = document.createElement('link');
-    fontLink.rel = 'preconnect';
-    fontLink.href = 'https://fonts.googleapis.com';
-    document.head.appendChild(fontLink);
-
-    const fontLink2 = document.createElement('link');
-    fontLink2.rel = 'preconnect';
-    fontLink2.href = 'https://fonts.gstatic.com';
-    fontLink2.crossOrigin = 'anonymous';
-    document.head.appendChild(fontLink2);
-
-    // Load Nunito Sans font
-    const nunitoLink = document.createElement('link');
-    nunitoLink.href = 'https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap';
-    nunitoLink.rel = 'stylesheet';
-    nunitoLink.media = 'print';
-    nunitoLink.onload = function() {
-      this.media = 'all';
-      this.onload = null;
-    };
-    document.head.appendChild(nunitoLink);
+onMount(() => {
+  if (browser && enableFonts) {
+    loadFonts()
   }
+})
+
+function loadFonts() {
+  // Preload Google Fonts
+  const fontLink = document.createElement("link")
+  fontLink.rel = "preconnect"
+  fontLink.href = "https://fonts.googleapis.com"
+  document.head.appendChild(fontLink)
+
+  const fontLink2 = document.createElement("link")
+  fontLink2.rel = "preconnect"
+  fontLink2.href = "https://fonts.gstatic.com"
+  fontLink2.crossOrigin = "anonymous"
+  document.head.appendChild(fontLink2)
+
+  // Load Nunito Sans font
+  const nunitoLink = document.createElement("link")
+  nunitoLink.href =
+    "https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap"
+  nunitoLink.rel = "stylesheet"
+  nunitoLink.media = "print"
+  nunitoLink.onload = function () {
+    this.media = "all"
+    this.onload = null
+  }
+  document.head.appendChild(nunitoLink)
+}
 </script>
 
 <svelte:head>

@@ -1,12 +1,12 @@
 <script>
-  import { trackEvent } from '$lib/analytics';
-  
-  function handleCtaClick(action) {
-    trackEvent('hero_cta_click', {
-      action: action,
-      section: 'hero'
-    });
-  }
+import { trackEvent } from "$lib/analytics"
+
+function _handleCtaClick(action) {
+  trackEvent("hero_cta_click", {
+    action: action,
+    section: "hero",
+  })
+}
 </script>
 
 <section class="hero">

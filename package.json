@@ -7,10 +7,16 @@
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./jsconfig.json",
     "check:watch": "svelte-check --tsconfig ./jsconfig.json --watch",
-    "lint": "prettier --check .",
-    "format": "prettier --write ."
+    "lint": "biome lint .",
+    "lint:fix": "biome lint --write .",
+    "format": "biome format --write .",
+    "format:check": "biome format .",
+    "biome:check": "biome check .",
+    "biome:fix": "biome check --write .",
+    "clean": "biome check --write . && biome format --write ."
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.2.4",
     "@sveltejs/adapter-auto": "1.0.0-next.65",
     "@sveltejs/adapter-vercel": "5.10.2",
     "@sveltejs/kit": "2.38.0",
