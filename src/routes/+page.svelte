@@ -2,7 +2,7 @@
 	import HeroSection from '$lib/HeroSection.svelte';
 	import FeaturesSection from '$lib/FeaturesSection.svelte';
 	import HomeDesignsSection from '$lib/HomeDesignsSection.svelte';
-	import RealScoutSimple from '$lib/RealScoutSimple.svelte';
+	import RealScoutDebug from '$lib/RealScoutDebug.svelte';
 	import TestimonialsSection from '$lib/TestimonialsSection.svelte';
 	import CTASection from '$lib/CTASection.svelte';
 	import SimpleAnimatedSection from '$lib/SimpleAnimatedSection.svelte';
@@ -43,7 +43,7 @@
 		<HomeDesignsSection />
 	</SimpleAnimatedSection>
 	<SimpleAnimatedSection delay={0.5}>
-		<RealScoutSimple />
+		<RealScoutDebug />
 	</SimpleAnimatedSection>
 	<SimpleAnimatedSection delay={0.6}>
 		<TestimonialsSection />
