@@ -7,12 +7,12 @@ import RichmondAmericanAssets from "$lib/RichmondAmericanAssets.svelte"
 
 // SEO data for neighborhood page
 const pageData = {
-  title: "Neighborhood & Location - Pewter Valley Estates Las Vegas",
-  description: "Discover the vibrant Las Vegas neighborhood surrounding Pewter Valley Estates. Explore local amenities, schools, shopping, dining, and entertainment options in this premier location.",
+  title: "Mountain's Edge Neighborhood - Pewter Valley Estates Las Vegas",
+  description: "Discover the Mountain's Edge corridor neighborhood surrounding Pewter Valley Estates. Explore local amenities, schools, shopping, dining, and entertainment options in this premier Las Vegas location.",
   image: "https://www.pewtervalleyestates.com/neighborhood-og-image.jpg",
   type: "website",
   canonical: "https://www.pewtervalleyestates.com/neighborhood",
-  keywords: "Las Vegas neighborhood, Henderson NV, Summerlin, local amenities, schools, shopping, dining, entertainment, Las Vegas real estate location"
+  keywords: "Mountain's Edge Las Vegas, Pewter Valley Estates, Las Vegas southwest, Mountains Edge corridor, Las Vegas new homes, southwest Las Vegas real estate, local amenities, schools, shopping, dining, entertainment"
 }
 
 // Breadcrumbs for neighborhood page
@@ -27,28 +27,28 @@ const neighborhoodFeatures = [
     category: "Shopping & Dining",
     features: [
       {
-        name: "The District at Green Valley Ranch",
-        distance: "5 minutes",
-        description: "Upscale shopping center with premium retailers and restaurants",
+        name: "Mountain's Edge Shopping Center",
+        distance: "2 minutes",
+        description: "Convenient local shopping with grocery stores, restaurants, and services",
         type: "shopping"
       },
       {
-        name: "Green Valley Ranch Resort & Casino",
-        distance: "3 minutes",
-        description: "World-class entertainment, dining, and gaming",
+        name: "South Point Casino & Resort",
+        distance: "8 minutes",
+        description: "Full-service resort with dining, entertainment, and gaming",
         type: "entertainment"
       },
       {
-        name: "Galleria at Sunset",
-        distance: "8 minutes",
-        description: "Major shopping mall with department stores and dining",
+        name: "The Shops at Summerlin",
+        distance: "12 minutes",
+        description: "Upscale shopping center with premium retailers and dining",
         type: "shopping"
       },
       {
-        name: "Downtown Summerlin",
+        name: "Red Rock Resort & Casino",
         distance: "15 minutes",
-        description: "Modern outdoor shopping and entertainment district",
-        type: "shopping"
+        description: "Luxury resort with fine dining and entertainment",
+        type: "entertainment"
       }
     ]
   },
@@ -56,27 +56,27 @@ const neighborhoodFeatures = [
     category: "Education",
     features: [
       {
-        name: "Green Valley High School",
-        distance: "2 minutes",
-        description: "Top-rated public high school with excellent academics",
+        name: "Mountain's Edge Elementary School",
+        distance: "1 minute",
+        description: "Highly rated elementary school serving the Mountain's Edge community",
         type: "school"
       },
       {
-        name: "Green Valley Elementary",
-        distance: "1 minute",
-        description: "Highly rated elementary school serving the community",
+        name: "Sierra Vista High School",
+        distance: "3 minutes",
+        description: "Top-rated public high school with excellent academics and sports programs",
         type: "school"
       },
       {
         name: "University of Nevada, Las Vegas",
-        distance: "20 minutes",
-        description: "Major university with diverse programs and research",
+        distance: "18 minutes",
+        description: "Major university with diverse programs and research facilities",
         type: "university"
       },
       {
-        name: "Nevada State College",
-        distance: "15 minutes",
-        description: "Growing four-year college with modern facilities",
+        name: "College of Southern Nevada",
+        distance: "12 minutes",
+        description: "Community college with excellent programs and modern facilities",
         type: "university"
       }
     ]
@@ -85,28 +85,28 @@ const neighborhoodFeatures = [
     category: "Recreation & Parks",
     features: [
       {
-        name: "Green Valley Ranch Golf Club",
-        distance: "2 minutes",
-        description: "Championship 18-hole golf course with stunning views",
-        type: "golf"
-      },
-      {
-        name: "Cornerstone Park",
-        distance: "3 minutes",
-        description: "Beautiful park with walking trails and playgrounds",
+        name: "Mountain's Edge Regional Park",
+        distance: "1 minute",
+        description: "Beautiful community park with walking trails, playgrounds, and sports facilities",
         type: "park"
       },
       {
-        name: "Lake Las Vegas",
-        distance: "10 minutes",
-        description: "Resort community with water activities and dining",
-        type: "recreation"
+        name: "Angel Park Golf Club",
+        distance: "5 minutes",
+        description: "Championship golf course with mountain views and excellent facilities",
+        type: "golf"
       },
       {
-        name: "Red Rock Canyon",
-        distance: "25 minutes",
-        description: "National Conservation Area with hiking and rock climbing",
+        name: "Red Rock Canyon National Conservation Area",
+        distance: "20 minutes",
+        description: "Stunning natural area with hiking trails, rock climbing, and scenic drives",
         type: "nature"
+      },
+      {
+        name: "Spring Mountain Ranch State Park",
+        distance: "25 minutes",
+        description: "Historic ranch with hiking trails and outdoor concerts",
+        type: "recreation"
       }
     ]
   },
@@ -114,27 +114,27 @@ const neighborhoodFeatures = [
     category: "Healthcare & Services",
     features: [
       {
-        name: "St. Rose Dominican Hospital",
-        distance: "5 minutes",
-        description: "Full-service hospital with emergency care",
+        name: "MountainView Hospital",
+        distance: "8 minutes",
+        description: "Full-service hospital with emergency care and specialized services",
         type: "healthcare"
       },
       {
-        name: "Green Valley Library",
-        distance: "4 minutes",
-        description: "Modern library with extensive resources and programs",
+        name: "Mountain's Edge Library",
+        distance: "2 minutes",
+        description: "Modern library with extensive resources, programs, and community events",
         type: "library"
       },
       {
-        name: "Henderson Police Department",
-        distance: "6 minutes",
-        description: "Local law enforcement ensuring community safety",
+        name: "Las Vegas Metropolitan Police Department",
+        distance: "5 minutes",
+        description: "Local law enforcement ensuring community safety and security",
         type: "safety"
       },
       {
-        name: "McCullough Hills Fire Station",
-        distance: "3 minutes",
-        description: "Fire and emergency services for the area",
+        name: "Mountain's Edge Fire Station",
+        distance: "1 minute",
+        description: "Fire and emergency services serving the Mountain's Edge community",
         type: "safety"
       }
     ]
@@ -177,25 +177,25 @@ const attractions = [
 const transportation = [
   {
     name: "McCarran International Airport",
-    distance: "12 minutes",
+    distance: "15 minutes",
     description: "Major international airport with direct flights worldwide",
     type: "airport"
   },
   {
     name: "Las Vegas Monorail",
-    distance: "15 minutes",
+    distance: "18 minutes",
     description: "Convenient transportation along the Strip",
     type: "public"
   },
   {
     name: "RTC Transit",
-    distance: "2 minutes",
+    distance: "1 minute",
     description: "Local bus service connecting to all major areas",
     type: "public"
   },
   {
-    name: "Interstate 215",
-    distance: "1 minute",
+    name: "Interstate 215 (Beltway)",
+    distance: "2 minutes",
     description: "Beltway providing easy access to all parts of the valley",
     type: "highway"
   }
@@ -275,27 +275,27 @@ onMount(() => {
   <section class="neighborhood-hero">
     <div class="container">
       <div class="hero-content">
-        <h1>Discover Your Perfect Las Vegas Neighborhood</h1>
+        <h1>Discover Mountain's Edge - Las Vegas's Premier Southwest Corridor</h1>
         <p class="hero-subtitle">
-          Pewter Valley Estates is strategically located in one of Las Vegas's most desirable areas, 
-          offering the perfect blend of suburban tranquility and urban convenience.
+          Pewter Valley Estates is strategically located in the Mountain's Edge corridor, 
+          one of Las Vegas's most desirable master-planned communities offering the perfect blend of suburban tranquility and urban convenience.
         </p>
         <div class="hero-stats">
           <div class="stat">
-            <span class="stat-number">15</span>
+            <span class="stat-number">18</span>
             <span class="stat-label">Minutes to The Strip</span>
           </div>
           <div class="stat">
-            <span class="stat-number">5</span>
+            <span class="stat-number">2</span>
             <span class="stat-label">Minutes to Shopping</span>
           </div>
           <div class="stat">
-            <span class="stat-number">2</span>
+            <span class="stat-number">5</span>
             <span class="stat-label">Minutes to Golf</span>
           </div>
           <div class="stat">
             <span class="stat-number">1</span>
-            <span class="stat-label">Minute to School</span>
+            <span class="stat-label">Minute to Park</span>
           </div>
         </div>
       </div>
@@ -305,15 +305,15 @@ onMount(() => {
   <!-- Location Overview -->
   <section class="location-overview">
     <div class="container">
-      <h2>Prime Las Vegas Location</h2>
+      <h2>Prime Mountain's Edge Location</h2>
       <div class="overview-grid">
         <div class="overview-content">
-          <h3>Why This Location is Perfect</h3>
+          <h3>Why Mountain's Edge is Perfect</h3>
           <p>
-            Pewter Valley Estates is nestled in the heart of Henderson, Nevada's second-largest city, 
-            known for its safety, excellent schools, and family-friendly atmosphere. Our community 
-            offers the best of both worlds: peaceful suburban living with easy access to all the 
-            excitement and opportunities that Las Vegas has to offer.
+            Pewter Valley Estates is strategically located in the Mountain's Edge corridor, 
+            one of Las Vegas's most prestigious master-planned communities. This southwest Las Vegas 
+            location offers the perfect combination of natural beauty, modern amenities, and easy 
+            access to all the excitement and opportunities that Las Vegas has to offer.
           </p>
           <ul class="location-benefits">
             <li>✅ Safe, family-friendly community with low crime rates</li>
@@ -340,9 +340,9 @@ onMount(() => {
   <!-- Neighborhood Features -->
   <section class="neighborhood-features">
     <div class="container">
-      <h2>Everything You Need Within Minutes</h2>
+      <h2>Everything You Need Within Minutes in Mountain's Edge</h2>
       <p class="section-subtitle">
-        Our convenient location puts you close to all the amenities and attractions that make Las Vegas living exceptional.
+        Our convenient Mountain's Edge location puts you close to all the amenities and attractions that make southwest Las Vegas living exceptional.
       </p>
       
       <!-- Category Tabs -->
@@ -410,10 +410,10 @@ onMount(() => {
   <!-- Transportation -->
   <section class="transportation">
     <div class="container">
-      <h2>Easy Access to Everywhere</h2>
+      <h2>Easy Access to Everywhere from Mountain's Edge</h2>
       <p class="section-subtitle">
         Whether you're commuting to work, traveling for business, or exploring the city, 
-        getting around is convenient and efficient.
+        getting around from Mountain's Edge is convenient and efficient.
       </p>
       
       <div class="transportation-grid">
@@ -434,7 +434,7 @@ onMount(() => {
   <!-- Community Highlights -->
   <section class="community-highlights">
     <div class="container">
-      <h2>Why Residents Love This Neighborhood</h2>
+      <h2>Why Residents Love Mountain's Edge</h2>
       <div class="highlights-grid">
         <div class="highlight-card">
           <div class="highlight-icon">🏆</div>
@@ -474,10 +474,10 @@ onMount(() => {
   <section class="neighborhood-cta">
     <div class="container">
       <div class="cta-content">
-        <h2>Ready to Call This Neighborhood Home?</h2>
+        <h2>Ready to Call Mountain's Edge Home?</h2>
         <p>
-          Discover why so many families choose Pewter Valley Estates for their perfect Las Vegas lifestyle. 
-          Schedule a tour today and experience the neighborhood for yourself.
+          Discover why so many families choose Pewter Valley Estates in Mountain's Edge for their perfect Las Vegas lifestyle. 
+          Schedule a tour today and experience this premier southwest Las Vegas community for yourself.
         </p>
         <div class="cta-buttons">
           <a href="/contact" class="cta-button primary" on:click={() => trackEvent('neighborhood_cta_click', { action: 'schedule_tour', page: 'neighborhood' })}>
