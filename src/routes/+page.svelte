@@ -100,27 +100,33 @@
 		<HomeDesignsSection />
 	</SimpleAnimatedSection>
 	
-	<!-- RealScout Widget Section - Static HTML -->
-	<section class="realscout-section">
+	<!-- Property Listings Section -->
+	<section class="listings-preview">
 		<div class="container">
 			<h2>Current Property Listings</h2>
 			<p>Browse our available homes in Las Vegas and surrounding areas</p>
 			
-			<div class="widget-container">
-				<div id="realscout-container" class="realscout-widget">
-					<div class="loading-message">
-						<p>Loading property listings...</p>
-					</div>
+			<div class="listings-preview-content">
+				<div class="preview-card">
+					<h3>🏠 Featured Properties</h3>
+					<p>Discover your dream home with our curated selection of available properties</p>
+					<ul class="feature-list">
+						<li>Modern new construction homes</li>
+						<li>3-5 bedrooms, 2-4 bathrooms</li>
+						<li>Resort-style amenities</li>
+						<li>Prime Las Vegas locations</li>
+					</ul>
+					<a href="/listings" class="cta-button">View All Listings</a>
 				</div>
-			</div>
-			
-			<div class="fallback-content">
-				<h3>Property Listings</h3>
-				<p>If you don't see listings above, please refresh the page or contact us directly.</p>
-				<div class="contact-info">
-					<p><strong>Dr. Jan Duffy</strong></p>
-					<p>Phone: <a href="tel:702-222-1964">(702) 222-1964</a></p>
-					<p>Email: <a href="mailto:jan.duffy@pewtervalleyestates.com">jan.duffy@pewtervalleyestates.com</a></p>
+				
+				<div class="contact-card">
+					<h3>📞 Contact Dr. Jan Duffy</h3>
+					<p>Your trusted real estate agent for Las Vegas properties</p>
+					<div class="contact-details">
+						<p><strong>Phone:</strong> <a href="tel:702-222-1964">(702) 222-1964</a></p>
+						<p><strong>Email:</strong> <a href="mailto:jan.duffy@pewtervalleyestates.com">jan.duffy@pewtervalleyestates.com</a></p>
+					</div>
+					<a href="/contact" class="cta-button secondary">Get in Touch</a>
 				</div>
 			</div>
 		</div>
@@ -139,7 +145,7 @@
 		overflow-x: hidden;
 	}
 
-	.realscout-section {
+	.listings-preview {
 		padding: 4rem 0;
 		background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
 	}
@@ -150,7 +156,7 @@
 		padding: 0 2rem;
 	}
 
-	.realscout-section h2 {
+	.listings-preview h2 {
 		font-size: 2.5rem;
 		font-weight: 700;
 		color: #1e3a8a;
@@ -159,82 +165,140 @@
 		font-family: 'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 	}
 
-	.realscout-section p {
+	.listings-preview p {
 		text-align: center;
 		color: #64748b;
 		font-size: 1.2rem;
 		margin-bottom: 3rem;
 	}
 
-	.widget-container {
+	.listings-preview-content {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 2rem;
+	}
+
+	.preview-card,
+	.contact-card {
 		background: white;
-		border-radius: 1rem;
 		padding: 2rem;
+		border-radius: 1rem;
 		box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-		margin-bottom: 2rem;
-		min-height: 400px;
-	}
-
-	.realscout-widget {
-		min-height: 300px;
-	}
-
-	.loading-message {
 		text-align: center;
-		padding: 2rem;
-		color: #64748b;
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
 	}
 
-	.fallback-content {
-		background: white;
-		padding: 2rem;
-		border-radius: 1rem;
-		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-		text-align: center;
+	.preview-card:hover,
+	.contact-card:hover {
+		transform: translateY(-4px);
+		box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
 	}
 
-	.fallback-content h3 {
+	.preview-card h3,
+	.contact-card h3 {
+		font-size: 1.5rem;
 		color: #1e3a8a;
 		margin-bottom: 1rem;
 	}
 
-	.contact-info {
-		margin-top: 1rem;
-		padding: 1rem;
-		background: #f8fafc;
-		border-radius: 0.5rem;
+	.preview-card p,
+	.contact-card p {
+		color: #64748b;
+		margin-bottom: 1.5rem;
+		text-align: center;
 	}
 
-	.contact-info a {
+	.feature-list {
+		text-align: left;
+		list-style: none;
+		padding: 0;
+		margin: 1.5rem 0;
+	}
+
+	.feature-list li {
+		padding: 0.5rem 0;
+		color: #374151;
+		position: relative;
+		padding-left: 1.5rem;
+	}
+
+	.feature-list li::before {
+		content: "✓";
+		position: absolute;
+		left: 0;
+		color: #10b981;
+		font-weight: bold;
+	}
+
+	.contact-details {
+		background: #f8fafc;
+		padding: 1rem;
+		border-radius: 0.5rem;
+		margin: 1rem 0;
+		text-align: left;
+	}
+
+	.contact-details p {
+		margin: 0.5rem 0;
+		text-align: left;
+	}
+
+	.contact-details a {
 		color: #1e3a8a;
 		text-decoration: none;
 		font-weight: 600;
 	}
 
-	.contact-info a:hover {
+	.contact-details a:hover {
 		color: #fbbf24;
 		text-decoration: underline;
 	}
 
-	/* RealScout widget styling */
-	realscout-office-listings {
-		--rs-listing-divider-color: rgb(101, 141, 172);
-		width: 100%;
-		min-height: 300px;
-		display: block;
+	.cta-button {
+		display: inline-block;
+		padding: 0.75rem 1.5rem;
+		background: #1e3a8a;
+		color: white;
+		text-decoration: none;
+		border-radius: 0.5rem;
+		font-weight: 600;
+		transition: all 0.3s ease;
+		margin-top: 1rem;
+	}
+
+	.cta-button:hover {
+		background: #1e40af;
+		transform: translateY(-2px);
+		box-shadow: 0 4px 12px rgba(30, 58, 138, 0.4);
+	}
+
+	.cta-button.secondary {
+		background: #fbbf24;
+		color: #1e3a8a;
+	}
+
+	.cta-button.secondary:hover {
+		background: #f59e0b;
+		box-shadow: 0 4px 12px rgba(251, 191, 36, 0.4);
 	}
 
 	@media (max-width: 768px) {
-		.realscout-section {
+		.listings-preview {
 			padding: 2rem 0;
 		}
 
-		.realscout-section h2 {
+		.listings-preview h2 {
 			font-size: 2rem;
 		}
 
-		.widget-container {
-			padding: 1rem;
+		.listings-preview-content {
+			grid-template-columns: 1fr;
+			gap: 1.5rem;
+		}
+
+		.preview-card,
+		.contact-card {
+			padding: 1.5rem;
 		}
 
 		.container {
