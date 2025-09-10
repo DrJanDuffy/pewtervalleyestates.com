@@ -4,15 +4,16 @@ import { trackEvent } from "$lib/analytics"
 import SEOHead from "$lib/SEOHead.svelte"
 import Breadcrumbs from "$lib/Breadcrumbs.svelte"
 import RichmondAmericanAssets from "$lib/RichmondAmericanAssets.svelte"
+import PanoramicMap from "$lib/PanoramicMap.svelte"
 
 // SEO data for neighborhood page
 const pageData = {
-  title: "Mountain's Edge Neighborhood - Pewter Valley Estates Las Vegas",
-  description: "Discover the Mountain's Edge corridor neighborhood surrounding Pewter Valley Estates. Explore local amenities, schools, shopping, dining, and entertainment options in this premier Las Vegas location.",
+  title: "Silverado Ranch Neighborhood - Pewter Valley Estates Las Vegas",
+  description: "Discover the historic Silverado Ranch neighborhood surrounding Pewter Valley Estates. Explore local amenities, schools, shopping, dining, and entertainment options in this vibrant Las Vegas community with rich history dating back to the late 1800s.",
   image: "https://www.pewtervalleyestates.com/neighborhood-og-image.jpg",
   type: "website",
   canonical: "https://www.pewtervalleyestates.com/neighborhood",
-  keywords: "Mountain's Edge Las Vegas, Pewter Valley Estates, Las Vegas southwest, Mountains Edge corridor, Las Vegas new homes, southwest Las Vegas real estate, local amenities, schools, shopping, dining, entertainment"
+  keywords: "Silverado Ranch Las Vegas, Pewter Valley Estates, Las Vegas southeast, Silverado Ranch history, Las Vegas new homes, southeast Las Vegas real estate, local amenities, schools, shopping, dining, entertainment, historic Las Vegas community"
 }
 
 // Breadcrumbs for neighborhood page
@@ -27,28 +28,28 @@ const neighborhoodFeatures = [
     category: "Shopping & Dining",
     features: [
       {
-        name: "Mountain's Edge Shopping Center",
+        name: "Silverado Ranch Shopping Center",
         distance: "2 minutes",
         description: "Convenient local shopping with grocery stores, restaurants, and services",
         type: "shopping"
       },
       {
-        name: "South Point Casino & Resort",
+        name: "M Resort Spa Casino",
+        distance: "5 minutes",
+        description: "Luxury resort with fine dining, entertainment, and gaming",
+        type: "entertainment"
+      },
+      {
+        name: "Green Valley Ranch Resort & Casino",
         distance: "8 minutes",
-        description: "Full-service resort with dining, entertainment, and gaming",
+        description: "Upscale resort with premium dining and entertainment",
         type: "entertainment"
       },
       {
-        name: "The Shops at Summerlin",
-        distance: "12 minutes",
-        description: "Upscale shopping center with premium retailers and dining",
+        name: "The District at Green Valley Ranch",
+        distance: "10 minutes",
+        description: "Premier shopping center with high-end retailers and restaurants",
         type: "shopping"
-      },
-      {
-        name: "Red Rock Resort & Casino",
-        distance: "15 minutes",
-        description: "Luxury resort with fine dining and entertainment",
-        type: "entertainment"
       }
     ]
   },
@@ -56,27 +57,27 @@ const neighborhoodFeatures = [
     category: "Education",
     features: [
       {
-        name: "Mountain's Edge Elementary School",
+        name: "Silverado Ranch Elementary School",
         distance: "1 minute",
-        description: "Highly rated elementary school serving the Mountain's Edge community",
+        description: "Highly rated elementary school serving the Silverado Ranch community",
         type: "school"
       },
       {
-        name: "Sierra Vista High School",
+        name: "Silverado High School",
         distance: "3 minutes",
         description: "Top-rated public high school with excellent academics and sports programs",
         type: "school"
       },
       {
         name: "University of Nevada, Las Vegas",
-        distance: "18 minutes",
+        distance: "15 minutes",
         description: "Major university with diverse programs and research facilities",
         type: "university"
       },
       {
-        name: "College of Southern Nevada",
-        distance: "12 minutes",
-        description: "Community college with excellent programs and modern facilities",
+        name: "Nevada State College",
+        distance: "8 minutes",
+        description: "Growing four-year college with modern facilities and programs",
         type: "university"
       }
     ]
@@ -85,28 +86,28 @@ const neighborhoodFeatures = [
     category: "Recreation & Parks",
     features: [
       {
-        name: "Mountain's Edge Regional Park",
+        name: "Silverado Ranch Park",
         distance: "1 minute",
         description: "Beautiful community park with walking trails, playgrounds, and sports facilities",
         type: "park"
       },
       {
-        name: "Angel Park Golf Club",
+        name: "Reflection Bay Golf Club",
         distance: "5 minutes",
-        description: "Championship golf course with mountain views and excellent facilities",
+        description: "Championship golf course with stunning lake views and excellent facilities",
         type: "golf"
       },
       {
-        name: "Red Rock Canyon National Conservation Area",
-        distance: "20 minutes",
-        description: "Stunning natural area with hiking trails, rock climbing, and scenic drives",
-        type: "nature"
+        name: "Lake Las Vegas",
+        distance: "8 minutes",
+        description: "Resort community with water activities, dining, and entertainment",
+        type: "recreation"
       },
       {
-        name: "Spring Mountain Ranch State Park",
-        distance: "25 minutes",
-        description: "Historic ranch with hiking trails and outdoor concerts",
-        type: "recreation"
+        name: "Henderson Bird Viewing Preserve",
+        distance: "12 minutes",
+        description: "Natural preserve with walking trails and bird watching opportunities",
+        type: "nature"
       }
     ]
   },
@@ -114,27 +115,27 @@ const neighborhoodFeatures = [
     category: "Healthcare & Services",
     features: [
       {
-        name: "MountainView Hospital",
-        distance: "8 minutes",
+        name: "St. Rose Dominican Hospital - Siena Campus",
+        distance: "5 minutes",
         description: "Full-service hospital with emergency care and specialized services",
         type: "healthcare"
       },
       {
-        name: "Mountain's Edge Library",
+        name: "Silverado Ranch Library",
         distance: "2 minutes",
         description: "Modern library with extensive resources, programs, and community events",
         type: "library"
       },
       {
-        name: "Las Vegas Metropolitan Police Department",
-        distance: "5 minutes",
+        name: "Henderson Police Department",
+        distance: "3 minutes",
         description: "Local law enforcement ensuring community safety and security",
         type: "safety"
       },
       {
-        name: "Mountain's Edge Fire Station",
+        name: "Silverado Ranch Fire Station",
         distance: "1 minute",
-        description: "Fire and emergency services serving the Mountain's Edge community",
+        description: "Fire and emergency services serving the Silverado Ranch community",
         type: "safety"
       }
     ]
@@ -275,14 +276,13 @@ onMount(() => {
   <section class="neighborhood-hero">
     <div class="container">
       <div class="hero-content">
-        <h1>Discover Mountain's Edge - Las Vegas's Premier Southwest Corridor</h1>
+        <h1>Discover Silverado Ranch - Las Vegas's Historic Southeast Community</h1>
         <p class="hero-subtitle">
-          Pewter Valley Estates is strategically located in the Mountain's Edge corridor, 
-          one of Las Vegas's most desirable master-planned communities offering the perfect blend of suburban tranquility and urban convenience.
+          Pewter Valley Estates is strategically located in Silverado Ranch, a vibrant Las Vegas community with rich history dating back to the late 1800s when the area was primarily used for ranching and agriculture. Over time, it has evolved and developed, becoming the thriving community it is today.
         </p>
         <div class="hero-stats">
           <div class="stat">
-            <span class="stat-number">18</span>
+            <span class="stat-number">15</span>
             <span class="stat-label">Minutes to The Strip</span>
           </div>
           <div class="stat">
@@ -305,15 +305,16 @@ onMount(() => {
   <!-- Location Overview -->
   <section class="location-overview">
     <div class="container">
-      <h2>Prime Mountain's Edge Location</h2>
+      <h2>Prime Silverado Ranch Location</h2>
       <div class="overview-grid">
         <div class="overview-content">
-          <h3>Why Mountain's Edge is Perfect</h3>
+          <h3>Why Silverado Ranch is Perfect</h3>
           <p>
-            Pewter Valley Estates is strategically located in the Mountain's Edge corridor, 
-            one of Las Vegas's most prestigious master-planned communities. This southwest Las Vegas 
-            location offers the perfect combination of natural beauty, modern amenities, and easy 
-            access to all the excitement and opportunities that Las Vegas has to offer.
+            Pewter Valley Estates is strategically located in Silverado Ranch, a vibrant Las Vegas community 
+            with rich history dating back to the late 1800s when the area was primarily used for ranching and agriculture. 
+            Over time, it has evolved and developed, becoming the thriving community it is today. This southeast Las Vegas 
+            location offers the perfect combination of historic charm, modern amenities, and easy access to all the 
+            excitement and opportunities that Las Vegas has to offer.
           </p>
           <ul class="location-benefits">
             <li>✅ Safe, family-friendly community with low crime rates</li>
@@ -337,12 +338,69 @@ onMount(() => {
     </div>
   </section>
 
+  <!-- Interactive Panoramic Map -->
+  <section class="panoramic-map-section">
+    <div class="container">
+      <h2>Explore Pewter Valley Estates</h2>
+      <p class="section-subtitle">
+        Take a virtual tour of Pewter Valley Estates with our interactive panoramic map. 
+        Get a bird's-eye view of the community layout, nearby amenities, and the beautiful Silverado Ranch surroundings.
+      </p>
+      
+      <PanoramicMap 
+        mapUrl="https://panomaps.us/homes/richmondamerican/nv/pewter-valley-estates/"
+        title="Pewter Valley Estates - Interactive Community Map"
+        height="600px"
+        showControls={true}
+        className="neighborhood-panomap"
+      />
+    </div>
+  </section>
+
+  <!-- Historical Background -->
+  <section class="historical-background">
+    <div class="container">
+      <h2>Silverado Ranch's Rich History</h2>
+      <div class="history-content">
+        <div class="history-text">
+          <p>
+            Silverado Ranch's rich history dates back to the late 1800s when the area was primarily used for ranching and agriculture. 
+            Over time, it has evolved and developed, becoming the vibrant community it is today. In the late 1800s, the land was primarily 
+            used for ranching and agriculture, establishing the foundation for what would become one of Las Vegas's most desirable neighborhoods.
+          </p>
+          <p>
+            Today, Silverado Ranch stands as a testament to the evolution of Las Vegas, seamlessly blending its historic ranching heritage 
+            with modern amenities and contemporary living. The community honors its agricultural roots while providing residents with 
+            all the conveniences of modern life in a thriving southeast Las Vegas location.
+          </p>
+        </div>
+        <div class="history-features">
+          <div class="history-feature">
+            <div class="history-icon">🏛️</div>
+            <h3>Historic Heritage</h3>
+            <p>Rich history dating back to the late 1800s ranching and agriculture era</p>
+          </div>
+          <div class="history-feature">
+            <div class="history-icon">🌱</div>
+            <h3>Agricultural Roots</h3>
+            <p>Originally used for ranching and agriculture, establishing community foundation</p>
+          </div>
+          <div class="history-feature">
+            <div class="history-icon">🏘️</div>
+            <h3>Modern Development</h3>
+            <p>Evolved into a vibrant, thriving community with contemporary amenities</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Neighborhood Features -->
   <section class="neighborhood-features">
     <div class="container">
-      <h2>Everything You Need Within Minutes in Mountain's Edge</h2>
+      <h2>Everything You Need Within Minutes in Silverado Ranch</h2>
       <p class="section-subtitle">
-        Our convenient Mountain's Edge location puts you close to all the amenities and attractions that make southwest Las Vegas living exceptional.
+        Our convenient Silverado Ranch location puts you close to all the amenities and attractions that make southeast Las Vegas living exceptional.
       </p>
       
       <!-- Category Tabs -->
@@ -410,10 +468,10 @@ onMount(() => {
   <!-- Transportation -->
   <section class="transportation">
     <div class="container">
-      <h2>Easy Access to Everywhere from Mountain's Edge</h2>
+      <h2>Easy Access to Everywhere from Silverado Ranch</h2>
       <p class="section-subtitle">
         Whether you're commuting to work, traveling for business, or exploring the city, 
-        getting around from Mountain's Edge is convenient and efficient.
+        getting around from Silverado Ranch is convenient and efficient.
       </p>
       
       <div class="transportation-grid">
@@ -434,7 +492,7 @@ onMount(() => {
   <!-- Community Highlights -->
   <section class="community-highlights">
     <div class="container">
-      <h2>Why Residents Love Mountain's Edge</h2>
+      <h2>Why Residents Love Silverado Ranch</h2>
       <div class="highlights-grid">
         <div class="highlight-card">
           <div class="highlight-icon">🏆</div>
@@ -474,10 +532,10 @@ onMount(() => {
   <section class="neighborhood-cta">
     <div class="container">
       <div class="cta-content">
-        <h2>Ready to Call Mountain's Edge Home?</h2>
+        <h2>Ready to Call Silverado Ranch Home?</h2>
         <p>
-          Discover why so many families choose Pewter Valley Estates in Mountain's Edge for their perfect Las Vegas lifestyle. 
-          Schedule a tour today and experience this premier southwest Las Vegas community for yourself.
+          Discover why so many families choose Pewter Valley Estates in Silverado Ranch for their perfect Las Vegas lifestyle. 
+          Schedule a tour today and experience this historic southeast Las Vegas community for yourself.
         </p>
         <div class="cta-buttons">
           <a href="/contact" class="cta-button primary" on:click={() => trackEvent('neighborhood_cta_click', { action: 'schedule_tour', page: 'neighborhood' })}>
@@ -548,6 +606,66 @@ onMount(() => {
   .location-overview {
     padding: 4rem 0;
     background: #F7F9FC;
+  }
+
+  /* Panoramic Map Section */
+  .panoramic-map-section {
+    padding: 4rem 0;
+    background: #f8fbff;
+  }
+
+
+  /* Historical Background */
+  .historical-background {
+    padding: 4rem 0;
+    background: white;
+  }
+
+  .history-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+    align-items: start;
+    margin-top: 2rem;
+  }
+
+  .history-text p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+
+  .history-features {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .history-feature {
+    background: #f8fbff;
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    border: 2px solid #e8f4fd;
+  }
+
+  .history-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .history-feature h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: #0A2540;
+  }
+
+  .history-feature p {
+    color: #666;
+    line-height: 1.5;
+    font-size: 0.95rem;
   }
 
   .overview-grid {
@@ -924,6 +1042,10 @@ onMount(() => {
     }
 
     .overview-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .history-content {
       grid-template-columns: 1fr;
     }
 
