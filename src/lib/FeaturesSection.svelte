@@ -59,7 +59,13 @@
     
     <div class="features-grid">
       {#each features as feature, index}
-        <div class="feature-card" on:click={() => handleFeatureClick(feature)}>
+        <div 
+          class="feature-card" 
+          role="button"
+          tabindex="0"
+          on:click={() => handleFeatureClick(feature)}
+          on:keydown={(e) => e.key === 'Enter' && handleFeatureClick(feature)}
+        >
           <div class="feature-icon">
             <span class="icon-emoji">{feature.icon}</span>
           </div>
@@ -123,10 +129,17 @@
     border: 1px solid #e2e8f0;
   }
   
-  .feature-card:hover {
+  .feature-card:hover,
+  .feature-card:focus {
     transform: translateY(-4px);
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
     border-color: #fbbf24;
+    outline: none;
+  }
+  
+  .feature-card:focus {
+    outline: 2px solid #1e3a8a;
+    outline-offset: 2px;
   }
   
   .feature-icon {

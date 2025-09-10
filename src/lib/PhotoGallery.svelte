@@ -91,7 +91,13 @@
   <div class="gallery-grid" style="grid-template-columns: repeat({responsiveColumns}, 1fr);">
     {#each photos as photo, index}
       <div class="photo-item" class:lazy={enableLazyLoading}>
-        <div class="photo-container" on:click={() => openLightbox(photo, index)}>
+        <div 
+          class="photo-container" 
+          role="button"
+          tabindex="0"
+          on:click={() => openLightbox(photo, index)}
+          on:keydown={(e) => e.key === 'Enter' && openLightbox(photo, index)}
+        >
           {#if enableLazyLoading}
             <img
               src={photo.thumbnail || photo.src}
@@ -123,8 +129,19 @@
 
 <!-- Lightbox Modal -->
 {#if lightboxOpen && selectedPhoto}
-  <div class="lightbox" on:click={closeLightbox}>
-    <div class="lightbox-content" on:click|stopPropagation>
+  <div 
+    class="lightbox" 
+    role="dialog"
+    aria-modal="true"
+    aria-label="Photo lightbox"
+    on:click={closeLightbox}
+    on:keydown={(e) => e.key === 'Escape' && closeLightbox()}
+  >
+    <div 
+      class="lightbox-content" 
+      role="document"
+      on:click|stopPropagation
+    >
       <button class="lightbox-close" on:click={closeLightbox} aria-label="Close lightbox">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -199,9 +216,15 @@
     cursor: pointer;
   }
 
-  .photo-item:hover {
+  .photo-item:hover,
+  .photo-container:focus {
     transform: translateY(-4px);
     box-shadow: var(--ra-shadow-lg, 0 10px 15px -3px rgba(0, 0, 0, 0.1));
+  }
+  
+  .photo-container:focus {
+    outline: 2px solid #1e3a8a;
+    outline-offset: 2px;
   }
 
   .photo-container {
