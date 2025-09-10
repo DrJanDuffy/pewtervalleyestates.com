@@ -1,6 +1,51 @@
-# SvelteKit
+# Pewter Valley Estates
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte), deployed to [Vercel](https://vercel.com).
+A SvelteKit website for Pewter Valley Estates, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte), deployed to [Vercel](https://vercel.com).
+
+## Google Analytics 4 Setup
+
+This project includes Google Analytics 4 (GA4) tracking with the following configuration:
+
+- **Measurement ID**: G-YB0SCBWM09
+- **Stream URL**: https://www.pewtervalleyestates.com/
+- **Stream ID**: 11219125744
+
+### Environment Variables
+
+Create a `.env` file in the root directory with:
+
+```bash
+PUBLIC_GA_MEASUREMENT_ID=G-YB0SCBWM09
+```
+
+### Analytics Features
+
+The analytics setup includes:
+
+- Automatic page view tracking
+- Custom event tracking utilities
+- External link click tracking
+- Form submission tracking
+- Download tracking
+- Scroll depth tracking
+- Time on page tracking
+
+### Usage
+
+Import analytics functions in your Svelte components:
+
+```javascript
+import { trackEvent, trackExternalLink, trackFormSubmission } from '$lib/analytics';
+
+// Track custom events
+trackEvent('button_click', { button_name: 'cta' });
+
+// Track external links
+trackExternalLink('https://example.com', 'External Link');
+
+// Track form submissions
+trackFormSubmission('contact_form');
+```
 
 ## Deploy Your Own
 

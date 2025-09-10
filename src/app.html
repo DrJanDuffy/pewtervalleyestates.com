@@ -4,6 +4,25 @@
     <meta charset="utf-8" />
     <link rel="icon" href="%sveltekit.assets%/favicon.png" />
     <meta name="viewport" content="width=device-width" />
+    
+    <!-- Google Analytics -->
+    <script>
+      const GA_MEASUREMENT_ID = '%sveltekit.env.PUBLIC_GA_MEASUREMENT_ID%' || 'G-YB0SCBWM09';
+    </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=%sveltekit.env.PUBLIC_GA_MEASUREMENT_ID%"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', GA_MEASUREMENT_ID, {
+        page_title: document.title,
+        page_location: window.location.href
+      });
+    </script>
+    
+    <!-- Preload RealScout Widget for better performance -->
+    <link rel="preload" href="https://em.realscout.com/widgets/realscout-web-components.umd.js" as="script" crossorigin="anonymous">
+    
     %sveltekit.head%
   </head>
   <body>

@@ -1,11 +1,25 @@
 <script>
 	import Header from '$lib/header/Header.svelte';
   import { webVitals } from '$lib/vitals';
-  import { browser } from '$app/env';
+  import { trackPageView, initGA } from '$lib/analytics';
+  import { browser } from '$app/environment';
   import { page } from '$app/stores';
+  import { onMount } from 'svelte';
   import '../app.css';
 
   let analyticsId = import.meta.env.VERCEL_ANALYTICS_ID;
+
+  // Initialize Google Analytics on mount
+  onMount(() => {
+    if (browser) {
+      initGA();
+    }
+  });
+
+  // Track page views when route changes
+  $: if (browser && $page) {
+    trackPageView($page.url.href, document.title);
+  }
 
   $: if (browser && analyticsId) {
     webVitals({

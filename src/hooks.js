@@ -21,3 +21,16 @@ export const handle = async ({ event, resolve }) => {
 
   return response;
 };
+
+/** @type {import('@sveltejs/kit').HandleFetch} */
+export const handleFetch = async ({ event, request, fetch }) => {
+  return fetch(request);
+};
+
+/** @type {import('@sveltejs/kit').HandleServerError} */
+export const handleError = async ({ error, event }) => {
+  console.error('An error occurred on the server:', error);
+  return {
+    message: 'An unexpected error occurred'
+  };
+};
