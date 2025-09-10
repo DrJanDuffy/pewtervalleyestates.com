@@ -1,11 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-US">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%sveltekit.assets%/favicon.png" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     
-    <!-- Google Analytics -->
+    <!-- Favicon and App Icons -->
+    <link rel="icon" href="%sveltekit.assets%/favicon.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="%sveltekit.assets%/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="%sveltekit.assets%/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="%sveltekit.assets%/favicon-16x16.png" />
+    <link rel="manifest" href="%sveltekit.assets%/site.webmanifest" />
+    <meta name="theme-color" content="#0A2540" />
+    
+    <!-- Primary Meta Tags -->
+    <title>%sveltekit.title%</title>
+    <meta name="title" content="%sveltekit.title%" />
+    <meta name="description" content="%sveltekit.description%" />
+    <meta name="keywords" content="Las Vegas new homes, Pewter Valley Estates, Richmond American Homes, Nevada real estate, Las Vegas home builder, new construction homes" />
+    <meta name="author" content="Dr. Jan Duffy - Real Estate Agent" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="bingbot" content="index, follow" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="%sveltekit.url%" />
+    
+    <!-- Hreflang for Local SEO -->
+    <link rel="alternate" hreflang="en-us" href="%sveltekit.url%" />
+    <link rel="alternate" hreflang="en" href="%sveltekit.url%" />
+    <link rel="alternate" hreflang="x-default" href="%sveltekit.url%" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="%sveltekit.url%" />
+    <meta property="og:title" content="%sveltekit.title%" />
+    <meta property="og:description" content="%sveltekit.description%" />
+    <meta property="og:image" content="%sveltekit.url%/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Pewter Valley Estates Las Vegas - Modern New Construction Homes" />
+    <meta property="og:site_name" content="Pewter Valley Estates" />
+    <meta property="og:locale" content="en_US" />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="%sveltekit.url%" />
+    <meta name="twitter:title" content="%sveltekit.title%" />
+    <meta name="twitter:description" content="%sveltekit.description%" />
+    <meta name="twitter:image" content="%sveltekit.url%/og-image.jpg" />
+    <meta name="twitter:image:alt" content="Pewter Valley Estates Las Vegas - Modern New Construction Homes" />
+    <meta name="twitter:site" content="@pewtervalleyestates" />
+    <meta name="twitter:creator" content="@pewtervalleyestates" />
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="geo.region" content="US-NV" />
+    <meta name="geo.placename" content="Las Vegas" />
+    <meta name="geo.position" content="36.1699;-115.1398" />
+    <meta name="ICBM" content="36.1699, -115.1398" />
+    <meta name="DC.title" content="%sveltekit.title%" />
+    <meta name="DC.description" content="%sveltekit.description%" />
+    <meta name="DC.subject" content="Real Estate, New Homes, Las Vegas, Nevada" />
+    <meta name="DC.language" content="en-US" />
+    <meta name="DC.coverage" content="Las Vegas, Nevada, United States" />
+    <meta name="DC.creator" content="Dr. Jan Duffy" />
+    <meta name="DC.publisher" content="Pewter Valley Estates" />
+    
+    <!-- Mobile App Meta Tags -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Pewter Valley Estates" />
+    
+    <!-- Preconnect to External Domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://em.realscout.com" />
+    
+    <!-- DNS Prefetch for Performance -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="//www.google-analytics.com" />
+    <link rel="dns-prefetch" href="//em.realscout.com" />
+    
+    <!-- Google Analytics 4 -->
     <script>
       const GA_MEASUREMENT_ID = '%sveltekit.env.PUBLIC_GA_MEASUREMENT_ID%' || 'G-YB0SCBWM09';
     </script>
@@ -16,19 +93,63 @@
       gtag('js', new Date());
       gtag('config', GA_MEASUREMENT_ID, {
         page_title: document.title,
-        page_location: window.location.href
+        page_location: window.location.href,
+        custom_map: {
+          'custom_parameter_1': 'property_type',
+          'custom_parameter_2': 'neighborhood',
+          'custom_parameter_3': 'price_range'
+        }
       });
     </script>
     
-    <!-- Preload RealScout Widget for better performance -->
-    <link rel="preload" href="https://em.realscout.com/widgets/realscout-web-components.umd.js" as="script" crossorigin="anonymous">
-    
     <!-- RealScout Web Components -->
+    <link rel="preload" href="https://em.realscout.com/widgets/realscout-web-components.umd.js" as="script" crossorigin="anonymous">
     <script src="https://em.realscout.com/widgets/realscout-web-components.umd.js" type="module" crossorigin="anonymous"></script>
     
+    <!-- Structured Data will be injected here by individual pages -->
     %sveltekit.head%
+    
+    <!-- Schema.org Structured Data - Base Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Pewter Valley Estates",
+      "alternateName": "Pewter Valley Estates Las Vegas",
+      "description": "Discover your dream home at Pewter Valley Estates in Las Vegas, Nevada. Modern new construction homes with resort-style amenities in prime Las Vegas locations.",
+      "url": "https://www.pewtervalleyestates.com",
+      "logo": "https://www.pewtervalleyestates.com/logo.png",
+      "foundingDate": "2024",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Pewter Valley Estates",
+        "addressLocality": "Las Vegas",
+        "addressRegion": "Nevada",
+        "postalCode": "89101",
+        "addressCountry": "United States"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+1-702-222-1964",
+        "contactType": "sales",
+        "areaServed": "Las Vegas, NV",
+        "availableLanguage": ["English", "Spanish"]
+      },
+      "sameAs": [
+        "https://facebook.com/pewtervalleyestates",
+        "https://twitter.com/pewtervalleyestates",
+        "https://instagram.com/pewtervalleyestates",
+        "https://linkedin.com/company/pewtervalleyestates"
+      ],
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Richmond American Homes",
+        "url": "https://www.richmondamerican.com"
+      }
+    }
+    </script>
   </head>
-  <body>
+  <body data-sveltekit-preload-data="hover">
     <div>%sveltekit.body%</div>
   </body>
 </html>

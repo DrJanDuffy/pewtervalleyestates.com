@@ -2,6 +2,22 @@
 import { onMount } from "svelte"
 import { trackEvent } from "$lib/analytics"
 
+// SEO data for listings page
+const _pageData = {
+  title: "Las Vegas New Home Listings - Pewter Valley Estates",
+  description:
+    "Browse available new construction homes at Pewter Valley Estates in Las Vegas, Nevada. Modern 3-5 bedroom homes with resort-style amenities starting from $400,000.",
+  image: "https://www.pewtervalleyestates.com/listings-og-image.jpg",
+  type: "website",
+  canonical: "https://www.pewtervalleyestates.com/listings",
+}
+
+// Breadcrumbs for listings page
+const _breadcrumbs = [
+  { name: "Home", url: "/" },
+  { name: "Property Listings", url: "/listings" },
+]
+
 onMount(() => {
   trackEvent("page_view", {
     page_title: "Property Listings",
@@ -66,10 +82,14 @@ function renderWidget() {
 }
 </script>
 
-<svelte:head>
-  <title>Property Listings - Pewter Valley Estates | Dr. Jan Duffy</title>
-  <meta name="description" content="Browse available homes in Las Vegas and surrounding areas. Find your dream home with Dr. Jan Duffy, your trusted real estate agent." />
-</svelte:head>
+<!-- SEO Head Component -->
+<SEOHead 
+  {pageData} 
+  includeRealEstate={true} 
+/>
+
+<!-- Breadcrumb Navigation -->
+<Breadcrumbs {breadcrumbs} />
 
 <div class="listings-page">
   <div class="container">
