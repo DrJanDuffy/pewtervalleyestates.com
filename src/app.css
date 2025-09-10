@@ -105,3 +105,34 @@ button:focus:not(:focus-visible) {
     font-size: 2.4rem;
   }
 }
+
+/* RealScout Widget Styles */
+realscout-office-listings {
+  --rs-listing-divider-color: rgb(101, 141, 172);
+  width: 100%;
+  margin: 2rem 0;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Ensure RealScout widget integrates well with site design */
+realscout-office-listings::part(listing-card) {
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+realscout-office-listings::part(listing-card):hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Custom styling for RealScout components to match site theme */
+realscout-office-listings {
+  --rs-primary-color: #1e3a8a;
+  --rs-secondary-color: #fbbf24;
+  --rs-text-color: #374151;
+  --rs-background-color: #ffffff;
+  --rs-border-color: #e5e7eb;
+}
