@@ -1,9 +1,11 @@
 <script>
 import { onMount } from "svelte"
 import { trackEvent } from "$lib/analytics"
+import RichmondAmericanAssets from "$lib/RichmondAmericanAssets.svelte"
+import PhotoGallery from "$lib/PhotoGallery.svelte"
 
 // Sample photos using Unsplash images
-const _photos = [
+const photos = [
   {
     src: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=800&h=600&fit=crop",
     thumbnail: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=400&h=300&fit=crop",

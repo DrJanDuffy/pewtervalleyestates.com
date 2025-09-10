@@ -1,8 +1,8 @@
 <script>
 import { onMount } from "svelte"
 
-let _widgetLoaded = false
-let _errorMessage = ""
+let widgetLoaded = false
+let errorMessage = ""
 
 onMount(() => {
   // Check if RealScout is available
@@ -14,10 +14,10 @@ onMount(() => {
   setTimeout(() => {
     if (customElements.get("realscout-office-listings")) {
       console.log("RealScout custom element is defined")
-      _widgetLoaded = true
+      widgetLoaded = true
     } else {
       console.log("RealScout custom element not found")
-      _errorMessage = "RealScout custom element not found. Check if script loaded correctly."
+      errorMessage = "RealScout custom element not found. Check if script loaded correctly."
     }
   }, 2000)
 })

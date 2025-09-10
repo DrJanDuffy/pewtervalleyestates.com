@@ -27,7 +27,7 @@ const { form, handleChange, handleSubmit, errors, isSubmitting } = createForm({
   },
 })
 
-function _onSubmit(values) {
+function onSubmit(values) {
   trackEvent("cta_form_submit", {
     form_type: "lead_capture",
     home_size: values.homeSize,

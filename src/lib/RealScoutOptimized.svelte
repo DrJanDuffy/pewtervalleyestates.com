@@ -88,7 +88,7 @@ function loadWidget() {
   document.head.appendChild(script)
 }
 
-function _handleWidgetClick() {
+function handleWidgetClick() {
   trackEvent("widget_interaction", {
     widget_type: "realscout",
     action: "listing_click",

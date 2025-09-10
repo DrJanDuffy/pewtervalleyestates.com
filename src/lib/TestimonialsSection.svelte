@@ -33,26 +33,10 @@ const testimonials = [
 
 let currentTestimonial = 0
 
-function _nextTestimonial() {
+function nextTestimonial() {
   currentTestimonial = (currentTestimonial + 1) % testimonials.length
   trackEvent("testimonial_navigation", {
     action: "next",
-    current_index: currentTestimonial,
-  })
-}
-
-function _prevTestimonial() {
-  currentTestimonial = currentTestimonial === 0 ? testimonials.length - 1 : currentTestimonial - 1
-  trackEvent("testimonial_navigation", {
-    action: "previous",
-    current_index: currentTestimonial,
-  })
-}
-
-function goToTestimonial(index) {
-  currentTestimonial = index
-  trackEvent("testimonial_navigation", {
-    action: "direct",
     current_index: currentTestimonial,
   })
 }
@@ -65,10 +49,10 @@ function prevTestimonial() {
   })
 }
 
-function nextTestimonial() {
-  currentTestimonial = (currentTestimonial + 1) % testimonials.length
+function goToTestimonial(index) {
+  currentTestimonial = index
   trackEvent("testimonial_navigation", {
-    action: "next",
+    action: "direct",
     current_index: currentTestimonial,
   })
 }

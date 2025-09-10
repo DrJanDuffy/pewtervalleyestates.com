@@ -1,10 +1,10 @@
 <script>
 import { onMount } from "svelte"
 
-let _scriptLoaded = false
-let _customElementDefined = false
+let scriptLoaded = false
+let customElementDefined = false
 const debugInfo = []
-const _widgetVisible = false
+let widgetVisible = false
 
 onMount(() => {
   debugInfo.push("Component mounted")
@@ -12,7 +12,7 @@ onMount(() => {
   // Check if script is loaded
   const checkScript = () => {
     if (document.querySelector('script[src*="realscout"]')) {
-      _scriptLoaded = true
+      scriptLoaded = true
       debugInfo.push("RealScout script found in DOM")
     } else {
       debugInfo.push("RealScout script NOT found in DOM")
@@ -22,7 +22,7 @@ onMount(() => {
   // Check if custom element is defined
   const checkCustomElement = () => {
     if (customElements.get("realscout-office-listings")) {
-      _customElementDefined = true
+      customElementDefined = true
       debugInfo.push("realscout-office-listings custom element is defined")
     } else {
       debugInfo.push("realscout-office-listings custom element NOT defined")

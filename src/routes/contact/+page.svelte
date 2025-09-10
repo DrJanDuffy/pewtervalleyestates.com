@@ -2,6 +2,7 @@
 import { onMount } from "svelte"
 import { createForm } from "svelte-forms-lib"
 import { trackEvent } from "$lib/analytics"
+import RichmondAmericanAssets from "$lib/RichmondAmericanAssets.svelte"
 
 const { form, handleChange, handleSubmit, errors, isSubmitting } = createForm({
   initialValues: {
@@ -37,7 +38,7 @@ onMount(() => {
   })
 })
 
-function _onSubmit(values) {
+function onSubmit(values) {
   trackEvent("contact_form_submit", {
     form_type: "contact",
     property_interest: values.propertyInterest,
@@ -51,7 +52,7 @@ function _onSubmit(values) {
   alert("Thank you for your message! Dr. Jan Duffy will contact you within 24 hours.")
 }
 
-function _handlePhoneClick() {
+function handlePhoneClick() {
   trackEvent("phone_click", {
     phone_number: "702-222-1964",
     section: "contact",

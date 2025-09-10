@@ -4,7 +4,7 @@ import { trackEvent } from "$lib/analytics"
 
 // RealScout configuration
 const agentEncodedId = "QWdlbnQtMjI1MDUw"
-const _sortOrder = "STATUS_AND_SIGNIFICANT_CHANGE"
+const sortOrder = "STATUS_AND_SIGNIFICANT_CHANGE"
 const listingStatus = "For Sale"
 const propertyTypes = "SFR,MF,TC"
 

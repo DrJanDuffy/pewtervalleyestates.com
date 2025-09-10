@@ -1,9 +1,11 @@
 <script>
 import { onMount } from "svelte"
 import { trackEvent } from "$lib/analytics"
+import SEOHead from "$lib/SEOHead.svelte"
+import Breadcrumbs from "$lib/Breadcrumbs.svelte"
 
 // SEO data for listings page
-const _pageData = {
+const pageData = {
   title: "Las Vegas New Home Listings - Pewter Valley Estates",
   description:
     "Browse available new construction homes at Pewter Valley Estates in Las Vegas, Nevada. Modern 3-5 bedroom homes with resort-style amenities starting from $400,000.",
@@ -13,7 +15,7 @@ const _pageData = {
 }
 
 // Breadcrumbs for listings page
-const _breadcrumbs = [
+const breadcrumbs = [
   { name: "Home", url: "/" },
   { name: "Property Listings", url: "/listings" },
 ]

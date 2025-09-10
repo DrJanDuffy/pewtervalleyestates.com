@@ -1,18 +1,20 @@
 <script>
 import { onMount } from "svelte"
 import { trackEvent } from "$lib/analytics"
+import RichmondAmericanAssets from "$lib/RichmondAmericanAssets.svelte"
+import RichmondAmericanBackground from "$lib/RichmondAmericanBackground.svelte"
 
-let _isLoaded = false
+let isLoaded = false
 
 onMount(() => {
-  _isLoaded = true
+  isLoaded = true
   trackEvent("page_view", {
     page_title: "Richmond American Demo",
     page_location: window.location.href,
   })
 })
 
-function _handleButtonClick(buttonType) {
+function handleButtonClick(buttonType) {
   trackEvent("button_click", {
     button_name: buttonType,
     page: "richmond_demo",

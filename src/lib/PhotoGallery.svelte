@@ -13,7 +13,7 @@ export const enableLazyLoading = true
 
 let selectedPhoto = null
 let lightboxOpen = false
-let _galleryRef
+let galleryRef
 
 // Responsive columns
 $: responsiveColumns = browser ? getResponsiveColumns() : columns
@@ -38,7 +38,7 @@ onMount(() => {
   }
 })
 
-function _openLightbox(photo, index) {
+function openLightbox(photo, index) {
   if (enableLightbox) {
     selectedPhoto = { ...photo, index }
     lightboxOpen = true
@@ -72,7 +72,7 @@ function prevPhoto() {
   }
 }
 
-function _handleKeydown(event) {
+function handleKeydown(event) {
   if (lightboxOpen) {
     if (event.key === "Escape") closeLightbox()
     if (event.key === "ArrowRight") nextPhoto()

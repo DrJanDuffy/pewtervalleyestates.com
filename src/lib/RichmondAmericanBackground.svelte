@@ -4,7 +4,7 @@ import { browser } from "$app/environment"
 import { trackEvent } from "$lib/analytics"
 
 let containerRef
-let _isActive = false
+let isActive = false
 const mousePosition = { x: 0, y: 0 }
 
 // Configuration
