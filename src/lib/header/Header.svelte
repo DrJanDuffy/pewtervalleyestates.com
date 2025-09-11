@@ -21,9 +21,9 @@ import { page } from '$app/stores';
       <li class:active={$page.url.pathname === '/neighborhood'}>
         <a data-sveltekit-preload-data="hover" href="/neighborhood">Neighborhood</a>
       </li>
-      <li class:active={$page.url.pathname === '/listings'}>
-        <a data-sveltekit-preload-data="hover" href="/listings">Listings</a>
-      </li>
+        <li class:active={$page.url.pathname === '/listings'}>
+          <a data-sveltekit-preload-data="hover" href="/listings">Active Listings</a>
+        </li>
       <li class:active={$page.url.pathname === '/photos'}>
         <a data-sveltekit-preload-data="hover" href="/photos">Photos</a>
       </li>
