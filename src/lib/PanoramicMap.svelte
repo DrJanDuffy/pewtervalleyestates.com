@@ -8,6 +8,7 @@
   export let height = '500px'
   export let showControls = true
   export let className = ''
+  export let realScoutUrl = 'https://drjanduffy.realscout.com/homesearch/shared-searches/U2hhcmVhYmxlU2VhcmNoTGluay0xMjEwOQ=='
 
   let mapContainer
   let isLoaded = false
@@ -44,6 +45,15 @@
       page: 'neighborhood'
     })
   }
+
+  function openRealScoutSearch() {
+    window.open(realScoutUrl, '_blank', 'width=1200,height=800,scrollbars=yes,resizable=yes')
+    trackEvent('panoramic_map_realscout_click', { 
+      map_url: mapUrl,
+      realscout_url: realScoutUrl,
+      page: 'neighborhood'
+    })
+  }
 </script>
 
 <div class="panoramic-map-container {className}">
@@ -75,6 +85,17 @@
           </svg>
           Open Map
         </a>
+        <button 
+          class="control-button realscout" 
+          on:click={openRealScoutSearch}
+          title="View available homes on RealScout"
+        >
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9,22 9,12 15,12 15,22"/>
+          </svg>
+          View Homes
+        </button>
       </div>
     {/if}
   </div>
@@ -107,6 +128,21 @@
           <p>Loading panoramic map...</p>
         </div>
       {/if}
+      
+      <!-- Floating RealScout Action Button -->
+      <div class="floating-action">
+        <button 
+          class="floating-btn"
+          on:click={openRealScoutSearch}
+          title="View available homes on RealScout"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9,22 9,12 15,12 15,22"/>
+          </svg>
+          <span>View Available Homes</span>
+        </button>
+      </div>
     {/if}
   </div>
 
@@ -173,6 +209,16 @@
     transform: translateY(-1px);
   }
 
+  .control-button.realscout {
+    background: rgba(22, 178, 134, 0.2);
+    border-color: rgba(22, 178, 134, 0.4);
+  }
+
+  .control-button.realscout:hover {
+    background: rgba(22, 178, 134, 0.3);
+    border-color: rgba(22, 178, 134, 0.6);
+  }
+
   .control-button svg {
     flex-shrink: 0;
   }
@@ -181,6 +227,44 @@
     position: relative;
     width: 100%;
     background: #f8f9fa;
+  }
+
+  .floating-action {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 20;
+  }
+
+  .floating-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    background: linear-gradient(135deg, #16B286 0%, #0D8A5B 100%);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(22, 178, 134, 0.3);
+    transition: all 0.3s ease;
+    text-decoration: none;
+  }
+
+  .floating-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(22, 178, 134, 0.4);
+    background: linear-gradient(135deg, #0D8A5B 0%, #16B286 100%);
+  }
+
+  .floating-btn svg {
+    flex-shrink: 0;
+  }
+
+  .floating-btn span {
+    white-space: nowrap;
   }
 
   .panoramic-map-iframe {
@@ -328,6 +412,15 @@
 
     .control-button {
       justify-content: center;
+    }
+
+    .floating-btn {
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    .floating-btn span {
+      display: none;
     }
   }
 </style>

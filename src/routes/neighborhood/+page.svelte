@@ -353,6 +353,7 @@ onMount(() => {
         height="600px"
         showControls={true}
         className="neighborhood-panomap"
+        realScoutUrl="https://drjanduffy.realscout.com/homesearch/shared-searches/U2hhcmVhYmxlU2VhcmNoTGluay0xMjEwOQ=="
       />
     </div>
   </section>
