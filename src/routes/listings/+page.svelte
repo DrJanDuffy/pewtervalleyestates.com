@@ -1,7 +1,7 @@
 <script>
   import { onMount } from 'svelte'
   import { trackEvent } from '$lib/analytics'
-  import SEOHead from '$lib/SEOHead.svelte'
+  import EnhancedSEOHead from '$lib/EnhancedSEOHead.svelte'
   import Breadcrumbs from '$lib/Breadcrumbs.svelte'
   import RichmondAmericanAssets from '$lib/RichmondAmericanAssets.svelte'
   import StickyContactButton from '$lib/StickyContactButton.svelte'
@@ -210,7 +210,7 @@
   <meta name="twitter:image" content={pageData.image} />
 </svelte:head>
 
-<SEOHead {pageData} />
+<EnhancedSEOHead {pageData} {breadcrumbs} showValidation={true} />
 <RichmondAmericanAssets />
 
 <main class="listings-page">
