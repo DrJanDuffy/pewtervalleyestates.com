@@ -12,8 +12,8 @@ export const SITE_CONFIG = {
     "Discover your dream home at Pewter Valley Estates in Las Vegas, Nevada. Modern new construction homes with resort-style amenities in prime Las Vegas locations.",
   url: "https://www.pewtervalleyestates.com",
   logo: "https://www.pewtervalleyestates.com/logo.png",
-  // Phone format: (702) 500-1955 for display, +17025001955 for tel: links
-  phone: "(702) 500-1955",
+  // Phone format: 702 500-1955 for display, +17025001955 for tel: links
+  phone: "702 500-1955",
   phoneFormatted: "+1-702-500-1955",
   phoneTel: "+17025001955",
   email: "jan.duffy@pewtervalleyestates.com",
