@@ -64,24 +64,23 @@ function handlePhoneClick() {
     section: "contact",
   })
 }
-</script>
 
-<!-- SEO data for Contact page -->
-{@const pageData = {
+// SEO data for Contact page
+const pageData = {
   title: "Contact Dr. Jan Duffy - Real Estate Agent | Pewter Valley Estates",
   description: `Contact Dr. Jan Duffy, your trusted real estate agent for Pewter Valley Estates in Las Vegas. Call ${SITE_CONFIG.phone} or send a message for expert home buying assistance.`,
   image: `${SITE_CONFIG.url}/og-image.jpg`,
   type: "website",
   canonical: `${SITE_CONFIG.url}/contact`,
   keywords: "contact Dr. Jan Duffy, Las Vegas real estate agent, Pewter Valley Estates contact, real estate consultation",
-}}
+}
 
-{@const breadcrumbs = [
+const breadcrumbs = [
   { name: "Home", url: SITE_CONFIG.url },
   { name: "Contact", url: `${SITE_CONFIG.url}/contact` },
-]}
+]
 
-{@const faqData = [
+const faqData = [
   {
     question: "What are Dr. Jan Duffy's business hours?",
     answer: "Dr. Jan Duffy is available Monday-Friday 9:00 AM - 6:00 PM and Saturday 10:00 AM - 4:00 PM. For urgent matters, you can call or text at any time.",
@@ -94,7 +93,8 @@ function handlePhoneClick() {
     question: "What information should I include in my contact form?",
     answer: "Please include your name, contact information, preferred contact method, property interest (buying, selling, investing), and any specific questions or requirements you have.",
   },
-]}
+]
+</script>
 
 <svelte:head>
   <title>{pageData.title}</title>
