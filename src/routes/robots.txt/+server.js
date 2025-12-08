@@ -67,6 +67,9 @@ Disallow: /api/
 Disallow: /todos
 Disallow: /.well-known/
 
+# Block Cloudflare internal paths
+Disallow: /cdn-cgi/
+
 # Allow CSS and JS for proper rendering
 Allow: /*.css
 Allow: /*.js
