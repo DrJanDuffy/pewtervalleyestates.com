@@ -64,6 +64,7 @@ Allow: /richmond-demo
 Disallow: /admin/
 Disallow: /private/
 Disallow: /api/
+Disallow: /todos
 Disallow: /.well-known/
 
 # Allow CSS and JS for proper rendering
