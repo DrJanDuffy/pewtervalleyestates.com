@@ -1,27 +1,52 @@
 <script>
-  import { generateMetaTags, generateStructuredData, generateBreadcrumbStructuredData, generateLocalBusinessStructuredData, preloadCriticalResources, generateHreflangTags, validateSEOData } from '$lib/seo-utils.js'
+  import {
+    generateMetaTags,
+    generateStructuredData,
+    generateBreadcrumbStructuredData,
+    generateLocalBusinessStructuredData,
+    preloadCriticalResources,
+    generateHreflangTags,
+    validateSEOData,
+    generateWebSiteSchema,
+    generateOrganizationSchema,
+    VERIFICATION_CODES
+  } from '$lib/seo-utils.js'
 
   export let pageData = {}
   export let breadcrumbs = []
   export let faqs = []
   export let structuredData = null
   export let showValidation = false
+  export let pageType = 'default' // 'default', 'listing', 'contact', 'private'
 
   // Generate comprehensive meta tags
   const metaTags = generateMetaTags(pageData)
-  
+
   // Generate structured data
   const baseStructuredData = structuredData || generateStructuredData(pageData)
   const breadcrumbStructuredData = breadcrumbs.length > 0 ? generateBreadcrumbStructuredData(breadcrumbs) : null
   const faqStructuredData = faqs.length > 0 ? generateFAQStructuredData(faqs) : null
   const localBusinessStructuredData = generateLocalBusinessStructuredData()
-  
+
+  // Google Search Console 2025: WebSite and Organization schemas
+  const webSiteSchema = generateWebSiteSchema()
+  const organizationSchema = generateOrganizationSchema()
+
   // Preload critical resources
   const criticalResources = preloadCriticalResources()
-  
+
   // Generate hreflang tags
   const hreflangTags = generateHreflangTags(metaTags.canonical)
-  
+
+  // Google Search Console 2025: Enhanced robots meta
+  const robotsConfig = {
+    default: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+    listing: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1',
+    contact: 'index, follow, max-snippet:160, max-image-preview:standard',
+    private: 'noindex, nofollow'
+  }
+  const robotsContent = robotsConfig[pageType] || robotsConfig.default
+
   // Validate SEO data if in development
   if (showValidation && typeof window !== 'undefined') {
     const errors = validateSEOData(pageData)
@@ -37,9 +62,19 @@
   <meta name="description" content={metaTags.description} />
   <meta name="keywords" content={metaTags.keywords} />
   <meta name="author" content={metaTags.author} />
-  <meta name="robots" content={metaTags.noindex ? 'noindex,nofollow' : 'index,follow'} />
-  <meta name="googlebot" content="index,follow" />
-  <meta name="bingbot" content="index,follow" />
+
+  <!-- Google Search Console 2025: Enhanced Robots Meta -->
+  <meta name="robots" content={metaTags.noindex ? 'noindex,nofollow' : robotsContent} />
+  <meta name="googlebot" content={robotsContent} />
+  <meta name="bingbot" content={metaTags.noindex ? 'noindex,nofollow' : 'index,follow'} />
+
+  <!-- Google Search Console 2025: Site Verification Tags -->
+  {#if VERIFICATION_CODES.google && VERIFICATION_CODES.google !== 'YOUR_GOOGLE_VERIFICATION_CODE'}
+    <meta name="google-site-verification" content={VERIFICATION_CODES.google} />
+  {/if}
+  {#if VERIFICATION_CODES.bing && VERIFICATION_CODES.bing !== 'YOUR_BING_VERIFICATION_CODE'}
+    <meta name="msvalidate.01" content={VERIFICATION_CODES.bing} />
+  {/if}
   
   <!-- Canonical URL -->
   <link rel="canonical" href={metaTags.canonical} />
@@ -86,17 +121,25 @@
   <link rel="dns-prefetch" href="//panomaps.us" />
   <link rel="dns-prefetch" href="//www.richmondamerican.com" />
   
-  <!-- Structured Data -->
+  <!-- Google Search Console 2025: Enhanced Structured Data -->
+  <!-- WebSite Schema with SearchAction for Sitelinks Searchbox -->
+  {@html `<script type="application/ld+json">${JSON.stringify(webSiteSchema)}</script>`}
+
+  <!-- Organization Schema -->
+  {@html `<script type="application/ld+json">${JSON.stringify(organizationSchema)}</script>`}
+
+  <!-- Page-specific Structured Data -->
   {@html `<script type="application/ld+json">${JSON.stringify(baseStructuredData)}</script>`}
-  
+
   {#if breadcrumbStructuredData}
     {@html `<script type="application/ld+json">${JSON.stringify(breadcrumbStructuredData)}</script>`}
   {/if}
-  
+
   {#if faqStructuredData}
     {@html `<script type="application/ld+json">${JSON.stringify(faqStructuredData)}</script>`}
   {/if}
-  
+
+  <!-- Local Business Schema -->
   {@html `<script type="application/ld+json">${JSON.stringify(localBusinessStructuredData)}</script>`}
   
   <!-- Additional Meta for Real Estate -->

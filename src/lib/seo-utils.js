@@ -1,4 +1,19 @@
-// SEO utility functions following SvelteKit best practices
+/**
+ * SEO utility functions following SvelteKit best practices
+ * Updated for Google Search Console 2025
+ *
+ * Features:
+ * - WebSite schema with SearchAction for sitelinks searchbox
+ * - Enhanced structured data following schema.org 2025 guidelines
+ * - Google verification meta tag support
+ * - Core Web Vitals optimization (INP, LCP, CLS)
+ */
+
+import {
+  GOOGLE_SITE_VERIFICATION,
+  BING_SITE_VERIFICATION,
+  generateRobotsMetaTags
+} from './google-search-console.js'
 
 export const SITE_CONFIG = {
   name: "Pewter Valley Estates",
@@ -13,6 +28,12 @@ export const SITE_CONFIG = {
     region: "Nevada",
     country: "United States"
   }
+}
+
+// Google Search Console 2025 verification codes
+export const VERIFICATION_CODES = {
+  google: GOOGLE_SITE_VERIFICATION,
+  bing: BING_SITE_VERIFICATION
 }
 
 // Generate comprehensive meta tags for any page
@@ -221,22 +242,104 @@ export function generateHreflangTags(canonicalUrl) {
 // Validate SEO data
 export function validateSEOData(pageData) {
   const errors = []
-  
+
   if (!pageData.title || pageData.title.length < 30) {
     errors.push('Title should be at least 30 characters')
   }
-  
+
   if (!pageData.description || pageData.description.length < 120) {
     errors.push('Description should be at least 120 characters')
   }
-  
+
   if (pageData.title && pageData.title.length > 60) {
     errors.push('Title should be under 60 characters for optimal display')
   }
-  
+
   if (pageData.description && pageData.description.length > 160) {
     errors.push('Description should be under 160 characters for optimal display')
   }
-  
+
   return errors
 }
+
+/**
+ * Google Search Console 2025 Enhanced Schemas
+ */
+
+// Generate WebSite schema with SearchAction for sitelinks searchbox
+export function generateWebSiteSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${SITE_CONFIG.url}/#website`,
+    name: SITE_CONFIG.name,
+    alternateName: 'Pewter Valley Estates Las Vegas',
+    description: SITE_CONFIG.description,
+    url: SITE_CONFIG.url,
+    publisher: {
+      '@id': `${SITE_CONFIG.url}/#organization`
+    },
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: {
+        '@type': 'EntryPoint',
+        urlTemplate: `${SITE_CONFIG.url}/listings?search={search_term_string}`
+      },
+      'query-input': 'required name=search_term_string'
+    },
+    inLanguage: 'en-US'
+  }
+}
+
+// Generate Organization schema (2025 enhanced)
+export function generateOrganizationSchema() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': `${SITE_CONFIG.url}/#organization`,
+    name: SITE_CONFIG.name,
+    alternateName: 'Pewter Valley Estates',
+    url: SITE_CONFIG.url,
+    logo: {
+      '@type': 'ImageObject',
+      '@id': `${SITE_CONFIG.url}/#logo`,
+      url: SITE_CONFIG.image,
+      contentUrl: SITE_CONFIG.image,
+      width: 1200,
+      height: 630,
+      caption: SITE_CONFIG.name
+    },
+    image: {
+      '@id': `${SITE_CONFIG.url}/#logo`
+    },
+    contactPoint: {
+      '@type': 'ContactPoint',
+      telephone: SITE_CONFIG.phone,
+      contactType: 'sales',
+      areaServed: 'US',
+      availableLanguage: ['English', 'Spanish']
+    },
+    sameAs: [
+      'https://www.facebook.com/drjanduffy',
+      'https://www.linkedin.com/in/drjanduffy',
+      'https://www.instagram.com/drjanduffy'
+    ]
+  }
+}
+
+// Generate complete JSON-LD graph for GSC 2025
+export function generateCompleteSchemaGraph(pageData = {}) {
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      generateWebSiteSchema(),
+      generateOrganizationSchema(),
+      generateLocalBusinessStructuredData(),
+      pageData.breadcrumbs ? generateBreadcrumbStructuredData(pageData.breadcrumbs) : null,
+      pageData.faqs ? generateFAQStructuredData(pageData.faqs) : null
+    ].filter(Boolean)
+  }
+}
+
+// Get robots meta tags based on page type
+export { generateRobotsMetaTags }
