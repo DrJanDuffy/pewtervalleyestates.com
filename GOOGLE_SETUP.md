@@ -105,7 +105,7 @@ Example with manual reviews:
 - All page components using NAPDisplay
 
 **Format standards:**
-- Phone: `(702) 222-1964` (display) / `+17022221964` (tel: links)
+- Phone: `(702) 500-1955` (display) / `+17025001955` (tel: links)
 - Address: Must match GBP exactly including abbreviations
 - Business Name: Must match GBP exactly
 

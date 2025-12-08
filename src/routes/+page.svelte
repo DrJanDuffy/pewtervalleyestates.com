@@ -13,7 +13,7 @@
   // SEO data for homepage - optimized for "Pewter Valley Estates" + "Dr. Jan Duffy"
   const pageData = {
     title: "Pewter Valley Estates Real Estate | Buy, Sell & Invest with Dr. Jan Duffy",
-    description: "Expert real estate services for Pewter Valley Estates in Southwest Las Vegas (89183). Dr. Jan Duffy specializes in resale homes, market analysis, and investment properties. Call (702) 222-1964.",
+    description: "Expert real estate services for Pewter Valley Estates in Southwest Las Vegas (89183). Dr. Jan Duffy specializes in resale homes, market analysis, and investment properties. Call (702) 500-1955.",
     image: `${SITE_CONFIG.url}/og-image.jpg`,
     type: "website",
     canonical: SITE_CONFIG.url,
@@ -43,7 +43,7 @@
     },
     {
       question: "How can I buy or sell a home in Pewter Valley Estates?",
-      answer: `Contact Dr. Jan Duffy at (702) 222-1964 for expert representation in buying or selling Pewter Valley Estates properties. Dr. Jan Duffy provides comprehensive services including market analysis, home valuations, buyer representation, seller marketing, and investment property consultation.`,
+      answer: `Contact Dr. Jan Duffy at (702) 500-1955 for expert representation in buying or selling Pewter Valley Estates properties. Dr. Jan Duffy provides comprehensive services including market analysis, home valuations, buyer representation, seller marketing, and investment property consultation.`,
     },
   ]
   

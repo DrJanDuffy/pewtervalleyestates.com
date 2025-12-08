@@ -10,7 +10,7 @@
   // SEO data for listings page
   const pageData = {
     title: "Active Las Vegas Homes for Sale | Dr. Jan Duffy Real Estate",
-    description: "Browse current Las Vegas home listings with Dr. Jan Duffy. Updated daily with new properties, price changes, and market insights. Call 702-222-1964 for exclusive access.",
+    description: "Browse current Las Vegas home listings with Dr. Jan Duffy. Updated daily with new properties, price changes, and market insights. Call 702-500-1955 for exclusive access.",
     image: "https://www.pewtervalleyestates.com/listings-og-image.jpg",
     type: "website",
     canonical: "https://www.pewtervalleyestates.com/listings",
@@ -169,7 +169,7 @@
 
   function handlePhoneClick() {
     trackEvent('phone_click', {
-      phone_number: '702-222-1964',
+      phone_number: '702-500-1955',
       section: 'listings_header'
     })
   }
@@ -252,11 +252,11 @@
             <h3>Your Las Vegas Real Estate Expert</h3>
             <p>Questions about any property?</p>
             <a 
-              href="tel:+17022221964" 
+              href="tel:+17025001955" 
               class="phone-cta"
               on:click={handlePhoneClick}
             >
-              📞 Text/Call (702) 222-1964
+              📞 Text/Call (702) 500-1955
             </a>
           </div>
         </div>
@@ -338,7 +338,7 @@
             <p>We're experiencing technical difficulties. Please try refreshing the page or contact Dr. Jan Duffy directly.</p>
             <div class="error-actions">
               <button on:click={() => window.location.reload()}>Refresh Page</button>
-              <a href="tel:+17022221964" on:click={handlePhoneClick}>Call (702) 222-1964</a>
+              <a href="tel:+17025001955" on:click={handlePhoneClick}>Call (702) 500-1955</a>
             </div>
           </div>
         {:else}
@@ -432,8 +432,8 @@
           <h3>📅 Schedule Showing</h3>
           <p>Ready to see properties in person?</p>
           <div class="showing-actions">
-            <a href="tel:+17022221964" class="phone-btn" on:click={handlePhoneClick}>
-              Call (702) 222-1964
+            <a href="tel:+17025001955" class="phone-btn" on:click={handlePhoneClick}>
+              Call (702) 500-1955
             </a>
             <a href="/contact" class="contact-btn">
               Contact Form
@@ -942,7 +942,7 @@
   "name": "Dr. Jan Duffy",
   "description": "Las Vegas Real Estate Agent specializing in luxury homes and investment properties",
   "url": "https://www.pewtervalleyestates.com",
-  "telephone": "+17022221964",
+  "telephone": "+17025001955",
   "email": "jan@pewtervalleyestates.com",
   "address": {
     "@type": "PostalAddress",

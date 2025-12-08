@@ -23,14 +23,14 @@
 
   function handlePhoneClick() {
     trackEvent('sticky_phone_click', {
-      phone_number: '702-222-1964',
+      phone_number: '702-500-1955',
       page: 'listings'
     })
   }
 
   function handleTextClick() {
     trackEvent('sticky_text_click', {
-      phone_number: '702-222-1964',
+      phone_number: '702-500-1955',
       page: 'listings'
     })
   }
@@ -40,7 +40,7 @@
   <div class="sticky-contact">
     <div class="contact-buttons">
       <a 
-        href="tel:+17022221964" 
+        href="tel:+17025001955" 
         class="contact-btn phone"
         on:click={handlePhoneClick}
       >
@@ -51,7 +51,7 @@
       </a>
       
       <a 
-        href="sms:+17022221964" 
+        href="sms:+17025001955" 
         class="contact-btn text"
         on:click={handleTextClick}
       >

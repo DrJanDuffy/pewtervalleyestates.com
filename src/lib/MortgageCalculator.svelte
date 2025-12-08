@@ -140,7 +140,7 @@
       <button class="reset-btn" on:click={resetCalculator}>
         Reset Calculator
       </button>
-      <a href="tel:+17022221964" class="contact-btn">
+      <a href="tel:+17025001955" class="contact-btn">
         Get Pre-Approved
       </a>
     </div>
