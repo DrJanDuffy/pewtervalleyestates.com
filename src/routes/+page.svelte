@@ -8,6 +8,7 @@
   import GoogleMap from "$lib/GoogleMap.svelte"
   import CTABanner from "$lib/CTABanner.svelte"
   import LeadCaptureForm from "$lib/LeadCaptureForm.svelte"
+  import StickyContactButton from "$lib/StickyContactButton.svelte"
   import { SITE_CONFIG } from "$lib/seo.js"
   
   // SEO data for homepage - optimized for "Pewter Valley Estates" + "Dr. Jan Duffy"
@@ -47,6 +48,14 @@
     },
   ]
   
+  function handleCtaClick(action, type) {
+    trackEvent("homepage_cta_click", {
+      action,
+      type, // "buyer" | "seller"
+      location: "hero"
+    })
+  }
+  
   onMount(() => {
     trackEvent("page_view", {
       page_title: "Homepage",
@@ -72,59 +81,155 @@
 <Breadcrumbs {breadcrumbs} />
 
 <main class="homepage">
-  <!-- Hero Section -->
+  <!-- Conversion-Focused Hero Section -->
   <section class="hero">
     <div class="container">
       <div class="hero-content">
-        <h1>Pewter Valley Estates Real Estate | Buy, Sell & Invest with Dr. Jan Duffy</h1>
-        <p class="hero-subtitle">Southwest Las Vegas's Premier Real Estate Expert | Zip Code 89183</p>
-        <p class="hero-description">
-          Specializing exclusively in Pewter Valley Estates and Southwest Las Vegas real estate, Dr. Jan Duffy provides expert guidance for buyers, sellers, and investors. Located at Pyle Avenue and S Rancho Destino Rd, this sold-out Richmond American Homes community offers exceptional resale opportunities in a family-friendly environment.
-        </p>
-        <div class="hero-ctas">
-          <a href="/homes-for-sale" class="cta-primary">View Homes for Sale</a>
-          <a href="/contact" class="cta-secondary">Contact Dr. Jan Duffy</a>
+        <h1>Find Your Dream Home or Sell Fast in Pewter Valley Estates</h1>
+        <p class="hero-subtitle">Southwest Las Vegas's #1 Real Estate Expert | Zip Code 89183</p>
+        
+        <!-- Split Buyer/Seller Path -->
+        <div class="buyer-seller-split">
+          <div class="path-card buyer-path">
+            <div class="path-icon">🏠</div>
+            <h2>I Want to Buy a Home</h2>
+            <p class="path-description">Get instant access to all available homes in Pewter Valley Estates. Expert guidance from search to closing.</p>
+            <ul class="path-benefits">
+              <li>✓ Access to all MLS listings</li>
+              <li>✓ Free home search & alerts</li>
+              <li>✓ Expert negotiation</li>
+              <li>✓ Full buyer representation</li>
+            </ul>
+            <div class="path-ctas">
+              <a href="/homes-for-sale" class="cta-primary" on:click={() => handleCtaClick('view_homes', 'buyer')}>
+                View Available Homes
+              </a>
+              <a href="tel:{SITE_CONFIG.phoneTel}" class="cta-phone" on:click={() => handleCtaClick('phone', 'buyer')}>
+                📞 Call {SITE_CONFIG.phone}
+              </a>
+            </div>
+          </div>
+          
+          <div class="path-card seller-path">
+            <div class="path-icon">💰</div>
+            <h2>I Want to Sell My Home</h2>
+            <p class="path-description">Get a free home valuation and expert marketing to sell faster and for more money.</p>
+            <ul class="path-benefits">
+              <li>✓ Free home valuation</li>
+              <li>✓ Professional marketing</li>
+              <li>✓ Expert pricing strategy</li>
+              <li>✓ Faster sales, higher prices</li>
+            </ul>
+            <div class="path-ctas">
+              <a href="/home-valuation" class="cta-primary" on:click={() => handleCtaClick('valuation', 'seller')}>
+                Get Free Valuation
+              </a>
+              <a href="tel:{SITE_CONFIG.phoneTel}" class="cta-phone" on:click={() => handleCtaClick('phone', 'seller')}>
+                📞 Call {SITE_CONFIG.phone}
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Trust Signals -->
+        <div class="trust-signals">
+          <div class="trust-item">
+            <strong>100+</strong>
+            <span>Homes Sold</span>
+          </div>
+          <div class="trust-item">
+            <strong>24hr</strong>
+            <span>Response Time</span>
+          </div>
+          <div class="trust-item">
+            <strong>5★</strong>
+            <span>Google Rating</span>
+          </div>
+          <div class="trust-item">
+            <strong>Free</strong>
+            <span>Consultation</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Quick Lead Capture Above the Fold -->
+  <section class="quick-lead">
+    <div class="container">
+      <div class="lead-grid">
+        <div class="lead-form-card">
+          <h3>Get Instant Access to New Listings</h3>
+          <p>Be the first to know when new homes hit the market</p>
+          <LeadCaptureForm 
+            formType="buyer"
+            title=""
+            subtitle=""
+          />
+        </div>
+        
+        <div class="lead-form-card">
+          <h3>Get Your Home's Value Instantly</h3>
+          <p>See what your home is worth in today's market</p>
+          <LeadCaptureForm 
+            formType="valuation"
+            title=""
+            subtitle=""
+          />
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Why Choose Dr. Jan Duffy Section -->
+  <!-- Why Choose Section - Conversion Focused -->
   <section class="why-choose">
     <div class="container">
-      <h2>Why Choose Dr. Jan Duffy for Pewter Valley Estates Homes</h2>
+      <h2>Why Dr. Jan Duffy is Southwest Las Vegas's #1 Real Estate Expert</h2>
+      
+      <div class="expertise-grid">
+        <div class="expertise-card">
+          <div class="expertise-icon">🎯</div>
+          <h3>Hyperlocal Specialist</h3>
+          <p>Exclusive focus on Pewter Valley Estates means deep knowledge of every street, floor plan, and market trend. This expertise translates to better deals and faster transactions.</p>
+        </div>
+        
+        <div class="expertise-card">
+          <div class="expertise-icon">⚡</div>
+          <h3>Fast Response Time</h3>
+          <p>24-hour response guarantee. When homes move fast, you need an agent who moves faster. Get instant updates on new listings and offers.</p>
+        </div>
+        
+        <div class="expertise-card">
+          <div class="expertise-icon">📊</div>
+          <h3>Data-Driven Pricing</h3>
+          <p>Advanced market analysis ensures you buy at the right price or sell for maximum value. No guesswork, just proven results.</p>
+        </div>
+        
+        <div class="expertise-card">
+          <div class="expertise-icon">🤝</div>
+          <h3>Full-Service Support</h3>
+          <p>From search to closing, every step handled professionally. Professional photography, staging, negotiation, and transaction management included.</p>
+        </div>
+      </div>
       
       <div class="content-grid">
         <div class="content-main">
-          <p class="lead">
-            As the leading real estate specialist for Pewter Valley Estates in Southwest Las Vegas, Dr. Jan Duffy brings unparalleled local expertise, market knowledge, and personalized service to every transaction. Whether you're buying your first home, selling to upgrade, or investing in rental properties, Dr. Jan Duffy's deep understanding of this unique community ensures optimal results.
+          <NAPDisplay showGoogleReviewsLink={true} showDirections={true} />
+          
+          <h3>Pewter Valley Estates: Your Next Home Awaits</h3>
+          <p>
+            Located at Pyle Avenue and S Rancho Destino Rd in zip code 89183, Pewter Valley Estates offers ranch-style homes from 1,950-2,240 sq ft with 3-4 bedrooms. Built by Richmond American Homes, this sold-out community is now in the resale phase, offering exceptional opportunities for buyers and sellers.
           </p>
           
-          <h3>Hyperlocal Market Expertise</h3>
+          <h3>What Makes This Community Special</h3>
           <p>
-            Dr. Jan Duffy's specialization in Pewter Valley Estates means you're working with an agent who knows every street, every floor plan variation, and every market nuance. From understanding the premium value of homes near Somerset Hills Park to recognizing investment opportunities in the resale market, this hyperlocal focus translates to better pricing, faster sales, and smarter purchases.
-          </p>
-          
-          <h3>Comprehensive Service Portfolio</h3>
-          <p>
-            Dr. Jan Duffy offers full-service real estate representation including buyer agency, seller marketing, home valuations, market analysis, and investment property consultation. For sellers, services include professional photography, staging recommendations, comparative market analysis (CMA), and strategic pricing. For buyers, expect pre-approval guidance, property search, negotiation expertise, and transaction management.
-          </p>
-          
-          <h3>Resale Market Specialization</h3>
-          <p>
-            With Pewter Valley Estates now in the resale phase, Dr. Jan Duffy understands the unique dynamics of this transition. Unlike new construction sales, resale transactions require expertise in condition assessment, comparable sales analysis, and understanding how original builder features impact value. This specialization ensures accurate pricing and smooth transactions.
-          </p>
-          
-          <h3>Investment Property Expertise</h3>
-          <p>
-            For investors, Dr. Jan Duffy provides cash flow analysis, cap rate calculations, rental market insights, and 1031 exchange guidance. Understanding the rental demand in zip code 89183, proximity to employment centers, and long-term appreciation potential helps investors make data-driven decisions.
+            Family-friendly environment, proximity to parks (Somerset Hills Park, Goett Family Park), easy I-15 access, and quiet residential streets. Perfect for first-time buyers, growing families, and those seeking single-story living.
           </p>
         </div>
         
         <aside class="content-sidebar">
-          <NAPDisplay showGoogleReviewsLink={true} showDirections={true} />
           <div class="quick-stats">
-            <h3>Quick Facts</h3>
+            <h3>Community Quick Facts</h3>
             <ul>
               <li><strong>Location:</strong> Pyle Ave & S Rancho Destino Rd</li>
               <li><strong>Zip Code:</strong> 89183</li>
@@ -132,178 +237,131 @@
               <li><strong>Home Styles:</strong> Ranch-style, Single-story</li>
               <li><strong>Square Footage:</strong> 1,950-2,240 sq ft</li>
               <li><strong>Bedrooms:</strong> 3-4</li>
+              <li><strong>Price Range:</strong> $450,000-$650,000</li>
               <li><strong>Market Status:</strong> Resale</li>
             </ul>
+          </div>
+          
+          <div class="cta-box">
+            <h3>Ready to Get Started?</h3>
+            <a href="tel:{SITE_CONFIG.phoneTel}" class="cta-button-phone">
+              📞 Call {SITE_CONFIG.phone}
+            </a>
+            <a href="/contact" class="cta-button-secondary">
+              Schedule Consultation
+            </a>
           </div>
         </aside>
       </div>
     </div>
   </section>
 
-  <!-- Current Listings & Market Status -->
+  <!-- Current Listings - Conversion Focused -->
   <section class="listings-market">
     <div class="container">
-      <h2>Current Pewter Valley Estates Listings & Market Status</h2>
+      <div class="section-header">
+        <h2>Homes Available Now in Pewter Valley Estates</h2>
+        <p class="section-subtitle">New listings added daily. Get instant alerts when homes match your criteria.</p>
+      </div>
       
-      <div class="market-overview">
-        <p class="lead">
-          The Pewter Valley Estates resale market offers opportunities for buyers seeking quality ranch-style homes in Southwest Las Vegas. As a sold-out community, all available properties are resales, requiring specialized knowledge of condition, upgrades, and market positioning.
-        </p>
+      <div class="market-cta-box">
+        <div class="market-info">
+          <h3>Current Market Overview</h3>
+          <p>Active resale listings range from $450,000 to $650,000. Homes move fast in this desirable community. Don't miss out on your dream home.</p>
+          <ul class="market-features">
+            <li>✓ Real-time MLS access</li>
+            <li>✓ Instant listing alerts</li>
+            <li>✓ Expert market analysis</li>
+            <li>✓ Priority showing access</li>
+          </ul>
+        </div>
         
-        <h3>Active Resale Inventory</h3>
-        <p>
-          Current resale listings in Pewter Valley Estates typically range from $450,000 to $650,000, depending on square footage, condition, and location within the community. Homes closer to community amenities like parks and with premium lot locations command higher prices. Dr. Jan Duffy maintains up-to-date access to all MLS listings and can provide real-time inventory updates.
-        </p>
-        
-        <h3>Market Dynamics & Pricing Trends</h3>
-        <p>
-          The transition from new construction to resale market creates unique pricing dynamics. Original purchase prices, builder upgrades, and subsequent owner improvements all factor into current valuations. Dr. Jan Duffy's market analysis includes tracking days on market (DOM), price per square foot trends, and absorption rates specific to Pewter Valley Estates.
-        </p>
-        
-        <h3>Buyer Profile & Demand</h3>
-        <p>
-          Current buyers in Pewter Valley Estates include first-time homeowners attracted to the family-friendly environment, empty nesters seeking single-story living, and investors recognizing the rental potential. The zip code 89183 location offers proximity to employment centers while maintaining a quiet, residential atmosphere.
-        </p>
-        
-        <div class="cta-inline">
-          <a href="/homes-for-sale" class="cta-link">View All Current Listings →</a>
-          <a href="/market-analysis" class="cta-link">See Market Analysis & Trends →</a>
+        <div class="market-cta">
+          <a href="/homes-for-sale" class="cta-large">
+            View All Available Homes
+          </a>
+          <a href="tel:{SITE_CONFIG.phoneTel}" class="cta-large-secondary">
+            📞 Call to Schedule Tour
+          </a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Southwest Las Vegas Location & Lifestyle -->
-  <section class="location-lifestyle">
-    <div class="container">
-      <h2>Southwest Las Vegas: Location & Lifestyle Benefits</h2>
-      
-      <p class="lead">
-        Pewter Valley Estates' location in Southwest Las Vegas (zip code 89183) offers the perfect balance of accessibility and tranquility. Situated at Pyle Avenue and S Rancho Destino Rd, residents enjoy easy access to major employment centers, shopping, dining, and entertainment while living in a quiet, family-oriented community.
-      </p>
-      
-      <div class="lifestyle-grid">
-        <div class="lifestyle-card">
-          <h3>Prime Location & Accessibility</h3>
-          <p>
-            The intersection of Pyle Avenue and S Rancho Destino Rd provides excellent connectivity. I-15 access is just minutes away, making commutes to the Las Vegas Strip, downtown Las Vegas, and employment centers convenient. Las Vegas Boulevard proximity offers additional route options. This strategic location appeals to professionals working throughout the Las Vegas Valley.
-          </p>
-        </div>
-        
-        <div class="lifestyle-card">
-          <h3>Community Parks & Recreation</h3>
-          <p>
-            Pewter Valley Estates residents enjoy proximity to multiple parks including Somerset Hills Park, Goett Family Park, and Jimmy Pettyjohn Jr. Park. These facilities offer playgrounds, sports courts, walking trails, and open spaces perfect for families. The South Point Skatepark provides additional recreational options for active residents.
-          </p>
-        </div>
-        
-        <div class="lifestyle-card">
-          <h3>Dining & Shopping Convenience</h3>
-          <p>
-            Local dining options include Seasalt Sushi & Oyster, Rosati's, and PT's Gold, all within easy reach. Shopping centers along Las Vegas Boulevard and nearby retail developments provide everyday convenience. The rural-urban balance means you're close to amenities without sacrificing the quiet residential atmosphere.
-          </p>
-        </div>
-        
-        <div class="lifestyle-card">
-          <h3>Golf & Leisure Activities</h3>
-          <p>
-            The Southern Highlands Golf Club is nearby, offering championship golf and social amenities. This proximity appeals to golf enthusiasts and those seeking an active lifestyle. The combination of community parks and nearby recreational facilities creates a well-rounded living environment.
-          </p>
-        </div>
-      </div>
-      
-      <h3>Zip Code 89183: A Growing Southwest Las Vegas Community</h3>
-      <p>
-        Zip code 89183 represents one of Southwest Las Vegas's most desirable residential areas. The combination of newer construction, master-planned communities, and established infrastructure creates strong property values. Pewter Valley Estates benefits from this broader market strength while maintaining its unique community identity.
-      </p>
-      
-      <h3>Family-Friendly Environment</h3>
-      <p>
-        The quiet streets, well-maintained common areas, and proximity to parks make Pewter Valley Estates ideal for families. The ranch-style, single-story homes appeal to families with young children and those planning for aging in place. The community's design emphasizes safety, walkability, and neighbor interaction.
-      </p>
-      
-      <div class="cta-inline">
-        <a href="/neighborhood-guide" class="cta-link">Explore Full Neighborhood Guide →</a>
-        <a href="/southwest-las-vegas" class="cta-link">Learn About Southwest Las Vegas →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Agent Bio Highlight -->
-  <section class="agent-bio">
-    <div class="container">
-      <h2>Dr. Jan Duffy: Your Pewter Valley Estates Specialist</h2>
-      
-      <div class="bio-content">
-        <div class="bio-text">
-          <p class="lead">
-            Dr. Jan Duffy has built a reputation as the go-to real estate expert for Pewter Valley Estates and Southwest Las Vegas. This specialization means every client benefits from deep market knowledge, established relationships, and proven transaction expertise.
-          </p>
-          
-          <h3>Specialization Creates Results</h3>
-          <p>
-            Unlike generalist agents who serve broad geographic areas, Dr. Jan Duffy's focus on Pewter Valley Estates enables superior market insights. Understanding every floor plan, every street's characteristics, and every market trend specific to this community results in better outcomes for buyers and sellers.
-          </p>
-          
-          <h3>Comprehensive Market Knowledge</h3>
-          <p>
-            From tracking resale inventory to analyzing price trends, Dr. Jan Duffy maintains comprehensive market intelligence. This includes understanding how original builder features impact resale value, which upgrades provide the best ROI, and what buyers are seeking in the current market.
-          </p>
-          
-          <h3>Client-Focused Service</h3>
-          <p>
-            Every transaction receives personalized attention. For sellers, this means strategic pricing, professional marketing, and negotiation expertise. For buyers, expect property search, offer strategy, inspection guidance, and transaction management. For investors, receive cash flow analysis, market data, and investment guidance.
-          </p>
-        </div>
-        
-        <div class="bio-cta">
-          <a href="/dr-jan-duffy" class="cta-button">Learn More About Dr. Jan Duffy</a>
-          <a href="/contact" class="cta-button secondary">Schedule a Consultation</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Service Highlights -->
+  <!-- Services - Buyer/Seller Focused -->
   <section class="services">
     <div class="container">
-      <h2>Real Estate Services for Pewter Valley Estates</h2>
+      <h2>Complete Real Estate Services for Buyers & Sellers</h2>
       
-      <div class="services-grid">
-        <div class="service-card">
-          <h3>Buyer Representation</h3>
-          <p>Expert guidance through the entire home buying process, from pre-approval to closing. Access to all MLS listings, property search, offer strategy, and negotiation.</p>
-          <a href="/buy-a-home" class="service-link">Learn More →</a>
+      <div class="services-split">
+        <div class="services-column buyer-services">
+          <h3>For Home Buyers</h3>
+          <div class="service-list">
+            <div class="service-item">
+              <span class="check">✓</span>
+              <div>
+                <strong>Free Home Search & Alerts</strong>
+                <p>Get instant notifications when new homes match your criteria</p>
+              </div>
+            </div>
+            <div class="service-item">
+              <span class="check">✓</span>
+              <div>
+                <strong>Expert Negotiation</strong>
+                <p>Save thousands with proven negotiation strategies</p>
+              </div>
+            </div>
+            <div class="service-item">
+              <span class="check">✓</span>
+              <div>
+                <strong>Full Buyer Representation</strong>
+                <p>From search to closing, we handle everything</p>
+              </div>
+            </div>
+            <div class="service-item">
+              <span class="check">✓</span>
+              <div>
+                <strong>Priority Showing Access</strong>
+                <p>See homes before they hit the market</p>
+              </div>
+            </div>
+          </div>
+          <a href="/buy-a-home" class="service-cta">Start Your Home Search →</a>
         </div>
         
-        <div class="service-card">
-          <h3>Seller Services</h3>
-          <p>Comprehensive marketing, pricing strategy, professional photography, staging recommendations, and negotiation to maximize your home's value and minimize time on market.</p>
-          <a href="/sell-your-home" class="service-link">Learn More →</a>
-        </div>
-        
-        <div class="service-card">
-          <h3>Home Valuations</h3>
-          <p>Free, accurate home valuations using comparable sales analysis, condition assessment, and market data specific to Pewter Valley Estates and zip code 89183.</p>
-          <a href="/home-valuation" class="service-link">Get Your Valuation →</a>
-        </div>
-        
-        <div class="service-card">
-          <h3>Investment Properties</h3>
-          <p>Cash flow analysis, cap rate calculations, rental market insights, and 1031 exchange guidance for investors seeking properties in Southwest Las Vegas.</p>
-          <a href="/investment-properties" class="service-link">Learn More →</a>
-        </div>
-        
-        <div class="service-card">
-          <h3>Market Analysis</h3>
-          <p>Comprehensive market reports, price trends, inventory analysis, and demographic data to inform your real estate decisions in Pewter Valley Estates.</p>
-          <a href="/market-analysis" class="service-link">View Market Data →</a>
-        </div>
-        
-        <div class="service-card">
-          <h3>Transaction Management</h3>
-          <p>Full-service transaction coordination from contract to closing, ensuring smooth, timely transactions with attention to every detail.</p>
-          <a href="/contact" class="service-link">Get Started →</a>
+        <div class="services-column seller-services">
+          <h3>For Home Sellers</h3>
+          <div class="service-list">
+            <div class="service-item">
+              <span class="check">✓</span>
+              <div>
+                <strong>Free Home Valuation</strong>
+                <p>Know your home's true market value instantly</p>
+              </div>
+            </div>
+            <div class="service-item">
+              <span class="check">✓</span>
+              <div>
+                <strong>Professional Marketing</strong>
+                <p>Professional photos, staging, and multi-channel promotion</p>
+              </div>
+            </div>
+            <div class="service-item">
+              <span class="check">✓</span>
+              <div>
+                <strong>Strategic Pricing</strong>
+                <p>Data-driven pricing to sell faster for more money</p>
+              </div>
+            </div>
+            <div class="service-item">
+              <span class="check">✓</span>
+              <div>
+                <strong>Faster Sales</strong>
+                <p>Average 30% faster than market average</p>
+              </div>
+            </div>
+          </div>
+          <a href="/sell-your-home" class="service-cta">Get Your Free Valuation →</a>
         </div>
       </div>
     </div>
@@ -319,23 +377,40 @@
     <GoogleMap />
   </section>
 
-  <!-- Lead Capture -->
-  <section class="lead-section">
-    <LeadCaptureForm 
-      formType="general"
-      title="Get Expert Real Estate Guidance"
-      subtitle="Contact Dr. Jan Duffy for personalized service in Pewter Valley Estates"
-    />
+  <!-- Final CTA Section -->
+  <section class="final-cta">
+    <div class="container">
+      <h2>Ready to Buy or Sell in Pewter Valley Estates?</h2>
+      <p class="cta-subtitle">Get expert guidance from Southwest Las Vegas's #1 real estate specialist</p>
+      
+      <div class="final-cta-buttons">
+        <a href="tel:{SITE_CONFIG.phoneTel}" class="cta-mega phone">
+          📞 Call {SITE_CONFIG.phone}
+        </a>
+        <a href="/contact" class="cta-mega email">
+          ✉️ Get in Touch
+        </a>
+        <a href="/home-valuation" class="cta-mega valuation">
+          💰 Free Home Valuation
+        </a>
+      </div>
+      
+      <p class="cta-guarantee">✓ 24-Hour Response Guarantee | ✓ Free Consultation | ✓ No Obligation</p>
+    </div>
   </section>
 
-  <!-- CTA Banner -->
-  <CTABanner 
-    variant="primary"
-    showPhone={true}
-    showEmail={true}
-    showValuation={true}
-    showTour={true}
-  />
+  <!-- Google Reviews -->
+  <section class="reviews-section">
+    <GoogleReviews />
+  </section>
+
+  <!-- Map Section -->
+  <section class="map-section">
+    <GoogleMap />
+  </section>
+
+  <!-- Sticky Contact Button (Mobile) -->
+  <StickyContactButton />
 </main>
 
 <style>
@@ -349,74 +424,186 @@
     padding: 0 2rem;
   }
   
-  /* Hero Section */
+  /* Hero Section - Conversion Focused */
   .hero {
     background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
     color: white;
-    padding: 4rem 0;
+    padding: 3rem 0 4rem;
     text-align: center;
   }
   
   .hero-content h1 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
+    font-size: 2.75rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
     line-height: 1.2;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
   }
   
   .hero-subtitle {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     color: #fbbf24;
-    margin-bottom: 1rem;
+    margin-bottom: 2.5rem;
     font-weight: 600;
   }
   
-  .hero-description {
-    font-size: 1.125rem;
-    max-width: 900px;
-    margin: 0 auto 2rem;
-    line-height: 1.7;
-    opacity: 0.95;
+  /* Buyer/Seller Split */
+  .buyer-seller-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto 3rem;
   }
   
-  .hero-ctas {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  
-  .cta-primary,
-  .cta-secondary {
-    display: inline-block;
-    padding: 1rem 2rem;
-    border-radius: 0.5rem;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1.125rem;
-    transition: all 0.3s ease;
-  }
-  
-  .cta-primary {
+  .path-card {
     background: white;
+    color: #1e3a8a;
+    padding: 2.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .path-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  }
+  
+  .path-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .path-card h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
     color: #1e3a8a;
   }
   
+  .path-description {
+    color: #64748b;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    font-size: 1rem;
+  }
+  
+  .path-benefits {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem 0;
+    text-align: left;
+  }
+  
+  .path-benefits li {
+    padding: 0.5rem 0;
+    color: #374151;
+    font-size: 0.95rem;
+  }
+  
+  .path-ctas {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .cta-primary {
+    display: block;
+    padding: 1rem 1.5rem;
+    background: #1e3a8a;
+    color: white;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    font-size: 1.125rem;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  
   .cta-primary:hover {
-    background: #f8fafc;
+    background: #1e40af;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   }
   
-  .cta-secondary {
-    background: transparent;
+  .cta-phone {
+    display: block;
+    padding: 0.875rem 1.5rem;
+    background: #16B286;
     color: white;
-    border: 2px solid white;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+    text-align: center;
+    transition: all 0.3s ease;
   }
   
-  .cta-secondary:hover {
+  .cta-phone:hover {
+    background: #0D8A5B;
+    transform: translateY(-2px);
+  }
+  
+  /* Trust Signals */
+  .trust-signals {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  .trust-item {
+    text-align: center;
+  }
+  
+  .trust-item strong {
+    display: block;
+    font-size: 2rem;
+    font-weight: 800;
+    color: #fbbf24;
+    margin-bottom: 0.25rem;
+  }
+  
+  .trust-item span {
+    display: block;
+    font-size: 0.875rem;
+    opacity: 0.9;
+  }
+  
+  /* Quick Lead Capture */
+  .quick-lead {
+    padding: 3rem 0;
+    background: #f8fafc;
+  }
+  
+  .lead-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  
+  .lead-form-card {
     background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .lead-form-card h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
     color: #1e3a8a;
+    margin-bottom: 0.5rem;
+  }
+  
+  .lead-form-card p {
+    color: #64748b;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
   }
   
   /* Why Choose Section */
@@ -429,8 +616,87 @@
     font-size: 2.5rem;
     font-weight: 700;
     color: #1e3a8a;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
     text-align: center;
+  }
+  
+  /* Expertise Grid */
+  .expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-bottom: 4rem;
+  }
+  
+  .expertise-card {
+    text-align: center;
+    padding: 1.5rem;
+  }
+  
+  .expertise-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  
+  .expertise-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 0.75rem;
+  }
+  
+  .expertise-card p {
+    color: #64748b;
+    line-height: 1.6;
+    font-size: 0.95rem;
+  }
+  
+  .cta-box {
+    background: #f8fafc;
+    padding: 2rem;
+    border-radius: 1rem;
+    margin-top: 2rem;
+    text-align: center;
+  }
+  
+  .cta-box h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 1.5rem;
+  }
+  
+  .cta-button-phone,
+  .cta-button-secondary {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  
+  .cta-button-phone {
+    background: #16B286;
+    color: white;
+  }
+  
+  .cta-button-phone:hover {
+    background: #0D8A5B;
+    transform: translateY(-2px);
+  }
+  
+  .cta-button-secondary {
+    background: #1e3a8a;
+    color: white;
+  }
+  
+  .cta-button-secondary:hover {
+    background: #1e40af;
+    transform: translateY(-2px);
   }
   
   .content-grid {
@@ -506,198 +772,100 @@
   /* Listings Market Section */
   .listings-market {
     padding: 4rem 0;
-    background: #f8fafc;
-  }
-  
-  .listings-market h2 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #1e3a8a;
-    margin-bottom: 2rem;
-    text-align: center;
-  }
-  
-  .market-overview .lead {
-    font-size: 1.25rem;
-    color: #374151;
-    line-height: 1.8;
-    margin-bottom: 2rem;
-    font-weight: 500;
-  }
-  
-  .market-overview h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #1e3a8a;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-  }
-  
-  .market-overview p {
-    color: #374151;
-    line-height: 1.8;
-    margin-bottom: 1.5rem;
-    font-size: 1.125rem;
-  }
-  
-  .cta-inline {
-    display: flex;
-    gap: 2rem;
-    margin-top: 2rem;
-    flex-wrap: wrap;
-  }
-  
-  .cta-link {
-    color: #1e3a8a;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 1.125rem;
-    transition: color 0.3s ease;
-  }
-  
-  .cta-link:hover {
-    color: #1e40af;
-    text-decoration: underline;
-  }
-  
-  /* Location Lifestyle Section */
-  .location-lifestyle {
-    padding: 4rem 0;
-    background: white;
-  }
-  
-  .location-lifestyle h2 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #1e3a8a;
-    margin-bottom: 2rem;
-    text-align: center;
-  }
-  
-  .location-lifestyle .lead {
-    font-size: 1.25rem;
-    color: #374151;
-    line-height: 1.8;
-    margin-bottom: 2rem;
-    font-weight: 500;
-  }
-  
-  .lifestyle-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-    margin: 2rem 0;
-  }
-  
-  .lifestyle-card {
-    background: #f8fafc;
-    padding: 2rem;
-    border-radius: 1rem;
-  }
-  
-  .lifestyle-card h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #1e3a8a;
-    margin-bottom: 1rem;
-  }
-  
-  .lifestyle-card p {
-    color: #374151;
-    line-height: 1.8;
-    font-size: 1.125rem;
-  }
-  
-  .location-lifestyle h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #1e3a8a;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-  }
-  
-  .location-lifestyle p {
-    color: #374151;
-    line-height: 1.8;
-    margin-bottom: 1.5rem;
-    font-size: 1.125rem;
-  }
-  
-  /* Agent Bio Section */
-  .agent-bio {
-    padding: 4rem 0;
     background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
   }
   
-  .agent-bio h2 {
+  .section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  
+  .section-header h2 {
     font-size: 2.5rem;
     font-weight: 700;
     color: #1e3a8a;
-    margin-bottom: 2rem;
-    text-align: center;
-  }
-  
-  .bio-content {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 3rem;
-    align-items: start;
-  }
-  
-  .bio-text .lead {
-    font-size: 1.25rem;
-    color: #374151;
-    line-height: 1.8;
-    margin-bottom: 2rem;
-    font-weight: 500;
-  }
-  
-  .bio-text h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #1e3a8a;
-    margin-top: 2rem;
     margin-bottom: 1rem;
   }
   
-  .bio-text p {
+  .section-subtitle {
+    font-size: 1.125rem;
+    color: #64748b;
+  }
+  
+  .market-cta-box {
+    background: white;
+    padding: 3rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 3rem;
+    align-items: center;
+  }
+  
+  .market-info h3 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 1rem;
+  }
+  
+  .market-info p {
     color: #374151;
-    line-height: 1.8;
+    line-height: 1.7;
     margin-bottom: 1.5rem;
     font-size: 1.125rem;
   }
   
-  .bio-cta {
+  .market-features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .market-features li {
+    padding: 0.5rem 0;
+    color: #374151;
+    font-size: 1rem;
+  }
+  
+  .market-cta {
     display: flex;
     flex-direction: column;
     gap: 1rem;
   }
   
-  .bio-cta .cta-button {
+  .cta-large,
+  .cta-large-secondary {
     display: block;
-    padding: 1rem 1.5rem;
-    background: #1e3a8a;
-    color: white;
-    text-decoration: none;
+    padding: 1.25rem 2rem;
     border-radius: 0.5rem;
-    font-weight: 600;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.125rem;
     text-align: center;
     transition: all 0.3s ease;
   }
   
-  .bio-cta .cta-button:hover {
+  .cta-large {
+    background: #1e3a8a;
+    color: white;
+  }
+  
+  .cta-large:hover {
     background: #1e40af;
     transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(30, 58, 138, 0.4);
   }
   
-  .bio-cta .cta-button.secondary {
-    background: white;
-    color: #1e3a8a;
-    border: 2px solid #1e3a8a;
+  .cta-large-secondary {
+    background: #16B286;
+    color: white;
   }
   
-  .bio-cta .cta-button.secondary:hover {
-    background: #f8fafc;
+  .cta-large-secondary:hover {
+    background: #0D8A5B;
+    transform: translateY(-2px);
   }
   
   /* Services Section */
@@ -714,48 +882,91 @@
     text-align: center;
   }
   
-  .services-grid {
+  .services-split {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    max-width: 1000px;
+    margin: 0 auto;
   }
   
-  .service-card {
+  .services-column {
     background: #f8fafc;
-    padding: 2rem;
+    padding: 2.5rem;
     border-radius: 1rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-top: 4px solid;
   }
   
-  .service-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  .buyer-services {
+    border-top-color: #16B286;
   }
   
-  .service-card h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
+  .seller-services {
+    border-top-color: #1e3a8a;
+  }
+  
+  .services-column h3 {
+    font-size: 1.75rem;
+    font-weight: 700;
     color: #1e3a8a;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
   }
   
-  .service-card p {
-    color: #374151;
-    line-height: 1.7;
+  .service-list {
+    margin-bottom: 2rem;
+  }
+  
+  .service-item {
+    display: flex;
+    gap: 1rem;
     margin-bottom: 1.5rem;
-    font-size: 1.125rem;
+    align-items: flex-start;
   }
   
-  .service-link {
+  .service-item .check {
+    color: #16B286;
+    font-size: 1.5rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  
+  .service-item strong {
+    display: block;
     color: #1e3a8a;
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease;
+    font-size: 1.125rem;
+    margin-bottom: 0.25rem;
   }
   
-  .service-link:hover {
-    color: #1e40af;
-    text-decoration: underline;
+  .service-item p {
+    color: #64748b;
+    font-size: 0.95rem;
+    margin: 0;
+    line-height: 1.5;
+  }
+  
+  .service-cta {
+    display: block;
+    padding: 1rem 1.5rem;
+    background: #1e3a8a;
+    color: white;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  
+  .service-cta:hover {
+    background: #1e40af;
+    transform: translateY(-2px);
+  }
+  
+  .seller-services .service-cta {
+    background: #16B286;
+  }
+  
+  .seller-services .service-cta:hover {
+    background: #0D8A5B;
   }
   
   /* Reviews Section */
@@ -768,9 +979,65 @@
     padding: 0;
   }
   
-  /* Lead Section */
-  .lead-section {
-    padding: 0;
+  /* Final CTA Section */
+  .final-cta {
+    padding: 4rem 0;
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+    color: white;
+    text-align: center;
+  }
+  
+  .final-cta h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+  
+  .cta-subtitle {
+    font-size: 1.25rem;
+    margin-bottom: 2.5rem;
+    opacity: 0.95;
+  }
+  
+  .final-cta-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+  
+  .cta-mega {
+    display: inline-block;
+    padding: 1.25rem 2.5rem;
+    background: white;
+    color: #1e3a8a;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    font-weight: 700;
+    font-size: 1.125rem;
+    transition: all 0.3s ease;
+  }
+  
+  .cta-mega:hover {
+    background: #f8fafc;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .cta-mega.phone {
+    background: #16B286;
+    color: white;
+  }
+  
+  .cta-mega.phone:hover {
+    background: #0D8A5B;
+  }
+  
+  .cta-guarantee {
+    font-size: 1rem;
+    opacity: 0.9;
+    margin-top: 1rem;
   }
   
   /* Responsive Design */
@@ -784,12 +1051,24 @@
       position: static;
     }
     
-    .lifestyle-grid {
+    .expertise-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .services-split {
       grid-template-columns: 1fr;
     }
     
-    .services-grid {
-      grid-template-columns: repeat(2, 1fr);
+    .buyer-seller-split {
+      grid-template-columns: 1fr;
+    }
+    
+    .lead-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .market-cta-box {
+      grid-template-columns: 1fr;
     }
   }
   
@@ -799,29 +1078,34 @@
     }
     
     .hero-subtitle {
-      font-size: 1.25rem;
+      font-size: 1.125rem;
     }
     
     .why-choose h2,
     .listings-market h2,
-    .location-lifestyle h2,
-    .agent-bio h2,
-    .services h2 {
+    .services h2,
+    .final-cta h2 {
       font-size: 2rem;
     }
     
-    .services-grid {
+    .expertise-grid {
       grid-template-columns: 1fr;
     }
     
-    .hero-ctas {
+    .trust-signals {
+      gap: 2rem;
+    }
+    
+    .final-cta-buttons {
       flex-direction: column;
     }
     
-    .cta-primary,
-    .cta-secondary {
+    .cta-mega {
       width: 100%;
-      text-align: center;
+    }
+    
+    .path-card {
+      padding: 2rem 1.5rem;
     }
   }
 </style>
