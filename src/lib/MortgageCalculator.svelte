@@ -1,5 +1,6 @@
 <script>
   import { trackEvent } from '$lib/analytics'
+  import { SITE_CONFIG } from '$lib/seo.js'
 
   let homePrice = 500000
   let downPayment = 100000
@@ -140,7 +141,7 @@
       <button class="reset-btn" on:click={resetCalculator}>
         Reset Calculator
       </button>
-      <a href="tel:+17025001955" class="contact-btn">
+      <a href="tel:{SITE_CONFIG.phoneTel}" class="contact-btn">
         Get Pre-Approved
       </a>
     </div>

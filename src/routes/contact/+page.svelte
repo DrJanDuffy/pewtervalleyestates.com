@@ -60,7 +60,7 @@ function onSubmit(values) {
 
 function handlePhoneClick() {
   trackEvent("phone_click", {
-    phone_number: "702-500-1955",
+    phone_number: SITE_CONFIG.phone,
     section: "contact",
   })
 }
@@ -139,8 +139,8 @@ const faqData = [
           </div>
           <h3>Call Me Directly</h3>
           <p>Speak with me personally about your real estate needs</p>
-          <a href="tel:+1-702-500-1955" class="contact-link" on:click={handlePhoneClick}>
-            702 500-1955
+          <a href="tel:{SITE_CONFIG.phoneFormatted}" class="contact-link" on:click={handlePhoneClick}>
+            {SITE_CONFIG.phone}
           </a>
         </div>
 
