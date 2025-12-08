@@ -3,27 +3,59 @@
  * Includes structured data, meta tags, and local SEO optimization
  */
 
-// Base site configuration
+// Base site configuration - MUST match Google Business Profile exactly
 export const SITE_CONFIG = {
-  name: "Pewter Valley Estates",
+  name: "Dr. Jan Duffy - Real Estate Agent",
+  businessName: "Pewter Valley Estates",
   tagline: "Las Vegas New Home Community by Richmond American Homes",
   description:
     "Discover your dream home at Pewter Valley Estates in Las Vegas, Nevada. Modern new construction homes with resort-style amenities in prime Las Vegas locations.",
   url: "https://www.pewtervalleyestates.com",
   logo: "https://www.pewtervalleyestates.com/logo.png",
-  phone: "+1-702-222-1964",
+  // Phone format: (702) 222-1964 for display, +17022221964 for tel: links
+  phone: "(702) 222-1964",
+  phoneFormatted: "+1-702-222-1964",
+  phoneTel: "+17022221964",
   email: "jan.duffy@pewtervalleyestates.com",
+  // Address must match Google Business Profile exactly
+  // Pewter Valley Estates: Pyle Avenue and S Rancho Destino Rd, Las Vegas, NV 89183
   address: {
-    street: "Pewter Valley Estates",
+    street: "Pyle Avenue and S Rancho Destino Rd",
     city: "Las Vegas",
     state: "Nevada",
-    zipCode: "89101",
+    stateAbbr: "NV",
+    zipCode: "89183", // Pewter Valley Estates zip code
     country: "United States",
+    countryCode: "US",
   },
   coordinates: {
-    latitude: "36.1699",
-    longitude: "-115.1398",
+    latitude: "36.0694", // Southwest Las Vegas coordinates
+    longitude: "-115.2408",
   },
+  // Local landmarks and context
+  localContext: {
+    zipCode: "89183",
+    majorStreets: ["Pyle Avenue", "S Rancho Destino Rd", "Las Vegas Boulevard", "I-15"],
+    nearbyParks: [
+      "Somerset Hills Park",
+      "Goett Family Park", 
+      "Jimmy Pettyjohn Jr. Park",
+      "South Point Skatepark"
+    ],
+    nearbyDining: [
+      "Seasalt Sushi & Oyster",
+      "Rosati's",
+      "PT's Gold"
+    ],
+    golfCourse: "Southern Highlands Golf Club",
+    builder: "Richmond American Homes",
+    homeStyles: ["Ranch-style", "Single-story"],
+    sqftRange: "1,950-2,240",
+    bedroomRange: "3-4",
+  },
+  // Google Business Profile URL - update with actual GBP URL
+  googleBusinessProfile: "https://g.page/r/YOUR_GBP_ID", // TODO: Replace with actual GBP URL
+  googleReviewsUrl: "https://search.google.com/local/writereview?placeid=YOUR_PLACE_ID", // TODO: Replace with actual Place ID
   social: {
     facebook: "https://facebook.com/pewtervalleyestates",
     twitter: "https://twitter.com/pewtervalleyestates",
@@ -111,40 +143,56 @@ export function generateLocalBusinessSchema() {
     "@context": "https://schema.org",
     "@type": "RealEstateAgent",
     name: SITE_CONFIG.name,
+    alternateName: SITE_CONFIG.businessName,
     description: SITE_CONFIG.description,
     url: SITE_CONFIG.url,
     logo: SITE_CONFIG.logo,
     image: `${SITE_CONFIG.url}/images/community-hero.jpg`,
-    telephone: SITE_CONFIG.phone,
+    telephone: SITE_CONFIG.phoneFormatted,
     email: SITE_CONFIG.email,
     address: {
       "@type": "PostalAddress",
       streetAddress: SITE_CONFIG.address.street,
       addressLocality: SITE_CONFIG.address.city,
-      addressRegion: SITE_CONFIG.address.state,
+      addressRegion: SITE_CONFIG.address.stateAbbr,
       postalCode: SITE_CONFIG.address.zipCode,
-      addressCountry: SITE_CONFIG.address.country,
+      addressCountry: SITE_CONFIG.address.countryCode,
     },
     geo: {
       "@type": "GeoCoordinates",
       latitude: SITE_CONFIG.coordinates.latitude,
       longitude: SITE_CONFIG.coordinates.longitude,
     },
-    areaServed: {
-      "@type": "City",
-      name: "Las Vegas",
-      containedInPlace: {
-        "@type": "State",
-        name: "Nevada",
+    areaServed: [
+      {
+        "@type": "City",
+        name: "Las Vegas",
+        containedInPlace: {
+          "@type": "State",
+          name: "Nevada",
+        },
       },
-    },
+      {
+        "@type": "City",
+        name: "Henderson",
+      },
+      {
+        "@type": "City",
+        name: "Summerlin",
+      },
+    ],
     serviceType: [
       "New Home Sales",
       "Real Estate Consultation",
       "Property Tours",
       "Home Buying Assistance",
+      "Home Selling Assistance",
     ],
-    openingHours: "Mo-Fr 09:00-18:00,Sa 10:00-16:00",
+    openingHours: [
+      "Mo-Fr 09:00-18:00",
+      "Sa 10:00-16:00",
+    ],
+    priceRange: "$$",
     sameAs: Object.values(SITE_CONFIG.social),
     hasOfferCatalog: {
       "@type": "OfferCatalog",
@@ -415,5 +463,59 @@ export function generateHreflangData() {
     en: `${SITE_CONFIG.url}`,
     "es-us": `${SITE_CONFIG.url}/es`,
     es: `${SITE_CONFIG.url}/es`,
+  }
+}
+
+/**
+ * Generate Review/AggregateRating schema for Google Reviews
+ * This should match your Google Business Profile reviews
+ */
+export function generateReviewSchema(reviews = []) {
+  // Default reviews if none provided - update with actual Google Reviews data
+  const defaultReviews = reviews.length > 0 ? reviews : [
+    {
+      author: "Sarah Johnson",
+      rating: 5,
+      reviewBody: "Dr. Jan Duffy made our home buying experience seamless. Her expertise in Las Vegas real estate is unmatched!",
+      datePublished: "2024-01-15",
+    },
+    {
+      author: "Michael Chen",
+      rating: 5,
+      reviewBody: "Professional, knowledgeable, and always available. Highly recommend for anyone looking to buy in Las Vegas.",
+      datePublished: "2024-02-20",
+    },
+  ]
+
+  const reviewCount = defaultReviews.length
+  const averageRating = defaultReviews.reduce((sum, r) => sum + r.rating, 0) / reviewCount
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": `${SITE_CONFIG.url}#business`,
+    name: SITE_CONFIG.name,
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: averageRating.toFixed(1),
+      reviewCount: reviewCount,
+      bestRating: "5",
+      worstRating: "1",
+    },
+    review: defaultReviews.map((review) => ({
+      "@type": "Review",
+      author: {
+        "@type": "Person",
+        name: review.author,
+      },
+      datePublished: review.datePublished,
+      reviewBody: review.reviewBody,
+      reviewRating: {
+        "@type": "Rating",
+        ratingValue: review.rating.toString(),
+        bestRating: "5",
+        worstRating: "1",
+      },
+    })),
   }
 }

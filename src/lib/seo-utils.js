@@ -1,17 +1,21 @@
 // SEO utility functions following SvelteKit best practices
 
+// Import from main SEO config to ensure consistency
+import { SITE_CONFIG as MAIN_CONFIG, generateLocalBusinessSchema } from "$lib/seo.js"
+
+// Re-export for backward compatibility
 export const SITE_CONFIG = {
-  name: "Pewter Valley Estates",
-  url: "https://www.pewtervalleyestates.com",
-  description: "Luxury new construction homes in Las Vegas, Nevada. Dr. Jan Duffy Real Estate - Your trusted Las Vegas real estate expert.",
-  image: "https://www.pewtervalleyestates.com/og-image.jpg",
+  name: MAIN_CONFIG.businessName,
+  url: MAIN_CONFIG.url,
+  description: MAIN_CONFIG.description,
+  image: `${MAIN_CONFIG.url}/og-image.jpg`,
   twitter: "@DrJanDuffy",
-  phone: "+17022221964",
-  email: "jan@pewtervalleyestates.com",
+  phone: MAIN_CONFIG.phoneTel,
+  email: MAIN_CONFIG.email,
   address: {
-    street: "Las Vegas, NV",
-    region: "Nevada",
-    country: "United States"
+    street: MAIN_CONFIG.address.street,
+    region: MAIN_CONFIG.address.state,
+    country: MAIN_CONFIG.address.country
   }
 }
 
@@ -163,41 +167,9 @@ export function generateFAQStructuredData(faqs) {
   }
 }
 
-// Generate local business structured data
+// Generate local business structured data - imports from main SEO config
 export function generateLocalBusinessStructuredData() {
-  return {
-    "@context": "https://schema.org",
-    "@type": "RealEstateAgent",
-    "name": "Dr. Jan Duffy",
-    "description": "Las Vegas Real Estate Agent specializing in luxury homes and investment properties",
-    "url": SITE_CONFIG.url,
-    "telephone": SITE_CONFIG.phone,
-    "email": SITE_CONFIG.email,
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": SITE_CONFIG.address.street,
-      "addressRegion": SITE_CONFIG.address.region,
-      "addressCountry": SITE_CONFIG.address.country
-    },
-    "areaServed": [
-      "Las Vegas",
-      "Henderson", 
-      "Summerlin",
-      "Green Valley",
-      "Anthem",
-      "Inspirada",
-      "Mountain's Edge",
-      "Silverado Ranch"
-    ],
-    "serviceType": "Real Estate Sales",
-    "priceRange": "$$$",
-    "openingHours": "Mo-Fr 09:00-18:00,Sa 09:00-17:00",
-    "sameAs": [
-      "https://www.facebook.com/drjanduffy",
-      "https://www.linkedin.com/in/drjanduffy",
-      "https://www.instagram.com/drjanduffy"
-    ]
-  }
+  return generateLocalBusinessSchema()
 }
 
 // Performance optimization helpers

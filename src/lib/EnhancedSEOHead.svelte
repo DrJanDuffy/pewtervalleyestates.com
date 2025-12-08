@@ -1,5 +1,5 @@
 <script>
-  import { generateMetaTags, generateStructuredData, generateBreadcrumbStructuredData, generateLocalBusinessStructuredData, preloadCriticalResources, generateHreflangTags, validateSEOData } from '$lib/seo-utils.js'
+  import { generateMetaTags, generateStructuredData, generateBreadcrumbStructuredData, generateFAQStructuredData, generateLocalBusinessStructuredData, preloadCriticalResources, generateHreflangTags, validateSEOData } from '$lib/seo-utils.js'
 
   export let pageData = {}
   export let breadcrumbs = []

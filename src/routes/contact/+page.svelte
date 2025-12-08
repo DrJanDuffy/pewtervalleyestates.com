@@ -1,8 +1,14 @@
 <script>
-import { onMount } from "svelte"
-import { createForm } from "svelte-forms-lib"
-import { trackEvent } from "$lib/analytics"
-import RichmondAmericanAssets from "$lib/RichmondAmericanAssets.svelte"
+  import { onMount } from "svelte"
+  import { createForm } from "svelte-forms-lib"
+  import { trackEvent } from "$lib/analytics"
+  import RichmondAmericanAssets from "$lib/RichmondAmericanAssets.svelte"
+  import SEOHead from "$lib/SEOHead.svelte"
+  import Breadcrumbs from "$lib/Breadcrumbs.svelte"
+  import NAPDisplay from "$lib/NAPDisplay.svelte"
+  import GoogleMap from "$lib/GoogleMap.svelte"
+  import GoogleReviews from "$lib/GoogleReviews.svelte"
+  import { SITE_CONFIG } from "$lib/seo.js"
 
 const { form, handleChange, handleSubmit, errors, isSubmitting } = createForm({
   initialValues: {
@@ -60,13 +66,50 @@ function handlePhoneClick() {
 }
 </script>
 
+<!-- SEO data for Contact page -->
+{@const pageData = {
+  title: "Contact Dr. Jan Duffy - Real Estate Agent | Pewter Valley Estates",
+  description: `Contact Dr. Jan Duffy, your trusted real estate agent for Pewter Valley Estates in Las Vegas. Call ${SITE_CONFIG.phone} or send a message for expert home buying assistance.`,
+  image: `${SITE_CONFIG.url}/og-image.jpg`,
+  type: "website",
+  canonical: `${SITE_CONFIG.url}/contact`,
+  keywords: "contact Dr. Jan Duffy, Las Vegas real estate agent, Pewter Valley Estates contact, real estate consultation",
+}}
+
+{@const breadcrumbs = [
+  { name: "Home", url: SITE_CONFIG.url },
+  { name: "Contact", url: `${SITE_CONFIG.url}/contact` },
+]}
+
+{@const faqData = [
+  {
+    question: "What are Dr. Jan Duffy's business hours?",
+    answer: "Dr. Jan Duffy is available Monday-Friday 9:00 AM - 6:00 PM and Saturday 10:00 AM - 4:00 PM. For urgent matters, you can call or text at any time.",
+  },
+  {
+    question: "How quickly will I receive a response?",
+    answer: "Dr. Jan Duffy typically responds to all inquiries within 24 hours. For urgent matters, calling or texting directly is the fastest way to reach her.",
+  },
+  {
+    question: "What information should I include in my contact form?",
+    answer: "Please include your name, contact information, preferred contact method, property interest (buying, selling, investing), and any specific questions or requirements you have.",
+  },
+]}
+
 <svelte:head>
-  <title>Contact Dr. Jan Duffy - Real Estate Agent | Pewter Valley Estates</title>
-  <meta name="description" content="Contact Dr. Jan Duffy, your trusted real estate agent for Pewter Valley Estates in Las Vegas. Call 702-222-1964 or send a message for expert home buying assistance." />
-  <meta property="og:title" content="Contact Dr. Jan Duffy - Real Estate Agent | Pewter Valley Estates" />
-  <meta property="og:description" content="Contact Dr. Jan Duffy, your trusted real estate agent for Pewter Valley Estates in Las Vegas. Call 702-222-1964 or send a message for expert home buying assistance." />
-  <meta property="og:type" content="website" />
+  <title>{pageData.title}</title>
+  <meta name="description" content={pageData.description} />
 </svelte:head>
+
+<!-- SEO Head Component -->
+<SEOHead 
+  {pageData} 
+  includeLocalBusiness={true} 
+  includeFAQ={true} 
+  {faqData} 
+/>
+
+<Breadcrumbs {breadcrumbs} />
 
 <RichmondAmericanAssets />
 
@@ -291,6 +334,23 @@ function handlePhoneClick() {
         </form>
       </div>
     </div>
+  </section>
+
+  <!-- NAP Display Section -->
+  <section class="nap-section">
+    <div class="container">
+      <NAPDisplay showGoogleReviewsLink={true} showDirections={true} />
+    </div>
+  </section>
+
+  <!-- Google Map Section -->
+  <section class="map-section">
+    <GoogleMap />
+  </section>
+
+  <!-- Google Reviews Section -->
+  <section class="reviews-section">
+    <GoogleReviews />
   </section>
 
   <!-- Why Choose Me Section -->
@@ -569,6 +629,24 @@ function handlePhoneClick() {
   }
 
   /* Why Choose Me Section */
+  /* NAP Section */
+  .nap-section {
+    padding: 4rem 0;
+    background: #f8fafc;
+  }
+  
+  /* Map Section */
+  .map-section {
+    padding: 0;
+    background: white;
+  }
+  
+  /* Reviews Section */
+  .reviews-section {
+    padding: 0;
+    background: #f8fafc;
+  }
+  
   .why-choose-me {
     padding: 4rem 0;
     background: white;
