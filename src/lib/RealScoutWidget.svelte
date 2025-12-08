@@ -82,7 +82,7 @@ onMount(() => {
       <p>If you don't see listings above, please refresh the page or contact us directly.</p>
       <div class="contact-info">
         <p><strong>Dr. Jan Duffy</strong></p>
-        <p>Phone: <a href="tel:702-500-1955">(702) 500-1955</a></p>
+        <p>Phone: <a href="tel:702-500-1955">702 500-1955</a></p>
         <p>Email: <a href="mailto:jan.duffy@pewtervalleyestates.com">jan.duffy@pewtervalleyestates.com</a></p>
       </div>
     </div>

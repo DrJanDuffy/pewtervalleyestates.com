@@ -256,7 +256,7 @@
               class="phone-cta"
               on:click={handlePhoneClick}
             >
-              📞 Text/Call (702) 500-1955
+              📞 Text/Call 702 500-1955
             </a>
           </div>
         </div>
@@ -338,7 +338,7 @@
             <p>We're experiencing technical difficulties. Please try refreshing the page or contact Dr. Jan Duffy directly.</p>
             <div class="error-actions">
               <button on:click={() => window.location.reload()}>Refresh Page</button>
-              <a href="tel:+17025001955" on:click={handlePhoneClick}>Call (702) 500-1955</a>
+              <a href="tel:+17025001955" on:click={handlePhoneClick}>Call 702 500-1955</a>
             </div>
           </div>
         {:else}
@@ -433,7 +433,7 @@
           <p>Ready to see properties in person?</p>
           <div class="showing-actions">
             <a href="tel:+17025001955" class="phone-btn" on:click={handlePhoneClick}>
-              Call (702) 500-1955
+              Call 702 500-1955
             </a>
             <a href="/contact" class="contact-btn">
               Contact Form

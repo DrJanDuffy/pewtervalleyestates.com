@@ -140,7 +140,7 @@ const faqData = [
           <h3>Call Me Directly</h3>
           <p>Speak with me personally about your real estate needs</p>
           <a href="tel:+1-702-500-1955" class="contact-link" on:click={handlePhoneClick}>
-            (702) 500-1955
+            702 500-1955
           </a>
         </div>
 
