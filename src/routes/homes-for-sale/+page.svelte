@@ -10,7 +10,7 @@
   
   const pageData = {
     title: "Pewter Valley Estates Homes For Sale | Las Vegas Resale & New Inventory",
-    description: `Browse current Pewter Valley Estates homes for sale in Southwest Las Vegas (89183). Ranch-style homes 1,950-2,240 sq ft by Richmond American Homes. Expert representation by Dr. Jan Duffy. Call 702 500-1955.`,
+    description: `Browse current Pewter Valley Estates homes for sale in Southwest Las Vegas (89183). Ranch-style homes 1,950-2,240 sq ft by Richmond American Homes. Expert representation by Dr. Jan Duffy. Call ${SITE_CONFIG.phone}.`,
     image: `${SITE_CONFIG.url}/og-image.jpg`,
     type: "website",
     canonical: `${SITE_CONFIG.url}/homes-for-sale`,
@@ -76,7 +76,7 @@
       
       <h3>Real-Time MLS Access</h3>
       <p>
-        Dr. Jan Duffy provides real-time access to all MLS listings in Pewter Valley Estates. This includes new listings as they hit the market, price reductions, pending sales, and recently sold properties. Contact Dr. Jan Duffy at 702 500-1955 for immediate listing updates and property alerts.
+        Dr. Jan Duffy provides real-time access to all MLS listings in Pewter Valley Estates. This includes new listings as they hit the market, price reductions, pending sales, and recently sold properties. Contact Dr. Jan Duffy at ${SITE_CONFIG.phone} for immediate listing updates and property alerts.
       </p>
       
       <div class="cta-box">
