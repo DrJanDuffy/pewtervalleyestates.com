@@ -77,7 +77,7 @@ function handleScheduleTour(design) {
               class="design-image"
             />
             <div class="design-overlay">
-              <button class="view-details-btn" on:click={() => handleDesignClick(design)}>
+              <button class="view-details-btn" onclick={() => handleDesignClick(design)}>
                 View Details
               </button>
             </div>
@@ -113,13 +113,13 @@ function handleScheduleTour(design) {
             <div class="design-actions">
               <button 
                 class="action-btn primary" 
-                on:click={() => handleScheduleTour(design)}
+                onclick={() => handleScheduleTour(design)}
               >
                 Schedule Tour
               </button>
               <button 
                 class="action-btn secondary" 
-                on:click={() => handleDesignClick(design)}
+                onclick={() => handleDesignClick(design)}
               >
                 View Floor Plan
               </button>

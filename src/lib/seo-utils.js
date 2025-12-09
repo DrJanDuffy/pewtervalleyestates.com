@@ -19,6 +19,16 @@ export const SITE_CONFIG = {
   }
 }
 
+/**
+ * Generate canonical URL from page path
+ * Helper function for dynamic URL generation
+ */
+export function generateCanonicalUrl(pathname = '/') {
+  // Remove trailing slash except for root
+  const cleanPath = pathname === '/' ? '' : pathname.replace(/\/$/, '')
+  return `${SITE_CONFIG.url}${cleanPath}`
+}
+
 // Generate comprehensive meta tags for any page
 export function generateMetaTags(pageData) {
   const {
@@ -27,6 +37,7 @@ export function generateMetaTags(pageData) {
     image = SITE_CONFIG.image,
     type = "website",
     canonical,
+    pathname, // Optional: SvelteKit page pathname for auto-generating canonical
     keywords = "",
     noindex = false,
     publishedTime,
@@ -37,8 +48,15 @@ export function generateMetaTags(pageData) {
 
   const fullTitle = title.includes(SITE_CONFIG.name) ? title : `${title} | ${SITE_CONFIG.name}`
   const fullDescription = description || SITE_CONFIG.description
-  const canonicalUrl = canonical || `${SITE_CONFIG.url}${pageData.slug || ''}`
+  // Use provided canonical, or generate from pathname, or fallback to base URL
+  const canonicalUrl = canonical || (pathname ? generateCanonicalUrl(pathname) : SITE_CONFIG.url)
   const imageUrl = image.startsWith('http') ? image : `${SITE_CONFIG.url}${image}`
+
+  // Ensure title and description are optimized for social sharing
+  const ogTitle = fullTitle.length > 60 ? fullTitle.substring(0, 57) + '...' : fullTitle
+  const ogDescription = fullDescription.length > 160 ? fullDescription.substring(0, 157) + '...' : fullDescription
+  const twitterTitle = fullTitle.length > 70 ? fullTitle.substring(0, 67) + '...' : fullTitle
+  const twitterDescription = fullDescription.length > 200 ? fullDescription.substring(0, 197) + '...' : fullDescription
 
   return {
     title: fullTitle,
@@ -52,20 +70,37 @@ export function generateMetaTags(pageData) {
     modifiedTime,
     author,
     section,
-    // Open Graph
-    ogTitle: fullTitle,
-    ogDescription: fullDescription,
+    // Open Graph - Enhanced for 2025
+    ogTitle: ogTitle,
+    ogDescription: ogDescription,
     ogImage: imageUrl,
+    ogImageSecureUrl: imageUrl.startsWith('https://') ? imageUrl : imageUrl.replace('http://', 'https://'),
+    ogImageType: 'image/jpeg',
+    ogImageWidth: '1200',
+    ogImageHeight: '630',
+    ogImageAlt: pageData.imageAlt || `${fullTitle} - ${SITE_CONFIG.name}`,
     ogType: type,
     ogUrl: canonicalUrl,
     ogSiteName: SITE_CONFIG.name,
-    // Twitter Card
+    ogLocale: 'en_US',
+    ogLocaleAlternate: 'es_US',
+    // Article-specific OG tags (when type is 'article')
+    ...(type === 'article' && {
+      articleAuthor: author,
+      articlePublishedTime: publishedTime,
+      articleModifiedTime: modifiedTime || publishedTime,
+      articleSection: section,
+      articleTag: pageData.tags || []
+    }),
+    // Twitter Card - Enhanced
     twitterCard: "summary_large_image",
-    twitterTitle: fullTitle,
-    twitterDescription: fullDescription,
+    twitterTitle: twitterTitle,
+    twitterDescription: twitterDescription,
     twitterImage: imageUrl,
+    twitterImageAlt: pageData.imageAlt || `${fullTitle} - ${SITE_CONFIG.name}`,
     twitterSite: SITE_CONFIG.twitter,
-    twitterCreator: SITE_CONFIG.twitter
+    twitterCreator: SITE_CONFIG.twitter,
+    twitterDomain: canonicalUrl.replace(/^https?:\/\//, '').split('/')[0]
   }
 }
 
@@ -146,7 +181,7 @@ export function generateBreadcrumbStructuredData(breadcrumbs) {
       "@type": "ListItem",
       "position": index + 1,
       "name": crumb.name,
-      "item": `${SITE_CONFIG.url}${crumb.href}`
+      "item": `${SITE_CONFIG.url}${crumb.url || crumb.href || ''}`
     }))
   }
 }

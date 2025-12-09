@@ -1,25 +1,26 @@
 <script>
 import { onMount } from "svelte"
 import { trackEvent } from "$lib/analytics"
-import SEOHead from "$lib/SEOHead.svelte"
+import EnhancedSEOHead from "$lib/EnhancedSEOHead.svelte"
 import Breadcrumbs from "$lib/Breadcrumbs.svelte"
 import RichmondAmericanAssets from "$lib/RichmondAmericanAssets.svelte"
 import PanoramicMap from "$lib/PanoramicMap.svelte"
+import { SITE_CONFIG } from "$lib/seo.js"
 
 // SEO data for neighborhood page
 const pageData = {
   title: "Silverado Ranch Neighborhood - Pewter Valley Estates Las Vegas",
   description: "Discover the historic Silverado Ranch neighborhood surrounding Pewter Valley Estates. Explore local amenities, schools, shopping, dining, and entertainment options in this vibrant Las Vegas community with rich history dating back to the late 1800s.",
-  image: "https://www.pewtervalleyestates.com/neighborhood-og-image.jpg",
+  image: `${SITE_CONFIG.url}/neighborhood-og-image.jpg`,
   type: "website",
-  canonical: "https://www.pewtervalleyestates.com/neighborhood",
+  canonical: `${SITE_CONFIG.url}/neighborhood`,
   keywords: "Silverado Ranch Las Vegas, Pewter Valley Estates, Las Vegas southeast, Silverado Ranch history, Las Vegas new homes, southeast Las Vegas real estate, local amenities, schools, shopping, dining, entertainment, historic Las Vegas community"
 }
 
 // Breadcrumbs for neighborhood page
 const breadcrumbs = [
-  { name: "Home", href: "/" },
-  { name: "Neighborhood", href: "/neighborhood" }
+  { name: "Home", url: "/" },
+  { name: "Neighborhood", url: "/neighborhood" }
 ]
 
 // Neighborhood data
@@ -251,19 +252,8 @@ onMount(() => {
 })
 </script>
 
-<svelte:head>
-  <title>{pageData.title}</title>
-  <meta name="description" content={pageData.description} />
-  <meta name="keywords" content={pageData.keywords} />
-  <link rel="canonical" href={pageData.canonical} />
-</svelte:head>
-
 <!-- SEO Head Component -->
-<SEOHead
-  {pageData}
-  includeRealEstate={false}
-  includeLocalBusiness={true}
-/>
+<EnhancedSEOHead {pageData} {breadcrumbs} />
 
 <!-- Breadcrumb Navigation -->
 <Breadcrumbs {breadcrumbs} />
@@ -276,7 +266,7 @@ onMount(() => {
   <section class="neighborhood-hero">
     <div class="container">
       <div class="hero-content">
-        <h1>Discover Silverado Ranch - Las Vegas's Historic Southeast Community</h1>
+        <h1>Pewter Valley Estates Neighborhood | Southwest Las Vegas Location Services by Dr. Jan Duffy</h1>
         <p class="hero-subtitle">
           Pewter Valley Estates is strategically located in Silverado Ranch, a vibrant Las Vegas community with rich history dating back to the late 1800s when the area was primarily used for ranching and agriculture. Over time, it has evolved and developed, becoming the thriving community it is today.
         </p>
@@ -305,10 +295,13 @@ onMount(() => {
   <!-- Location Overview -->
   <section class="location-overview">
     <div class="container">
-      <h2>Prime Silverado Ranch Location</h2>
+      <h2>Prime Southwest Las Vegas Location | Pewter Valley Estates by Dr. Jan Duffy</h2>
+      <p class="lead">
+        Pewter Valley Estates benefits from its strategic location in Southwest Las Vegas at Pyle Avenue and S Rancho Destino Rd in zip code 89183. Dr. Jan Duffy's expertise in this location helps buyers and sellers understand location advantages affecting property values and lifestyle.
+      </p>
       <div class="overview-grid">
         <div class="overview-content">
-          <h3>Why Silverado Ranch is Perfect</h3>
+          <h3>Why Pewter Valley Estates Location is Ideal</h3>
           <p>
             Pewter Valley Estates is strategically located in Silverado Ranch, a vibrant Las Vegas community 
             with rich history dating back to the late 1800s when the area was primarily used for ranching and agriculture. 
@@ -329,7 +322,7 @@ onMount(() => {
           <div class="map-placeholder">
             <h4>Interactive Map</h4>
             <p>Explore the neighborhood and nearby amenities</p>
-            <button class="map-button" on:click={() => trackEvent('map_interaction', { action: 'view_map', page: 'neighborhood' })}>
+            <button class="map-button" onclick={() => trackEvent('map_interaction', { action: 'view_map', page: 'neighborhood' })}>
               View Interactive Map
             </button>
           </div>
@@ -410,7 +403,7 @@ onMount(() => {
           <button 
             class="category-tab"
             class:active={selectedCategory === category.category}
-            on:click={() => selectCategory(category.category)}
+            onclick={() => selectCategory(category.category)}
           >
             {category.category}
           </button>
@@ -423,10 +416,10 @@ onMount(() => {
           <div 
             class="feature-card"
             class:selected={selectedFeature === feature}
-            on:click={() => selectFeature(feature)}
+            onclick={() => selectFeature(feature)}
             role="button"
             tabindex="0"
-            on:keydown={(e) => e.key === 'Enter' && selectFeature(feature)}
+            onkeydown={(e) => e.key === 'Enter' && selectFeature(feature)}
           >
             <div class="feature-icon">{getFeatureIcon(feature.type)}</div>
             <div class="feature-content">
@@ -539,10 +532,10 @@ onMount(() => {
           Schedule a tour today and experience this historic southeast Las Vegas community for yourself.
         </p>
         <div class="cta-buttons">
-          <a href="/contact" class="cta-button primary" on:click={() => trackEvent('neighborhood_cta_click', { action: 'schedule_tour', page: 'neighborhood' })}>
+          <a href="/contact" class="cta-button primary" onclick={() => trackEvent('neighborhood_cta_click', { action: 'schedule_tour', page: 'neighborhood' })}>
             Schedule a Tour
           </a>
-          <a href="/listings" class="cta-button secondary" on:click={() => trackEvent('neighborhood_cta_click', { action: 'view_listings', page: 'neighborhood' })}>
+          <a href="/listings" class="cta-button secondary" onclick={() => trackEvent('neighborhood_cta_click', { action: 'view_listings', page: 'neighborhood' })}>
             View Available Homes
           </a>
         </div>

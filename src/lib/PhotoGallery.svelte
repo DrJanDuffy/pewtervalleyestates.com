@@ -81,7 +81,7 @@ function handleKeydown(event) {
 }
 </script>
 
-<svelte:window on:keydown={handleKeydown} />
+<svelte:window onkeydown={handleKeydown} />
 
 <div class="photo-gallery" bind:this={galleryRef}>
   {#if showTitle}
@@ -95,8 +95,8 @@ function handleKeydown(event) {
           class="photo-container" 
           role="button"
           tabindex="0"
-          on:click={() => openLightbox(photo, index)}
-          on:keydown={(e) => e.key === 'Enter' && openLightbox(photo, index)}
+          onclick={() => openLightbox(photo, index)}
+          onkeydown={(e) => e.key === 'Enter' && openLightbox(photo, index)}
         >
           {#if enableLazyLoading}
             <img
@@ -135,27 +135,27 @@ function handleKeydown(event) {
     aria-modal="true"
     aria-label="Photo lightbox"
     tabindex="-1"
-    on:click={closeLightbox}
-    on:keydown={(e) => e.key === 'Escape' && closeLightbox()}
+    onclick={closeLightbox}
+    onkeydown={(e) => e.key === 'Escape' && closeLightbox()}
   >
     <div 
       class="lightbox-content" 
       role="document"
     >
-      <button class="lightbox-close" on:click={closeLightbox} aria-label="Close lightbox">
+      <button class="lightbox-close" onclick={closeLightbox} aria-label="Close lightbox">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <line x1="18" y1="6" x2="6" y2="18"></line>
           <line x1="6" y1="6" x2="18" y2="18"></line>
         </svg>
       </button>
       
-      <button class="lightbox-nav lightbox-prev" on:click={prevPhoto} aria-label="Previous photo">
+      <button class="lightbox-nav lightbox-prev" onclick={prevPhoto} aria-label="Previous photo">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <polyline points="15,18 9,12 15,6"></polyline>
         </svg>
       </button>
       
-      <button class="lightbox-nav lightbox-next" on:click={nextPhoto} aria-label="Next photo">
+      <button class="lightbox-nav lightbox-next" onclick={nextPhoto} aria-label="Next photo">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <polyline points="9,18 15,12 9,6"></polyline>
         </svg>

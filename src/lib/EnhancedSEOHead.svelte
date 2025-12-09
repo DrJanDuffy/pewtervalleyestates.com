@@ -1,19 +1,37 @@
 <script>
-  import { generateMetaTags, generateStructuredData, generateBreadcrumbStructuredData, generateFAQStructuredData, generateLocalBusinessStructuredData, preloadCriticalResources, generateHreflangTags, validateSEOData } from '$lib/seo-utils.js'
+  // Import SEO utilities
+  import {
+    generateMetaTags,
+    generateStructuredData,
+    generateBreadcrumbStructuredData,
+    generateLocalBusinessStructuredData,
+    generateFAQStructuredData,
+    preloadCriticalResources,
+    generateHreflangTags,
+    validateSEOData
+  } from '$lib/seo-utils.js'
 
-  export let pageData = {}
-  export let breadcrumbs = []
-  export let faqs = []
-  export let structuredData = null
-  export let showValidation = false
+  // Svelte 5: Use $props() instead of export let
+  const {
+    pageData = {},
+    breadcrumbs = [],
+    faqs = [],
+    structuredData = null,
+    showValidation = false
+  } = $props()
 
   // Generate comprehensive meta tags
   const metaTags = generateMetaTags(pageData)
   
   // Generate structured data
   const baseStructuredData = structuredData || generateStructuredData(pageData)
-  const breadcrumbStructuredData = breadcrumbs.length > 0 ? generateBreadcrumbStructuredData(breadcrumbs) : null
-  const faqStructuredData = faqs.length > 0 ? generateFAQStructuredData(faqs) : null
+  const breadcrumbStructuredData = breadcrumbs && breadcrumbs.length > 0 ? generateBreadcrumbStructuredData(breadcrumbs) : null
+  
+  // Generate FAQ structured data if FAQs are provided
+  const faqsArray = faqs && Array.isArray(faqs) ? faqs : []
+  const hasValidFAQs = faqsArray.length > 0
+  const faqStructuredData = hasValidFAQs ? generateFAQStructuredData(faqsArray) : null
+  
   const localBusinessStructuredData = generateLocalBusinessStructuredData()
   
   // Preload critical resources
@@ -49,22 +67,56 @@
     <link rel="alternate" hreflang={tag.hreflang} href={tag.href} />
   {/each}
   
-  <!-- Open Graph / Facebook -->
+  <!-- Open Graph / Facebook - Enhanced for 2025 Best Practices -->
   <meta property="og:type" content={metaTags.ogType} />
   <meta property="og:title" content={metaTags.ogTitle} />
   <meta property="og:description" content={metaTags.ogDescription} />
   <meta property="og:image" content={metaTags.ogImage} />
+  <meta property="og:image:secure_url" content={metaTags.ogImageSecureUrl} />
+  <meta property="og:image:type" content={metaTags.ogImageType} />
+  <meta property="og:image:width" content={metaTags.ogImageWidth} />
+  <meta property="og:image:height" content={metaTags.ogImageHeight} />
+  <meta property="og:image:alt" content={metaTags.ogImageAlt} />
   <meta property="og:url" content={metaTags.ogUrl} />
   <meta property="og:site_name" content={metaTags.ogSiteName} />
-  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale" content={metaTags.ogLocale} />
+  <meta property="og:locale:alternate" content={metaTags.ogLocaleAlternate} />
   
-  <!-- Twitter Card -->
+  <!-- Article-specific OG tags (when applicable) -->
+  {#if metaTags.articleAuthor}
+    <meta property="article:author" content={metaTags.articleAuthor} />
+  {/if}
+  {#if metaTags.articlePublishedTime}
+    <meta property="article:published_time" content={metaTags.articlePublishedTime} />
+  {/if}
+  {#if metaTags.articleModifiedTime}
+    <meta property="article:modified_time" content={metaTags.articleModifiedTime} />
+  {/if}
+  {#if metaTags.articleSection}
+    <meta property="article:section" content={metaTags.articleSection} />
+  {/if}
+  {#if metaTags.articleTag && metaTags.articleTag.length > 0}
+    {#each metaTags.articleTag as tag}
+      <meta property="article:tag" content={tag} />
+    {/each}
+  {/if}
+  
+  <!-- Twitter Card - Enhanced -->
   <meta name="twitter:card" content={metaTags.twitterCard} />
   <meta name="twitter:title" content={metaTags.twitterTitle} />
   <meta name="twitter:description" content={metaTags.twitterDescription} />
   <meta name="twitter:image" content={metaTags.twitterImage} />
+  <meta name="twitter:image:alt" content={metaTags.twitterImageAlt} />
   <meta name="twitter:site" content={metaTags.twitterSite} />
   <meta name="twitter:creator" content={metaTags.twitterCreator} />
+  <meta name="twitter:domain" content={metaTags.twitterDomain} />
+  
+  <!-- LinkedIn Open Graph Support -->
+  <meta property="og:image:url" content={metaTags.ogImage} />
+  
+  <!-- Additional Platform Support -->
+  <meta name="pinterest" content="nohover" />
+  <meta name="pinterest-rich-pin" content="true" />
   
   <!-- Additional Meta Tags -->
   <meta name="theme-color" content="#0A2540" />
@@ -73,12 +125,14 @@
   
   <!-- Preload Critical Resources -->
   {#each criticalResources as resource}
-    <link rel="preload" href={resource.href} as={resource.as} type={resource.type} crossorigin={resource.crossorigin} />
+    {@const asType = (resource.as === 'font' ? 'font' : resource.as === 'image' ? 'image' : 'fetch') as 'font' | 'image' | 'fetch'}
+    {@const crossOrigin = (resource.crossorigin === 'anonymous' ? 'anonymous' : resource.crossorigin === 'use-credentials' ? 'use-credentials' : null) as 'anonymous' | 'use-credentials' | null | undefined}
+    <link rel="preload" href={resource.href} as={asType} type={resource.type || undefined} crossorigin={crossOrigin} />
   {/each}
   
   <!-- Preconnect to External Domains -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
   <link rel="preconnect" href="https://www.google-analytics.com" />
   <link rel="preconnect" href="https://drjanduffy.realscout.com" />
   
@@ -111,8 +165,6 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Pewter Valley Estates" />
   
-  <!-- Security Headers -->
-  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
-  <meta http-equiv="X-Frame-Options" content="DENY" />
-  <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+  <!-- Note: Security headers (X-Content-Type-Options, X-Frame-Options, X-XSS-Protection) 
+       should be set via server headers, not meta tags. Configure in Vercel or your hosting platform. -->
 </svelte:head>

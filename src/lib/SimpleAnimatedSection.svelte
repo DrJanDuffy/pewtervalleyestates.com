@@ -1,12 +1,15 @@
 <script>
 import { onMount } from "svelte"
 
-export let children
-export const delay = 0
-export const duration = 0.6
-export const direction = "up"
+// Svelte 5: Use $props() instead of export let
+let {
+  children,
+  delay = 0,
+  duration = 0.6,
+  direction = "up"
+} = $props()
 
-let isVisible = false
+let isVisible = $state(false)
 let element
 
 onMount(() => {

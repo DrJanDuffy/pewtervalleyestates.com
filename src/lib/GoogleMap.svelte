@@ -1,9 +1,12 @@
 <script>
   import { SITE_CONFIG } from "$lib/seo.js"
   
-  export let height = "400px"
-  export let width = "100%"
-  export let zoom = 15
+  // Svelte 5: Use $props() instead of export let
+  let {
+    height = "400px",
+    width = "100%",
+    zoom = 15
+  } = $props()
   
   // Generate Google Maps embed URL
   // Format: https://www.google.com/maps/embed/v1/place?key=API_KEY&q=ADDRESS
@@ -50,7 +53,7 @@
         Get Directions
       </a>
       <a 
-        href="tel:{SITE_CONFIG.phoneTel}" 
+        href={`tel:${SITE_CONFIG.phoneTel}`} 
         class="map-button"
       >
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -70,11 +73,11 @@
       </div>
       <div class="address-card">
         <h3>Phone</h3>
-        <p><a href="tel:{SITE_CONFIG.phoneTel}">{SITE_CONFIG.phone}</a></p>
+        <p><a href={`tel:${SITE_CONFIG.phoneTel}`}>{SITE_CONFIG.phone}</a></p>
       </div>
       <div class="address-card">
         <h3>Email</h3>
-        <p><a href="mailto:{SITE_CONFIG.email}">{SITE_CONFIG.email}</a></p>
+        <p><a href={`mailto:${SITE_CONFIG.email}`}>{SITE_CONFIG.email}</a></p>
       </div>
     </div>
   </div>

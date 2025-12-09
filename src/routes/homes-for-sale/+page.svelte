@@ -1,7 +1,7 @@
 <script>
   import { onMount } from "svelte"
   import { trackEvent } from "$lib/analytics"
-  import SEOHead from "$lib/SEOHead.svelte"
+  import EnhancedSEOHead from "$lib/EnhancedSEOHead.svelte"
   import Breadcrumbs from "$lib/Breadcrumbs.svelte"
   import NAPDisplay from "$lib/NAPDisplay.svelte"
   import CTABanner from "$lib/CTABanner.svelte"
@@ -18,8 +18,8 @@
   }
   
   const breadcrumbs = [
-    { name: "Home", url: SITE_CONFIG.url },
-    { name: "Homes for Sale", url: `${SITE_CONFIG.url}/homes-for-sale` },
+    { name: "Home", url: "/" },
+    { name: "Homes for Sale", url: "/homes-for-sale" },
   ]
   
   onMount(() => {
@@ -30,19 +30,14 @@
   })
 </script>
 
-<svelte:head>
-  <title>{pageData.title}</title>
-  <meta name="description" content={pageData.description} />
-</svelte:head>
-
-<SEOHead {pageData} includeLocalBusiness={true} includeRealEstate={true} />
+<EnhancedSEOHead {pageData} {breadcrumbs} />
 
 <Breadcrumbs {breadcrumbs} />
 
 <main class="homes-for-sale-page">
   <section class="hero">
     <div class="container">
-      <h1>Pewter Valley Estates Homes For Sale | Las Vegas Resale & New Inventory</h1>
+      <h1>Pewter Valley Estates Homes For Sale | Resale Properties in Southwest Las Vegas by Dr. Jan Duffy</h1>
       <p class="hero-subtitle">Expert Real Estate Services by Dr. Jan Duffy | Zip Code 89183</p>
       <p class="hero-description">
         Discover available homes in Pewter Valley Estates, Southwest Las Vegas's premier master-planned community. Located at Pyle Avenue and S Rancho Destino Rd, these ranch-style homes by Richmond American Homes offer exceptional value in a family-friendly environment.

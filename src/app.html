@@ -30,27 +30,38 @@
     <link rel="alternate" hreflang="en" href="https://www.pewtervalleyestates.com" />
     <link rel="alternate" hreflang="x-default" href="https://www.pewtervalleyestates.com" />
     
-    <!-- Open Graph / Facebook -->
+    <!-- Open Graph / Facebook - Enhanced for 2025 Best Practices -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.pewtervalleyestates.com" />
     <meta property="og:title" content="%sveltekit.title%" />
     <meta property="og:description" content="%sveltekit.description%" />
     <meta property="og:image" content="https://www.pewtervalleyestates.com/og-image.jpg" />
+    <meta property="og:image:secure_url" content="https://www.pewtervalleyestates.com/og-image.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Pewter Valley Estates Las Vegas - Modern New Construction Homes" />
-    <meta property="og:site_name" content="Pewter Valley Estates" />
+    <meta property="og:image:alt" content="Pewter Valley Estates Las Vegas - Modern New Construction Homes | Dr. Jan Duffy Real Estate" />
+    <meta property="og:site_name" content="Dr. Jan Duffy - Real Estate Agent" />
     <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="es_US" />
     
-    <!-- Twitter Card -->
+    <!-- Twitter Card - Enhanced -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://www.pewtervalleyestates.com" />
     <meta name="twitter:title" content="%sveltekit.title%" />
     <meta name="twitter:description" content="%sveltekit.description%" />
     <meta name="twitter:image" content="https://www.pewtervalleyestates.com/og-image.jpg" />
-    <meta name="twitter:image:alt" content="Pewter Valley Estates Las Vegas - Modern New Construction Homes" />
+    <meta name="twitter:image:alt" content="Pewter Valley Estates Las Vegas - Modern New Construction Homes | Dr. Jan Duffy Real Estate" />
     <meta name="twitter:site" content="@pewtervalleyestates" />
     <meta name="twitter:creator" content="@pewtervalleyestates" />
+    <meta name="twitter:domain" content="pewtervalleyestates.com" />
+    
+    <!-- LinkedIn Open Graph -->
+    <meta property="og:image:url" content="https://www.pewtervalleyestates.com/og-image.jpg" />
+    
+    <!-- Additional Platform Support -->
+    <meta name="pinterest" content="nohover" />
+    <meta name="pinterest-rich-pin" content="true" />
     
     <!-- Additional SEO Meta Tags -->
     <meta name="geo.region" content="US-NV" />
@@ -75,40 +86,66 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <meta name="apple-mobile-web-app-title" content="Pewter Valley Estates" />
     
-    <!-- Preconnect to External Domains -->
+    <!-- Preconnect to External Domains - Only critical ones -->
+    <link rel="preconnect" href="https://images.unsplash.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://www.googletagmanager.com" />
-    <link rel="preconnect" href="https://em.realscout.com" />
     
-    <!-- DNS Prefetch for Performance -->
-    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
-    <link rel="dns-prefetch" href="//www.google-analytics.com" />
+    <!-- DNS Prefetch for Performance - Non-critical domains -->
+    <link rel="dns-prefetch" href="//www.googletagmanager.com" />
     <link rel="dns-prefetch" href="//em.realscout.com" />
+    <link rel="dns-prefetch" href="//www.google-analytics.com" />
     
-    <!-- Google Analytics 4 -->
+    <!-- Preload LCP Image for faster rendering -->
+    <link rel="preload" as="image" href="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1200&h=800&fit=crop&q=80" fetchpriority="high" />
+    
+    <!-- Google Analytics 4 - Deferred for Performance -->
     <script>
-      const GA_MEASUREMENT_ID = '%sveltekit.env.PUBLIC_GA_MEASUREMENT_ID%' || 'G-YB0SCBWM09';
-    </script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=%sveltekit.env.PUBLIC_GA_MEASUREMENT_ID%"></script>
-    <script>
+      // Defer GA loading until after page is interactive
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', GA_MEASUREMENT_ID, {
-        page_title: document.title,
-        page_location: window.location.href,
-        custom_map: {
-          'custom_parameter_1': 'property_type',
-          'custom_parameter_2': 'neighborhood',
-          'custom_parameter_3': 'price_range'
-        }
-      });
+      
+      function loadGA() {
+        const GA_MEASUREMENT_ID = '%sveltekit.env.PUBLIC_GA_MEASUREMENT_ID%' || 'G-YB0SCBWM09';
+        const script = document.createElement('script');
+        script.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_MEASUREMENT_ID;
+        script.async = true;
+        document.head.appendChild(script);
+        
+        gtag('js', new Date());
+        gtag('config', GA_MEASUREMENT_ID, {
+          page_title: document.title,
+          page_location: window.location.href
+        });
+      }
+      
+      // Load GA after page is idle or after 3 seconds, whichever comes first
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(loadGA, { timeout: 3000 });
+      } else {
+        setTimeout(loadGA, 3000);
+      }
     </script>
     
-    <!-- RealScout Web Components -->
-    <link rel="preload" href="https://em.realscout.com/widgets/realscout-web-components.umd.js" as="script" crossorigin="anonymous">
-    <script src="https://em.realscout.com/widgets/realscout-web-components.umd.js" type="module" crossorigin="anonymous"></script>
+    <!-- RealScout Web Components - Lazy Loaded for Performance -->
+    <script>
+      // Lazy load RealScout only when user scrolls near listings or after delay
+      let realscoutLoaded = false;
+      function loadRealScout() {
+        if (realscoutLoaded) return;
+        realscoutLoaded = true;
+        const script = document.createElement('script');
+        script.src = 'https://em.realscout.com/widgets/realscout-web-components.umd.js';
+        script.type = 'module';
+        script.crossOrigin = 'anonymous';
+        document.head.appendChild(script);
+      }
+      
+      // Load after 2 seconds or on scroll/interaction
+      setTimeout(loadRealScout, 2000);
+      document.addEventListener('scroll', loadRealScout, { once: true, passive: true });
+      document.addEventListener('click', loadRealScout, { once: true });
+    </script>
     
     <!-- Structured Data will be injected here by individual pages -->
     %sveltekit.head%

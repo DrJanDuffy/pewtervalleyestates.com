@@ -2,17 +2,19 @@
   import { onMount } from 'svelte'
   import { trackEvent } from '$lib/analytics'
 
-  // Props
-  export let mapUrl = 'https://panomaps.us/homes/richmondamerican/nv/pewter-valley-estates/'
-  export let title = 'Pewter Valley Estates - Interactive Panoramic Map'
-  export let height = '500px'
-  export let showControls = true
-  export let className = ''
-  export let realScoutUrl = 'https://drjanduffy.realscout.com/homesearch/shared-searches/U2hhcmVhYmxlU2VhcmNoTGluay0xMjEwOQ=='
+  // Svelte 5: Use $props() instead of export let
+  let {
+    mapUrl = 'https://panomaps.us/homes/richmondamerican/nv/pewter-valley-estates/',
+    title = 'Pewter Valley Estates - Interactive Panoramic Map',
+    height = '500px',
+    showControls = true,
+    className = '',
+    realScoutUrl = 'https://drjanduffy.realscout.com/homesearch/shared-searches/U2hhcmVhYmxlU2VhcmNoTGluay0xMjEwOQ=='
+  } = $props()
 
   let mapContainer
-  let isLoaded = false
-  let errorMessage = ''
+  let isLoaded = $state(false)
+  let errorMessage = $state('')
 
   onMount(() => {
     // Track map load event
@@ -63,7 +65,7 @@
       <div class="map-controls">
         <button 
           class="control-button fullscreen" 
-          on:click={openFullscreenMap}
+            onclick={openFullscreenMap}
           title="Open in fullscreen"
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -87,7 +89,7 @@
         </a>
         <button 
           class="control-button realscout" 
-          on:click={openRealScoutSearch}
+            onclick={openRealScoutSearch}
           title="View available homes on RealScout"
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -105,7 +107,7 @@
       <div class="map-error">
         <div class="error-icon">🗺️</div>
         <p>{errorMessage}</p>
-        <button class="retry-button" on:click={() => window.location.reload()}>
+        <button class="retry-button" onclick={() => window.location.reload()}>
           Retry
         </button>
       </div>
@@ -117,8 +119,8 @@
         frameborder="0"
         allowfullscreen
         loading="lazy"
-        on:load={handleMapLoad}
-        on:error={handleMapError}
+        onload={handleMapLoad}
+         onerror={handleMapError}
         class="panoramic-map-iframe"
       ></iframe>
       
@@ -133,7 +135,7 @@
       <div class="floating-action">
         <button 
           class="floating-btn"
-          on:click={openRealScoutSearch}
+            onclick={openRealScoutSearch}
           title="View available homes on RealScout"
         >
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

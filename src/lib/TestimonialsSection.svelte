@@ -95,7 +95,7 @@ function goToTestimonial(index) {
       </div>
       
       <div class="testimonial-controls">
-        <button class="control-btn prev" on:click={prevTestimonial} aria-label="Previous testimonial">
+        <button class="control-btn prev" onclick={prevTestimonial} aria-label="Previous testimonial">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M15 18l-6-6 6-6"/>
           </svg>
@@ -106,13 +106,13 @@ function goToTestimonial(index) {
             <button 
               class="dot" 
               class:active={index === currentTestimonial}
-              on:click={() => goToTestimonial(index)}
+              onclick={() => goToTestimonial(index)}
               aria-label="Go to testimonial {index + 1}"
             ></button>
           {/each}
         </div>
         
-        <button class="control-btn next" on:click={nextTestimonial} aria-label="Next testimonial">
+        <button class="control-btn next" onclick={nextTestimonial} aria-label="Next testimonial">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M9 18l6-6-6-6"/>
           </svg>

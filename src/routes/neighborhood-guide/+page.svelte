@@ -1,7 +1,7 @@
 <script>
   import { onMount } from "svelte"
   import { trackEvent } from "$lib/analytics"
-  import SEOHead from "$lib/SEOHead.svelte"
+  import EnhancedSEOHead from "$lib/EnhancedSEOHead.svelte"
   import Breadcrumbs from "$lib/Breadcrumbs.svelte"
   import GoogleMap from "$lib/GoogleMap.svelte"
   import CTABanner from "$lib/CTABanner.svelte"
@@ -17,8 +17,8 @@
   }
   
   const breadcrumbs = [
-    { name: "Home", url: SITE_CONFIG.url },
-    { name: "Neighborhood Guide", url: `${SITE_CONFIG.url}/neighborhood-guide` },
+    { name: "Home", url: "/" },
+    { name: "Neighborhood Guide", url: "/neighborhood-guide" },
   ]
   
   onMount(() => {
@@ -29,19 +29,14 @@
   })
 </script>
 
-<svelte:head>
-  <title>{pageData.title}</title>
-  <meta name="description" content={pageData.description} />
-</svelte:head>
-
-<SEOHead {pageData} includeLocalBusiness={true} />
+<EnhancedSEOHead {pageData} {breadcrumbs} />
 
 <Breadcrumbs {breadcrumbs} />
 
 <main class="neighborhood-guide-page">
   <section class="hero">
     <div class="container">
-      <h1>Pewter Valley Estates Neighborhood Guide | Southwest Las Vegas Living</h1>
+      <h1>Pewter Valley Estates Neighborhood Guide | Southwest Las Vegas Living by Dr. Jan Duffy</h1>
       <p class="hero-subtitle">Complete Guide to Community Life in Zip Code 89183</p>
       <p class="hero-description">
         Discover everything Pewter Valley Estates and Southwest Las Vegas have to offer. From community parks and recreational facilities to schools, shopping, dining, and transportation, this comprehensive guide helps you understand the lifestyle and amenities available to residents.

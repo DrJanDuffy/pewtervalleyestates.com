@@ -16,11 +16,11 @@ export const SITE_CONFIG = {
   phone: "702 500-1955",
   phoneFormatted: "+1-702-500-1955",
   phoneTel: "+17025001955",
-  email: "jan.duffy@pewtervalleyestates.com",
+  email: "DrDuffy@PewterValleyEstates.com",
   // Address must match Google Business Profile exactly
-  // Pewter Valley Estates: Pyle Avenue and S Rancho Destino Rd, Las Vegas, NV 89183
+  // Pewter Valley Estates: Pyle Avenue and, S Rancho Destino Rd, Las Vegas, NV 89183
   address: {
-    street: "Pyle Avenue and S Rancho Destino Rd",
+    street: "Pyle Avenue and, S Rancho Destino Rd",
     city: "Las Vegas",
     state: "Nevada",
     stateAbbr: "NV",
@@ -246,7 +246,7 @@ export function generateOrganizationSchema() {
       addressLocality: SITE_CONFIG.address.city,
       addressRegion: SITE_CONFIG.address.state,
       postalCode: SITE_CONFIG.address.zipCode,
-      addressCountry: SITE_CONFIG.address.country,
+      addressCountry: SITE_CONFIG.address.countryCode,
     },
     contactPoint: {
       "@type": "ContactPoint",
@@ -300,7 +300,7 @@ export function generateRealEstateSchema(listingData = {}) {
       addressLocality: SITE_CONFIG.address.city,
       addressRegion: SITE_CONFIG.address.state,
       postalCode: SITE_CONFIG.address.zipCode,
-      addressCountry: SITE_CONFIG.address.country,
+      addressCountry: SITE_CONFIG.address.countryCode,
     },
     geo: {
       "@type": "GeoCoordinates",
@@ -416,22 +416,88 @@ export function generateSitemapData() {
       priority: "1.0",
     },
     {
+      url: `${baseUrl}/about`,
+      lastmod: currentDate,
+      changefreq: "monthly",
+      priority: "0.9",
+    },
+    {
       url: `${baseUrl}/listings`,
       lastmod: currentDate,
       changefreq: "daily",
       priority: "0.9",
     },
     {
-      url: `${baseUrl}/neighborhood`,
+      url: `${baseUrl}/homes-for-sale`,
       lastmod: currentDate,
-      changefreq: "monthly",
-      priority: "0.85",
+      changefreq: "daily",
+      priority: "0.9",
     },
     {
       url: `${baseUrl}/contact`,
       lastmod: currentDate,
       changefreq: "monthly",
+      priority: "0.85",
+    },
+    {
+      url: `${baseUrl}/buy-a-home`,
+      lastmod: currentDate,
+      changefreq: "monthly",
+      priority: "0.85",
+    },
+    {
+      url: `${baseUrl}/sell-your-home`,
+      lastmod: currentDate,
+      changefreq: "monthly",
+      priority: "0.85",
+    },
+    {
+      url: `${baseUrl}/home-valuation`,
+      lastmod: currentDate,
+      changefreq: "monthly",
+      priority: "0.85",
+    },
+    {
+      url: `${baseUrl}/investment-properties`,
+      lastmod: currentDate,
+      changefreq: "monthly",
+      priority: "0.85",
+    },
+    {
+      url: `${baseUrl}/market-analysis`,
+      lastmod: currentDate,
+      changefreq: "weekly",
+      priority: "0.85",
+    },
+    {
+      url: `${baseUrl}/neighborhood`,
+      lastmod: currentDate,
+      changefreq: "monthly",
       priority: "0.8",
+    },
+    {
+      url: `${baseUrl}/neighborhood-guide`,
+      lastmod: currentDate,
+      changefreq: "monthly",
+      priority: "0.8",
+    },
+    {
+      url: `${baseUrl}/southwest-las-vegas`,
+      lastmod: currentDate,
+      changefreq: "monthly",
+      priority: "0.8",
+    },
+    {
+      url: `${baseUrl}/faq`,
+      lastmod: currentDate,
+      changefreq: "monthly",
+      priority: "0.75",
+    },
+    {
+      url: `${baseUrl}/dr-jan-duffy`,
+      lastmod: currentDate,
+      changefreq: "monthly",
+      priority: "0.75",
     },
     {
       url: `${baseUrl}/photos`,
@@ -440,16 +506,34 @@ export function generateSitemapData() {
       priority: "0.7",
     },
     {
-      url: `${baseUrl}/about`,
+      url: `${baseUrl}/richmond-demo`,
       lastmod: currentDate,
       changefreq: "monthly",
       priority: "0.6",
     },
     {
-      url: `${baseUrl}/richmond-demo`,
+      url: `${baseUrl}/google-reviews`,
       lastmod: currentDate,
       changefreq: "monthly",
-      priority: "0.5",
+      priority: "0.7",
+    },
+    {
+      url: `${baseUrl}/las-vegas-relocation-guide`,
+      lastmod: currentDate,
+      changefreq: "monthly",
+      priority: "0.8",
+    },
+    {
+      url: `${baseUrl}/buyer-checklist`,
+      lastmod: currentDate,
+      changefreq: "monthly",
+      priority: "0.8",
+    },
+    {
+      url: `${baseUrl}/selling-checklist`,
+      lastmod: currentDate,
+      changefreq: "monthly",
+      priority: "0.8",
     },
   ]
 }

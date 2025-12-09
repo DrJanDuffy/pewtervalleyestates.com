@@ -2,12 +2,16 @@
   import { SITE_CONFIG } from "$lib/seo.js"
   import { generateReviewSchema } from "$lib/seo.js"
   
+  // Svelte 5: Use $props() instead of export let
   // Google Reviews data - update with actual reviews from Google Business Profile
   // You can fetch this via Google My Business API or manually update
-  export let reviews = []
-  export let showSchema = true
+  let {
+    reviews = [],
+    showSchema = true
+  } = $props()
   
-  $: reviewSchema = showSchema ? generateReviewSchema(reviews) : null
+  // Svelte 5: Use $derived() instead of $:
+  let reviewSchema = $derived(showSchema ? generateReviewSchema(reviews) : null)
 </script>
 
 {#if reviewSchema}
