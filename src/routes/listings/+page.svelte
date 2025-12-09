@@ -432,14 +432,21 @@
 
   .listings-page {
     min-height: 100vh;
-    background: #f8fbff;
+    background: var(--color-off-white);
+  }
+
+  .container {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-4);
   }
 
   /* Hero Section */
   .listings-hero {
-    background: linear-gradient(135deg, #0A2540 0%, #1e3a8a 100%);
-    color: white;
-    padding: 5rem 0;
+    background: linear-gradient(135deg, var(--color-navy-800) 0%, var(--color-indigo-700) 100%);
+    color: var(--color-white);
+    padding: var(--space-10) 0;
     position: relative;
     overflow: hidden;
   }
@@ -447,23 +454,23 @@
   .hero-content {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    gap: 4rem;
+    gap: var(--space-6);
     align-items: center;
     position: relative;
     z-index: 1;
   }
 
   .hero-text h1 {
-    font-size: 3.5rem;
+    font-size: clamp(2.5rem, 3vw, 3.75rem);
     font-weight: 800;
-    margin-bottom: 1rem;
+    margin-bottom: var(--space-2);
     line-height: 1.1;
-    color: white;
+    color: var(--color-white);
   }
 
   .hero-subtitle {
-    font-size: 1.5rem;
-    margin-bottom: 3rem;
+    font-size: 1.35rem;
+    margin-bottom: var(--space-6);
     opacity: 0.9;
     font-weight: 300;
   }
@@ -471,15 +478,15 @@
   .market-stats {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
-    margin-top: 2rem;
+    gap: var(--space-4);
+    margin-top: var(--space-4);
   }
 
   .stat {
     text-align: center;
     background: rgba(255, 255, 255, 0.1);
-    padding: 1.5rem;
-    border-radius: 12px;
+    padding: var(--space-4);
+    border-radius: var(--radius-lg);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
     transition: transform 0.3s ease;
@@ -494,7 +501,7 @@
     display: block;
     font-size: 2.5rem;
     font-weight: 700;
-    color: #4ade80; /* Brighter green for contrast */
+    color: #4ade80;
     margin-bottom: 0.25rem;
   }
 
@@ -512,14 +519,14 @@
   }
 
   .contact-card {
-    background: white;
-    color: #333;
-    padding: 2.5rem;
-    border-radius: 20px;
+    background: var(--color-white);
+    color: var(--color-slate-700);
+    padding: var(--space-6);
+    border-radius: var(--radius-xl);
     text-align: center;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-lg);
     width: 100%;
-    max-width: 350px;
+    max-width: 360px;
   }
 
   .headshot {
@@ -527,124 +534,125 @@
     height: 140px;
     border-radius: 50%;
     object-fit: cover;
-    margin-bottom: 1.5rem;
-    border: 4px solid #3A8DDE;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    margin-bottom: var(--space-4);
+    border: 4px solid var(--color-indigo-600);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   }
 
   .contact-card h3 {
-    color: #0A2540;
+    color: var(--color-navy-800);
     margin-bottom: 0.5rem;
     font-size: 1.5rem;
     font-weight: 700;
   }
 
   .phone-cta {
-    display: inline-block;
-    background: #16B286;
-    color: white;
-    padding: 1rem 2rem;
-    border-radius: 50px;
+    display: inline-flex;
+    justify-content: center;
+    background: var(--color-teal-500);
+    color: var(--color-white);
+    padding: var(--space-3) var(--space-5);
+    border-radius: 999px;
     text-decoration: none;
     font-weight: 700;
-    margin-top: 1.5rem;
+    margin-top: var(--space-4);
     transition: all 0.3s ease;
-    box-shadow: 0 4px 12px rgba(22, 178, 134, 0.3);
+    box-shadow: 0 6px 16px rgba(22, 178, 134, 0.3);
   }
 
   .phone-cta:hover {
-    background: #0D8A5B;
+    background: var(--color-teal-600);
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(22, 178, 134, 0.4);
+    box-shadow: 0 8px 18px rgba(22, 178, 134, 0.4);
   }
 
   /* Quick Search */
   .quick-search {
-    background: white;
-    padding: 2rem 0;
-    border-bottom: 1px solid #e9ecef;
+    background: var(--color-white);
+    padding: var(--space-6) 0;
+    border-bottom: 1px solid var(--color-slate-200);
     position: relative;
     z-index: 10;
-    margin-top: -2rem; /* Overlap hero */
+    margin-top: -var(--space-6);
   }
 
   .quick-search .container {
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    padding: 2rem;
+    background: var(--color-white);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-md);
+    padding: var(--space-6);
   }
 
   .search-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: var(--space-4);
   }
 
   .search-header h2 {
     font-size: 1.5rem;
-    color: #0A2540;
+    color: var(--color-navy-800);
     margin: 0;
   }
 
   .filter-toggle {
     background: transparent;
-    color: #3A8DDE;
-    border: 2px solid #3A8DDE;
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
+    color: var(--color-indigo-600);
+    border: 2px solid var(--color-indigo-600);
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-md);
     cursor: pointer;
     font-weight: 600;
     transition: all 0.2s;
   }
 
   .filter-toggle:hover {
-    background: #3A8DDE;
-    color: white;
+    background: var(--color-indigo-600);
+    color: var(--color-white);
   }
 
   .search-filters {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
+    gap: var(--space-4);
     align-items: end;
   }
 
   .filter-group label {
     display: block;
-    margin-bottom: 0.5rem;
+    margin-bottom: var(--space-2);
     font-weight: 600;
-    color: #4b5563;
+    color: var(--color-slate-600);
     font-size: 0.9rem;
   }
 
   .filter-group select {
     width: 100%;
-    padding: 0.75rem;
-    border: 2px solid #e5e7eb;
-    border-radius: 8px;
+    padding: var(--space-3);
+    border: 2px solid var(--color-slate-200);
+    border-radius: var(--radius-md);
     font-size: 1rem;
     background-color: #f9fafb;
     transition: border-color 0.2s;
   }
 
   .filter-group select:focus {
-    border-color: #3A8DDE;
+    border-color: var(--color-indigo-600);
     outline: none;
   }
 
   .filter-actions {
     display: flex;
-    gap: 1rem;
+    gap: var(--space-3);
   }
 
   .apply-filters {
-    background: #3A8DDE;
-    color: white;
+    background: var(--color-indigo-600);
+    color: var(--color-white);
     border: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: 8px;
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-md);
     cursor: pointer;
     font-weight: 600;
     flex: 1;
@@ -652,23 +660,23 @@
   }
 
   .apply-filters:hover {
-    background: #2563eb;
+    background: var(--color-indigo-700);
   }
 
   .clear-filters {
-    background: white;
-    color: #6b7280;
-    border: 2px solid #e5e7eb;
-    padding: 0.75rem 1.5rem;
-    border-radius: 8px;
+    background: var(--color-white);
+    color: var(--color-slate-600);
+    border: 2px solid var(--color-slate-200);
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-md);
     cursor: pointer;
     font-weight: 600;
     transition: all 0.2s;
   }
 
   .clear-filters:hover {
-    border-color: #d1d5db;
-    color: #374151;
+    border-color: var(--color-slate-400);
+    color: var(--color-slate-700);
   }
 
   /* RealScout Section */
