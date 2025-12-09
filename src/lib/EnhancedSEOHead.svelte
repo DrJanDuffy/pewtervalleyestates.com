@@ -1,5 +1,6 @@
 <script>
   // Import SEO utilities
+  import { browser } from '$app/environment'
   import {
     generateMetaTags,
     generateStructuredData,
@@ -40,8 +41,8 @@
   // Generate hreflang tags
   const hreflangTags = generateHreflangTags(metaTags.canonical)
   
-  // Validate SEO data if in development
-  if (showValidation && typeof window !== 'undefined') {
+  // Validate SEO data if in development (only in browser)
+  if (showValidation && browser) {
     const errors = validateSEOData(pageData)
     if (errors.length > 0) {
       console.warn('SEO Validation Errors:', errors)
