@@ -14,6 +14,7 @@
   import CTASection from "$lib/CTASection.svelte"
   import Counter from "$lib/Counter.svelte"
   import RelatedPages from "$lib/RelatedPages.svelte"
+  import RealScoutListings from "$lib/RealScoutListings.svelte"
   import { SITE_CONFIG } from "$lib/seo.js"
   
   // SEO data for homepage - optimized for "Pewter Valley Estates" + "Dr. Jan Duffy"
@@ -233,6 +234,17 @@
           </a>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- RealScout Listings Widget - Below the Fold -->
+  <section class="homepage-listings">
+    <div class="container">
+      <div class="listings-header">
+        <h2>Live MLS Listings | Pewter Valley Estates & Southwest Las Vegas</h2>
+        <p class="listings-subtitle">Real-time property search with expert guidance from Dr. Jan Duffy. Updated every 15 minutes with the latest homes in zip code 89183.</p>
+      </div>
+      <RealScoutListings />
     </div>
   </section>
 
@@ -744,6 +756,35 @@
 
   .seller-services .service-cta:hover {
     background: var(--color-teal-600);
+  }
+  
+  /* Homepage Listings Section */
+  .homepage-listings {
+    padding: var(--space-10) 0;
+    background: var(--color-white);
+    border-top: 1px solid var(--color-slate-200);
+    border-bottom: 1px solid var(--color-slate-200);
+  }
+  
+  .listings-header {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto var(--space-8);
+  }
+  
+  .listings-header h2 {
+    font-size: clamp(2rem, 2.5vw, 2.75rem);
+    font-weight: 700;
+    color: var(--color-indigo-700);
+    margin-bottom: var(--space-4);
+    line-height: 1.2;
+  }
+  
+  .listings-subtitle {
+    font-size: 1.125rem;
+    color: var(--color-slate-600);
+    line-height: 1.7;
+    margin: 0;
   }
   
   /* Map Section */
