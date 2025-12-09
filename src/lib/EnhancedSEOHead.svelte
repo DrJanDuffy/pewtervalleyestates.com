@@ -125,9 +125,13 @@
   
   <!-- Preload Critical Resources -->
   {#each criticalResources as resource}
-    {@const asType = (resource.as === 'font' ? 'font' : resource.as === 'image' ? 'image' : 'fetch') as 'font' | 'image' | 'fetch'}
-    {@const crossOrigin = (resource.crossorigin === 'anonymous' ? 'anonymous' : resource.crossorigin === 'use-credentials' ? 'use-credentials' : null) as 'anonymous' | 'use-credentials' | null | undefined}
-    <link rel="preload" href={resource.href} as={asType} type={resource.type || undefined} crossorigin={crossOrigin} />
+    {@const asType = resource.as === 'font' ? 'font' : resource.as === 'image' ? 'image' : 'fetch'}
+    {@const crossOrigin = resource.crossorigin === 'anonymous'
+      ? 'anonymous'
+      : resource.crossorigin === 'use-credentials'
+        ? 'use-credentials'
+        : null}
+    <link rel="preload" href={resource.href} as={asType} type={resource.type || undefined} crossorigin={crossOrigin || undefined} />
   {/each}
   
   <!-- Preconnect to External Domains -->
