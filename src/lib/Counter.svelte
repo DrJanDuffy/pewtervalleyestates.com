@@ -1,7 +1,7 @@
 <script>
 import { spring } from "svelte/motion"
 
-const count = 0
+let count = $state(0)
 
 const displayed_count = spring()
 $: displayed_count.set(count)
