@@ -3,9 +3,13 @@ import { spring } from "svelte/motion"
 
 let count = $state(0)
 
-const displayed_count = spring()
-$: displayed_count.set(count)
-$: offset = modulo($displayed_count, 1)
+const displayed_count = spring(0)
+
+$effect(() => {
+  displayed_count.set(count)
+})
+
+const offset = $derived(modulo($displayed_count, 1))
 
 /**
  * @param {number} n
