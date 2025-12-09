@@ -103,12 +103,12 @@ function handleWidgetClick() {
       {sort-order}
       {listing-status}
       {property-types}
-      on:click={handleWidgetClick}
+      onclick={handleWidgetClick}
     ></realscout-office-listings>
   {:else if widgetError}
     <div class="error-state">
       <p>Unable to load property listings. Please try again later.</p>
-      <button on:click={loadWidget} class="retry-button">Retry</button>
+      <button onclick={loadWidget} class="retry-button">Retry</button>
     </div>
   {:else if showLoadingState}
     <div class="loading-placeholder">

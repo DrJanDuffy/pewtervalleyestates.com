@@ -65,6 +65,7 @@ Disallow: /admin/
 Disallow: /private/
 Disallow: /api/
 Disallow: /.well-known/
+Disallow: /todos
 
 # Allow CSS and JS for proper rendering
 Allow: /*.css

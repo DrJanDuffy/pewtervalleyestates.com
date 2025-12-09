@@ -1,37 +1,119 @@
 <script>
-  import { createForm } from "svelte-forms-lib"
+  import { onMount } from "svelte"
   import { trackEvent } from "$lib/analytics"
   
-  export let formType = "general" // "general" | "valuation" | "buyer" | "seller"
-  export let title = "Get in Touch"
-  export let subtitle = "Fill out the form below and we'll get back to you within 24 hours"
+  // Svelte 5: Use $props() instead of export let
+  let { 
+    formType = "general", // "general" | "valuation" | "buyer" | "seller"
+    title = "Get in Touch",
+    subtitle = "Fill out the form below and we'll get back to you within 24 hours"
+  } = $props()
   
-  const { form, handleChange, handleSubmit, errors, isSubmitting } = createForm({
-    initialValues: {
-      name: "",
-      email: "",
-      phone: "",
-      message: "",
-      propertyAddress: "",
-      interestType: formType === "general" ? "" : formType,
-    },
-    validationSchema: {
-      name: (value) => (value ? null : "Name is required"),
-      email: (value) => {
-        if (!value) return "Email is required"
-        if (!value.includes("@")) return "Please enter a valid email"
-        return null
-      },
-      phone: (value) => {
-        if (!value) return "Phone number is required"
-        if (value.length < 10) return "Please enter a valid phone number"
-        return null
-      },
-      message: (value) => (value ? null : "Please tell us how we can help"),
-    },
+  // Svelte 5: Use $state() for reactive state
+  let form = $state({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+    propertyAddress: "",
+    interestType: formType === "general" ? "" : formType,
   })
   
+  let errors = $state({})
+  let isSubmitting = $state(false)
+  
+  // Try to use svelte-forms-lib if available, otherwise use fallback
+  let formLib = $state(null)
+  let useFormLib = $state(false)
+  
+  // Use onMount for one-time async initialization (still recommended in Svelte 5)
+  onMount(async () => {
+    try {
+      const { createForm } = await import("svelte-forms-lib")
+      const formResult = createForm({
+        initialValues: {
+          name: "",
+          email: "",
+          phone: "",
+          message: "",
+          propertyAddress: "",
+          interestType: formType === "general" ? "" : formType,
+        },
+        validationSchema: {
+          name: (value) => (value ? null : "Name is required"),
+          email: (value) => {
+            if (!value) return "Email is required"
+            if (!value.includes("@")) return "Please enter a valid email"
+            return null
+          },
+          phone: (value) => {
+            if (!value) return "Phone number is required"
+            if (value.length < 10) return "Please enter a valid phone number"
+            return null
+          },
+          message: (value) => (value ? null : "Please tell us how we can help"),
+        },
+      })
+      formLib = formResult
+      useFormLib = true
+      form = formResult.form
+      errors = formResult.errors
+      isSubmitting = formResult.isSubmitting
+    } catch (e) {
+      // Fallback to manual form handling
+      console.warn("svelte-forms-lib not available, using fallback form handling", e)
+      useFormLib = false
+    }
+  })
+  
+  function validateForm() {
+    const newErrors = {}
+    if (!form.name) newErrors.name = "Name is required"
+    if (!form.email) {
+      newErrors.email = "Email is required"
+    } else if (!form.email.includes("@")) {
+      newErrors.email = "Please enter a valid email"
+    }
+    if (!form.phone) {
+      newErrors.phone = "Phone number is required"
+    } else if (form.phone.length < 10) {
+      newErrors.phone = "Please enter a valid phone number"
+    }
+    if (!form.message) newErrors.message = "Please tell us how we can help"
+    errors = newErrors
+    return Object.keys(newErrors).length === 0
+  }
+  
+  function handleChange(e) {
+    if (useFormLib && formLib?.handleChange) {
+      formLib.handleChange(e)
+    } else {
+      // bind:value handles the form update automatically
+      // This function only clears errors when user starts typing
+      const { name } = e.target
+      if (errors[name]) {
+        errors = { ...errors, [name]: null }
+      }
+    }
+  }
+  
+  function handleSubmit(callback) {
+    return (e) => {
+      e.preventDefault()
+      
+      if (useFormLib && formLib?.handleSubmit) {
+        formLib.handleSubmit(callback)(e)
+      } else {
+        if (validateForm()) {
+          callback(form)
+        }
+      }
+    }
+  }
+  
   function onSubmit(values) {
+    isSubmitting = true
+    
     trackEvent("lead_capture", {
       form_type: formType,
       has_property_address: !!values.propertyAddress,
@@ -45,11 +127,16 @@
     alert("Thank you! Dr. Jan Duffy will contact you within 24 hours.")
     
     // Reset form
-    form.name = ""
-    form.email = ""
-    form.phone = ""
-    form.message = ""
-    form.propertyAddress = ""
+    form = {
+      name: "",
+      email: "",
+      phone: "",
+      message: "",
+      propertyAddress: "",
+      interestType: formType === "general" ? "" : formType,
+    }
+    errors = {}
+    isSubmitting = false
   }
 </script>
 
@@ -60,7 +147,7 @@
       <p>{subtitle}</p>
     </div>
     
-    <form on:submit={handleSubmit(onSubmit)} class="lead-form">
+    <form onsubmit={handleSubmit(onSubmit)} class="lead-form">
       <div class="form-row">
         <div class="form-group">
           <label for="name">Full Name *</label>
@@ -68,15 +155,15 @@
             type="text" 
             id="name"
             name="name"
-            bind:value={$form.name}
-            on:input={handleChange}
+            bind:value={form.name}
+            oninput={handleChange}
             class="form-input"
-            class:error={$errors.name}
+            class:error={errors.name}
             placeholder="Your full name"
             required
           />
-          {#if $errors.name}
-            <span class="error-message">{$errors.name}</span>
+          {#if errors.name}
+            <span class="error-message">{errors.name}</span>
           {/if}
         </div>
         
@@ -86,15 +173,15 @@
             type="email" 
             id="email"
             name="email"
-            bind:value={$form.email}
-            on:input={handleChange}
+            bind:value={form.email}
+            oninput={handleChange}
             class="form-input"
-            class:error={$errors.email}
+            class:error={errors.email}
             placeholder="your.email@example.com"
             required
           />
-          {#if $errors.email}
-            <span class="error-message">{$errors.email}</span>
+          {#if errors.email}
+            <span class="error-message">{errors.email}</span>
           {/if}
         </div>
       </div>
@@ -106,15 +193,15 @@
             type="tel" 
             id="phone"
             name="phone"
-            bind:value={$form.phone}
-            on:input={handleChange}
+            bind:value={form.phone}
+            oninput={handleChange}
             class="form-input"
-            class:error={$errors.phone}
+            class:error={errors.phone}
             placeholder="(702) 555-0123"
             required
           />
-          {#if $errors.phone}
-            <span class="error-message">{$errors.phone}</span>
+          {#if errors.phone}
+            <span class="error-message">{errors.phone}</span>
           {/if}
         </div>
         
@@ -125,8 +212,8 @@
               type="text" 
               id="propertyAddress"
               name="propertyAddress"
-              bind:value={$form.propertyAddress}
-              on:input={handleChange}
+              bind:value={form.propertyAddress}
+              oninput={handleChange}
               class="form-input"
               placeholder="Pyle Avenue, Las Vegas, NV 89183"
             />
@@ -139,25 +226,25 @@
         <textarea 
           id="message"
           name="message"
-          bind:value={$form.message}
-          on:input={handleChange}
+          bind:value={form.message}
+          oninput={handleChange}
           class="form-textarea"
-          class:error={$errors.message}
+          class:error={errors.message}
           placeholder="Tell us about your real estate needs..."
           rows="5"
           required
         ></textarea>
-        {#if $errors.message}
-          <span class="error-message">{$errors.message}</span>
+        {#if errors.message}
+          <span class="error-message">{errors.message}</span>
         {/if}
       </div>
       
       <button 
         type="submit" 
         class="submit-btn"
-        disabled={$isSubmitting}
+        disabled={isSubmitting}
       >
-        {#if $isSubmitting}
+        {#if isSubmitting}
           Sending...
         {:else}
           Submit

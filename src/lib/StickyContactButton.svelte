@@ -1,24 +1,28 @@
 <script>
-  import { onMount } from 'svelte'
   import { trackEvent } from '$lib/analytics'
   import { SITE_CONFIG } from '$lib/seo.js'
 
-  let isVisible = false
-  let isMobile = false
+  // Svelte 5: Use $state() for reactive state
+  let isVisible = $state(false)
+  let isMobile = $state(false)
 
-  onMount(() => {
+  // Svelte 5: Use $effect() for side effects
+  $effect(() => {
     // Check if mobile
-    isMobile = window.innerWidth <= 768
-    
-    // Show button after scrolling down 300px
-    const handleScroll = () => {
-      isVisible = window.scrollY > 300
-    }
-    
-    window.addEventListener('scroll', handleScroll)
-    
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
+    if (typeof window !== 'undefined') {
+      isMobile = window.innerWidth <= 768
+      
+      // Show button after scrolling down 300px
+      const handleScroll = () => {
+        isVisible = window.scrollY > 300
+      }
+      
+      window.addEventListener('scroll', handleScroll)
+      
+      // Cleanup function
+      return () => {
+        window.removeEventListener('scroll', handleScroll)
+      }
     }
   })
 
@@ -41,9 +45,9 @@
   <div class="sticky-contact">
     <div class="contact-buttons">
       <a 
-        href="tel:{SITE_CONFIG.phoneTel}" 
+        href={`tel:${SITE_CONFIG.phoneTel}`} 
         class="contact-btn phone"
-        on:click={handlePhoneClick}
+        onclick={handlePhoneClick}
       >
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
@@ -54,7 +58,7 @@
       <a 
         href="sms:{SITE_CONFIG.phoneTel}" 
         class="contact-btn text"
-        on:click={handleTextClick}
+        onclick={handleTextClick}
       >
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>

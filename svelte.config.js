@@ -16,6 +16,27 @@ const config = {
         domains: ["pewtervalleyestates.com", "www.pewtervalleyestates.com"],
       },
     }),
+    prerender: {
+      // Handle 404s during prerender gracefully
+      handleHttpError: ({ path, referrer, message }) => {
+        // Ignore missing font and image files during prerender
+        if (
+          path.includes('/fonts/') ||
+          path.includes('/images/') ||
+          path.includes('.woff2') ||
+          path.includes('.webp') ||
+          path.includes('.jpg') ||
+          path.includes('.jpeg') ||
+          path.includes('.png')
+        ) {
+          console.warn(`[Prerender] Missing asset (ignored): ${path}${referrer ? ` (linked from ${referrer})` : ''}`)
+          return
+        }
+        // For other 404s, throw to fail the build
+        throw new Error(`404 ${path}${referrer ? ` (linked from ${referrer})` : ''}: ${message}`)
+      },
+      handleMissingId: 'warn'
+    },
   },
 }
 

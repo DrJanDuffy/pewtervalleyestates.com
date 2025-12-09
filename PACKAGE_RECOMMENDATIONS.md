@@ -180,3 +180,4 @@ pnpm add layerchart @neoconfetti/svelte @sentry/sveltekit
 - **svelte-forms-lib**: Consider migrating to `sveltekit-superforms` gradually
 - All packages are actively maintained and compatible with SvelteKit 2.x
 
+

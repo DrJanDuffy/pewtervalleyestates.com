@@ -68,8 +68,8 @@ function handleFeatureClick(feature) {
           class="feature-card" 
           role="button"
           tabindex="0"
-          on:click={() => handleFeatureClick(feature)}
-          on:keydown={(e) => e.key === 'Enter' && handleFeatureClick(feature)}
+          onclick={() => handleFeatureClick(feature)}
+          onkeydown={(e) => e.key === 'Enter' && handleFeatureClick(feature)}
         >
           <div class="feature-icon">
             <span class="icon-emoji">{feature.icon}</span>

@@ -138,10 +138,10 @@
     </div>
 
     <div class="calculator-actions">
-      <button class="reset-btn" on:click={resetCalculator}>
+      <button class="reset-btn" onclick={resetCalculator}>
         Reset Calculator
       </button>
-      <a href="tel:{SITE_CONFIG.phoneTel}" class="contact-btn">
+      <a href={`tel:${SITE_CONFIG.phoneTel}`} class="contact-btn">
         Get Pre-Approved
       </a>
     </div>

@@ -2,9 +2,12 @@
   import { SITE_CONFIG } from "$lib/seo.js"
   import { trackEvent } from "$lib/analytics"
   
-  export let showGoogleReviewsLink = true
-  export let showDirections = true
-  export let variant = "default" // "default" | "compact" | "inline"
+  // Svelte 5: Use $props() instead of export let
+  let {
+    showGoogleReviewsLink = true,
+    showDirections = true,
+    variant = "default" // "default" | "compact" | "inline"
+  } = $props()
   
   function handlePhoneClick() {
     trackEvent("phone_click", {
@@ -53,7 +56,7 @@
       <div class="nap-details">
         <div class="nap-label">Phone</div>
         <div class="nap-value">
-          <a href="tel:{SITE_CONFIG.phoneTel}" on:click={handlePhoneClick}>
+          <a href={`tel:${SITE_CONFIG.phoneTel}`} onclick={handlePhoneClick}>
             {SITE_CONFIG.phone}
           </a>
         </div>
@@ -84,7 +87,7 @@
           target="_blank"
           rel="noopener noreferrer"
           class="nap-action-button"
-          on:click={handleDirectionsClick}
+          onclick={handleDirectionsClick}
         >
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -98,7 +101,7 @@
           target="_blank"
           rel="noopener noreferrer"
           class="nap-action-button"
-          on:click={handleReviewsClick}
+          onclick={handleReviewsClick}
         >
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>

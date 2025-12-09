@@ -6,6 +6,8 @@ export let data
 <svelte:head>
 	<title>Todos</title>
 	<meta name="description" content="A todo list app" />
+	<meta name="robots" content="noindex, nofollow" />
+	<meta name="googlebot" content="noindex, nofollow" />
 </svelte:head>
 
 <div class="todos">

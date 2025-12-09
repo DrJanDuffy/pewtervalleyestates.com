@@ -109,30 +109,28 @@ export function trackWebVitals() {
 
 // Image preloading for above-the-fold content
 export function preloadCriticalImages() {
+  // Only include images that actually exist in static/
   const criticalImages = [
     '/images/hero-bg.webp',
-    '/images/dr-jan-headshot.jpg',
-    '/images/pewter-valley-estates-logo.png'
+    '/images/dr-jan-headshot.jpg'
+    // Add more existing images here as needed
   ]
 
   return criticalImages.map(src => ({
     rel: 'preload',
     as: 'image',
     href: src,
-    type: 'image/webp'
+    type: src.endsWith('.webp') ? 'image/webp' : 'image/jpeg'
   }))
 }
 
 // Font preloading
 export function preloadFonts() {
+  // Only include fonts that actually exist
+  // Removed missing font: /fonts/inter-var.woff2
+  // Using @fontsource/fira-mono from npm instead
   return [
-    {
-      rel: 'preload',
-      as: 'font',
-      href: '/fonts/inter-var.woff2',
-      type: 'font/woff2',
-      crossorigin: 'anonymous'
-    }
+    // Add actual existing fonts here if needed
   ]
 }
 

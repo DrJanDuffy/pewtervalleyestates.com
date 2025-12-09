@@ -47,14 +47,14 @@ function onSubmit(values) {
     <p>Receive floor plans, pricing, and community details</p>
   </div>
   
-  <form on:submit={handleSubmit(onSubmit)}>
+  <form onsubmit={handleSubmit(onSubmit)}>
     <div class="form-group">
       <input 
         type="text" 
         name="firstName"
         placeholder="First Name" 
         bind:value={$form.firstName}
-        on:input={handleChange}
+        oninput={handleChange}
         class="form-input"
         class:error={$errors.firstName}
       />
@@ -69,7 +69,7 @@ function onSubmit(values) {
         name="lastName"
         placeholder="Last Name" 
         bind:value={$form.lastName}
-        on:input={handleChange}
+        oninput={handleChange}
         class="form-input"
         class:error={$errors.lastName}
       />
@@ -84,7 +84,7 @@ function onSubmit(values) {
         name="email"
         placeholder="Email Address" 
         bind:value={$form.email}
-        on:input={handleChange}
+        oninput={handleChange}
         class="form-input"
         class:error={$errors.email}
       />
@@ -99,7 +99,7 @@ function onSubmit(values) {
         name="phone"
         placeholder="Phone Number" 
         bind:value={$form.phone}
-        on:input={handleChange}
+        oninput={handleChange}
         class="form-input"
         class:error={$errors.phone}
       />
@@ -112,7 +112,7 @@ function onSubmit(values) {
       <select 
         name="homeSize"
         bind:value={$form.homeSize}
-        on:change={handleChange}
+        onchange={handleChange}
         class="form-select"
         class:error={$errors.homeSize}
       >

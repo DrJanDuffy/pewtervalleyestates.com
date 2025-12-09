@@ -1,5 +1,8 @@
 {
   "private": true,
+  "sideEffects": [
+    "src/lib/seo-utils.js"
+  ],
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
@@ -13,7 +16,8 @@
     "format:check": "biome format .",
     "biome:check": "biome check .",
     "biome:fix": "biome check --write .",
-    "clean": "biome check --write . && biome format --write ."
+    "clean": "biome check --write . && biome format --write .",
+    "generate:og-image": "node scripts/generate-og-image.js"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.2.4",
@@ -32,6 +36,7 @@
   "type": "module",
   "dependencies": {
     "@fontsource/fira-mono": "^4.5.0",
+    "@fontsource/inter": "^5.2.8",
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
     "cookie": "^0.4.1",

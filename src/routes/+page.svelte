@@ -1,14 +1,19 @@
 <script>
   import { onMount } from "svelte"
   import { trackEvent } from "$lib/analytics"
-  import SEOHead from "$lib/SEOHead.svelte"
+  import EnhancedSEOHead from "$lib/EnhancedSEOHead.svelte"
   import Breadcrumbs from "$lib/Breadcrumbs.svelte"
   import NAPDisplay from "$lib/NAPDisplay.svelte"
   import GoogleReviews from "$lib/GoogleReviews.svelte"
   import GoogleMap from "$lib/GoogleMap.svelte"
-  import CTABanner from "$lib/CTABanner.svelte"
   import LeadCaptureForm from "$lib/LeadCaptureForm.svelte"
   import StickyContactButton from "$lib/StickyContactButton.svelte"
+  import HeroSection from "$lib/HeroSection.svelte"
+  import FeaturesSection from "$lib/FeaturesSection.svelte"
+  import TestimonialsSection from "$lib/TestimonialsSection.svelte"
+  import CTASection from "$lib/CTASection.svelte"
+  import Counter from "$lib/Counter.svelte"
+  import RelatedPages from "$lib/RelatedPages.svelte"
   import { SITE_CONFIG } from "$lib/seo.js"
   
   // SEO data for homepage - optimized for "Pewter Valley Estates" + "Dr. Jan Duffy"
@@ -64,97 +69,21 @@
   })
 </script>
 
-<svelte:head>
-  <title>{pageData.title}</title>
-  <meta name="description" content={pageData.description} />
-  <meta name="keywords" content={pageData.keywords} />
-</svelte:head>
-
-<SEOHead 
+<EnhancedSEOHead 
   {pageData} 
+  {breadcrumbs}
   includeLocalBusiness={true} 
   includeRealEstate={true} 
   includeFAQ={true} 
-  {faqData} 
+  faqs={faqData} 
+  showValidation={true}
 />
 
-<Breadcrumbs {breadcrumbs} />
-
 <main class="homepage">
-  <!-- Conversion-Focused Hero Section -->
-  <section class="hero">
-    <div class="container">
-      <div class="hero-content">
-        <h1>Find Your Dream Home or Sell Fast in Pewter Valley Estates</h1>
-        <p class="hero-subtitle">Southwest Las Vegas's #1 Real Estate Expert | Zip Code 89183</p>
-        
-        <!-- Split Buyer/Seller Path -->
-        <div class="buyer-seller-split">
-          <div class="path-card buyer-path">
-            <div class="path-icon">🏠</div>
-            <h2>I Want to Buy a Home</h2>
-            <p class="path-description">Get instant access to all available homes in Pewter Valley Estates. Expert guidance from search to closing.</p>
-            <ul class="path-benefits">
-              <li>✓ Access to all MLS listings</li>
-              <li>✓ Free home search & alerts</li>
-              <li>✓ Expert negotiation</li>
-              <li>✓ Full buyer representation</li>
-            </ul>
-            <div class="path-ctas">
-              <a href="/homes-for-sale" class="cta-primary" on:click={() => handleCtaClick('view_homes', 'buyer')}>
-                View Available Homes
-              </a>
-              <a href="tel:{SITE_CONFIG.phoneTel}" class="cta-phone" on:click={() => handleCtaClick('phone', 'buyer')}>
-                📞 Call {SITE_CONFIG.phone}
-              </a>
-            </div>
-          </div>
-          
-          <div class="path-card seller-path">
-            <div class="path-icon">💰</div>
-            <h2>I Want to Sell My Home</h2>
-            <p class="path-description">Get a free home valuation and expert marketing to sell faster and for more money.</p>
-            <ul class="path-benefits">
-              <li>✓ Free home valuation</li>
-              <li>✓ Professional marketing</li>
-              <li>✓ Expert pricing strategy</li>
-              <li>✓ Faster sales, higher prices</li>
-            </ul>
-            <div class="path-ctas">
-              <a href="/home-valuation" class="cta-primary" on:click={() => handleCtaClick('valuation', 'seller')}>
-                Get Free Valuation
-              </a>
-              <a href="tel:{SITE_CONFIG.phoneTel}" class="cta-phone" on:click={() => handleCtaClick('phone', 'seller')}>
-                📞 Call {SITE_CONFIG.phone}
-              </a>
-            </div>
-          </div>
-        </div>
-        
-        <!-- Trust Signals -->
-        <div class="trust-signals">
-          <div class="trust-item">
-            <strong>100+</strong>
-            <span>Homes Sold</span>
-          </div>
-          <div class="trust-item">
-            <strong>24hr</strong>
-            <span>Response Time</span>
-          </div>
-          <div class="trust-item">
-            <strong>5★</strong>
-            <span>Google Rating</span>
-          </div>
-          <div class="trust-item">
-            <strong>Free</strong>
-            <span>Consultation</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  
-  <!-- Quick Lead Capture Above the Fold -->
+  <!-- Primary Hero Section -->
+  <HeroSection />
+
+  <!-- Quick Lead Capture -->
   <section class="quick-lead">
     <div class="container">
       <div class="lead-grid">
@@ -181,37 +110,66 @@
     </div>
   </section>
 
-  <!-- Why Choose Section - Conversion Focused -->
-  <section class="why-choose">
+  <!-- Buyer/Seller Pathways -->
+  <section class="pathways">
     <div class="container">
-      <h2>Why Dr. Jan Duffy is Southwest Las Vegas's #1 Real Estate Expert</h2>
-      
-      <div class="expertise-grid">
-        <div class="expertise-card">
-          <div class="expertise-icon">🎯</div>
-          <h3>Hyperlocal Specialist</h3>
-          <p>Exclusive focus on Pewter Valley Estates means deep knowledge of every street, floor plan, and market trend. This expertise translates to better deals and faster transactions.</p>
+      <h2 class="section-title">Choose Your Path</h2>
+      <div class="buyer-seller-split">
+        <div class="path-card buyer-path">
+          <div class="path-icon">🏠</div>
+          <h2>I Want to Buy a Home</h2>
+          <p class="path-description">Get instant access to all available homes in Pewter Valley Estates. Expert guidance from search to closing.</p>
+          <ul class="path-benefits">
+            <li>✓ Access to all MLS listings</li>
+            <li>✓ Free home search & alerts</li>
+            <li>✓ Expert negotiation</li>
+            <li>✓ Full buyer representation</li>
+          </ul>
+          <div class="path-ctas">
+            <a href="/homes-for-sale" class="cta-primary" onclick={() => handleCtaClick('view_homes', 'buyer')}>
+              View Available Homes
+            </a>
+            <a href={`tel:${SITE_CONFIG.phoneTel}`} class="cta-phone" onclick={() => handleCtaClick('phone', 'buyer')}>
+              📞 Call {SITE_CONFIG.phone}
+            </a>
+          </div>
         </div>
         
-        <div class="expertise-card">
-          <div class="expertise-icon">⚡</div>
-          <h3>Fast Response Time</h3>
-          <p>24-hour response guarantee. When homes move fast, you need an agent who moves faster. Get instant updates on new listings and offers.</p>
-        </div>
-        
-        <div class="expertise-card">
-          <div class="expertise-icon">📊</div>
-          <h3>Data-Driven Pricing</h3>
-          <p>Advanced market analysis ensures you buy at the right price or sell for maximum value. No guesswork, just proven results.</p>
-        </div>
-        
-        <div class="expertise-card">
-          <div class="expertise-icon">🤝</div>
-          <h3>Full-Service Support</h3>
-          <p>From search to closing, every step handled professionally. Professional photography, staging, negotiation, and transaction management included.</p>
+        <div class="path-card seller-path">
+          <div class="path-icon">💰</div>
+          <h2>I Want to Sell My Home</h2>
+          <p class="path-description">Get a free home valuation and expert marketing to sell faster and for more money.</p>
+          <ul class="path-benefits">
+            <li>✓ Free home valuation</li>
+            <li>✓ Professional marketing</li>
+            <li>✓ Expert pricing strategy</li>
+            <li>✓ Faster sales, higher prices</li>
+          </ul>
+          <div class="path-ctas">
+            <a href="/home-valuation" class="cta-primary" onclick={() => handleCtaClick('valuation', 'seller')}>
+              Get Free Valuation
+            </a>
+            <a href={`tel:${SITE_CONFIG.phoneTel}`} class="cta-phone" onclick={() => handleCtaClick('phone', 'seller')}>
+              📞 Call {SITE_CONFIG.phone}
+            </a>
+          </div>
         </div>
       </div>
-      
+    </div>
+  </section>
+
+  <!-- Trust & Social Proof -->
+  <TestimonialsSection />
+
+  <!-- Google Reviews -->
+  <GoogleReviews showSchema={false} />
+
+  <!-- Value & Features -->
+  <FeaturesSection />
+  
+  <!-- Expertise & Content -->
+  <section class="content-section">
+    <div class="container">
       <div class="content-grid">
         <div class="content-main">
           <NAPDisplay showGoogleReviewsLink={true} showDirections={true} />
@@ -240,16 +198,6 @@
               <li><strong>Price Range:</strong> $450,000-$650,000</li>
               <li><strong>Market Status:</strong> Resale</li>
             </ul>
-          </div>
-          
-          <div class="cta-box">
-            <h3>Ready to Get Started?</h3>
-            <a href="tel:{SITE_CONFIG.phoneTel}" class="cta-button-phone">
-              📞 Call {SITE_CONFIG.phone}
-            </a>
-            <a href="/contact" class="cta-button-secondary">
-              Schedule Consultation
-            </a>
           </div>
         </aside>
       </div>
@@ -280,7 +228,7 @@
           <a href="/homes-for-sale" class="cta-large">
             View All Available Homes
           </a>
-          <a href="tel:{SITE_CONFIG.phoneTel}" class="cta-large-secondary">
+          <a href={`tel:${SITE_CONFIG.phoneTel}`} class="cta-large-secondary">
             📞 Call to Schedule Tour
           </a>
         </div>
@@ -288,7 +236,7 @@
     </div>
   </section>
 
-  <!-- Services - Buyer/Seller Focused -->
+  <!-- Services -->
   <section class="services">
     <div class="container">
       <h2>Complete Real Estate Services for Buyers & Sellers</h2>
@@ -316,13 +264,6 @@
               <div>
                 <strong>Full Buyer Representation</strong>
                 <p>From search to closing, we handle everything</p>
-              </div>
-            </div>
-            <div class="service-item">
-              <span class="check">✓</span>
-              <div>
-                <strong>Priority Showing Access</strong>
-                <p>See homes before they hit the market</p>
               </div>
             </div>
           </div>
@@ -353,13 +294,6 @@
                 <p>Data-driven pricing to sell faster for more money</p>
               </div>
             </div>
-            <div class="service-item">
-              <span class="check">✓</span>
-              <div>
-                <strong>Faster Sales</strong>
-                <p>Average 30% faster than market average</p>
-              </div>
-            </div>
           </div>
           <a href="/sell-your-home" class="service-cta">Get Your Free Valuation →</a>
         </div>
@@ -367,47 +301,16 @@
     </div>
   </section>
 
-  <!-- Google Reviews -->
-  <section class="reviews-section">
-    <GoogleReviews />
-  </section>
-
   <!-- Map Section -->
   <section class="map-section">
     <GoogleMap />
   </section>
+
+  <!-- Related Pages for SEO Internal Linking -->
+  <RelatedPages currentPage="/" />
 
   <!-- Final CTA Section -->
-  <section class="final-cta">
-    <div class="container">
-      <h2>Ready to Buy or Sell in Pewter Valley Estates?</h2>
-      <p class="cta-subtitle">Get expert guidance from Southwest Las Vegas's #1 real estate specialist</p>
-      
-      <div class="final-cta-buttons">
-        <a href="tel:{SITE_CONFIG.phoneTel}" class="cta-mega phone">
-          📞 Call {SITE_CONFIG.phone}
-        </a>
-        <a href="/contact" class="cta-mega email">
-          ✉️ Get in Touch
-        </a>
-        <a href="/home-valuation" class="cta-mega valuation">
-          💰 Free Home Valuation
-        </a>
-      </div>
-      
-      <p class="cta-guarantee">✓ 24-Hour Response Guarantee | ✓ Free Consultation | ✓ No Obligation</p>
-    </div>
-  </section>
-
-  <!-- Google Reviews -->
-  <section class="reviews-section">
-    <GoogleReviews />
-  </section>
-
-  <!-- Map Section -->
-  <section class="map-section">
-    <GoogleMap />
-  </section>
+  <CTASection />
 
   <!-- Sticky Contact Button (Mobile) -->
   <StickyContactButton />
@@ -419,57 +322,48 @@
   }
   
   .container {
-    max-width: 1200px;
+    width: 100%;
+    max-width: var(--max-width);
     margin: 0 auto;
-    padding: 0 2rem;
+    padding: 0 var(--space-4);
   }
-  
-  /* Hero Section - Conversion Focused */
-  .hero {
-    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
-    color: white;
-    padding: 3rem 0 4rem;
+
+  .section-title {
+    font-size: clamp(2rem, 2.5vw, 2.75rem);
+    font-weight: 700;
+    color: var(--color-indigo-700);
+    margin-bottom: var(--space-8);
     text-align: center;
   }
   
-  .hero-content h1 {
-    font-size: 2.75rem;
-    font-weight: 800;
-    margin-bottom: 0.5rem;
-    line-height: 1.2;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
+  /* Pathways Section */
+  .pathways {
+    padding: var(--space-10) 0;
+    background: var(--color-slate-100);
   }
-  
-  .hero-subtitle {
-    font-size: 1.25rem;
-    color: #fbbf24;
-    margin-bottom: 2.5rem;
-    font-weight: 600;
-  }
-  
+
   /* Buyer/Seller Split */
   .buyer-seller-split {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    max-width: 1000px;
-    margin: 0 auto 3rem;
+    gap: var(--space-5);
+    max-width: var(--content-width);
+    margin: 0 auto;
   }
   
   .path-card {
-    background: white;
-    color: #1e3a8a;
-    padding: 2.5rem;
-    border-radius: 1rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    background: var(--color-white);
+    color: var(--color-indigo-700);
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(7, 20, 39, 0.08);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   
   .path-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    box-shadow: var(--shadow-lg);
   }
   
   .path-icon {
@@ -478,15 +372,15 @@
   }
   
   .path-card h2 {
-    font-size: 1.75rem;
+    font-size: clamp(1.5rem, 1.5vw + 1rem, 2rem);
     font-weight: 700;
-    margin-bottom: 1rem;
-    color: #1e3a8a;
+    margin-bottom: var(--space-3);
+    color: var(--color-indigo-700);
   }
   
   .path-description {
-    color: #64748b;
-    margin-bottom: 1.5rem;
+    color: var(--color-slate-500);
+    margin-bottom: var(--space-4);
     line-height: 1.6;
     font-size: 1rem;
   }
@@ -499,254 +393,134 @@
   }
   
   .path-benefits li {
-    padding: 0.5rem 0;
-    color: #374151;
+    padding: var(--space-2) 0;
+    color: var(--color-slate-700);
     font-size: 0.95rem;
   }
   
   .path-ctas {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: var(--space-3);
   }
   
   .cta-primary {
     display: block;
-    padding: 1rem 1.5rem;
-    background: #1e3a8a;
-    color: white;
+    padding: var(--space-3) var(--space-5);
+    background: var(--color-indigo-700);
+    color: var(--color-white);
     text-decoration: none;
-    border-radius: 0.5rem;
+    border-radius: var(--radius-md);
     font-weight: 600;
     font-size: 1.125rem;
     text-align: center;
     transition: all 0.3s ease;
+    box-shadow: 0 10px 20px rgba(30, 58, 138, 0.25);
   }
-  
+
   .cta-primary:hover {
-    background: #1e40af;
+    background: var(--color-indigo-600);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   }
-  
+
   .cta-phone {
     display: block;
-    padding: 0.875rem 1.5rem;
-    background: #16B286;
-    color: white;
+    padding: var(--space-3) var(--space-5);
+    background: var(--color-teal-500);
+    color: var(--color-white);
     text-decoration: none;
-    border-radius: 0.5rem;
+    border-radius: var(--radius-md);
     font-weight: 600;
     font-size: 1rem;
     text-align: center;
     transition: all 0.3s ease;
+    box-shadow: 0 10px 20px rgba(22, 178, 134, 0.2);
   }
-  
+
   .cta-phone:hover {
-    background: #0D8A5B;
+    background: var(--color-teal-600);
     transform: translateY(-2px);
-  }
-  
-  /* Trust Signals */
-  .trust-signals {
-    display: flex;
-    justify-content: center;
-    gap: 3rem;
-    margin-top: 2rem;
-    flex-wrap: wrap;
-  }
-  
-  .trust-item {
-    text-align: center;
-  }
-  
-  .trust-item strong {
-    display: block;
-    font-size: 2rem;
-    font-weight: 800;
-    color: #fbbf24;
-    margin-bottom: 0.25rem;
-  }
-  
-  .trust-item span {
-    display: block;
-    font-size: 0.875rem;
-    opacity: 0.9;
   }
   
   /* Quick Lead Capture */
   .quick-lead {
-    padding: 3rem 0;
-    background: #f8fafc;
+    padding: var(--space-10) 0;
+    background: var(--color-white);
+    border-bottom: 1px solid var(--color-slate-200);
   }
   
   .lead-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-5);
   }
   
   .lead-form-card {
-    background: white;
-    padding: 2rem;
-    border-radius: 1rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background: var(--color-slate-100);
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-slate-200);
   }
   
   .lead-form-card h3 {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #1e3a8a;
-    margin-bottom: 0.5rem;
+    color: var(--color-indigo-700);
+    margin-bottom: var(--space-2);
   }
   
   .lead-form-card p {
-    color: #64748b;
-    margin-bottom: 1.5rem;
+    color: var(--color-slate-500);
+    margin-bottom: var(--space-4);
     font-size: 1rem;
   }
   
-  /* Why Choose Section */
-  .why-choose {
-    padding: 4rem 0;
-    background: white;
+  /* Content Section */
+  .content-section {
+    padding: var(--space-10) 0;
+    background: var(--color-white);
   }
-  
-  .why-choose h2 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #1e3a8a;
-    margin-bottom: 3rem;
-    text-align: center;
-  }
-  
-  /* Expertise Grid */
-  .expertise-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 2rem;
-    margin-bottom: 4rem;
-  }
-  
-  .expertise-card {
-    text-align: center;
-    padding: 1.5rem;
-  }
-  
-  .expertise-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-  }
-  
-  .expertise-card h3 {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #1e3a8a;
-    margin-bottom: 0.75rem;
-  }
-  
-  .expertise-card p {
-    color: #64748b;
-    line-height: 1.6;
-    font-size: 0.95rem;
-  }
-  
-  .cta-box {
-    background: #f8fafc;
-    padding: 2rem;
-    border-radius: 1rem;
-    margin-top: 2rem;
-    text-align: center;
-  }
-  
-  .cta-box h3 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #1e3a8a;
-    margin-bottom: 1.5rem;
-  }
-  
-  .cta-button-phone,
-  .cta-button-secondary {
-    display: block;
-    width: 100%;
-    padding: 1rem;
-    margin-bottom: 0.75rem;
-    border-radius: 0.5rem;
-    text-decoration: none;
-    font-weight: 600;
-    text-align: center;
-    transition: all 0.3s ease;
-  }
-  
-  .cta-button-phone {
-    background: #16B286;
-    color: white;
-  }
-  
-  .cta-button-phone:hover {
-    background: #0D8A5B;
-    transform: translateY(-2px);
-  }
-  
-  .cta-button-secondary {
-    background: #1e3a8a;
-    color: white;
-  }
-  
-  .cta-button-secondary:hover {
-    background: #1e40af;
-    transform: translateY(-2px);
-  }
-  
+
   .content-grid {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    gap: 3rem;
-    margin-top: 2rem;
-  }
-  
-  .content-main .lead {
-    font-size: 1.25rem;
-    color: #374151;
-    line-height: 1.8;
-    margin-bottom: 2rem;
-    font-weight: 500;
+    gap: var(--space-6);
   }
   
   .content-main h3 {
     font-size: 1.5rem;
     font-weight: 600;
-    color: #1e3a8a;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
+    color: var(--color-indigo-700);
+    margin-top: var(--space-6);
+    margin-bottom: var(--space-3);
   }
   
   .content-main p {
-    color: #374151;
+    color: var(--color-slate-700);
     line-height: 1.8;
-    margin-bottom: 1.5rem;
+    margin-bottom: var(--space-4);
     font-size: 1.125rem;
   }
   
   .content-sidebar {
     position: sticky;
-    top: 2rem;
+    top: var(--space-6);
     height: fit-content;
   }
   
   .quick-stats {
-    background: #f8fafc;
-    padding: 1.5rem;
-    border-radius: 1rem;
-    margin-top: 2rem;
+    background: var(--color-slate-100);
+    padding: var(--space-5);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-slate-200);
   }
   
   .quick-stats h3 {
     font-size: 1.25rem;
     font-weight: 600;
-    color: #1e3a8a;
-    margin-bottom: 1rem;
+    color: var(--color-indigo-700);
+    margin-bottom: var(--space-3);
   }
   
   .quick-stats ul {
@@ -756,9 +530,9 @@
   }
   
   .quick-stats li {
-    padding: 0.5rem 0;
-    color: #374151;
-    border-bottom: 1px solid #e2e8f0;
+    padding: var(--space-2) 0;
+    color: var(--color-slate-700);
+    border-bottom: 1px solid var(--color-slate-200);
   }
   
   .quick-stats li:last-child {
@@ -766,54 +540,55 @@
   }
   
   .quick-stats strong {
-    color: #1e3a8a;
+    color: var(--color-indigo-700);
   }
   
   /* Listings Market Section */
   .listings-market {
-    padding: 4rem 0;
-    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    padding: var(--space-10) 0;
+    background: linear-gradient(135deg, var(--color-slate-100) 0%, var(--color-slate-200) 100%);
   }
   
   .section-header {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: var(--space-8);
   }
   
   .section-header h2 {
-    font-size: 2.5rem;
+    font-size: clamp(2rem, 2.5vw, 2.75rem);
     font-weight: 700;
-    color: #1e3a8a;
-    margin-bottom: 1rem;
+    color: var(--color-indigo-700);
+    margin-bottom: var(--space-3);
   }
   
   .section-subtitle {
     font-size: 1.125rem;
-    color: #64748b;
+    color: var(--color-slate-500);
   }
   
   .market-cta-box {
-    background: white;
-    padding: 3rem;
-    border-radius: 1rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    background: var(--color-white);
+    padding: var(--space-8);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
     display: grid;
     grid-template-columns: 1.5fr 1fr;
-    gap: 3rem;
+    gap: var(--space-6);
     align-items: center;
+    border: 1px solid rgba(7, 20, 39, 0.05);
   }
   
   .market-info h3 {
     font-size: 1.75rem;
     font-weight: 700;
-    color: #1e3a8a;
-    margin-bottom: 1rem;
+    color: var(--color-indigo-700);
+    margin-bottom: var(--space-3);
   }
   
   .market-info p {
-    color: #374151;
+    color: var(--color-slate-700);
     line-height: 1.7;
-    margin-bottom: 1.5rem;
+    margin-bottom: var(--space-4);
     font-size: 1.125rem;
   }
   
@@ -824,22 +599,22 @@
   }
   
   .market-features li {
-    padding: 0.5rem 0;
-    color: #374151;
+    padding: var(--space-2) 0;
+    color: var(--color-slate-700);
     font-size: 1rem;
   }
   
   .market-cta {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: var(--space-4);
   }
   
   .cta-large,
   .cta-large-secondary {
     display: block;
-    padding: 1.25rem 2rem;
-    border-radius: 0.5rem;
+    padding: var(--space-3) var(--space-5);
+    border-radius: var(--radius-md);
     text-decoration: none;
     font-weight: 700;
     font-size: 1.125rem;
@@ -848,68 +623,70 @@
   }
   
   .cta-large {
-    background: #1e3a8a;
-    color: white;
+    background: var(--color-indigo-700);
+    color: var(--color-white);
+    box-shadow: 0 10px 18px rgba(30, 58, 138, 0.25);
   }
-  
+
   .cta-large:hover {
-    background: #1e40af;
+    background: var(--color-indigo-600);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(30, 58, 138, 0.4);
   }
-  
+
   .cta-large-secondary {
-    background: #16B286;
-    color: white;
+    background: var(--color-teal-500);
+    color: var(--color-white);
+    box-shadow: 0 10px 18px rgba(22, 178, 134, 0.25);
   }
   
   .cta-large-secondary:hover {
-    background: #0D8A5B;
+    background: var(--color-teal-600);
     transform: translateY(-2px);
   }
   
   /* Services Section */
   .services {
-    padding: 4rem 0;
-    background: white;
+    padding: var(--space-10) 0;
+    background: var(--color-white);
   }
-  
+
   .services h2 {
-    font-size: 2.5rem;
+    font-size: clamp(2rem, 2.5vw, 2.5rem);
     font-weight: 700;
-    color: #1e3a8a;
-    margin-bottom: 3rem;
+    color: var(--color-indigo-700);
+    margin-bottom: var(--space-8);
     text-align: center;
   }
-  
+
   .services-split {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    max-width: 1000px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-6);
+    max-width: var(--content-width);
     margin: 0 auto;
   }
-  
+
   .services-column {
-    background: #f8fafc;
-    padding: 2.5rem;
-    border-radius: 1rem;
+    background: var(--color-slate-100);
+    padding: var(--space-6);
+    border-radius: var(--radius-lg);
     border-top: 4px solid;
+    box-shadow: var(--shadow-sm);
   }
-  
+
   .buyer-services {
-    border-top-color: #16B286;
+    border-top-color: var(--color-teal-500);
   }
-  
+
   .seller-services {
-    border-top-color: #1e3a8a;
+    border-top-color: var(--color-indigo-700);
   }
-  
+
   .services-column h3 {
     font-size: 1.75rem;
     font-weight: 700;
-    color: #1e3a8a;
-    margin-bottom: 2rem;
+    color: var(--color-indigo-700);
+    margin-bottom: var(--space-4);
   }
   
   .service-list {
@@ -918,27 +695,27 @@
   
   .service-item {
     display: flex;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
     align-items: flex-start;
   }
-  
+
   .service-item .check {
-    color: #16B286;
+    color: var(--color-teal-500);
     font-size: 1.5rem;
     font-weight: 700;
     flex-shrink: 0;
   }
-  
+
   .service-item strong {
     display: block;
-    color: #1e3a8a;
+    color: var(--color-indigo-700);
     font-size: 1.125rem;
-    margin-bottom: 0.25rem;
+    margin-bottom: var(--space-1);
   }
-  
+
   .service-item p {
-    color: #64748b;
+    color: var(--color-slate-500);
     font-size: 0.95rem;
     margin: 0;
     line-height: 1.5;
@@ -946,32 +723,27 @@
   
   .service-cta {
     display: block;
-    padding: 1rem 1.5rem;
-    background: #1e3a8a;
-    color: white;
+    padding: var(--space-3) var(--space-5);
+    background: var(--color-indigo-700);
+    color: var(--color-white);
     text-decoration: none;
-    border-radius: 0.5rem;
+    border-radius: var(--radius-md);
     font-weight: 600;
     text-align: center;
     transition: all 0.3s ease;
   }
-  
+
   .service-cta:hover {
-    background: #1e40af;
+    background: var(--color-indigo-600);
     transform: translateY(-2px);
   }
-  
+
   .seller-services .service-cta {
-    background: #16B286;
+    background: var(--color-teal-500);
   }
-  
+
   .seller-services .service-cta:hover {
-    background: #0D8A5B;
-  }
-  
-  /* Reviews Section */
-  .reviews-section {
-    padding: 0;
+    background: var(--color-teal-600);
   }
   
   /* Map Section */
@@ -979,80 +751,14 @@
     padding: 0;
   }
   
-  /* Final CTA Section */
-  .final-cta {
-    padding: 4rem 0;
-    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
-    color: white;
-    text-align: center;
-  }
-  
-  .final-cta h2 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-  }
-  
-  .cta-subtitle {
-    font-size: 1.25rem;
-    margin-bottom: 2.5rem;
-    opacity: 0.95;
-  }
-  
-  .final-cta-buttons {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 2rem;
-  }
-  
-  .cta-mega {
-    display: inline-block;
-    padding: 1.25rem 2.5rem;
-    background: white;
-    color: #1e3a8a;
-    text-decoration: none;
-    border-radius: 0.5rem;
-    font-weight: 700;
-    font-size: 1.125rem;
-    transition: all 0.3s ease;
-  }
-  
-  .cta-mega:hover {
-    background: #f8fafc;
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  }
-  
-  .cta-mega.phone {
-    background: #16B286;
-    color: white;
-  }
-  
-  .cta-mega.phone:hover {
-    background: #0D8A5B;
-  }
-  
-  .cta-guarantee {
-    font-size: 1rem;
-    opacity: 0.9;
-    margin-top: 1rem;
-  }
-  
   /* Responsive Design */
   @media (max-width: 968px) {
-    .content-grid,
-    .bio-content {
+    .content-grid {
       grid-template-columns: 1fr;
     }
     
     .content-sidebar {
       position: static;
-    }
-    
-    .expertise-grid {
-      grid-template-columns: repeat(2, 1fr);
     }
     
     .services-split {
@@ -1073,35 +779,10 @@
   }
   
   @media (max-width: 768px) {
-    .hero-content h1 {
-      font-size: 2rem;
-    }
-    
-    .hero-subtitle {
-      font-size: 1.125rem;
-    }
-    
     .why-choose h2,
     .listings-market h2,
-    .services h2,
-    .final-cta h2 {
+    .services h2 {
       font-size: 2rem;
-    }
-    
-    .expertise-grid {
-      grid-template-columns: 1fr;
-    }
-    
-    .trust-signals {
-      gap: 2rem;
-    }
-    
-    .final-cta-buttons {
-      flex-direction: column;
-    }
-    
-    .cta-mega {
-      width: 100%;
     }
     
     .path-card {
