@@ -1,5 +1,6 @@
 <script>
   import { onMount } from 'svelte'
+  import { slide } from 'svelte/transition'
   import { trackEvent } from '$lib/analytics'
   import { SITE_CONFIG } from '$lib/seo.js'
   import EnhancedSEOHead from '$lib/EnhancedSEOHead.svelte'
@@ -420,7 +421,6 @@
 </main>
 
 <style>
-  import { slide } from 'svelte/transition';
 
   /* Custom styles for RealScout widget */
   realscout-office-listings {
