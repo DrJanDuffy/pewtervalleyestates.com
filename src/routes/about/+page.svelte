@@ -35,6 +35,19 @@
     "Anthem", "Inspirada", "Mountain's Edge", "Silverado Ranch",
     "Pewter Valley", "Southwest Las Vegas"
   ]
+  
+  const FALLBACK_HEADSHOT =
+    "https://ui-avatars.com/api/?name=Jan+Duffy&size=500&background=0A2540&color=fff"
+  
+  function handleHeadshotError(event) {
+    const target = event.currentTarget
+    if (target && typeof target === "object" && "src" in target) {
+      target.src = FALLBACK_HEADSHOT
+      if ("onerror" in target) {
+        target.onerror = null
+      }
+    }
+  }
 
   onMount(() => {
     trackEvent("page_view", {
@@ -64,7 +77,12 @@
       </div>
       <div class="hero-image-wrapper">
          <!-- Placeholder for Headshot - Ensure this file exists in static/ -->
-        <img src="/dr-jan-headshot.jpg" alt="Dr. Jan Duffy" class="hero-headshot" onerror="this.src='https://ui-avatars.com/api/?name=Jan+Duffy&size=500&background=0A2540&color=fff'" />
+        <img
+          src="/dr-jan-headshot.jpg"
+          alt="Dr. Jan Duffy"
+          class="hero-headshot"
+          on:error={handleHeadshotError}
+        />
       </div>
     </div>
   </section>
