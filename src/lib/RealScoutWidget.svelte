@@ -84,7 +84,7 @@ onMount(() => {
       <div class="contact-info">
         <p><strong>Dr. Jan Duffy</strong></p>
         <p>Phone: <a href={`tel:${SITE_CONFIG.phoneTel}`}>{SITE_CONFIG.phone}</a></p>
-        <p>Email: <a href="mailto:DrDuffy@PewterValleyEstates.com">DrDuffy@PewterValleyEstates.com</a></p>
+        <p>Email: <a href={`mailto:${SITE_CONFIG.email}`}>{SITE_CONFIG.email}</a></p>
       </div>
     </div>
   </div>

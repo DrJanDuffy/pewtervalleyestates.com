@@ -73,9 +73,6 @@
 <EnhancedSEOHead 
   {pageData} 
   {breadcrumbs}
-  includeLocalBusiness={true} 
-  includeRealEstate={true} 
-  includeFAQ={true} 
   faqs={faqData} 
   showValidation={true}
 />
@@ -205,32 +202,57 @@
     </div>
   </section>
 
-  <!-- Current Listings - Conversion Focused -->
-  <section class="listings-market">
+  <!-- Current Property Listings -->
+  <section class="current-property-listings">
     <div class="container">
-      <div class="section-header">
-        <h2>Homes Available Now in Pewter Valley Estates</h2>
-        <p class="section-subtitle">New listings added daily. Get instant alerts when homes match your criteria.</p>
+      <div class="listings-section-header">
+        <h2>Current Property Listings</h2>
+        <p class="listings-subtitle">Browse our available homes in Las Vegas and surrounding areas</p>
       </div>
       
-      <div class="market-cta-box">
-        <div class="market-info">
-          <h3>Current Market Overview</h3>
-          <p>Active resale listings range from $450,000 to $650,000. Homes move fast in this desirable community. Don't miss out on your dream home.</p>
-          <ul class="market-features">
-            <li>✓ Real-time MLS access</li>
-            <li>✓ Instant listing alerts</li>
-            <li>✓ Expert market analysis</li>
-            <li>✓ Priority showing access</li>
+      <div class="listings-cards-grid">
+        <!-- Featured Properties Card -->
+        <div class="listings-card featured-properties">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+          </div>
+          <h3>Featured Properties</h3>
+          <p>Discover your dream home with our curated selection of available properties.</p>
+          <ul class="properties-features">
+            <li>Modern new construction homes</li>
+            <li>3 Bedrooms, 2 Bathrooms</li>
+            <li>Resort-style amenities</li>
+            <li>Prime Las Vegas locations</li>
           </ul>
+          <a href="/homes-for-sale" class="card-button primary">
+            View All Listings
+          </a>
         </div>
         
-        <div class="market-cta">
-          <a href="/homes-for-sale" class="cta-large">
-            View All Available Homes
-          </a>
-          <a href={`tel:${SITE_CONFIG.phoneTel}`} class="cta-large-secondary">
-            📞 Call to Schedule Tour
+        <!-- Contact Dr. Jan Duffy Card -->
+        <div class="listings-card contact-card">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+          </div>
+          <h3>Contact Dr. Jan Duffy</h3>
+          <p>Your trusted real estate agent for Las Vegas properties.</p>
+          <div class="contact-info">
+            <p class="contact-item">
+              <strong>Phone:</strong> 
+              <a href={`tel:${SITE_CONFIG.phoneTel}`}>{SITE_CONFIG.phone}</a>
+            </p>
+            <p class="contact-item">
+              <strong>Email:</strong> 
+              <a href={`mailto:${SITE_CONFIG.email}`}>{SITE_CONFIG.email}</a>
+            </p>
+          </div>
+          <a href="/contact" class="card-button secondary">
+            Get In Touch
           </a>
         </div>
       </div>
@@ -238,15 +260,7 @@
   </section>
 
   <!-- RealScout Listings Widget - Below the Fold -->
-  <section class="homepage-listings">
-    <div class="container">
-      <div class="listings-header">
-        <h2>Live MLS Listings | Pewter Valley Estates & Southwest Las Vegas</h2>
-        <p class="listings-subtitle">Real-time property search with expert guidance from Dr. Jan Duffy. Updated every 15 minutes with the latest homes in zip code 89183.</p>
-      </div>
-      <RealScoutListings />
-    </div>
-  </section>
+  <RealScoutListings />
 
   <!-- Services -->
   <section class="services">
@@ -555,105 +569,172 @@
     color: var(--color-indigo-700);
   }
   
-  /* Listings Market Section */
-  .listings-market {
+  /* Current Property Listings Section */
+  .current-property-listings {
     padding: var(--space-10) 0;
-    background: linear-gradient(135deg, var(--color-slate-100) 0%, var(--color-slate-200) 100%);
+    background: var(--color-white);
   }
   
-  .section-header {
+  .listings-section-header {
     text-align: center;
     margin-bottom: var(--space-8);
   }
   
-  .section-header h2 {
+  .listings-section-header h2 {
     font-size: clamp(2rem, 2.5vw, 2.75rem);
     font-weight: 700;
-    color: var(--color-indigo-700);
+    color: var(--color-slate-700);
     margin-bottom: var(--space-3);
   }
   
-  .section-subtitle {
+  .listings-subtitle {
     font-size: 1.125rem;
     color: var(--color-slate-500);
+    line-height: 1.6;
   }
   
-  .market-cta-box {
+  .listings-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  
+  .listings-card {
     background: var(--color-white);
     padding: var(--space-8);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-md);
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: var(--space-6);
-    align-items: center;
     border: 1px solid rgba(7, 20, 39, 0.05);
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
   }
   
-  .market-info h3 {
-    font-size: 1.75rem;
+  .listings-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+  
+  .card-icon {
+    width: 3rem;
+    height: 3rem;
+    background: var(--color-indigo-100);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--space-4);
+    color: var(--color-indigo-700);
+  }
+  
+  .card-icon svg {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  
+  .listings-card h3 {
+    font-size: 1.5rem;
     font-weight: 700;
     color: var(--color-indigo-700);
     margin-bottom: var(--space-3);
   }
   
-  .market-info p {
-    color: var(--color-slate-700);
+  .listings-card > p {
+    color: var(--color-slate-600);
     line-height: 1.7;
-    margin-bottom: var(--space-4);
-    font-size: 1.125rem;
+    margin-bottom: var(--space-5);
+    font-size: 1rem;
   }
   
-  .market-features {
+  .properties-features {
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin: 0 0 var(--space-6) 0;
+    flex: 1;
   }
   
-  .market-features li {
+  .properties-features li {
     padding: var(--space-2) 0;
+    color: var(--color-slate-700);
+    font-size: 1rem;
+    position: relative;
+    padding-left: var(--space-5);
+  }
+  
+  .properties-features li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--color-indigo-700);
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+  
+  .contact-info {
+    margin: var(--space-4) 0 var(--space-6) 0;
+    flex: 1;
+  }
+  
+  .contact-item {
+    margin-bottom: var(--space-3);
     color: var(--color-slate-700);
     font-size: 1rem;
   }
   
-  .market-cta {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-4);
+  .contact-item strong {
+    color: var(--color-indigo-700);
+    margin-right: var(--space-2);
   }
   
-  .cta-large,
-  .cta-large-secondary {
+  .contact-item a {
+    color: var(--color-indigo-700);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  
+  .contact-item a:hover {
+    color: var(--color-indigo-600);
+    text-decoration: underline;
+  }
+  
+  .card-button {
     display: block;
     padding: var(--space-3) var(--space-5);
     border-radius: var(--radius-md);
     text-decoration: none;
-    font-weight: 700;
-    font-size: 1.125rem;
+    font-weight: 600;
+    font-size: 1rem;
     text-align: center;
     transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
   }
   
-  .cta-large {
-    background: var(--color-indigo-700);
+  .card-button.primary {
+    background: #dc2626;
     color: var(--color-white);
-    box-shadow: 0 10px 18px rgba(30, 58, 138, 0.25);
-  }
-
-  .cta-large:hover {
-    background: var(--color-indigo-600);
-    transform: translateY(-2px);
-  }
-
-  .cta-large-secondary {
-    background: var(--color-teal-500);
-    color: var(--color-white);
-    box-shadow: 0 10px 18px rgba(22, 178, 134, 0.25);
+    box-shadow: 0 4px 6px rgba(220, 38, 38, 0.25);
   }
   
-  .cta-large-secondary:hover {
-    background: var(--color-teal-600);
+  .card-button.primary:hover {
+    background: #b91c1c;
     transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(220, 38, 38, 0.35);
+  }
+  
+  .card-button.secondary {
+    background: var(--color-slate-600);
+    color: var(--color-white);
+    box-shadow: 0 4px 6px rgba(71, 85, 105, 0.25);
+  }
+  
+  .card-button.secondary:hover {
+    background: var(--color-slate-700);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(71, 85, 105, 0.35);
   }
   
   /* Services Section */
@@ -758,35 +839,6 @@
     background: var(--color-teal-600);
   }
   
-  /* Homepage Listings Section */
-  .homepage-listings {
-    padding: var(--space-10) 0;
-    background: var(--color-white);
-    border-top: 1px solid var(--color-slate-200);
-    border-bottom: 1px solid var(--color-slate-200);
-  }
-  
-  .listings-header {
-    text-align: center;
-    max-width: 900px;
-    margin: 0 auto var(--space-8);
-  }
-  
-  .listings-header h2 {
-    font-size: clamp(2rem, 2.5vw, 2.75rem);
-    font-weight: 700;
-    color: var(--color-indigo-700);
-    margin-bottom: var(--space-4);
-    line-height: 1.2;
-  }
-  
-  .listings-subtitle {
-    font-size: 1.125rem;
-    color: var(--color-slate-600);
-    line-height: 1.7;
-    margin: 0;
-  }
-  
   /* Map Section */
   .map-section {
     padding: 0;
@@ -810,18 +862,18 @@
       grid-template-columns: 1fr;
     }
     
-    .lead-grid {
+    .listings-cards-grid {
       grid-template-columns: 1fr;
     }
     
-    .market-cta-box {
+    .lead-grid {
       grid-template-columns: 1fr;
     }
   }
   
   @media (max-width: 768px) {
     .why-choose h2,
-    .listings-market h2,
+    .listings-section-header h2,
     .services h2 {
       font-size: 2rem;
     }

@@ -73,7 +73,7 @@
       <div class="nap-details">
         <div class="nap-label">Email</div>
         <div class="nap-value">
-          <a href="mailto:{SITE_CONFIG.email}">{SITE_CONFIG.email}</a>
+          <a href={`mailto:${SITE_CONFIG.email}`}>{SITE_CONFIG.email}</a>
         </div>
       </div>
     </div>

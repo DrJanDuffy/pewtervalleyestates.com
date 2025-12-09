@@ -39,13 +39,13 @@
   const FALLBACK_HEADSHOT =
     "https://ui-avatars.com/api/?name=Jan+Duffy&size=500&background=0A2540&color=fff"
   
+  const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(`${SITE_CONFIG.address.street}, ${SITE_CONFIG.address.city}, ${SITE_CONFIG.address.stateAbbr} ${SITE_CONFIG.address.zipCode}`)}`
+  
   function handleHeadshotError(event) {
-    const target = event.currentTarget
-    if (target && typeof target === "object" && "src" in target) {
+    const target = event?.currentTarget
+    if (target?.src) {
       target.src = FALLBACK_HEADSHOT
-      if ("onerror" in target) {
-        target.onerror = null
-      }
+      target.onerror = null
     }
   }
 
@@ -123,10 +123,55 @@
 
           <div class="contact-card">
             <h3>Get in Touch</h3>
-            <NAPDisplay variant="compact" />
-            <div class="contact-actions">
-              <a href={`tel:${SITE_CONFIG.phoneTel}`} class="contact-link">{SITE_CONFIG.phone}</a>
-              <a href={`mailto:${SITE_CONFIG.email}`} class="contact-link">{SITE_CONFIG.email}</a>
+            <div class="contact-info">
+              <div class="contact-item">
+                <div class="contact-label">Address</div>
+                <div class="contact-value">
+                  {SITE_CONFIG.address.street}<br>
+                  {SITE_CONFIG.address.city}, {SITE_CONFIG.address.stateAbbr} {SITE_CONFIG.address.zipCode}
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-label">Phone</div>
+                <div class="contact-value">
+                  <a href={`tel:${SITE_CONFIG.phoneTel}`} class="contact-link">{SITE_CONFIG.phone}</a>
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-label">Email</div>
+                <div class="contact-value">
+                  <a href={`mailto:${SITE_CONFIG.email}`} class="contact-link">{SITE_CONFIG.email}</a>
+                </div>
+              </div>
+            </div>
+            <div class="contact-buttons">
+              <a 
+                href={directionsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-outline-white"
+              >
+                Directions
+              </a>
+              {#if SITE_CONFIG.googleBusinessProfile}
+                <a 
+                  href={SITE_CONFIG.googleBusinessProfile}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn btn-outline-white"
+                >
+                  View Google Reviews
+                </a>
+              {:else}
+                <a 
+                  href="https://search.google.com/local/writereview?placeid=YOUR_PLACE_ID"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn btn-outline-white"
+                >
+                  View Google Reviews
+                </a>
+              {/if}
             </div>
           </div>
         </div>
@@ -159,6 +204,12 @@
         <span class="section-overline">Available Properties</span>
         <h2>Pewter Valley Estates Featured Listings</h2>
         <p>Discover exceptional resale homes in Pewter Valley Estates, Southwest Las Vegas's premier master-planned community. Dr. Jan Duffy provides expert representation for buyers and sellers in zip code 89183.</p>
+      </div>
+      
+      <div class="listings-intro">
+        <h3>Current Listings</h3>
+        <p>Explore our available properties in Las Vegas and surrounding areas</p>
+        <p class="listings-help"><strong>Need help finding the perfect home?</strong> Contact Dr. Jan Duffy for personalized assistance.</p>
       </div>
       
       <!-- Reusing the RealScout Listings Component -->
@@ -215,7 +266,36 @@
 
   <!-- Reviews Section -->
   <section class="reviews-section">
-    <GoogleReviews showSchema={false} />
+    <div class="container">
+      <div class="reviews-header">
+        <h2>Google Reviews</h2>
+        <p>See what our clients say about working with Dr. Jan Duffy</p>
+      </div>
+      <div class="reviews-actions">
+        {#if SITE_CONFIG.googleReviewsUrl}
+          <a 
+            href={SITE_CONFIG.googleReviewsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-outline"
+          >
+            Write a Review on Google
+          </a>
+        {/if}
+        {#if SITE_CONFIG.googleBusinessProfile}
+          <a 
+            href={SITE_CONFIG.googleBusinessProfile}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-outline"
+          >
+            View All Google Reviews
+          </a>
+        {/if}
+      </div>
+      <GoogleReviews showSchema={false} />
+      <p class="reviews-note">Reviews will be displayed here. Connect your Google Business Profile to show live reviews.</p>
+    </div>
   </section>
 
   <!-- Final CTA -->
@@ -438,20 +518,64 @@
     font-size: 1.5rem;
   }
 
-  .contact-actions {
-    display: flex;
-    gap: 1.5rem;
-    margin-top: 1.5rem;
+  .contact-info {
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-item {
+    margin-bottom: 1.25rem;
+  }
+
+  .contact-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .contact-label {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #cbd5e1;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+
+  .contact-value {
+    font-size: 1rem;
+    color: white;
+    line-height: 1.6;
   }
 
   .contact-link {
     color: #fbbf24;
     text-decoration: none;
     font-weight: 600;
+    transition: color 0.2s ease;
   }
 
   .contact-link:hover {
+    color: #f59e0b;
     text-decoration: underline;
+  }
+
+  .contact-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .btn-outline-white {
+    background-color: transparent;
+    color: white;
+    border: 2px solid white;
+    text-align: center;
+  }
+
+  .btn-outline-white:hover {
+    background-color: white;
+    color: #0A2540;
   }
 
   /* Listings Section */
@@ -492,6 +616,30 @@
     padding: 0 !important;
   }
 
+  .listings-intro {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .listings-intro h3 {
+    font-size: 1.75rem;
+    color: #0A2540;
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+
+  .listings-intro p {
+    font-size: 1.125rem;
+    color: #64748b;
+    margin-bottom: 1rem;
+  }
+
+  .listings-help {
+    font-size: 1rem;
+    color: #4b5563;
+    margin-top: 1.5rem;
+  }
+
   .listings-cta {
     text-align: center;
     margin-top: 3rem;
@@ -530,10 +678,47 @@
     font-size: 1.125rem;
   }
 
+  /* Reviews Section */
+  .reviews-section {
+    padding: 6rem 0;
+    background-color: #f8fafc;
+  }
+
+  .reviews-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .reviews-header h2 {
+    margin-bottom: 1rem;
+  }
+
+  .reviews-header p {
+    font-size: 1.125rem;
+    color: #64748b;
+  }
+
+  .reviews-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .reviews-note {
+    text-align: center;
+    color: #94a3b8;
+    font-size: 0.9rem;
+    margin-top: 2rem;
+    font-style: italic;
+  }
+
   .neighborhoods-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 1.5rem;
+    margin-top: 3rem;
   }
 
   .neighborhood-card {
@@ -672,6 +857,14 @@
     
     .stats-grid {
       grid-template-columns: repeat(2, 1fr);
+    }
+
+    .contact-buttons {
+      flex-direction: column;
+    }
+
+    .reviews-actions {
+      flex-direction: column;
     }
   }
 

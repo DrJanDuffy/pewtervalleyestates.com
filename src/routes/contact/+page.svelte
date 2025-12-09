@@ -43,9 +43,10 @@
   }
 
   function handleChange(e) {
-    const { name, value } = e.target
+    const target = e.target
+    const { name, value } = target
     // Errors are cleared automatically by binding in some cases, but we can be explicit
-    if (errors[name]) {
+    if (name && errors[name]) {
       errors = { ...errors, [name]: null }
     }
   }
@@ -176,8 +177,8 @@
           </div>
           <h3>Email Me</h3>
           <p>Send me a detailed message about your requirements</p>
-          <a href="mailto:DrDuffy@PewterValleyEstates.com" class="contact-link">
-            DrDuffy@PewterValleyEstates.com
+          <a href={`mailto:${SITE_CONFIG.email}`} class="contact-link">
+            {SITE_CONFIG.email}
           </a>
         </div>
 

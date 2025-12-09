@@ -45,8 +45,8 @@ onMount(() => {
 <section class="realscout-section">
   <div class="container">
     <div class="section-header">
-      <h2>Current Listings</h2>
-      <p>Explore our available properties in Las Vegas and surrounding areas</p>
+      <h2>Live MLS Listings | Pewter Valley Estates & Southwest Las Vegas</h2>
+      <p>Real-time property search with expert guidance from Dr. Jan Duffy. Updated every 15 minutes with the latest homes in zip code 89183.</p>
     </div>
     
     <div class="realscout-container">
