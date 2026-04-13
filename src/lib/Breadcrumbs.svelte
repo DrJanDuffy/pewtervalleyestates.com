@@ -1,12 +1,17 @@
 <script>
 import { generateBreadcrumbSchema } from "$lib/seo.js"
 
-export const breadcrumbs = []
-export const showHome = true
+let {
+  breadcrumbs = [],
+  showHome = true
+} = $props()
 
-// Generate breadcrumb schema for SEO
-$: breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs)
+const breadcrumbSchema = $derived(generateBreadcrumbSchema(breadcrumbs))
 </script>
+
+<svelte:head>
+  {@html `<script type="application/ld+json">${JSON.stringify(breadcrumbSchema)}</script>`}
+</svelte:head>
 
 <!-- Breadcrumb Navigation -->
 <nav aria-label="Breadcrumb" class="breadcrumbs">
@@ -39,9 +44,6 @@ $: breadcrumbSchema = generateBreadcrumbSchema(breadcrumbs)
     {/each}
   </ol>
 </nav>
-
-<!-- JSON-LD Structured Data -->
-{@html `<script type="application/ld+json">${JSON.stringify(breadcrumbSchema)}</script>`}
 
 <style>
   .breadcrumbs {

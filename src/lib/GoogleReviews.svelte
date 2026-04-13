@@ -14,11 +14,11 @@
   let reviewSchema = $derived(showSchema ? generateReviewSchema(reviews) : null)
 </script>
 
-{#if reviewSchema}
-  <script type="application/ld+json">
-    {JSON.stringify(reviewSchema)}
-  </script>
-{/if}
+<svelte:head>
+  {#if reviewSchema}
+    {@html `<script type="application/ld+json">${JSON.stringify(reviewSchema)}</script>`}
+  {/if}
+</svelte:head>
 
 <section class="google-reviews">
   <div class="container">

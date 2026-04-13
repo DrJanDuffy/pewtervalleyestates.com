@@ -2,8 +2,8 @@
 // Implements caching strategies for optimal performance
 
 // Bump when changing caching rules so clients drop stale HTML/JS pairings.
-const STATIC_CACHE = 'static-v2'
-const DYNAMIC_CACHE = 'dynamic-v2'
+const STATIC_CACHE = 'static-v3'
+const DYNAMIC_CACHE = 'dynamic-v3'
 
 /**
  * Precache only real static assets — never HTML documents.

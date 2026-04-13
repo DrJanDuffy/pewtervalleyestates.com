@@ -210,12 +210,7 @@ export function generateLocalBusinessStructuredData() {
 
 // Performance optimization helpers
 export function preloadCriticalResources() {
-  // Preload critical images that exist in static/
-  return [
-    { href: '/images/hero-bg.webp', as: 'image' },
-    { href: '/images/dr-jan-headshot.jpg', as: 'image' }
-    // Note: Inter font is loaded via @fontsource/inter npm package, not static file
-  ]
+  return []
 }
 
 // Generate hreflang tags for internationalization

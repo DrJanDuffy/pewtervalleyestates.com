@@ -2,7 +2,6 @@
   import { onMount } from "svelte"
   import { trackEvent } from "$lib/analytics"
   import EnhancedSEOHead from "$lib/EnhancedSEOHead.svelte"
-  import Breadcrumbs from "$lib/Breadcrumbs.svelte"
   import NAPDisplay from "$lib/NAPDisplay.svelte"
   import GoogleReviews from "$lib/GoogleReviews.svelte"
   import GoogleMap from "$lib/GoogleMap.svelte"
@@ -12,7 +11,6 @@
   import FeaturesSection from "$lib/FeaturesSection.svelte"
   import TestimonialsSection from "$lib/TestimonialsSection.svelte"
   import CTASection from "$lib/CTASection.svelte"
-  import Counter from "$lib/Counter.svelte"
   import RelatedPages from "$lib/RelatedPages.svelte"
   import RealScoutListings from "$lib/RealScoutListings.svelte"
   import SectionReveal from "$lib/SectionReveal.svelte"
@@ -82,7 +80,7 @@
   showValidation={true}
 />
 
-<main class="homepage">
+<div class="homepage">
   <!-- Primary Hero Section -->
   <HeroSection />
 
@@ -347,7 +345,7 @@
 
   <!-- Sticky Contact Button (Mobile) -->
   <StickyContactButton />
-</main>
+</div>
 
 <style>
   .homepage {
