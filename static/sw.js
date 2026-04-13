@@ -1,21 +1,16 @@
 // Service Worker for Pewter Valley Estates
 // Implements caching strategies for optimal performance
 
-const CACHE_NAME = 'pewter-valley-estates-v1'
-const STATIC_CACHE = 'static-v1'
-const DYNAMIC_CACHE = 'dynamic-v1'
+// Bump when changing caching rules so clients drop stale HTML/JS pairings.
+const STATIC_CACHE = 'static-v2'
+const DYNAMIC_CACHE = 'dynamic-v2'
 
-// Assets to cache immediately
-const STATIC_ASSETS = [
-  '/',
-  '/listings',
-  '/neighborhood',
-  '/contact',
-  '/photos',
-  '/about',
-  '/favicon.ico',
-  '/manifest.json'
-]
+/**
+ * Precache only real static assets — never HTML documents.
+ * Caching `/` or route URLs causes stale shells after deploys: old HTML
+ * references deleted `/_app/immutable/*` chunks → hydration fails → white screen.
+ */
+const STATIC_ASSETS = ['/favicon.ico', '/manifest.json']
 
 // Install event - cache static assets
 self.addEventListener('install', event => {
@@ -44,6 +39,12 @@ self.addEventListener('activate', event => {
   )
 })
 
+function isHtmlNavigation(request) {
+  if (request.method !== 'GET') return false
+  const accept = request.headers.get('accept') || ''
+  return request.mode === 'navigate' || accept.includes('text/html')
+}
+
 // Fetch event - implement caching strategies
 self.addEventListener('fetch', event => {
   const { request } = event
@@ -54,6 +55,12 @@ self.addEventListener('fetch', event => {
 
   // Skip chrome-extension and other non-http requests
   if (!url.protocol.startsWith('http')) return
+
+  // HTML: always network-first — never serve cached document first (stale + wrong chunks).
+  if (isHtmlNavigation(request)) {
+    event.respondWith(networkFirstHtml(request))
+    return
+  }
 
   event.respondWith(
     caches.match(request)
@@ -73,16 +80,27 @@ self.addEventListener('fetch', event => {
           return cacheFirst(request)
         }
 
-        // Stale while revalidate for HTML pages
-        if (request.headers.get('accept')?.includes('text/html')) {
-          return staleWhileRevalidate(request)
-        }
-
         // Default to network
         return fetch(request)
       })
   )
 })
+
+/** Always try network for HTML; fall back to cache only when offline. */
+async function networkFirstHtml(request) {
+  try {
+    const response = await fetch(request)
+    if (response.ok) {
+      const cache = await caches.open(DYNAMIC_CACHE)
+      cache.put(request, response.clone())
+    }
+    return response
+  } catch (e) {
+    const cached = await caches.match(request)
+    if (cached) return cached
+    throw e
+  }
+}
 
 // Cache first strategy for static assets
 async function cacheFirst(request) {
@@ -110,21 +128,6 @@ async function networkFirst(request) {
   } catch (error) {
     return caches.match(request)
   }
-}
-
-// Stale while revalidate for HTML pages
-async function staleWhileRevalidate(request) {
-  const cache = await caches.open(DYNAMIC_CACHE)
-  const cachedResponse = await cache.match(request)
-
-  const fetchPromise = fetch(request).then(response => {
-    if (response.ok) {
-      cache.put(request, response.clone())
-    }
-    return response
-  })
-
-  return cachedResponse || fetchPromise
 }
 
 // Check if request is for a static asset
