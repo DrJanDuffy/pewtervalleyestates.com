@@ -15,16 +15,17 @@
   import Counter from "$lib/Counter.svelte"
   import RelatedPages from "$lib/RelatedPages.svelte"
   import RealScoutListings from "$lib/RealScoutListings.svelte"
+  import SectionReveal from "$lib/SectionReveal.svelte"
   import { SITE_CONFIG } from "$lib/seo.js"
   
-  // SEO data for homepage - optimized for "Pewter Valley Estates" + "Dr. Jan Duffy"
+  // SEO — site brand + Silverado Ranch / Pewter Valley / Las Vegas Valley
   const pageData = {
-    title: "Pewter Valley Estates Real Estate | Buy, Sell & Invest with Dr. Jan Duffy",
-    description: `Expert real estate services for Pewter Valley Estates in Southwest Las Vegas (89183). Dr. Jan Duffy specializes in resale homes, market analysis, and investment properties. Call ${SITE_CONFIG.phone}.`,
+    title: SITE_CONFIG.businessName,
+    description: `Expert real estate in Silverado Ranch (Henderson & Clark County). Pewter Valley Estates is a community within Silverado Ranch (89183)—Dr. Jan Duffy specializes in resale homes, market analysis, and investment properties. Call ${SITE_CONFIG.phone}.`,
     image: `${SITE_CONFIG.url}/og-image.jpg`,
     type: "website",
     canonical: SITE_CONFIG.url,
-    keywords: "Pewter Valley Estates, Dr. Jan Duffy realtor, Southwest Las Vegas homes, 89183 real estate, Pyle Avenue homes, S Rancho Destino Rd properties",
+    keywords: "Pewter Valley Estates, Silverado Ranch Henderson, Dr. Jan Duffy realtor, Southwest Las Vegas homes, 89183 real estate, 89123 Henderson, Pyle Avenue homes, S Rancho Destino Rd properties",
   }
   
   const breadcrumbs = [
@@ -34,11 +35,11 @@
   const faqData = [
     {
       question: "What is Pewter Valley Estates?",
-      answer: `Pewter Valley Estates is a sold-out master-planned community in Southwest Las Vegas (zip code 89183), located at the intersection of Pyle Avenue and S Rancho Destino Rd. Built by Richmond American Homes, the community features ranch-style homes ranging from 1,950 to 2,240 square feet with 3-4 bedrooms. The community is now in the resale market phase.`,
+      answer: `Pewter Valley Estates is a community within Silverado Ranch—a sold-out Richmond American master-planned pocket in Southwest Las Vegas (zip code 89183), at Pyle Avenue and S Rancho Destino Rd. It features ranch-style homes from 1,950 to 2,240 square feet with 3-4 bedrooms. The community is now in the resale market phase.`,
     },
     {
       question: "Who is Dr. Jan Duffy?",
-      answer: "Dr. Jan Duffy is a specialized real estate agent focusing exclusively on Pewter Valley Estates and Southwest Las Vegas properties. With deep local market knowledge and expertise in resale transactions, market analysis, and investment properties, Dr. Jan Duffy helps buyers, sellers, and investors navigate the unique dynamics of this community.",
+      answer: "Dr. Jan Duffy is a specialized real estate agent focused on Silverado Ranch and Pewter Valley Estates (a community within Silverado Ranch), plus Southwest Las Vegas. With deep local market knowledge and expertise in resale transactions, market analysis, and investment properties, she helps buyers, sellers, and investors navigate neighborhood-specific dynamics.",
     },
     {
       question: "What types of homes are available in Pewter Valley Estates?",
@@ -46,11 +47,15 @@
     },
     {
       question: "Where is Pewter Valley Estates located?",
-      answer: `Pewter Valley Estates is located in Southwest Las Vegas at the intersection of Pyle Avenue and S Rancho Destino Rd, zip code 89183. The community offers easy access to I-15 and Las Vegas Boulevard, while maintaining a peaceful, rural-urban balance. Nearby amenities include Somerset Hills Park, Goett Family Park, Jimmy Pettyjohn Jr. Park, and the Southern Highlands Golf Club.`,
+      answer: `Pewter Valley Estates sits within Silverado Ranch in Southwest Las Vegas—Pyle Avenue and S Rancho Destino Rd, zip code 89183. The community offers easy access to I-15 and Las Vegas Boulevard, while maintaining a peaceful, rural-urban balance. Nearby amenities include Somerset Hills Park, Goett Family Park, Jimmy Pettyjohn Jr. Park, and the Southern Highlands Golf Club.`,
     },
     {
       question: "How can I buy or sell a home in Pewter Valley Estates?",
       answer: `Contact Dr. Jan Duffy at ${SITE_CONFIG.phone} for expert representation in buying or selling Pewter Valley Estates properties. Dr. Jan Duffy provides comprehensive services including market analysis, home valuations, buyer representation, seller marketing, and investment property consultation.`,
+    },
+    {
+      question: "Does Dr. Jan Duffy serve Silverado Ranch and Henderson?",
+      answer: `Yes. Silverado Ranch spans parts of Henderson and southeast Clark County (including 89123 and 89183). Pewter Valley Estates is a community within Silverado Ranch. Visit the Silverado Ranch page on this site for area context, then call ${SITE_CONFIG.phone} to align MLS search and tours to your commute, schools, and lifestyle priorities.`,
     },
   ]
   
@@ -81,32 +86,34 @@
   <!-- Primary Hero Section -->
   <HeroSection />
 
-  <!-- Quick Lead Capture -->
-  <section class="quick-lead">
-    <div class="container">
-      <div class="lead-grid">
-        <div class="lead-form-card">
-          <h3>Get Instant Access to New Listings</h3>
-          <p>Be the first to know when new homes hit the market</p>
-          <LeadCaptureForm 
-            formType="buyer"
-            title=""
-            subtitle=""
-          />
-        </div>
-        
-        <div class="lead-form-card">
-          <h3>Get Your Home's Value Instantly</h3>
-          <p>See what your home is worth in today's market</p>
-          <LeadCaptureForm 
-            formType="valuation"
-            title=""
-            subtitle=""
-          />
+  <!-- Quick Lead Capture (scroll reveal + transitions) -->
+  <SectionReveal>
+    <section class="quick-lead">
+      <div class="container">
+        <div class="lead-grid">
+          <div class="lead-form-card">
+            <h3>Get Instant Access to New Listings</h3>
+            <p>Be the first to know when new homes hit the market</p>
+            <LeadCaptureForm 
+              formType="buyer"
+              title=""
+              subtitle=""
+            />
+          </div>
+          
+          <div class="lead-form-card">
+            <h3>Get Your Home's Value Instantly</h3>
+            <p>See what your home is worth in today's market</p>
+            <LeadCaptureForm 
+              formType="valuation"
+              title=""
+              subtitle=""
+            />
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </SectionReveal>
 
   <!-- Buyer/Seller Pathways -->
   <section class="pathways">

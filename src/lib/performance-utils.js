@@ -2,22 +2,16 @@
 
 // Image optimization helpers
 export function getOptimizedImageUrl(src, options = {}) {
-  const {
-    width = 800,
-    height = 600,
-    quality = 80,
-    format = 'webp',
-    fit = 'cover'
-  } = options
+  const { width = 800, height = 600, quality = 80, format = "webp", fit = "cover" } = options
 
   // If using a CDN like Vercel or Cloudinary, add optimization parameters
-  if (src.includes('vercel.app') || src.includes('cloudinary.com')) {
+  if (src.includes("vercel.app") || src.includes("cloudinary.com")) {
     const params = new URLSearchParams({
       w: width.toString(),
       h: height.toString(),
       q: quality.toString(),
       f: format,
-      fit
+      fit,
     })
     return `${src}?${params.toString()}`
   }
@@ -28,8 +22,8 @@ export function getOptimizedImageUrl(src, options = {}) {
 // Lazy loading configuration
 export function getLazyLoadingConfig() {
   return {
-    rootMargin: '50px 0px',
-    threshold: 0.1
+    rootMargin: "50px 0px",
+    threshold: 0.1,
   }
 }
 
@@ -69,25 +63,26 @@ export function getCriticalCSS() {
 // Resource hints for performance
 export function getResourceHints() {
   return [
-    { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
-    { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: true },
-    { rel: 'preconnect', href: 'https://www.google-analytics.com' },
-    { rel: 'preconnect', href: 'https://drjanduffy.realscout.com' },
-    { rel: 'dns-prefetch', href: '//panomaps.us' },
-    { rel: 'dns-prefetch', href: '//www.richmondamerican.com' }
+    { rel: "preconnect", href: "https://fonts.googleapis.com" },
+    { rel: "preconnect", href: "https://fonts.gstatic.com", crossorigin: true },
+    { rel: "preconnect", href: "https://www.google-analytics.com" },
+    { rel: "preconnect", href: "https://drjanduffy.realscout.com" },
+    { rel: "dns-prefetch", href: "//panomaps.us" },
+    { rel: "dns-prefetch", href: "//www.richmondamerican.com" },
   ]
 }
 
 // Service Worker registration
 export function registerServiceWorker() {
-  if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js')
-        .then(registration => {
-          console.log('SW registered: ', registration)
+  if (typeof window !== "undefined" && "serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker
+        .register("/sw.js")
+        .then((registration) => {
+          console.log("SW registered: ", registration)
         })
-        .catch(registrationError => {
-          console.log('SW registration failed: ', registrationError)
+        .catch((registrationError) => {
+          console.log("SW registration failed: ", registrationError)
         })
     })
   }
@@ -95,14 +90,14 @@ export function registerServiceWorker() {
 
 // Web Vitals monitoring
 export function trackWebVitals() {
-  if (typeof window !== 'undefined') {
+  if (typeof window !== "undefined") {
     // Track Core Web Vitals
-    import('web-vitals').then(({ getCLS, getFID, getFCP, getLCP, getTTFB }) => {
-      getCLS(console.log)
-      getFID(console.log)
-      getFCP(console.log)
-      getLCP(console.log)
-      getTTFB(console.log)
+    import("web-vitals").then(({ onCLS, onFCP, onINP, onLCP, onTTFB }) => {
+      onCLS(console.log)
+      onINP(console.log)
+      onFCP(console.log)
+      onLCP(console.log)
+      onTTFB(console.log)
     })
   }
 }
@@ -111,16 +106,16 @@ export function trackWebVitals() {
 export function preloadCriticalImages() {
   // Only include images that actually exist in static/
   const criticalImages = [
-    '/images/hero-bg.webp',
-    '/images/dr-jan-headshot.jpg'
+    "/images/hero-bg.webp",
+    "/images/dr-jan-headshot.jpg",
     // Add more existing images here as needed
   ]
 
-  return criticalImages.map(src => ({
-    rel: 'preload',
-    as: 'image',
+  return criticalImages.map((src) => ({
+    rel: "preload",
+    as: "image",
     href: src,
-    type: src.endsWith('.webp') ? 'image/webp' : 'image/jpeg'
+    type: src.endsWith(".webp") ? "image/webp" : "image/jpeg",
   }))
 }
 
@@ -136,39 +131,39 @@ export function preloadFonts() {
 
 // Bundle analysis helper
 export function analyzeBundleSize() {
-  if (typeof window !== 'undefined' && process.env.NODE_ENV === 'development') {
+  if (typeof window !== "undefined" && process.env.NODE_ENV === "development") {
     // Log bundle size information
-    const scripts = document.querySelectorAll('script[src]')
+    const scripts = document.querySelectorAll("script[src]")
     const stylesheets = document.querySelectorAll('link[rel="stylesheet"]')
-    
-    console.group('Bundle Analysis')
-    console.log('Scripts:', scripts.length)
-    console.log('Stylesheets:', stylesheets.length)
+
+    console.group("Bundle Analysis")
+    console.log("Scripts:", scripts.length)
+    console.log("Stylesheets:", stylesheets.length)
     console.groupEnd()
   }
 }
 
 // Memory usage monitoring
 export function monitorMemoryUsage() {
-  if (typeof window !== 'undefined' && 'memory' in performance) {
+  if (typeof window !== "undefined" && "memory" in performance) {
     const memory = performance.memory
-    console.log('Memory Usage:', {
-      used: Math.round(memory.usedJSHeapSize / 1048576) + ' MB',
-      total: Math.round(memory.totalJSHeapSize / 1048576) + ' MB',
-      limit: Math.round(memory.jsHeapSizeLimit / 1048576) + ' MB'
+    console.log("Memory Usage:", {
+      used: `${Math.round(memory.usedJSHeapSize / 1048576)} MB`,
+      total: `${Math.round(memory.totalJSHeapSize / 1048576)} MB`,
+      limit: `${Math.round(memory.jsHeapSizeLimit / 1048576)} MB`,
     })
   }
 }
 
 // Intersection Observer for lazy loading
 export function createIntersectionObserver(callback, options = {}) {
-  if (typeof window === 'undefined') return null
+  if (typeof window === "undefined") return null
 
   const defaultOptions = {
     root: null,
-    rootMargin: '50px 0px',
+    rootMargin: "50px 0px",
     threshold: 0.1,
-    ...options
+    ...options,
   }
 
   return new IntersectionObserver(callback, defaultOptions)
@@ -190,11 +185,11 @@ export function debounce(func, wait) {
 // Throttle function for performance
 export function throttle(func, limit) {
   let inThrottle
-  return function(...args) {
+  return function (...args) {
     if (!inThrottle) {
       func.apply(this, args)
       inThrottle = true
-      setTimeout(() => inThrottle = false, limit)
+      setTimeout(() => (inThrottle = false), limit)
     }
   }
 }

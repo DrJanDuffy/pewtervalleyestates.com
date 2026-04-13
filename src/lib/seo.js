@@ -1,15 +1,14 @@
 /**
- * Comprehensive SEO utilities for Pewter Valley Estates Las Vegas
- * Includes structured data, meta tags, and local SEO optimization
+ * SEO utilities — Silverado Ranch, Henderson & Las Vegas Valley (includes Pewter Valley Estates 89183)
  */
 
-// Base site configuration - MUST match Google Business Profile exactly
+// Base site configuration — businessName = public site title; name = agent for RealEstateAgent schema
 export const SITE_CONFIG = {
-  name: "Dr. Jan Duffy - Real Estate Agent",
-  businessName: "Pewter Valley Estates",
-  tagline: "Las Vegas New Home Community by Richmond American Homes",
+  name: "Dr. Jan Duffy",
+  businessName: "Silverado Ranch | Homes by Dr. Jan Duffy",
+  tagline: "Homes by Dr. Jan Duffy",
   description:
-    "Discover your dream home at Pewter Valley Estates in Las Vegas, Nevada. Modern new construction homes with resort-style amenities in prime Las Vegas locations.",
+    "Silverado Ranch real estate in Henderson and Clark County—including Pewter Valley Estates, a community within Silverado Ranch (89183). Dr. Jan Duffy helps buyers and sellers with MLS-backed search, pricing, and neighborhood context.",
   url: "https://www.pewtervalleyestates.com",
   logo: "https://www.pewtervalleyestates.com/logo.png",
   // Phone format: 702 500-1955 for display, +17025001955 for tel: links
@@ -64,6 +63,59 @@ export const SITE_CONFIG = {
   },
 }
 
+/** Silverado Ranch (Henderson / Clark County) — Pewter Valley Estates is a community within this broader area */
+export const SILVERADO_RANCH = {
+  name: "Silverado Ranch",
+  city: "Henderson",
+  county: "Clark County",
+  state: "Nevada",
+  zips: ["89123", "89183"],
+  summary:
+    "Silverado Ranch is a master-planned area in the southeast Las Vegas Valley (developer American West; roots in the 1990s) with 20+ subdivisions spanning parts of Henderson and Clark County. Pewter Valley Estates is a community within Silverado Ranch (89183). Housing runs from condos and townhomes to single-family and custom estates, with mature lots and strong freeway access toward I-15 and I-215.",
+  /** Third-party-style aggregates — not a valuation; Dr. Jan Duffy provides MLS-backed figures per address */
+  marketSnapshotIllustrative: {
+    averageValueDisplay: "$476,563",
+    avgPricePerSqFtDisplay: "$269",
+    homesForSaleDisplay: "391",
+    footnote:
+      "Illustrative figures from public market overviews; inventory, prices, and $/sf change daily. Ask Dr. Jan Duffy for a current MLS snapshot on the homes you care about.",
+  },
+  masterPlan: {
+    developer: "American West",
+    era: "1990s",
+    subdivisionsPlus: "20+",
+    housingTypes: [
+      "Condos",
+      "Townhomes",
+      "Detached single-family homes",
+      "Custom estates",
+    ],
+  },
+  access: {
+    freeways: ["I-15", "I-215"],
+    stripMilesApprox: 10,
+    positioning:
+      "Central location between Henderson and Las Vegas—buyers often cite freeway access and a short drive to major retail, dining, and the Las Vegas Strip.",
+  },
+  /** Reported banded ranges — verify against live MLS comps */
+  priceBandsIllustrative: [
+    { label: "Condos & townhomes", range: "$209,000–$529,000" },
+    { label: "Single-family (incl. Spanish Mission & ranch styles, 2–5 beds)", range: "$300,000–$630,000" },
+    { label: "Mid-sized estates", range: "$630,000–$1.5 million" },
+    { label: "Large estates (about five- to ten-bedroom)", range: "up to about $3.75 million" },
+  ],
+  schoolsReference: {
+    district: "Clark County School District",
+    examples: [
+      "John C. Bass Elementary School",
+      "Charles A. Silvestri Junior High School",
+      "Liberty High School",
+    ],
+    programsNote:
+      "Liberty High offers dual-enrollment coursework with Nevada State College for students on an education pathway. The University of Nevada, Reno Extension is a short drive north of much of the area—confirm programs, boundaries, and ratings with CCSD and school sites before you buy.",
+  },
+}
+
 // Las Vegas neighborhood keywords for SEO
 export const NEIGHBORHOOD_KEYWORDS = [
   "Las Vegas new homes",
@@ -81,6 +133,12 @@ export const NEIGHBORHOOD_KEYWORDS = [
   "Las Vegas luxury homes",
   "Las Vegas modern homes",
   "Las Vegas energy efficient homes",
+  "Silverado Ranch Henderson NV",
+  "Pewter Valley Estates Silverado Ranch",
+  "Silverado Ranch real estate",
+  "Henderson NV 89123 homes",
+  "Clark County NV 89183 real estate",
+  "suburban homes Henderson Las Vegas",
 ]
 
 // Property types and features
@@ -102,7 +160,7 @@ export const PROPERTY_FEATURES = [
  */
 export function generateMetaTags(pageData = {}) {
   const {
-    title = SITE_CONFIG.name,
+    title = SITE_CONFIG.businessName,
     description = SITE_CONFIG.description,
     image = `${SITE_CONFIG.url}/og-image.jpg`,
     type = "website",
@@ -121,7 +179,7 @@ export function generateMetaTags(pageData = {}) {
     "og:image": image,
     "og:url": canonical,
     "og:type": type,
-    "og:site_name": SITE_CONFIG.name,
+    "og:site_name": SITE_CONFIG.businessName,
     "og:locale": "en_US",
     "twitter:card": "summary_large_image",
     "twitter:title": title,
@@ -143,7 +201,7 @@ export function generateLocalBusinessSchema() {
     "@context": "https://schema.org",
     "@type": "RealEstateAgent",
     name: SITE_CONFIG.name,
-    alternateName: SITE_CONFIG.businessName,
+    alternateName: `${SITE_CONFIG.businessName}; Pewter Valley Estates Las Vegas`,
     description: SITE_CONFIG.description,
     url: SITE_CONFIG.url,
     logo: SITE_CONFIG.logo,
@@ -179,6 +237,12 @@ export function generateLocalBusinessSchema() {
       {
         "@type": "City",
         name: "Summerlin",
+      },
+      {
+        "@type": "Place",
+        name: "Silverado Ranch",
+        description:
+          "Suburban neighborhood in Henderson and southeast Clark County, Nevada (89123, 89183). Pewter Valley Estates is a community within Silverado Ranch.",
       },
     ],
     serviceType: [
@@ -234,8 +298,8 @@ export function generateOrganizationSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: SITE_CONFIG.name,
-    alternateName: "Pewter Valley Estates Las Vegas",
+    name: SITE_CONFIG.businessName,
+    alternateName: "Dr. Jan Duffy · Pewter Valley Estates Las Vegas",
     description: SITE_CONFIG.description,
     url: SITE_CONFIG.url,
     logo: SITE_CONFIG.logo,

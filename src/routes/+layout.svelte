@@ -1,41 +1,42 @@
 <script>
 import { onMount } from "svelte"
-import { page } from "$app/stores"
 import { browser } from "$app/environment"
+import { page } from "$app/state"
 import { initGA, trackPageView } from "$lib/analytics"
-import { webVitals } from "$lib/vitals"
-import Header from "$lib/header/Header.svelte"
 import Footer from "$lib/Footer.svelte"
+import Header from "$lib/header/Header.svelte"
+import { webVitals } from "$lib/vitals"
 import "../app.css"
+
+/** @type {{ children: import("svelte").Snippet }} */
+let { children } = $props()
 
 const analyticsId = import.meta.env.VERCEL_ANALYTICS_ID
 
-// Initialize Google Analytics on mount
 onMount(() => {
   if (browser) {
     initGA()
   }
+  if (browser && analyticsId) {
+    webVitals({
+      path: page.url.pathname,
+      params: page.params,
+      analyticsId,
+    })
+  }
 })
 
-// Track page views when route changes
-$: if (browser && $page) {
-  trackPageView($page.url.href, document.title)
-}
-
-$: if (browser && analyticsId && $page) {
-  webVitals({
-    path: $page.url.pathname,
-    params: $page.params,
-    analyticsId,
-  })
-}
+$effect(() => {
+  if (!browser) return
+  trackPageView(page.url.href, document.title)
+})
 </script>
 
 <div class="app-layout">
   <Header />
 
   <main>
-    <slot />
+    {@render children()}
   </main>
 
   <Footer />

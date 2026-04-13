@@ -1,23 +1,24 @@
 <script>
+  import { fade } from "svelte/transition"
   import EnhancedSEOHead from "$lib/EnhancedSEOHead.svelte"
   import { SITE_CONFIG } from "$lib/seo.js"
 
   let { error, status } = $props()
 
   const pageData = {
-    title: "Page Not Found - 404 | Pewter Valley Estates",
+    title: `Page Not Found - 404 | ${SITE_CONFIG.businessName}`,
     description: `The page you're looking for doesn't exist. Return to ${SITE_CONFIG.businessName} homepage.`,
     canonical: `${SITE_CONFIG.url}/404`,
     noindex: true,
   }
 
-  const errorStatus = status || 404
-  const errorMessage = error?.message || "Page not found"
+  const errorStatus = $derived(status ?? 404)
+  const errorMessage = $derived(error?.message ?? "Page not found")
 </script>
 
 <EnhancedSEOHead {pageData} />
 
-<main class="error-page">
+<main class="error-page" in:fade={{ duration: 200 }}>
   <div class="container">
     <div class="error-content">
       <h1>{errorStatus}</h1>

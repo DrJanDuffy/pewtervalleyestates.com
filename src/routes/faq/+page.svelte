@@ -8,8 +8,8 @@
   import { SITE_CONFIG } from "$lib/seo.js"
   
   const pageData = {
-    title: "FAQ | Pewter Valley Estates Real Estate Questions Answered by Dr. Jan Duffy",
-    description: `Frequently asked questions about Pewter Valley Estates real estate, buying, selling, and investing in Southwest Las Vegas (89183). Expert answers by Dr. Jan Duffy.`,
+    title: `FAQ | Silverado Ranch & Las Vegas Valley Real Estate | ${SITE_CONFIG.businessName}`,
+    description: `Frequently asked questions about Pewter Valley Estates, Silverado Ranch, buying, selling, and investing in Southwest Las Vegas (89183) and Clark County. Expert answers by Dr. Jan Duffy.`,
     image: `${SITE_CONFIG.url}/og-image.jpg`,
     type: "website",
     canonical: `${SITE_CONFIG.url}/faq`,
@@ -24,7 +24,7 @@
   const faqs = [
     {
       question: "What is Pewter Valley Estates?",
-      answer: `Pewter Valley Estates is a sold-out master-planned community in Southwest Las Vegas (zip code 89183), located at the intersection of Pyle Avenue and S Rancho Destino Rd. Built by Richmond American Homes, the community features ranch-style homes ranging from 1,950 to 2,240 square feet with 3-4 bedrooms. The community is now in the resale market phase, meaning all available properties are previously owned homes.`,
+      answer: `Pewter Valley Estates is a community within Silverado Ranch—a sold-out Richmond American master-planned pocket in Southwest Las Vegas (zip code 89183), at Pyle Avenue and S Rancho Destino Rd. The community features ranch-style homes from 1,950 to 2,240 square feet with 3-4 bedrooms. It is now in the resale market phase, meaning available properties are previously owned homes.`,
     },
     {
       question: "What types of homes are available in Pewter Valley Estates?",
@@ -32,7 +32,7 @@
     },
     {
       question: "Where is Pewter Valley Estates located?",
-      answer: `Pewter Valley Estates is located in Southwest Las Vegas at the intersection of Pyle Avenue and S Rancho Destino Rd, zip code 89183. The community offers easy access to I-15 and Las Vegas Boulevard, while maintaining a peaceful, rural-urban balance. Nearby amenities include Somerset Hills Park, Goett Family Park, Jimmy Pettyjohn Jr. Park, and the Southern Highlands Golf Club.`,
+      answer: `Pewter Valley Estates sits within Silverado Ranch in Southwest Las Vegas—Pyle Avenue and S Rancho Destino Rd, zip code 89183. The community offers easy access to I-15 and Las Vegas Boulevard, while maintaining a peaceful, rural-urban balance. Nearby amenities include Somerset Hills Park, Goett Family Park, Jimmy Pettyjohn Jr. Park, and the Southern Highlands Golf Club.`,
     },
     {
       question: "How can I buy a home in Pewter Valley Estates?",
@@ -52,7 +52,7 @@
     },
     {
       question: "What makes Dr. Jan Duffy different from other real estate agents?",
-      answer: `Dr. Jan Duffy specializes exclusively in Pewter Valley Estates and Southwest Las Vegas, providing community-specific expertise that generalist agents cannot match. Her deep knowledge of the resale market, buyer and seller representation, investment analysis, and ongoing market intelligence ensures clients receive expert guidance tailored to this specific community.`,
+      answer: `Dr. Jan Duffy specializes in Silverado Ranch and Pewter Valley Estates (a community within Silverado Ranch), plus Southwest Las Vegas—community-specific expertise that generalist agents cannot match. Her deep knowledge of resale markets, buyer and seller representation, investment analysis, and ongoing market intelligence helps clients in this area and nearby pockets.`,
     },
   ]
   
@@ -67,10 +67,10 @@
 <main class="faq-page">
   <section class="hero">
     <div class="container">
-      <h1>FAQ | Pewter Valley Estates Real Estate Questions Answered by Dr. Jan Duffy</h1>
+      <h1>FAQ | Silverado Ranch &amp; Las Vegas Valley Real Estate | Dr. Jan Duffy</h1>
       <p class="hero-subtitle">Expert Answers to Your Real Estate Questions in Southwest Las Vegas (89183)</p>
       <p class="hero-description">
-        Whether you're buying, selling, or investing in Pewter Valley Estates, you likely have questions about the community, market conditions, and real estate process. Dr. Jan Duffy answers frequently asked questions about Pewter Valley Estates real estate, providing expert insights based on her specialized knowledge of this Southwest Las Vegas community and years of experience helping clients achieve their real estate goals.
+        Pewter Valley Estates is a community within Silverado Ranch. Whether you're buying, selling, or investing here, you likely have questions about the neighborhood, market conditions, and process. Dr. Jan Duffy answers frequently asked questions with expert insights based on localized Silverado Ranch and Pewter Valley knowledge.
       </p>
     </div>
   </section>

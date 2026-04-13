@@ -16,9 +16,10 @@
       title: 'Home',
       related: [
         { href: '/homes-for-sale', label: 'Browse Homes for Sale in Pewter Valley', description: 'View all available properties' },
+        { href: '/silverado-ranch', label: 'Silverado Ranch (Henderson area)', description: 'Suburban focus: 89123 & 89183' },
         { href: '/sell-your-home', label: 'Sell Your Las Vegas Home', description: 'Get expert selling assistance' },
         { href: '/about', label: 'About Dr. Jan Duffy', description: 'Meet your local real estate expert' },
-        { href: '/neighborhood', label: 'Explore Pewter Valley Estates', description: 'Discover the community' }
+        { href: '/neighborhood', label: 'Pewter Valley Estates (in Silverado Ranch)', description: 'Richmond American resale community' }
       ]
     },
     '/homes-for-sale': {
@@ -60,19 +61,68 @@
     '/neighborhood': {
       title: 'Pewter Valley Estates',
       related: [
+        { href: '/pewter-valley-estates/amenities', label: 'Nearby shopping & parks', description: 'Amenities guide (split URL)' },
+        { href: '/silverado-ranch/getting-around', label: 'Commute & transportation', description: 'Freeways, airport, transit' },
         { href: '/homes-for-sale', label: 'Homes for Sale in Pewter Valley', description: 'Browse available properties' },
-        { href: '/southwest-las-vegas', label: 'Southwest Las Vegas Overview', description: 'Explore the region' },
-        { href: '/neighborhood-guide', label: 'Las Vegas Neighborhoods', description: 'Compare communities' },
-        { href: '/photos', label: 'Community Photos', description: 'See Pewter Valley' }
+        { href: '/silverado-ranch', label: 'Silverado Ranch area', description: 'Broader neighborhood; Pewter Valley sits inside' },
+        { href: '/southwest-las-vegas', label: 'Southwest Las Vegas Overview', description: 'Explore the region' }
       ]
     },
     '/southwest-las-vegas': {
       title: 'Southwest Las Vegas',
       related: [
         { href: '/neighborhood', label: 'Pewter Valley Estates', description: 'Premier community' },
+        { href: '/silverado-ranch', label: 'Silverado Ranch', description: 'Henderson & Clark County 89123/89183' },
         { href: '/homes-for-sale', label: 'Southwest Las Vegas Homes', description: 'Browse listings' },
         { href: '/neighborhood-guide', label: 'All Las Vegas Neighborhoods', description: 'Explore more areas' },
         { href: '/market-analysis', label: 'Southwest Market Trends', description: 'Local market data' }
+      ]
+    },
+    '/silverado-ranch': {
+      title: 'Silverado Ranch',
+      related: [
+        { href: '/pewter-valley-estates/amenities', label: 'Nearby amenities (Pewter)', description: 'Shopping, parks, schools' },
+        { href: '/silverado-ranch/getting-around', label: 'Commute & transport', description: 'I-15, I-215, airport' },
+        { href: '/silverado-ranch/attractions', label: 'Attractions & day trips', description: 'Strip, Hoover Dam, Valley of Fire' },
+        { href: '/silverado-ranch/history', label: 'Silverado Ranch history', description: 'Ranch roots to today' },
+        { href: '/homes-for-sale', label: 'Homes for Sale', description: 'Browse current listings' },
+        { href: '/neighborhood', label: 'Pewter Valley Estates', description: 'Community within Silverado Ranch (89183)' }
+      ]
+    },
+    '/pewter-valley-estates/amenities': {
+      title: 'Nearby amenities',
+      related: [
+        { href: '/neighborhood', label: 'Pewter Valley Estates hub', description: 'Community overview & map' },
+        { href: '/silverado-ranch', label: 'Silverado Ranch real estate', description: '89123 & 89183 focus' },
+        { href: '/silverado-ranch/getting-around', label: 'Commute & transport', description: 'Freeways and airport' },
+        { href: '/homes-for-sale', label: 'Homes for sale', description: 'Search listings' }
+      ]
+    },
+    '/silverado-ranch/history': {
+      title: 'Silverado Ranch history',
+      related: [
+        { href: '/silverado-ranch', label: 'Silverado Ranch overview', description: 'Market & lifestyle context' },
+        { href: '/neighborhood', label: 'Pewter Valley Estates', description: 'Richmond American pocket' },
+        { href: '/silverado-ranch/attractions', label: 'Attractions near the area', description: 'Lifestyle orientation' },
+        { href: '/contact', label: 'Ask Dr. Jan Duffy', description: 'Tour & timing questions' }
+      ]
+    },
+    '/silverado-ranch/getting-around': {
+      title: 'Getting around',
+      related: [
+        { href: '/silverado-ranch', label: 'Silverado Ranch', description: 'Area overview' },
+        { href: '/pewter-valley-estates/amenities', label: 'Nearby amenities', description: 'Daily shopping & parks' },
+        { href: '/silverado-ranch/attractions', label: 'Attractions & day trips', description: 'Strip & beyond' },
+        { href: '/las-vegas-relocation-guide', label: 'Relocation guide', description: 'Move planning' }
+      ]
+    },
+    '/silverado-ranch/attractions': {
+      title: 'Attractions',
+      related: [
+        { href: '/silverado-ranch/getting-around', label: 'Commute & transport', description: 'How far is the Strip?' },
+        { href: '/neighborhood-guide', label: 'Las Vegas neighborhoods', description: 'Broader area compare' },
+        { href: '/silverado-ranch', label: 'Silverado Ranch homes', description: 'Buy or sell locally' },
+        { href: '/photos', label: 'Community photos', description: 'Visual context' }
       ]
     },
     '/about': {

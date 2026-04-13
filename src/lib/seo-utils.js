@@ -109,6 +109,7 @@ export function generateKeywords(pageData) {
   const baseKeywords = [
     "Las Vegas real estate",
     "Dr. Jan Duffy",
+    "Silverado Ranch homes",
     "Pewter Valley Estates",
     "Las Vegas homes for sale",
     "new construction Las Vegas",

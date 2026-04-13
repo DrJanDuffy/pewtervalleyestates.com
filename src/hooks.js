@@ -1,5 +1,13 @@
 import * as cookie from "cookie"
 
+/** @type {import('@sveltejs/kit').Reroute} */
+export function reroute() {
+  // Optional URL rewriting before routing; return a pathname string to rewrite, or nothing.
+}
+
+/** @type {import('@sveltejs/kit').Transport} */
+export const transport = {}
+
 /** @type {import('@sveltejs/kit').Handle} */
 export const handle = async ({ event, resolve }) => {
   const cookies = cookie.parse(event.request.headers.get("cookie") || "")
@@ -23,12 +31,12 @@ export const handle = async ({ event, resolve }) => {
 }
 
 /** @type {import('@sveltejs/kit').HandleFetch} */
-export const handleFetch = async ({ event, request, fetch }) => {
+export const handleFetch = async ({ request, fetch }) => {
   return fetch(request)
 }
 
 /** @type {import('@sveltejs/kit').HandleServerError} */
-export const handleError = async ({ error, event }) => {
+export const handleError = async ({ error }) => {
   console.error("An error occurred on the server:", error)
   return {
     message: "An unexpected error occurred",

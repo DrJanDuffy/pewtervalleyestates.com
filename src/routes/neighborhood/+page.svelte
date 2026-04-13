@@ -5,12 +5,14 @@ import EnhancedSEOHead from "$lib/EnhancedSEOHead.svelte"
 import Breadcrumbs from "$lib/Breadcrumbs.svelte"
 import RichmondAmericanAssets from "$lib/RichmondAmericanAssets.svelte"
 import PanoramicMap from "$lib/PanoramicMap.svelte"
+import RelatedPages from "$lib/RelatedPages.svelte"
 import { SITE_CONFIG } from "$lib/seo.js"
 
-// SEO data for neighborhood page
+// SEO — Pewter Valley Estates is a community within Silverado Ranch
 const pageData = {
-  title: "Silverado Ranch Neighborhood - Pewter Valley Estates Las Vegas",
-  description: "Discover the historic Silverado Ranch neighborhood surrounding Pewter Valley Estates. Explore local amenities, schools, shopping, dining, and entertainment options in this vibrant Las Vegas community with rich history dating back to the late 1800s.",
+  title: "Pewter Valley Estates | A Silverado Ranch Community in Las Vegas (89183)",
+  description:
+    "Pewter Valley Estates (89183) within Silverado Ranch—community map, location overview, and links to dedicated guides: nearby amenities, commute/transport, attractions, and area history. Dr. Jan Duffy.",
   image: `${SITE_CONFIG.url}/neighborhood-og-image.jpg`,
   type: "website",
   canonical: `${SITE_CONFIG.url}/neighborhood`,
@@ -22,227 +24,6 @@ const breadcrumbs = [
   { name: "Home", url: "/" },
   { name: "Neighborhood", url: "/neighborhood" }
 ]
-
-// Neighborhood data
-const neighborhoodFeatures = [
-  {
-    category: "Shopping & Dining",
-    features: [
-      {
-        name: "Silverado Ranch Shopping Center",
-        distance: "2 minutes",
-        description: "Convenient local shopping with grocery stores, restaurants, and services",
-        type: "shopping"
-      },
-      {
-        name: "M Resort Spa Casino",
-        distance: "5 minutes",
-        description: "Luxury resort with fine dining, entertainment, and gaming",
-        type: "entertainment"
-      },
-      {
-        name: "Green Valley Ranch Resort & Casino",
-        distance: "8 minutes",
-        description: "Upscale resort with premium dining and entertainment",
-        type: "entertainment"
-      },
-      {
-        name: "The District at Green Valley Ranch",
-        distance: "10 minutes",
-        description: "Premier shopping center with high-end retailers and restaurants",
-        type: "shopping"
-      }
-    ]
-  },
-  {
-    category: "Education",
-    features: [
-      {
-        name: "Silverado Ranch Elementary School",
-        distance: "1 minute",
-        description: "Highly rated elementary school serving the Silverado Ranch community",
-        type: "school"
-      },
-      {
-        name: "Silverado High School",
-        distance: "3 minutes",
-        description: "Top-rated public high school with excellent academics and sports programs",
-        type: "school"
-      },
-      {
-        name: "University of Nevada, Las Vegas",
-        distance: "15 minutes",
-        description: "Major university with diverse programs and research facilities",
-        type: "university"
-      },
-      {
-        name: "Nevada State College",
-        distance: "8 minutes",
-        description: "Growing four-year college with modern facilities and programs",
-        type: "university"
-      }
-    ]
-  },
-  {
-    category: "Recreation & Parks",
-    features: [
-      {
-        name: "Silverado Ranch Park",
-        distance: "1 minute",
-        description: "Beautiful community park with walking trails, playgrounds, and sports facilities",
-        type: "park"
-      },
-      {
-        name: "Reflection Bay Golf Club",
-        distance: "5 minutes",
-        description: "Championship golf course with stunning lake views and excellent facilities",
-        type: "golf"
-      },
-      {
-        name: "Lake Las Vegas",
-        distance: "8 minutes",
-        description: "Resort community with water activities, dining, and entertainment",
-        type: "recreation"
-      },
-      {
-        name: "Henderson Bird Viewing Preserve",
-        distance: "12 minutes",
-        description: "Natural preserve with walking trails and bird watching opportunities",
-        type: "nature"
-      }
-    ]
-  },
-  {
-    category: "Healthcare & Services",
-    features: [
-      {
-        name: "St. Rose Dominican Hospital - Siena Campus",
-        distance: "5 minutes",
-        description: "Full-service hospital with emergency care and specialized services",
-        type: "healthcare"
-      },
-      {
-        name: "Silverado Ranch Library",
-        distance: "2 minutes",
-        description: "Modern library with extensive resources, programs, and community events",
-        type: "library"
-      },
-      {
-        name: "Henderson Police Department",
-        distance: "3 minutes",
-        description: "Local law enforcement ensuring community safety and security",
-        type: "safety"
-      },
-      {
-        name: "Silverado Ranch Fire Station",
-        distance: "1 minute",
-        description: "Fire and emergency services serving the Silverado Ranch community",
-        type: "safety"
-      }
-    ]
-  }
-]
-
-// Local attractions
-const attractions = [
-  {
-    name: "The Strip",
-    distance: "15 minutes",
-    description: "World-famous Las Vegas Strip with casinos, shows, and entertainment",
-    image: "https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?w=400&h=300&fit=crop",
-    category: "Entertainment"
-  },
-  {
-    name: "Fremont Street Experience",
-    distance: "18 minutes",
-    description: "Historic downtown Las Vegas with light shows and live music",
-    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop",
-    category: "Entertainment"
-  },
-  {
-    name: "Hoover Dam",
-    distance: "45 minutes",
-    description: "Engineering marvel and National Historic Landmark",
-    image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop",
-    category: "Attractions"
-  },
-  {
-    name: "Valley of Fire State Park",
-    distance: "50 minutes",
-    description: "Nevada's oldest state park with stunning red rock formations",
-    image: "https://images.unsplash.com/photo-1506905925346-14bda5d4c4c0?w=400&h=300&fit=crop",
-    category: "Nature"
-  }
-]
-
-// Transportation options
-const transportation = [
-  {
-    name: "McCarran International Airport",
-    distance: "15 minutes",
-    description: "Major international airport with direct flights worldwide",
-    type: "airport"
-  },
-  {
-    name: "Las Vegas Monorail",
-    distance: "18 minutes",
-    description: "Convenient transportation along the Strip",
-    type: "public"
-  },
-  {
-    name: "RTC Transit",
-    distance: "1 minute",
-    description: "Local bus service connecting to all major areas",
-    type: "public"
-  },
-  {
-    name: "Interstate 215 (Beltway)",
-    distance: "2 minutes",
-    description: "Beltway providing easy access to all parts of the valley",
-    type: "highway"
-  }
-]
-
-let selectedCategory = "Shopping & Dining"
-let selectedFeature = null
-
-function selectCategory(category) {
-  selectedCategory = category
-  selectedFeature = null
-  trackEvent("neighborhood_category_select", {
-    category: category,
-    page: "neighborhood"
-  })
-}
-
-function selectFeature(feature) {
-  selectedFeature = feature
-  trackEvent("neighborhood_feature_select", {
-    feature: feature.name,
-    category: selectedCategory,
-    page: "neighborhood"
-  })
-}
-
-function getFeatureIcon(type) {
-  const icons = {
-    shopping: "🛍️",
-    entertainment: "🎭",
-    school: "🎓",
-    university: "🏛️",
-    golf: "⛳",
-    park: "🌳",
-    recreation: "🏊",
-    nature: "🏔️",
-    healthcare: "🏥",
-    library: "📚",
-    safety: "🛡️",
-    airport: "✈️",
-    public: "🚌",
-    highway: "🛣️"
-  }
-  return icons[type] || "📍"
-}
 
 onMount(() => {
   trackEvent("page_view", {
@@ -266,7 +47,7 @@ onMount(() => {
   <section class="neighborhood-hero">
     <div class="container">
       <div class="hero-content">
-        <h1>Pewter Valley Estates Neighborhood | Southwest Las Vegas Location Services by Dr. Jan Duffy</h1>
+        <h1>Pewter Valley Estates | A Silverado Ranch Community | Southwest Las Vegas (89183)</h1>
         <p class="hero-subtitle">
           Pewter Valley Estates is strategically located in Silverado Ranch, a vibrant Las Vegas community with rich history dating back to the late 1800s when the area was primarily used for ranching and agriculture. Over time, it has evolved and developed, becoming the thriving community it is today.
         </p>
@@ -351,173 +132,35 @@ onMount(() => {
     </div>
   </section>
 
-  <!-- Historical Background -->
-  <section class="historical-background">
+  <!-- Deep-dive guides (split for SEO / indexing) -->
+  <section class="guides-hub">
     <div class="container">
-      <h2>Silverado Ranch's Rich History</h2>
-      <div class="history-content">
-        <div class="history-text">
-          <p>
-            Silverado Ranch's rich history dates back to the late 1800s when the area was primarily used for ranching and agriculture. 
-            Over time, it has evolved and developed, becoming the vibrant community it is today. In the late 1800s, the land was primarily 
-            used for ranching and agriculture, establishing the foundation for what would become one of Las Vegas's most desirable neighborhoods.
-          </p>
-          <p>
-            Today, Silverado Ranch stands as a testament to the evolution of Las Vegas, seamlessly blending its historic ranching heritage 
-            with modern amenities and contemporary living. The community honors its agricultural roots while providing residents with 
-            all the conveniences of modern life in a thriving southeast Las Vegas location.
-          </p>
-        </div>
-        <div class="history-features">
-          <div class="history-feature">
-            <div class="history-icon">🏛️</div>
-            <h3>Historic Heritage</h3>
-            <p>Rich history dating back to the late 1800s ranching and agriculture era</p>
-          </div>
-          <div class="history-feature">
-            <div class="history-icon">🌱</div>
-            <h3>Agricultural Roots</h3>
-            <p>Originally used for ranching and agriculture, establishing community foundation</p>
-          </div>
-          <div class="history-feature">
-            <div class="history-icon">🏘️</div>
-            <h3>Modern Development</h3>
-            <p>Evolved into a vibrant, thriving community with contemporary amenities</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Neighborhood Features -->
-  <section class="neighborhood-features">
-    <div class="container">
-      <h2>Everything You Need Within Minutes in Silverado Ranch</h2>
-      <p class="section-subtitle">
-        Our convenient Silverado Ranch location puts you close to all the amenities and attractions that make southeast Las Vegas living exceptional.
+      <h2>Silverado Ranch &amp; Pewter Valley guides</h2>
+      <p class="guides-lead">
+        We split long neighborhood topics into focused pages—each with its own title, FAQs, and internal links—so Google can
+        index clear answers (AEO) and local entities (GEO) without one overloaded URL.
       </p>
-      
-      <!-- Category Tabs -->
-      <div class="category-tabs">
-        {#each neighborhoodFeatures as category}
-          <button 
-            class="category-tab"
-            class:active={selectedCategory === category.category}
-            onclick={() => selectCategory(category.category)}
-          >
-            {category.category}
-          </button>
-        {/each}
-      </div>
-
-      <!-- Features Grid -->
-      <div class="features-grid">
-        {#each neighborhoodFeatures.find(c => c.category === selectedCategory).features as feature}
-          <div 
-            class="feature-card"
-            class:selected={selectedFeature === feature}
-            onclick={() => selectFeature(feature)}
-            role="button"
-            tabindex="0"
-            onkeydown={(e) => e.key === 'Enter' && selectFeature(feature)}
-          >
-            <div class="feature-icon">{getFeatureIcon(feature.type)}</div>
-            <div class="feature-content">
-              <h3 class="feature-name">{feature.name}</h3>
-              <p class="feature-distance">{feature.distance} away</p>
-              <p class="feature-description">{feature.description}</p>
-            </div>
-          </div>
-        {/each}
-      </div>
-    </div>
-  </section>
-
-  <!-- Local Attractions -->
-  <section class="local-attractions">
-    <div class="container">
-      <h2>Explore Las Vegas & Beyond</h2>
-      <p class="section-subtitle">
-        From world-famous attractions to natural wonders, there's always something exciting to discover.
-      </p>
-      
-      <div class="attractions-grid">
-        {#each attractions as attraction}
-          <div class="attraction-card">
-            <div class="attraction-image">
-              <img src={attraction.image} alt={attraction.name} loading="lazy" />
-              <div class="attraction-category">{attraction.category}</div>
-            </div>
-            <div class="attraction-content">
-              <h3 class="attraction-name">{attraction.name}</h3>
-              <p class="attraction-distance">{attraction.distance} away</p>
-              <p class="attraction-description">{attraction.description}</p>
-            </div>
-          </div>
-        {/each}
-      </div>
-    </div>
-  </section>
-
-  <!-- Transportation -->
-  <section class="transportation">
-    <div class="container">
-      <h2>Easy Access to Everywhere from Silverado Ranch</h2>
-      <p class="section-subtitle">
-        Whether you're commuting to work, traveling for business, or exploring the city, 
-        getting around from Silverado Ranch is convenient and efficient.
-      </p>
-      
-      <div class="transportation-grid">
-        {#each transportation as transport}
-          <div class="transport-card">
-            <div class="transport-icon">{getFeatureIcon(transport.type)}</div>
-            <div class="transport-content">
-              <h3 class="transport-name">{transport.name}</h3>
-              <p class="transport-distance">{transport.distance} away</p>
-              <p class="transport-description">{transport.description}</p>
-            </div>
-          </div>
-        {/each}
-      </div>
-    </div>
-  </section>
-
-  <!-- Community Highlights -->
-  <section class="community-highlights">
-    <div class="container">
-      <h2>Why Residents Love Silverado Ranch</h2>
-      <div class="highlights-grid">
-        <div class="highlight-card">
-          <div class="highlight-icon">🏆</div>
-          <h3>Top-Rated Schools</h3>
-          <p>Excellent public and private schools with high academic standards and extracurricular programs.</p>
-        </div>
-        <div class="highlight-card">
-          <div class="highlight-icon">🛡️</div>
-          <h3>Safe & Secure</h3>
-          <p>Low crime rates and active community watch programs ensure a safe environment for families.</p>
-        </div>
-        <div class="highlight-card">
-          <div class="highlight-icon">🌳</div>
-          <h3>Green Spaces</h3>
-          <p>Beautiful parks, walking trails, and recreational facilities for outdoor activities and relaxation.</p>
-        </div>
-        <div class="highlight-card">
-          <div class="highlight-icon">🚗</div>
-          <h3>Easy Commuting</h3>
-          <p>Convenient access to major highways and employment centers throughout the Las Vegas valley.</p>
-        </div>
-        <div class="highlight-card">
-          <div class="highlight-icon">🛍️</div>
-          <h3>Shopping & Dining</h3>
-          <p>Upscale shopping centers, diverse restaurants, and entertainment venues just minutes away.</p>
-        </div>
-        <div class="highlight-card">
-          <div class="highlight-icon">🏥</div>
-          <h3>Healthcare Access</h3>
-          <p>Top-rated hospitals and medical facilities providing comprehensive healthcare services.</p>
-        </div>
+      <div class="guides-grid">
+        <a class="guide-card" href="/pewter-valley-estates/amenities">
+          <h3>Shopping, parks &amp; schools</h3>
+          <p>Browse amenities by category—dining, education, recreation, healthcare.</p>
+          <span class="guide-cta">Open amenities guide →</span>
+        </a>
+        <a class="guide-card" href="/silverado-ranch/getting-around">
+          <h3>Commute &amp; transportation</h3>
+          <p>Freeways, airport, transit, and why buyers cite easy regional access.</p>
+          <span class="guide-cta">Open commute guide →</span>
+        </a>
+        <a class="guide-card" href="/silverado-ranch/attractions">
+          <h3>Attractions &amp; day trips</h3>
+          <p>Strip, downtown, Hoover Dam, Valley of Fire—orientation for lifestyle buyers.</p>
+          <span class="guide-cta">View attractions →</span>
+        </a>
+        <a class="guide-card" href="/silverado-ranch/history">
+          <h3>Silverado Ranch history</h3>
+          <p>Ranching roots, development context, and why lot patterns vary.</p>
+          <span class="guide-cta">Read history →</span>
+        </a>
       </div>
     </div>
   </section>
@@ -542,6 +185,8 @@ onMount(() => {
       </div>
     </div>
   </section>
+
+  <RelatedPages currentPage="/neighborhood" />
 </main>
 
 <style>
@@ -608,58 +253,14 @@ onMount(() => {
     background: #f8fbff;
   }
 
-
-  /* Historical Background */
-  .historical-background {
-    padding: 4rem 0;
-    background: white;
-  }
-
-  .history-content {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 3rem;
-    align-items: start;
-    margin-top: 2rem;
-  }
-
-  .history-text p {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    margin-bottom: 1.5rem;
-    color: #333;
-  }
-
-  .history-features {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  .history-feature {
-    background: #f8fbff;
-    border-radius: 12px;
-    padding: 1.5rem;
-    text-align: center;
-    border: 2px solid #e8f4fd;
-  }
-
-  .history-icon {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-  }
-
-  .history-feature h3 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 0.75rem;
-    color: #0A2540;
-  }
-
-  .history-feature p {
+  .panoramic-map-section .section-subtitle {
+    font-size: 1.2rem;
     color: #666;
-    line-height: 1.5;
-    font-size: 0.95rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .overview-grid {
@@ -705,263 +306,70 @@ onMount(() => {
     transform: translateY(-2px);
   }
 
-  /* Neighborhood Features */
-  .neighborhood-features {
+  /* Guides hub (links to split SEO pages) */
+  .guides-hub {
     padding: 4rem 0;
+    background: #f8fafc;
+    border-top: 1px solid #e2e8f0;
   }
 
-  .section-subtitle {
-    font-size: 1.2rem;
-    color: #666;
+  .guides-hub h2 {
     text-align: center;
-    margin-bottom: 3rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .category-tabs {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 3rem;
-    flex-wrap: wrap;
-  }
-
-  .category-tab {
-    background: white;
-    border: 2px solid #e0e0e0;
-    padding: 0.75rem 1.5rem;
-    border-radius: 25px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  .category-tab:hover {
-    border-color: #3A8DDE;
-    color: #3A8DDE;
-  }
-
-  .category-tab.active {
-    background: #3A8DDE;
-    border-color: #3A8DDE;
-    color: white;
-  }
-
-  .features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
-  }
-
-  .feature-card {
-    background: white;
-    border-radius: 12px;
-    padding: 1.5rem;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-  }
-
-  .feature-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-    border-color: #3A8DDE;
-  }
-
-  .feature-card.selected {
-    border-color: #3A8DDE;
-    background: #f8fbff;
-  }
-
-  .feature-icon {
+    color: #1e3a8a;
     font-size: 2rem;
-    margin-bottom: 1rem;
-  }
-
-  .feature-name {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    color: #0A2540;
-  }
-
-  .feature-distance {
-    color: #3A8DDE;
-    font-weight: 600;
     margin-bottom: 0.75rem;
   }
 
-  .feature-description {
-    color: #666;
-    line-height: 1.5;
+  .guides-lead {
+    text-align: center;
+    color: #64748b;
+    max-width: 52rem;
+    margin: 0 auto 2rem;
+    font-size: 1.05rem;
+    line-height: 1.65;
   }
 
-  /* Local Attractions */
-  .local-attractions {
-    padding: 4rem 0;
-    background: #F7F9FC;
-  }
-
-  .attractions-grid {
+  .guides-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.25rem;
   }
 
-  .attraction-card {
+  .guide-card {
+    display: flex;
+    flex-direction: column;
     background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    transition: all 0.3s ease;
-  }
-
-  .attraction-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-  }
-
-  .attraction-image {
-    position: relative;
-    height: 200px;
-    overflow: hidden;
-  }
-
-  .attraction-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .attraction-category {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: #3A8DDE;
-    color: white;
-    padding: 0.25rem 0.75rem;
-    border-radius: 15px;
-    font-size: 0.875rem;
-    font-weight: 600;
-  }
-
-  .attraction-content {
-    padding: 1.5rem;
-  }
-
-  .attraction-name {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    color: #0A2540;
-  }
-
-  .attraction-distance {
-    color: #3A8DDE;
-    font-weight: 600;
-    margin-bottom: 0.75rem;
-  }
-
-  .attraction-description {
-    color: #666;
-    line-height: 1.5;
-  }
-
-  /* Transportation */
-  .transportation {
-    padding: 4rem 0;
-  }
-
-  .transportation-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-    margin-top: 3rem;
-  }
-
-  .transport-card {
-    background: white;
+    border: 1px solid #e2e8f0;
     border-radius: 12px;
     padding: 1.5rem;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    text-align: center;
-    transition: all 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+    transition: box-shadow 0.2s, border-color 0.2s;
   }
 
-  .transport-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  .guide-card:hover {
+    border-color: #3a8dde;
+    box-shadow: 0 8px 24px rgba(58, 141, 222, 0.12);
   }
 
-  .transport-icon {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
+  .guide-card h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1.15rem;
+    color: #0a2540;
   }
 
-  .transport-name {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    color: #0A2540;
-  }
-
-  .transport-distance {
-    color: #3A8DDE;
-    font-weight: 600;
-    margin-bottom: 0.75rem;
-  }
-
-  .transport-description {
-    color: #666;
+  .guide-card p {
+    flex: 1;
+    margin: 0 0 1rem;
+    color: #64748b;
+    font-size: 0.95rem;
     line-height: 1.5;
   }
 
-  /* Community Highlights */
-  .community-highlights {
-    padding: 4rem 0;
-    background: #F7F9FC;
-  }
-
-  .highlights-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
-  }
-
-  .highlight-card {
-    background: white;
-    border-radius: 12px;
-    padding: 2rem;
-    text-align: center;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    transition: all 0.3s ease;
-  }
-
-  .highlight-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
-  }
-
-  .highlight-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-  }
-
-  .highlight-card h3 {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    color: #0A2540;
-  }
-
-  .highlight-card p {
-    color: #666;
-    line-height: 1.5;
+  .guide-cta {
+    font-weight: 700;
+    color: #1d4ed8;
+    font-size: 0.92rem;
   }
 
   /* CTA Section */
@@ -1037,15 +445,6 @@ onMount(() => {
 
     .overview-grid {
       grid-template-columns: 1fr;
-    }
-
-    .history-content {
-      grid-template-columns: 1fr;
-    }
-
-    .category-tabs {
-      flex-direction: column;
-      align-items: center;
     }
 
     .cta-buttons {

@@ -1,5 +1,6 @@
 <script>
   import { onMount } from "svelte"
+  import { enhance } from "$app/forms"
   import { trackEvent } from "$lib/analytics"
   import RichmondAmericanAssets from "$lib/RichmondAmericanAssets.svelte"
   import EnhancedSEOHead from "$lib/EnhancedSEOHead.svelte"
@@ -9,7 +10,9 @@
   import GoogleReviews from "$lib/GoogleReviews.svelte"
   import { SITE_CONFIG } from "$lib/seo.js"
 
-  let form = $state({
+  let { form: actionForm } = $props()
+
+  const emptyFields = () => ({
     name: "",
     email: "",
     phone: "",
@@ -18,67 +21,80 @@
     preferredContact: "phone",
   })
 
+  let fields = $state(emptyFields())
   let errors = $state({})
-  let isSubmitting = $state(false)
+  let pending = $state(false)
+
+  function err(field) {
+    return errors[field] ?? actionForm?.errors?.[field]
+  }
+
+  $effect(() => {
+    const v = actionForm?.values
+    if (!v || typeof v !== "object") return
+    fields = {
+      name: String(v.name ?? ""),
+      email: String(v.email ?? ""),
+      phone: String(v.phone ?? ""),
+      message: String(v.message ?? ""),
+      propertyInterest: String(v.propertyInterest ?? ""),
+      preferredContact: String(v.preferredContact ?? "phone"),
+    }
+  })
 
   function validateForm() {
     const newErrors = {}
-    if (!form.name) newErrors.name = "Name is required"
-    if (!form.email) {
+    if (!fields.name) newErrors.name = "Name is required"
+    if (!fields.email) {
       newErrors.email = "Email is required"
-    } else if (!form.email.includes("@")) {
+    } else if (!fields.email.includes("@")) {
       newErrors.email = "Please enter a valid email"
     }
-    if (!form.phone) {
+    if (!fields.phone) {
       newErrors.phone = "Phone number is required"
-    } else if (form.phone.length < 10) {
+    } else if (fields.phone.length < 10) {
       newErrors.phone = "Please enter a valid phone number"
     }
-    if (!form.message) newErrors.message = "Please tell us how we can help you"
-    if (!form.propertyInterest) newErrors.propertyInterest = "Please select a property interest"
-    if (!form.preferredContact) newErrors.preferredContact = "Please select preferred contact method"
-    
+    if (!fields.message) newErrors.message = "Please tell us how we can help you"
+    if (!fields.propertyInterest)
+      newErrors.propertyInterest = "Please select a property interest"
+    if (!fields.preferredContact)
+      newErrors.preferredContact = "Please select preferred contact method"
+
     errors = newErrors
     return Object.keys(newErrors).length === 0
   }
 
   function handleChange(e) {
     const target = e.target
-    const { name, value } = target
-    // Errors are cleared automatically by binding in some cases, but we can be explicit
+    const { name } = target
     if (name && errors[name]) {
       errors = { ...errors, [name]: null }
     }
   }
 
-  function onSubmit(e) {
-    e.preventDefault()
-    if (!validateForm()) return
-
-    isSubmitting = true
-    trackEvent("contact_form_submit", {
-      form_type: "contact",
-      property_interest: form.propertyInterest,
-      preferred_contact: form.preferredContact,
-    })
-
-    // Here you would typically send the data to your backend
-    console.log("Contact form submitted:", form)
-
-    // Show success message
-    setTimeout(() => {
-        alert("Thank you for your message! Dr. Jan Duffy will contact you within 24 hours.")
-        isSubmitting = false
-        // Reset form
-        form = {
-            name: "",
-            email: "",
-            phone: "",
-            message: "",
-            propertyInterest: "",
-            preferredContact: "phone",
+  /** @param {{ cancel: () => void }} ctx */
+  function contactEnhance({ cancel }) {
+    if (!validateForm()) {
+      cancel()
+      return
+    }
+    pending = true
+    return async (/** @type {{ result: import('@sveltejs/kit').ActionResult }} */ { result }) => {
+      pending = false
+      if (result.type === "success") {
+        const data = result.data
+        if (data?.success) {
+          trackEvent("contact_form_submit", {
+            form_type: "contact",
+            property_interest: fields.propertyInterest,
+            preferred_contact: fields.preferredContact,
+          })
+          fields = emptyFields()
+          errors = {}
         }
-    }, 500)
+      }
+    }
   }
 
   function handlePhoneClick() {
@@ -97,8 +113,8 @@
 
   // SEO data for Contact page
   const pageData = {
-    title: "Contact Dr. Jan Duffy - Real Estate Agent | Pewter Valley Estates",
-    description: `Contact Dr. Jan Duffy, your trusted real estate agent for Pewter Valley Estates in Las Vegas. Call ${SITE_CONFIG.phone} or send a message for expert home buying assistance.`,
+    title: `Contact Dr. Jan Duffy | ${SITE_CONFIG.businessName}`,
+    description: `Contact Dr. Jan Duffy for Silverado Ranch, Henderson, and Las Vegas Valley real estate—including Pewter Valley Estates. Call ${SITE_CONFIG.phone} or send a message.`,
     image: `${SITE_CONFIG.url}/og-image.jpg`,
     type: "website",
     canonical: `${SITE_CONFIG.url}/contact`,
@@ -142,8 +158,8 @@
   <section class="contact-hero">
     <div class="container">
       <div class="hero-content">
-        <h1>Contact Dr. Jan Duffy - Real Estate Agent | Pewter Valley Estates</h1>
-        <p class="hero-subtitle">Your Trusted Real Estate Agent for Pewter Valley Estates</p>
+        <h1>Contact Dr. Jan Duffy | {SITE_CONFIG.businessName}</h1>
+        <p class="hero-subtitle">Silverado Ranch, Henderson &amp; Las Vegas Valley — including Pewter Valley Estates</p>
         <p class="hero-description">
           Ready to find your dream home in Las Vegas? I'm here to guide you through every step of the home buying process with personalized service and expert local knowledge.
         </p>
@@ -210,7 +226,11 @@
           <p>Fill out the form below and I'll get back to you within 24 hours</p>
         </div>
 
-        <form onsubmit={onSubmit} class="contact-form">
+        {#if actionForm?.success}
+          <p class="form-success-banner" role="status">{actionForm.message}</p>
+        {/if}
+
+        <form method="POST" action="?/default" class="contact-form" use:enhance={contactEnhance}>
           <div class="form-row">
             <div class="form-group">
               <label for="name">Full Name *</label>
@@ -218,14 +238,14 @@
                 type="text" 
                 id="name"
                 name="name"
-                bind:value={form.name}
+                bind:value={fields.name}
                 oninput={handleChange}
                 class="form-input"
-                class:error={errors.name}
+                class:error={Boolean(err("name"))}
                 placeholder="Your full name"
               />
-              {#if errors.name}
-                <span class="error-message">{errors.name}</span>
+              {#if err("name")}
+                <span class="error-message">{err("name")}</span>
               {/if}
             </div>
 
@@ -235,10 +255,10 @@
                 type="email" 
                 id="email"
                 name="email"
-                bind:value={form.email}
+                bind:value={fields.email}
                 oninput={handleChange}
                 class="form-input"
-                class:error={errors.email}
+                class:error={Boolean(err("email"))}
                 placeholder="your.email@example.com"
               />
               {#if errors.email}
@@ -254,14 +274,14 @@
                 type="tel" 
                 id="phone"
                 name="phone"
-                bind:value={form.phone}
+                bind:value={fields.phone}
                 oninput={handleChange}
                 class="form-input"
-                class:error={errors.phone}
+                class:error={Boolean(err("phone"))}
                 placeholder="(702) 555-0123"
               />
-              {#if errors.phone}
-                <span class="error-message">{errors.phone}</span>
+              {#if err("phone")}
+                <span class="error-message">{err("phone")}</span>
               {/if}
             </div>
 
@@ -270,10 +290,10 @@
               <select 
                 id="propertyInterest"
                 name="propertyInterest"
-                bind:value={form.propertyInterest}
+                bind:value={fields.propertyInterest}
                 onchange={handleChange}
                 class="form-select"
-                class:error={errors.propertyInterest}
+                class:error={Boolean(err("propertyInterest"))}
               >
                 <option value="">Select your interest</option>
                 <option value="buying">Buying a Home</option>
@@ -282,8 +302,8 @@
                 <option value="renting">Rental Property</option>
                 <option value="general">General Inquiry</option>
               </select>
-              {#if errors.propertyInterest}
-                <span class="error-message">{errors.propertyInterest}</span>
+              {#if err("propertyInterest")}
+                <span class="error-message">{err("propertyInterest")}</span>
               {/if}
             </div>
           </div>
@@ -296,7 +316,7 @@
                   type="radio" 
                   name="preferredContact"
                   value="phone"
-                  bind:group={form.preferredContact}
+                  bind:group={fields.preferredContact}
                   onchange={handleChange}
                 />
                 <span class="radio-text">Phone Call</span>
@@ -306,7 +326,7 @@
                   type="radio" 
                   name="preferredContact"
                   value="email"
-                  bind:group={form.preferredContact}
+                  bind:group={fields.preferredContact}
                   onchange={handleChange}
                 />
                 <span class="radio-text">Email</span>
@@ -316,14 +336,14 @@
                   type="radio" 
                   name="preferredContact"
                   value="text"
-                  bind:group={form.preferredContact}
+                  bind:group={fields.preferredContact}
                   onchange={handleChange}
                 />
                 <span class="radio-text">Text Message</span>
               </label>
             </div>
-            {#if errors.preferredContact}
-              <span class="error-message">{errors.preferredContact}</span>
+            {#if err("preferredContact")}
+              <span class="error-message">{err("preferredContact")}</span>
             {/if}
           </div>
 
@@ -332,24 +352,24 @@
             <textarea 
               id="message"
               name="message"
-              bind:value={form.message}
+              bind:value={fields.message}
               oninput={handleChange}
               class="form-textarea"
-              class:error={errors.message}
+              class:error={Boolean(err("message"))}
               placeholder="Tell me about your real estate needs, timeline, budget, or any questions you have about Pewter Valley Estates..."
               rows="5"
             ></textarea>
-            {#if errors.message}
-              <span class="error-message">{errors.message}</span>
+            {#if err("message")}
+              <span class="error-message">{err("message")}</span>
             {/if}
           </div>
 
           <button 
             type="submit" 
             class="submit-btn"
-            disabled={isSubmitting}
+            disabled={pending}
           >
-            {#if isSubmitting}
+            {#if pending}
               Sending Message...
             {:else}
               Send Message to Dr. Jan Duffy
@@ -618,6 +638,16 @@
   .form-header p {
     color: #64748b;
     font-size: 1.1rem;
+  }
+
+  .form-success-banner {
+    margin-bottom: 1.25rem;
+    padding: 1rem 1.25rem;
+    border-radius: 8px;
+    background: #ecfdf5;
+    color: #065f46;
+    font-weight: 600;
+    border: 1px solid #6ee7b7;
   }
 
   .form-row {

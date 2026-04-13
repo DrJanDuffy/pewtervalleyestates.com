@@ -10,8 +10,8 @@
   
   // SEO data
   const pageData = {
-    title: "Dr. Jan Duffy - Las Vegas Real Estate Agent | Pewter Valley Estates",
-    description: `Dr. Jan Duffy: Las Vegas real estate expert specializing in luxury homes and new construction at Pewter Valley Estates. ${SITE_CONFIG.phone}`,
+    title: `About Dr. Jan Duffy | ${SITE_CONFIG.businessName}`,
+    description: `Dr. Jan Duffy: Silverado Ranch, Henderson, and Las Vegas Valley real estate—including Pewter Valley Estates and Southwest Las Vegas. ${SITE_CONFIG.phone}`,
     image: `${SITE_CONFIG.url}/og-image.jpg`,
     type: "profile",
     canonical: `${SITE_CONFIG.url}/about`,
@@ -65,7 +65,7 @@
     <div class="hero-bg"></div>
     <div class="container hero-container">
       <div class="hero-content">
-        <h1 class="hero-title">Dr. Jan Duffy - Las Vegas Real Estate Agent | Pewter Valley Estates</h1>
+        <h1 class="hero-title">About Dr. Jan Duffy | {SITE_CONFIG.businessName}</h1>
         <p class="hero-subtitle">Expert Real Estate Services for Southwest Las Vegas (89183)</p>
         <div class="hero-separator"></div>
         <p class="hero-tagline">Professional Excellence Meets Personal Service</p>

@@ -11,6 +11,9 @@
 
   const resourceLinks = [
     { label: "Neighborhood Guide", href: "/neighborhood-guide" },
+    { label: "Pewter: nearby amenities", href: "/pewter-valley-estates/amenities" },
+    { label: "Silverado: commute & transport", href: "/silverado-ranch/getting-around" },
+    { label: "Silverado Ranch (Henderson)", href: "/silverado-ranch" },
     { label: "Southwest Las Vegas", href: "/southwest-las-vegas" },
     { label: "Market Analysis", href: "/market-analysis" },
     { label: "Investment Properties", href: "/investment-properties" },
@@ -39,7 +42,7 @@
       <div class="cta-content">
         <div>
           <p class="cta-eyebrow">Luxury Las Vegas Real Estate</p>
-          <h2>Ready to tour Pewter Valley Estates?</h2>
+          <h2>Ready to explore Silverado Ranch &amp; the Las Vegas Valley?</h2>
           <p>Schedule a private consultation with Dr. Jan Duffy and explore the most exclusive homes in Southwest Las Vegas.</p>
         </div>
         <div class="cta-actions">
@@ -68,7 +71,7 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <p class="footer-tagline">Pewter Valley Estates</p>
+          <p class="footer-tagline">{SITE_CONFIG.businessName}</p>
           <h3>Dr. Jan Duffy | Luxury Real Estate Advisor</h3>
           <p class="footer-description">
             Boutique representation for buyers, sellers, and investors seeking premium Southwest Las Vegas properties. Personal service, data-backed strategies, and unmatched neighborhood expertise.
@@ -131,7 +134,7 @@
   <div class="footer-bottom">
     <div class="container">
       <div class="footer-bottom-content">
-        <p>© {new Date().getFullYear()} Dr. Jan Duffy · Pewter Valley Estates · Luxury Real Estate in Las Vegas</p>
+        <p>© {new Date().getFullYear()} {SITE_CONFIG.businessName} · Las Vegas &amp; Henderson Real Estate</p>
         <p class="footer-legal">NV Licensed Realtor · Equal Housing Opportunity · Powered by Richmond American Homes</p>
       </div>
     </div>

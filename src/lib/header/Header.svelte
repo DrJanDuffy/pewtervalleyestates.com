@@ -1,8 +1,9 @@
 <script>
-import { page } from '$app/stores';
-import { SITE_CONFIG } from '$lib/seo.js';
+import { slide } from "svelte/transition"
+import { page } from "$app/state"
+import { SITE_CONFIG } from "$lib/seo.js"
 
-let mobileMenuOpen = $state(false);
+let mobileMenuOpen = $state(false)
 
 function toggleMenu() {
   mobileMenuOpen = !mobileMenuOpen;
@@ -17,17 +18,17 @@ function closeMenu() {
   <div class="header-container">
     <!-- Logo/Brand -->
     <a href="/" class="brand" onclick={closeMenu}>
-      <span class="brand-name">Pewter Valley Estates</span>
+      <span class="brand-name">{SITE_CONFIG.businessName}</span>
       <span class="brand-tagline">Dr. Jan Duffy, Realtor</span>
     </a>
 
     <!-- Desktop Navigation -->
     <nav class="desktop-nav">
       <ul>
-        <li class:active={$page.url.pathname === '/'}>
+        <li class:active={page.url.pathname === "/"}>
           <a href="/">Home</a>
         </li>
-        <li class="has-dropdown" class:active={$page.url.pathname.startsWith('/homes') || $page.url.pathname === '/buy-a-home' || $page.url.pathname === '/buyer-checklist' || $page.url.pathname === '/listings'}>
+        <li class="has-dropdown" class:active={page.url.pathname.startsWith("/homes") || page.url.pathname === "/buy-a-home" || page.url.pathname === "/buyer-checklist" || page.url.pathname === "/listings"}>
           <a href="/homes-for-sale">Buy</a>
           <ul class="dropdown">
             <li><a href="/homes-for-sale">Homes for Sale</a></li>
@@ -37,7 +38,7 @@ function closeMenu() {
             <li><a href="/investment-properties">Investment Properties</a></li>
           </ul>
         </li>
-        <li class="has-dropdown" class:active={$page.url.pathname === '/sell-your-home' || $page.url.pathname === '/home-valuation' || $page.url.pathname === '/selling-checklist'}>
+        <li class="has-dropdown" class:active={page.url.pathname === "/sell-your-home" || page.url.pathname === "/home-valuation" || page.url.pathname === "/selling-checklist"}>
           <a href="/sell-your-home">Sell</a>
           <ul class="dropdown">
             <li><a href="/sell-your-home">Sell Your Home</a></li>
@@ -46,20 +47,25 @@ function closeMenu() {
             <li><a href="/selling-checklist">Selling Checklist</a></li>
           </ul>
         </li>
-        <li class="has-dropdown" class:active={$page.url.pathname.startsWith('/neighborhood') || $page.url.pathname === '/southwest-las-vegas' || $page.url.pathname === '/las-vegas-relocation-guide'}>
+        <li class="has-dropdown" class:active={page.url.pathname.startsWith("/neighborhood") || page.url.pathname.startsWith("/pewter-valley-estates") || page.url.pathname === "/southwest-las-vegas" || page.url.pathname.startsWith("/silverado-ranch") || page.url.pathname === "/las-vegas-relocation-guide"}>
           <a href="/neighborhood">Areas</a>
           <ul class="dropdown">
             <li><a href="/neighborhood">Pewter Valley Estates</a></li>
+            <li><a href="/silverado-ranch">Silverado Ranch (Henderson)</a></li>
             <li><a href="/southwest-las-vegas">Southwest Las Vegas</a></li>
             <li><a href="/neighborhood-guide">Neighborhood Guide</a></li>
             <li><a href="/photos">Community Photos</a></li>
             <li><a href="/las-vegas-relocation-guide">Relocation Guide</a></li>
+            <li><a href="/pewter-valley-estates/amenities">Nearby amenities (Pewter)</a></li>
+            <li><a href="/silverado-ranch/getting-around">Commute &amp; transport</a></li>
+            <li><a href="/silverado-ranch/attractions">Attractions &amp; day trips</a></li>
+            <li><a href="/silverado-ranch/history">Silverado Ranch history</a></li>
           </ul>
         </li>
-        <li class:active={$page.url.pathname === '/about' || $page.url.pathname === '/dr-jan-duffy'}>
+        <li class:active={page.url.pathname === "/about" || page.url.pathname === "/dr-jan-duffy"}>
           <a href="/about">About</a>
         </li>
-        <li class:active={$page.url.pathname === '/contact'}>
+        <li class:active={page.url.pathname === "/contact"}>
           <a href="/contact">Contact</a>
         </li>
       </ul>
@@ -79,7 +85,7 @@ function closeMenu() {
 
   <!-- Mobile Navigation -->
   {#if mobileMenuOpen}
-    <nav class="mobile-nav">
+    <nav class="mobile-nav" transition:slide={{ duration: 200 }}>
       <ul>
         <li><a href="/" onclick={closeMenu}>Home</a></li>
         <li class="mobile-section">
@@ -105,10 +111,15 @@ function closeMenu() {
           <span class="section-title">Explore Areas</span>
           <ul>
             <li><a href="/neighborhood" onclick={closeMenu}>Pewter Valley Estates</a></li>
+            <li><a href="/silverado-ranch" onclick={closeMenu}>Silverado Ranch (Henderson)</a></li>
             <li><a href="/southwest-las-vegas" onclick={closeMenu}>Southwest Las Vegas</a></li>
             <li><a href="/neighborhood-guide" onclick={closeMenu}>Neighborhood Guide</a></li>
             <li><a href="/las-vegas-relocation-guide" onclick={closeMenu}>Relocation Guide</a></li>
             <li><a href="/photos" onclick={closeMenu}>Community Photos</a></li>
+            <li><a href="/pewter-valley-estates/amenities" onclick={closeMenu}>Nearby amenities (Pewter)</a></li>
+            <li><a href="/silverado-ranch/getting-around" onclick={closeMenu}>Commute &amp; transport</a></li>
+            <li><a href="/silverado-ranch/attractions" onclick={closeMenu}>Attractions &amp; day trips</a></li>
+            <li><a href="/silverado-ranch/history" onclick={closeMenu}>Silverado Ranch history</a></li>
           </ul>
         </li>
         <li><a href="/about" onclick={closeMenu}>About Dr. Jan Duffy</a></li>

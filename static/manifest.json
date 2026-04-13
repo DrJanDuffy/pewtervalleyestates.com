@@ -1,7 +1,7 @@
 {
-  "name": "Pewter Valley Estates - Las Vegas Real Estate",
-  "short_name": "Pewter Valley Estates",
-  "description": "Luxury new construction homes in Las Vegas, Nevada. Dr. Jan Duffy Real Estate - Your trusted Las Vegas real estate expert.",
+  "name": "Silverado Ranch | Homes by Dr. Jan Duffy",
+  "short_name": "Silverado Ranch Homes",
+  "description": "Silverado Ranch, Henderson, and Las Vegas Valley real estate. Dr. Jan Duffy — buyer, seller, and investment guidance.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0A2540",
@@ -46,7 +46,7 @@
       "sizes": "1280x720",
       "type": "image/png",
       "form_factor": "wide",
-      "label": "Pewter Valley Estates Homepage"
+      "label": "Silverado Ranch | Homes by Dr. Jan Duffy — Homepage"
     },
     {
       "src": "/screenshots/mobile-listings.png",

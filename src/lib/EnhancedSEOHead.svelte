@@ -11,6 +11,7 @@
     generateHreflangTags,
     validateSEOData
   } from '$lib/seo-utils.js'
+  import { SITE_CONFIG } from '$lib/seo.js'
 
   // Svelte 5: Use $props() instead of export let
   const {
@@ -168,7 +169,7 @@
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Pewter Valley Estates" />
+  <meta name="apple-mobile-web-app-title" content={SITE_CONFIG.businessName} />
   
   <!-- Note: Security headers (X-Content-Type-Options, X-Frame-Options, X-XSS-Protection) 
        should be set via server headers, not meta tags. Configure in Vercel or your hosting platform. -->
