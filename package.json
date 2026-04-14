@@ -13,7 +13,8 @@
     "clean": "biome check --write . && biome format --write .",
     "generate:og-image": "node scripts/generate-og-image.js",
     "generate:images": "node scripts/generate-site-images.mjs",
-    "audit:schema": "node scripts/audit-structured-data.mjs"
+    "audit:schema": "node scripts/audit-structured-data.mjs",
+    "cloudflare:purge": "node scripts/cloudflare-cache-purge.mjs"
   },
   "dependencies": {
     "@fontsource/fira-mono": "^5.2.7",
