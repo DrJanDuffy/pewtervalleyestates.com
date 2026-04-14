@@ -1,13 +1,13 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { Pathways } from "@/app/_components/Pathways"
+import { CalendlyInlineWidget } from "@/components/CalendlyWidgets"
 import { CTASection } from "@/components/CTASection"
 import { FeaturesSection } from "@/components/FeaturesSection"
 import { GoogleMap } from "@/components/GoogleMap"
 import { GoogleReviews } from "@/components/GoogleReviews"
 import { HeroSection } from "@/components/HeroSection"
 import { JsonLd } from "@/components/JsonLd"
-import { LeadCaptureForm } from "@/components/LeadCaptureForm"
 import { NAPDisplay } from "@/components/NAPDisplay"
 import { PageViewTracker } from "@/components/PageViewTracker"
 import { RealScoutListings } from "@/components/RealScoutListings"
@@ -77,12 +77,12 @@ export default function HomePage() {
             <div className={styles.leadFormCard}>
               <h3>Get Instant Access to New Listings</h3>
               <p>Be the first to know when new homes hit the market</p>
-              <LeadCaptureForm formType="buyer" title="" subtitle="" />
+              <CalendlyInlineWidget title="Book your buyer consultation" />
             </div>
             <div className={styles.leadFormCard}>
               <h3>Get Your Home&apos;s Value Instantly</h3>
               <p>See what your home is worth in today&apos;s market</p>
-              <LeadCaptureForm formType="valuation" title="" subtitle="" />
+              <CalendlyInlineWidget title="Book your home valuation consultation" />
             </div>
           </div>
         </div>

@@ -53,6 +53,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
   return (
     <html lang="en">
+      <head>
+        <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" />
+      </head>
       <body>
         <JsonLd data={website} />
         <JsonLd data={org} />
@@ -69,6 +72,10 @@ gtag('js', new Date());
 gtag('config', '${GA_MEASUREMENT_ID}', { anonymize_ip: true });
 `}
         </Script>
+        <Script
+          src="https://assets.calendly.com/assets/external/widget.js"
+          strategy="afterInteractive"
+        />
         <Providers>
           <Header />
           <main id="main-content">{children}</main>

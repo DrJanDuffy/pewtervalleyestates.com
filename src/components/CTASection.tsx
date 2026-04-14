@@ -1,16 +1,12 @@
 "use client"
 
 import Link from "next/link"
+import { CalendlyInlineWidget, CalendlyPopupLink } from "@/components/CalendlyWidgets"
 import { trackEvent } from "@/lib/analytics"
 import { SITE_CONFIG } from "@/lib/site-contact"
 import styles from "./CTASection.module.css"
 
 export function CTASection() {
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    trackEvent("cta_form_submit", { section: "final_cta" })
-  }
-
   return (
     <section className={styles.ctaSection}>
       <div className={styles.container}>
@@ -69,64 +65,14 @@ export function CTASection() {
 
           <div className={styles.ctaForm}>
             <div className={styles.formHeader}>
-              <h3>Get Your Free Information Packet</h3>
-              <p>Receive floor plans, pricing, and community details</p>
+              <h3>Book Your Free Information Session</h3>
+              <p>Schedule time to review floor plans, pricing, and community details</p>
             </div>
-            <form className={styles.contactForm} onSubmit={onSubmit}>
-              <div className={styles.formGroup}>
-                <input
-                  type="text"
-                  placeholder="First Name"
-                  required
-                  className={styles.formInput}
-                  name="firstName"
-                />
-              </div>
-              <div className={styles.formGroup}>
-                <input
-                  type="text"
-                  placeholder="Last Name"
-                  required
-                  className={styles.formInput}
-                  name="lastName"
-                />
-              </div>
-              <div className={styles.formGroup}>
-                <input
-                  type="email"
-                  placeholder="Email Address"
-                  required
-                  className={styles.formInput}
-                  name="email"
-                />
-              </div>
-              <div className={styles.formGroup}>
-                <input
-                  type="tel"
-                  placeholder="Phone Number"
-                  required
-                  className={styles.formInput}
-                  name="phone"
-                />
-              </div>
-              <div className={styles.formGroup}>
-                <select className={styles.formSelect} required name="size" defaultValue="">
-                  <option value="" disabled>
-                    Preferred Home Size
-                  </option>
-                  <option value="3-bedroom">3 Bedroom (2,000-2,500 sq ft)</option>
-                  <option value="4-bedroom">4 Bedroom (2,500-3,000 sq ft)</option>
-                  <option value="5-bedroom">5+ Bedroom (3,000+ sq ft)</option>
-                </select>
-              </div>
-              <button type="submit" className={styles.submitBtn}>
-                Get Free Information
-              </button>
-            </form>
+            <CalendlyInlineWidget title="Schedule your free consultation" />
             <div className={styles.formFooter}>
               <p>
-                By submitting this form, you agree to receive communications from {SITE_CONFIG.name}{" "}
-                with {SITE_CONFIG.brokerage.name}.
+                Booking through Calendly connects you directly with {SITE_CONFIG.name} at{" "}
+                {SITE_CONFIG.brokerage.name}.
               </p>
             </div>
           </div>
@@ -157,6 +103,11 @@ export function CTASection() {
             </svg>
             Take Virtual Tour
           </Link>
+          <CalendlyPopupLink
+            className={`${styles.actionBtn} ${styles.outline}`}
+            label="Schedule Tour"
+            url="https://calendly.com/drjanduffy/15min"
+          />
           <Link
             href="/contact"
             className={`${styles.actionBtn} ${styles.outline}`}
@@ -169,7 +120,7 @@ export function CTASection() {
               <line x1="8" y1="2" x2="8" y2="6" />
               <line x1="3" y1="10" x2="21" y2="10" />
             </svg>
-            Schedule Tour
+            Contact Form
           </Link>
         </div>
       </div>

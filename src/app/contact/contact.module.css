@@ -54,6 +54,23 @@
   text-decoration: underline;
 }
 
+.calendlyCta {
+  margin-top: var(--space-3);
+  color: var(--color-slate-700);
+  font-weight: 500;
+}
+
+.calendlyLink {
+  color: var(--color-indigo-700);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.calendlyLink:hover {
+  color: var(--color-indigo-600);
+}
+
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr;

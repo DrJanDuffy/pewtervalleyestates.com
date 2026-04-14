@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
+import { CalendlyInlineWidget, CalendlyPopupLink } from "@/components/CalendlyWidgets"
 import { JsonLd } from "@/components/JsonLd"
 import { PageViewTracker } from "@/components/PageViewTracker"
 import { RelatedPages } from "@/components/RelatedPages"
@@ -108,7 +109,10 @@ export default async function MarketingCatchAllPage({ params }: Props) {
             <a href={`tel:${SITE_CONFIG.phoneTel}`}>Call {SITE_CONFIG.phone}</a>
             {" · "}
             <Link href="/contact">Contact</Link>
+            {" · "}
+            <CalendlyPopupLink label="Schedule a 15-minute call" />
           </p>
+          <CalendlyInlineWidget title="Book a 15-minute real estate consultation" />
         </article>
         <RelatedPages currentPage={pathname} />
       </div>

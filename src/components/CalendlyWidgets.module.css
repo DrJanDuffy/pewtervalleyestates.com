@@ -1,0 +1,15 @@
+.inlineSection {
+  margin-top: var(--space-6);
+}
+
+.inlineTitle {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-indigo-700);
+  margin: 0 0 var(--space-3);
+}
+
+.inlineWidget {
+  min-width: 320px;
+  height: 700px;
+}

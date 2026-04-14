@@ -1,6 +1,6 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { ContactPageForm } from "@/components/ContactPageForm"
+import { CalendlyInlineWidget, CalendlyPopupLink } from "@/components/CalendlyWidgets"
 import { GoogleMap } from "@/components/GoogleMap"
 import { GoogleReviews } from "@/components/GoogleReviews"
 import { JsonLd } from "@/components/JsonLd"
@@ -74,14 +74,21 @@ export default function ContactPage() {
             <a href={`mailto:${SITE_CONFIG.email}`}>{SITE_CONFIG.email}</a>, or send a message
             below.
           </p>
+          <p className={styles.calendlyCta}>
+            Prefer a scheduled call?{" "}
+            <CalendlyPopupLink
+              className={styles.calendlyLink}
+              label="Book a 15-minute consultation"
+            />
+          </p>
         </header>
 
         <div className={styles.grid}>
           <section className={styles.card} aria-labelledby="contact-form-heading">
             <h2 id="contact-form-heading" className={styles.h2}>
-              Send a message
+              Schedule a consultation
             </h2>
-            <ContactPageForm />
+            <CalendlyInlineWidget title="Book your 15-minute call" />
           </section>
 
           <aside className={styles.aside}>
@@ -94,6 +101,10 @@ export default function ContactPage() {
             Client feedback
           </h2>
           <GoogleReviews />
+        </section>
+
+        <section className={styles.section}>
+          <CalendlyInlineWidget title="Schedule a 15-minute consultation" />
         </section>
 
         <section className={styles.mapSection} aria-labelledby="map-heading">
