@@ -5,6 +5,7 @@ export type MarketingPage = {
   description: string
   h1: string
   paragraphs: string[]
+  faqs?: { question: string; answer: string }[]
 }
 
 /** Path keys without leading slash (e.g. `silverado-ranch/history`). */
@@ -52,6 +53,25 @@ export const MARKETING_PAGES: Record<string, MarketingPage> = {
     paragraphs: [
       "Investors benefit from clear rent comps, HOA constraints, and realistic renovation timelines—especially in established neighborhoods with stable demand drivers.",
       "Dr. Jan Duffy can help you compare scenarios and connect you with trusted local vendors when needed. This is not tax or legal advice; consult licensed professionals for those topics.",
+      "For Silverado Ranch and nearby 89183 segments, underwriting usually depends on realistic rent assumptions, vacancy expectations, HOA rules, and property condition rather than headline list price alone.",
+      "A practical investment review compares hold-as-rental, light-value-add, and long-term appreciation scenarios using conservative assumptions for repair and carrying costs.",
+    ],
+    faqs: [
+      {
+        question: "What should investors review before buying in Silverado Ranch?",
+        answer:
+          "Start with rent comparables, HOA restrictions, expected maintenance, and vacancy assumptions. Then model cash flow under conservative financing and operating costs.",
+      },
+      {
+        question: "How do I compare two investment homes fairly?",
+        answer:
+          "Use a side-by-side model including purchase price, projected rent, taxes, insurance, HOA dues, repairs, and financing terms so each option is evaluated on the same basis.",
+      },
+      {
+        question: "Is this investment guidance legal or tax advice?",
+        answer:
+          "No. This is general real estate guidance only. For tax and legal decisions, consult licensed CPAs and attorneys.",
+      },
     ],
   },
   "sell-your-home": {
@@ -61,6 +81,25 @@ export const MARKETING_PAGES: Record<string, MarketingPage> = {
     paragraphs: [
       "Selling starts with accurate pricing, strong presentation, and a marketing plan designed for how buyers search online.",
       "Dr. Jan Duffy supports sellers with preparation guidance, listing strategy, negotiation, and a communication cadence you can count on.",
+      "In 89183 and nearby Silverado Ranch pockets, pricing performs best when comparable sales are adjusted for condition, lot position, updates, and showing readiness.",
+      "Most strong launches focus on high-impact preparation first: photo-ready presentation, curb appeal, and repairs that reduce buyer objections early.",
+    ],
+    faqs: [
+      {
+        question: "How is listing price set for Silverado Ranch homes?",
+        answer:
+          "Pricing starts with recent sold comparables and active competition, then adjusts for upgrades, condition, lot factors, and expected buyer demand in your segment.",
+      },
+      {
+        question: "What should I do before putting my home on market?",
+        answer:
+          "Prioritize staging basics, decluttering, high-visibility repairs, and photo preparation. Early presentation quality often drives showing activity and offer strength.",
+      },
+      {
+        question: "How quickly can I begin the selling process?",
+        answer:
+          "Most sellers can begin with a short consultation, valuation review, and launch plan. Timeline depends on property condition and your target listing date.",
+      },
     ],
   },
   "home-valuation": {
@@ -196,6 +235,25 @@ export const MARKETING_PAGES: Record<string, MarketingPage> = {
     paragraphs: [
       "Pewter Valley Estates includes Richmond American product that is now primarily resale-driven.",
       "If you are comparing similar floor plans, ask for a targeted comp analysis tied to condition, upgrades, and lot variables.",
+      "Because this is largely a resale market, model names should be secondary to actual condition, update quality, and lot-specific tradeoffs.",
+      "Use this page for context, then validate decisions with current listings and recent sold comparables in the same micro-area.",
+    ],
+    faqs: [
+      {
+        question: "Are Richmond American homes here new construction?",
+        answer:
+          "Generally no. In Pewter Valley Estates, Richmond American inventory is primarily resale, so each property should be evaluated by condition and upgrades.",
+      },
+      {
+        question: "How should I compare similar floor plans?",
+        answer:
+          "Compare recent solds for similar plans and then adjust for renovation level, lot orientation, and deferred maintenance instead of relying on plan labels alone.",
+      },
+      {
+        question: "What is the next step after reviewing this page?",
+        answer:
+          "Move to live listings and sold data, then request an address-level comparison to validate pricing and negotiation strategy.",
+      },
     ],
   },
   "dr-jan-duffy": {
@@ -223,6 +281,25 @@ export const MARKETING_PAGES: Record<string, MarketingPage> = {
     paragraphs: [
       "These answers are for general education; every transaction has unique facts. For advice tailored to your situation, reach out directly.",
       "For property-specific guidance, a short call can save time and reduce avoidable mistakes.",
+      "The FAQ content here is focused on recurring buyer and seller questions in Pewter Valley Estates, Silverado Ranch, and nearby Las Vegas/Henderson neighborhoods.",
+      "When a decision depends on one property, HOA rules, or financing structure, use these answers as a starting point and confirm with current data.",
+    ],
+    faqs: [
+      {
+        question: "Do these FAQ answers apply to every property in 89183?",
+        answer:
+          "Not always. They are general guidance. Final decisions still depend on property condition, HOA rules, financing, and current market conditions.",
+      },
+      {
+        question: "Can I get guidance for my specific timeline and goals?",
+        answer:
+          "Yes. A brief consultation can align your timing, budget, and neighborhood priorities into a practical next-step plan.",
+      },
+      {
+        question: "Where should I start if I am deciding between buying and selling first?",
+        answer:
+          "Start with financing and timing constraints, then compare scenario outcomes using local inventory, valuation ranges, and transaction timelines.",
+      },
     ],
   },
 }

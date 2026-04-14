@@ -5,6 +5,15 @@ import { SITE_CONFIG } from "@/lib/site-contact"
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = SITE_CONFIG.url
   const lastModified = new Date()
+  const highIntentPaths = new Set([
+    "/faq",
+    "/investment-properties",
+    "/sell-your-home",
+    "/homes-for-sale",
+    "/listings",
+    "/home-valuation",
+    "/contact",
+  ])
 
   const entries: MetadataRoute.Sitemap = [
     {
@@ -35,11 +44,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   for (const key of Object.keys(MARKETING_PAGES)) {
     const path = `/${key}`
-    const priority = path.includes("homes-for-sale") || path.includes("listings") ? 0.9 : 0.8
+    const priority = highIntentPaths.has(path) ? 0.9 : 0.78
     entries.push({
       url: `${base}${path}`,
       lastModified,
-      changeFrequency: "weekly",
+      changeFrequency: highIntentPaths.has(path) ? "weekly" : "monthly",
       priority,
     })
   }

@@ -115,6 +115,25 @@ export default function HomePage() {
                 Park), easy I-15 access, and quiet residential streets. Perfect for first-time
                 buyers, growing families, and those seeking single-story living.
               </p>
+
+              <h3>Popular Next Steps</h3>
+              <p>
+                Explore these high-intent local guides for buyers, sellers, and investors in Pewter
+                Valley Estates and Silverado Ranch.
+              </p>
+              <ul className={styles.popularLinksList}>
+                <li>
+                  <Link href="/sell-your-home">Sell Your Home in Silverado Ranch</Link>
+                </li>
+                <li>
+                  <Link href="/investment-properties">
+                    Investment Properties in 89183 and nearby
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/faq">Pewter Valley Estates Real Estate FAQ</Link>
+                </li>
+              </ul>
             </div>
 
             <aside className={styles.contentSidebar}>

@@ -52,7 +52,7 @@ export default async function MarketingCatchAllPage({ params }: Props) {
 
   const webPage = generateWebPageSchema(page.title, page.description, pathname)
   const crumbs = generateBreadcrumbSchema(breadcrumbs)
-  const faqs = [
+  const defaultFaqs = [
     {
       question: `What should I know about ${page.h1}?`,
       answer: page.paragraphs[0],
@@ -67,6 +67,7 @@ export default async function MarketingCatchAllPage({ params }: Props) {
       answer: `Call ${SITE_CONFIG.phone} or use the contact page for a quick strategy conversation tailored to your goals.`,
     },
   ]
+  const faqs = page.faqs?.length ? page.faqs : defaultFaqs
   const faqSchema = generateFAQSchema(faqs)
 
   return (

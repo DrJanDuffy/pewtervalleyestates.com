@@ -29,6 +29,16 @@ export const pageRelationships: Record<string, { related: RelatedLink[] }> = {
         description: "Get expert selling assistance",
       },
       {
+        href: "/investment-properties",
+        label: "Investment Properties in Silverado Ranch",
+        description: "Analyze rental and resale opportunities",
+      },
+      {
+        href: "/faq",
+        label: "Pewter Valley Estates Real Estate FAQ",
+        description: "Common local buying and selling questions",
+      },
+      {
         href: "/about",
         label: "About Dr. Jan Duffy",
         description: "Meet your local real estate expert",
