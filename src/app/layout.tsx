@@ -54,7 +54,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <head>
-        <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" />
+        <link rel="preconnect" href="https://assets.calendly.com" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://em.realscout.com" />
+        <link rel="preconnect" href="https://www.realscout.com" />
+        <link
+          rel="preload"
+          href="https://assets.calendly.com/assets/external/widget.css"
+          as="style"
+        />
+        <noscript>
+          <link rel="stylesheet" href="https://assets.calendly.com/assets/external/widget.css" />
+        </noscript>
       </head>
       <body>
         <JsonLd data={website} />
@@ -70,6 +81,20 @@ window.dataLayer = window.dataLayer || [];
 function gtag(){window.dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', '${GA_MEASUREMENT_ID}', { anonymize_ip: true });
+`}
+        </Script>
+        <Script id="calendly-css-load" strategy="afterInteractive">
+          {`
+(function () {
+  var href = "https://assets.calendly.com/assets/external/widget.css";
+  var existing = document.querySelector('link[data-calendly-css="true"]');
+  if (existing) return;
+  var link = document.createElement("link");
+  link.rel = "stylesheet";
+  link.href = href;
+  link.setAttribute("data-calendly-css", "true");
+  document.head.appendChild(link);
+})();
 `}
         </Script>
         <Script
