@@ -53,7 +53,7 @@
 .heroText {
   max-width: 600px;
   color: white;
-  padding: 3.5rem 0 3rem;
+  padding: 2.75rem 0 2.75rem;
 }
 
 .heroTitle {
@@ -190,7 +190,7 @@
 @media (max-width: 768px) {
   .heroText {
     max-width: 100%;
-    padding: 2.5rem 0 2.2rem;
+    padding: 2rem 0 1.9rem;
   }
 
   .heroStats {

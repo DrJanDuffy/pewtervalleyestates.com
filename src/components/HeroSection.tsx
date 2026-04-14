@@ -12,7 +12,8 @@ export function HeroSection() {
       <div className={styles.heroBackground}>
         <Image
           src={MARKETING_IMAGES.hero}
-          alt="Illustrative Southwest Las Vegas–style residential home — not a specific listing."
+          alt=""
+          aria-hidden
           className={styles.heroImage}
           fill
           priority
