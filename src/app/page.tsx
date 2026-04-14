@@ -14,23 +14,19 @@ import { RealScoutListings } from "@/components/RealScoutListings"
 import { RelatedPages } from "@/components/RelatedPages"
 import { StickyContactButton } from "@/components/StickyContactButton"
 import { TestimonialsSection } from "@/components/TestimonialsSection"
-import { buildPageMetadata } from "@/lib/metadata"
-import {
-  generateBreadcrumbSchema,
-  generateFAQSchema,
-  generateWebPageSchema,
-} from "@/lib/schema"
+import { buildPageMetadata, DEFAULT_OG_IMAGE_PATH } from "@/lib/metadata"
+import { generateBreadcrumbSchema, generateFAQSchema, generateWebPageSchema } from "@/lib/schema"
 import { SITE_CONFIG } from "@/lib/site-contact"
 import styles from "./page.module.css"
 
-const HOME_TITLE = SITE_CONFIG.businessName
-const HOME_DESCRIPTION = `Expert real estate in Silverado Ranch (Henderson & Clark County). Pewter Valley Estates is a community within Silverado Ranch (89183)—Dr. Jan Duffy specializes in resale homes, market analysis, and investment properties. Call ${SITE_CONFIG.phone}.`
+const HOME_TITLE = `Pewter Valley Estates & Silverado Ranch Real Estate | ${SITE_CONFIG.name}`
+const HOME_DESCRIPTION = `Homes for sale and expert representation in Silverado Ranch and Pewter Valley Estates (89183), Henderson & Clark County. MLS-backed search, pricing, and neighborhood context with ${SITE_CONFIG.name}. Call ${SITE_CONFIG.phone}.`
 
 export const metadata: Metadata = buildPageMetadata({
   title: HOME_TITLE,
   description: HOME_DESCRIPTION,
   path: "/",
-  ogImagePath: "/og-image.jpg",
+  ogImagePath: DEFAULT_OG_IMAGE_PATH,
 })
 
 const faqData = [
@@ -107,16 +103,17 @@ export default function HomePage() {
 
               <h3>Pewter Valley Estates: Your Next Home Awaits</h3>
               <p>
-                Located at Pyle Avenue and S Rancho Destino Rd in zip code 89183, Pewter Valley Estates offers ranch-style
-                homes from 1,950-2,240 sq ft with 3-4 bedrooms. Built by Richmond American Homes, this sold-out community
-                is now in the resale phase, offering exceptional opportunities for buyers and sellers.
+                Located at Pyle Avenue and S Rancho Destino Rd in zip code 89183, Pewter Valley
+                Estates offers ranch-style homes from 1,950-2,240 sq ft with 3-4 bedrooms. Built by
+                Richmond American Homes, this sold-out community is now in the resale phase,
+                offering exceptional opportunities for buyers and sellers.
               </p>
 
               <h3>What Makes This Community Special</h3>
               <p>
-                Family-friendly environment, proximity to parks (Somerset Hills Park, Goett Family Park), easy I-15 access,
-                and quiet residential streets. Perfect for first-time buyers, growing families, and those seeking
-                single-story living.
+                Family-friendly environment, proximity to parks (Somerset Hills Park, Goett Family
+                Park), easy I-15 access, and quiet residential streets. Perfect for first-time
+                buyers, growing families, and those seeking single-story living.
               </p>
             </div>
 
@@ -159,13 +156,22 @@ export default function HomePage() {
         <div className={styles.container}>
           <div className={styles.listingsSectionHeader}>
             <h2>Current Property Listings</h2>
-            <p className={styles.listingsSubtitle}>Browse our available homes in Las Vegas and surrounding areas</p>
+            <p className={styles.listingsSubtitle}>
+              Browse our available homes in Las Vegas and surrounding areas
+            </p>
           </div>
 
           <div className={styles.listingsCardsGrid}>
             <div className={styles.listingsCard}>
               <div className={styles.cardIcon}>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  aria-hidden
+                >
+                  <title>Featured properties</title>
                   <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
                   <polyline points="9 22 9 12 15 12 15 22" />
                 </svg>
@@ -178,14 +184,24 @@ export default function HomePage() {
                 <li>Resort-style amenities</li>
                 <li>Prime Las Vegas locations</li>
               </ul>
-              <Link href="/homes-for-sale" className={`${styles.cardButton} ${styles.cardButtonPrimary}`}>
+              <Link
+                href="/homes-for-sale"
+                className={`${styles.cardButton} ${styles.cardButtonPrimary}`}
+              >
                 View All Listings
               </Link>
             </div>
 
             <div className={styles.listingsCard}>
               <div className={styles.cardIcon}>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  aria-hidden
+                >
+                  <title>Contact by phone</title>
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
                 </svg>
               </div>
@@ -201,7 +217,10 @@ export default function HomePage() {
                   <a href={`mailto:${SITE_CONFIG.email}`}>{SITE_CONFIG.email}</a>
                 </p>
               </div>
-              <Link href="/contact" className={`${styles.cardButton} ${styles.cardButtonSecondary}`}>
+              <Link
+                href="/contact"
+                className={`${styles.cardButton} ${styles.cardButtonSecondary}`}
+              >
                 Get In Touch
               </Link>
             </div>

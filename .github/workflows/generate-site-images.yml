@@ -1,0 +1,54 @@
+# Generates first-party marketing PNGs via OpenRouter and commits them to the repo.
+#
+# Setup (repository Settings → Secrets and variables → Actions):
+#   - Add secret: OPENROUTER_API_KEY  (your OpenRouter API key)
+# Optional (Settings → Variables → Actions):
+#   - OPENROUTER_IMAGE_MODEL  (e.g. google/gemini-3.1-flash-image-preview)
+#
+# Run: Actions → "Generate marketing images" → Run workflow
+
+name: Generate marketing images
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: generate-marketing-images
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Generate images (OpenRouter)
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          OPENROUTER_IMAGE_MODEL: ${{ vars.OPENROUTER_IMAGE_MODEL }}
+          OPENROUTER_HTTP_REFERER: ${{ github.server_url }}/${{ github.repository }}
+          OPENROUTER_APP_TITLE: pewtervalleyestates.com image generation
+        run: node scripts/generate-site-images.mjs
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/images/hero-marketing.png public/images/og-marketing.png public/photos/pewter-valley-community.png
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "chore: refresh marketing images (OpenRouter)"
+          git push

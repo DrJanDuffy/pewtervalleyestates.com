@@ -30,7 +30,7 @@ const aboutLinks = [
 ]
 
 const directionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
-  `${SITE_CONFIG.address.street}, ${SITE_CONFIG.address.city}, ${SITE_CONFIG.address.stateAbbr} ${SITE_CONFIG.address.zipCode}`,
+  `${SITE_CONFIG.address.street}, ${SITE_CONFIG.address.city}, ${SITE_CONFIG.address.stateAbbr} ${SITE_CONFIG.address.zipCode}`
 )}`
 
 export function Footer() {
@@ -51,12 +51,15 @@ export function Footer() {
               <p className={styles.ctaEyebrow}>Luxury Las Vegas Real Estate</p>
               <h2>Ready to explore Silverado Ranch &amp; the Las Vegas Valley?</h2>
               <p>
-                Schedule a private consultation with Dr. Jan Duffy and explore the most exclusive homes in Southwest
-                Las Vegas.
+                Schedule a private consultation with Dr. Jan Duffy and explore the most exclusive
+                homes in Southwest Las Vegas.
               </p>
             </div>
             <div className={styles.ctaActions}>
-              <a href={`tel:${SITE_CONFIG.phoneTel}`} className={`${styles.ctaButton} ${styles.primary}`}>
+              <a
+                href={`tel:${SITE_CONFIG.phoneTel}`}
+                className={`${styles.ctaButton} ${styles.primary}`}
+              >
                 <span>📞 Call {SITE_CONFIG.phone}</span>
               </a>
               <a
@@ -89,8 +92,9 @@ export function Footer() {
               <p className="footer-tagline">{SITE_CONFIG.businessName}</p>
               <h3>Dr. Jan Duffy | Luxury Real Estate Advisor</h3>
               <p className={styles.footerDescription}>
-                Boutique representation for buyers, sellers, and investors seeking premium Southwest Las Vegas properties.
-                Personal service, data-backed strategies, and unmatched neighborhood expertise.
+                Boutique representation for buyers, sellers, and investors seeking premium Southwest
+                Las Vegas properties. Personal service, data-backed strategies, and unmatched
+                neighborhood expertise.
               </p>
               <div className={styles.footerContact}>
                 <div>
@@ -98,7 +102,8 @@ export function Footer() {
                   <p>
                     {SITE_CONFIG.address.street}
                     <br />
-                    {SITE_CONFIG.address.city}, {SITE_CONFIG.address.stateAbbr} {SITE_CONFIG.address.zipCode}
+                    {SITE_CONFIG.address.city}, {SITE_CONFIG.address.stateAbbr}{" "}
+                    {SITE_CONFIG.address.zipCode}
                   </p>
                 </div>
                 <div>
@@ -166,7 +171,8 @@ export function Footer() {
               © {year} {SITE_CONFIG.businessName} · Las Vegas &amp; Henderson Real Estate
             </p>
             <p className="footer-legal">
-              NV Licensed Realtor · Equal Housing Opportunity · Powered by Richmond American Homes
+              Nevada license {SITE_CONFIG.licenseNumber} · Equal Housing Opportunity ·{" "}
+              {SITE_CONFIG.brokerage.name}
             </p>
           </div>
         </div>

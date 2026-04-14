@@ -4,7 +4,12 @@ import { Footer } from "@/components/Footer"
 import { Header } from "@/components/Header"
 import { JsonLd } from "@/components/JsonLd"
 import { GA_MEASUREMENT_ID } from "@/lib/analytics"
-import { generateLocalBusinessSchema, generateOrganizationSchema } from "@/lib/schema"
+import { MARKETING_IMAGES } from "@/lib/marketing-images"
+import {
+  generateLocalBusinessSchema,
+  generateOrganizationSchema,
+  generateWebSiteSchema,
+} from "@/lib/schema"
 import { SITE_CONFIG } from "@/lib/site-contact"
 import { Providers } from "./providers"
 import "./globals.css"
@@ -23,7 +28,20 @@ export const metadata: Metadata = {
     siteName: SITE_CONFIG.businessName,
     title: SITE_CONFIG.businessName,
     description: SITE_CONFIG.description,
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: SITE_CONFIG.businessName }],
+    images: [
+      {
+        url: MARKETING_IMAGES.og,
+        width: 1200,
+        height: 630,
+        alt: SITE_CONFIG.businessName,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_CONFIG.businessName,
+    description: SITE_CONFIG.description,
+    images: [MARKETING_IMAGES.og],
   },
   robots: { index: true, follow: true },
 }
@@ -31,10 +49,12 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const org = generateOrganizationSchema()
   const agent = generateLocalBusinessSchema()
+  const website = generateWebSiteSchema()
 
   return (
     <html lang="en">
       <body>
+        <JsonLd data={website} />
         <JsonLd data={org} />
         <JsonLd data={agent} />
         <Script

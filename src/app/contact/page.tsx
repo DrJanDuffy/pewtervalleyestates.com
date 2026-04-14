@@ -6,7 +6,7 @@ import { GoogleReviews } from "@/components/GoogleReviews"
 import { JsonLd } from "@/components/JsonLd"
 import { NAPDisplay } from "@/components/NAPDisplay"
 import { PageViewTracker } from "@/components/PageViewTracker"
-import { buildPageMetadata } from "@/lib/metadata"
+import { buildPageMetadata, DEFAULT_OG_IMAGE_PATH } from "@/lib/metadata"
 import { generateBreadcrumbSchema, generateFAQSchema, generateWebPageSchema } from "@/lib/schema"
 import { SITE_CONFIG } from "@/lib/site-contact"
 import styles from "./contact.module.css"
@@ -19,7 +19,7 @@ export const metadata: Metadata = buildPageMetadata({
   title: CONTACT_TITLE,
   description: CONTACT_DESCRIPTION,
   path: PATH,
-  ogImagePath: "/og-image.jpg",
+  ogImagePath: DEFAULT_OG_IMAGE_PATH,
 })
 
 const contactFaqs = [
@@ -71,7 +71,8 @@ export default function ContactPage() {
           <h1 className={styles.h1}>Contact Dr. Jan Duffy</h1>
           <p className={styles.lead}>
             Call <a href={`tel:${SITE_CONFIG.phoneTel}`}>{SITE_CONFIG.phone}</a>, email{" "}
-            <a href={`mailto:${SITE_CONFIG.email}`}>{SITE_CONFIG.email}</a>, or send a message below.
+            <a href={`mailto:${SITE_CONFIG.email}`}>{SITE_CONFIG.email}</a>, or send a message
+            below.
           </p>
         </header>
 

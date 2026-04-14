@@ -4,11 +4,8 @@ import { notFound } from "next/navigation"
 import { JsonLd } from "@/components/JsonLd"
 import { PageViewTracker } from "@/components/PageViewTracker"
 import { allMarketingPathSegments, getMarketingPage, segmentsToKey } from "@/lib/marketing-pages"
-import { buildPageMetadata } from "@/lib/metadata"
-import {
-  generateBreadcrumbSchema,
-  generateWebPageSchema,
-} from "@/lib/schema"
+import { buildPageMetadata, DEFAULT_OG_IMAGE_PATH } from "@/lib/metadata"
+import { generateBreadcrumbSchema, generateWebPageSchema } from "@/lib/schema"
 import { SITE_CONFIG } from "@/lib/site-contact"
 import styles from "./marketing.module.css"
 
@@ -34,7 +31,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: page.description,
     path: pathname,
     ogType: "website",
-    ogImagePath: "/og-image.jpg",
+    ogImagePath: DEFAULT_OG_IMAGE_PATH,
   })
 }
 
@@ -71,8 +68,8 @@ export default async function MarketingCatchAllPage({ params }: Props) {
         </nav>
         <article>
           <h1 className={styles.h1}>{page.h1}</h1>
-          {page.paragraphs.map((paragraph, index) => (
-            <p key={index} className={styles.p}>
+          {page.paragraphs.map((paragraph) => (
+            <p key={paragraph} className={styles.p}>
               {paragraph}
             </p>
           ))}
