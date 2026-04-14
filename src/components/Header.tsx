@@ -38,6 +38,9 @@ export function Header() {
                   <Link href="/buy-a-home">Buyer&apos;s Guide</Link>
                 </li>
                 <li>
+                  <Link href="/buyer-seller-services">Buyer &amp; Seller Services</Link>
+                </li>
+                <li>
                   <Link href="/buyer-checklist">Buyer Checklist</Link>
                 </li>
                 <li>
@@ -63,6 +66,9 @@ export function Header() {
                   <Link href="/market-analysis">Market Analysis</Link>
                 </li>
                 <li>
+                  <Link href="/buyer-seller-services">Buyer &amp; Seller Services</Link>
+                </li>
+                <li>
                   <Link href="/selling-checklist">Selling Checklist</Link>
                 </li>
               </ul>
@@ -83,6 +89,9 @@ export function Header() {
                 </li>
                 <li>
                   <Link href="/neighborhood-guide">Neighborhood Guide</Link>
+                </li>
+                <li>
+                  <Link href="/neighborhood-insights">Neighborhood Insights (89183)</Link>
                 </li>
                 <li>
                   <Link href="/photos">Community Photos</Link>
@@ -165,6 +174,11 @@ export function Header() {
                   </Link>
                 </li>
                 <li>
+                  <Link href="/buyer-seller-services" onClick={() => setMobileOpen(false)}>
+                    Buyer &amp; Seller Services
+                  </Link>
+                </li>
+                <li>
                   <Link href="/listings" onClick={() => setMobileOpen(false)}>
                     All Listings
                   </Link>
@@ -199,6 +213,11 @@ export function Header() {
                     Market Analysis
                   </Link>
                 </li>
+                <li>
+                  <Link href="/buyer-seller-services" onClick={() => setMobileOpen(false)}>
+                    Buyer &amp; Seller Services
+                  </Link>
+                </li>
               </ul>
             </li>
             <li className={styles.mobileSection}>
@@ -222,6 +241,11 @@ export function Header() {
                 <li>
                   <Link href="/neighborhood-guide" onClick={() => setMobileOpen(false)}>
                     Neighborhood Guide
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/neighborhood-insights" onClick={() => setMobileOpen(false)}>
+                    Neighborhood Insights (89183)
                   </Link>
                 </li>
                 <li>
