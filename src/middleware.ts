@@ -14,7 +14,7 @@ export function middleware(request: NextRequest) {
     const destination = request.nextUrl.clone()
     destination.protocol = "https"
     destination.host = CANONICAL_HOST
-    return NextResponse.redirect(destination, 308)
+    return NextResponse.redirect(destination, { status: 308 })
   }
 
   const response = NextResponse.next()
