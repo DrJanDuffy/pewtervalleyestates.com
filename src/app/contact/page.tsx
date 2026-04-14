@@ -34,9 +34,9 @@ const contactFaqs = [
       "Dr. Jan Duffy typically responds to all inquiries within 24 hours. For urgent matters, calling or texting directly is the fastest way to reach her.",
   },
   {
-    question: "What information should I include in my contact form?",
+    question: "What should I prepare before the consultation?",
     answer:
-      "Please include your name, contact information, preferred contact method, property interest (buying, selling, investing), and any specific questions or requirements you have.",
+      "Bring your timeline, target neighborhoods, budget or price expectations, and your top priorities so the consultation can focus on practical next steps.",
   },
 ]
 
@@ -71,8 +71,7 @@ export default function ContactPage() {
           <h1 className={styles.h1}>Contact Dr. Jan Duffy</h1>
           <p className={styles.lead}>
             Call <a href={`tel:${SITE_CONFIG.phoneTel}`}>{SITE_CONFIG.phone}</a>, email{" "}
-            <a href={`mailto:${SITE_CONFIG.email}`}>{SITE_CONFIG.email}</a>, or send a message
-            below.
+            <a href={`mailto:${SITE_CONFIG.email}`}>{SITE_CONFIG.email}</a>, or book a time below.
           </p>
           <p className={styles.calendlyCta}>
             Prefer a scheduled call?{" "}
@@ -101,10 +100,6 @@ export default function ContactPage() {
             Client feedback
           </h2>
           <GoogleReviews />
-        </section>
-
-        <section className={styles.section}>
-          <CalendlyInlineWidget title="Schedule a 15-minute consultation" />
         </section>
 
         <section className={styles.mapSection} aria-labelledby="map-heading">

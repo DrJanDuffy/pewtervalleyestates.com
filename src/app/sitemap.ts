@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/listings",
     "/home-valuation",
     "/contact",
+    "/schedule",
   ])
 
   const entries: MetadataRoute.Sitemap = [
@@ -24,6 +25,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${base}/contact`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.9,
+    },
+    {
+      url: `${base}/schedule`,
       lastModified,
       changeFrequency: "weekly",
       priority: 0.9,
